@@ -1,0 +1,2 @@
+./configure CC=gcc-5.3.0 CFLAGS=-g CXX=g++-5.3.0 CXXFLAGS=-g FC=gfortran-5.3.0 FCFLAGS="-O -ffixed-line-length-none -fopenmp"
+

@@ -1,0 +1,11 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In the folder \code{src/dmd\_astro} we provide a set of wrapper
+routines that all call the halo driver function \code{dsdmsdriver} in 
+a specific way. The rest of the code communicates with \code{dsdmsdriver},
+and hence the halo model(s), only via these functions and never by 
+calling \code{dsdmsdriver} directly. The routines in  \code{src/dmd\_astro} 
+therefore provide examples of functions that {\it cannot be
+replaced} individually in a consistent way, but only as a whole set 
+(along with \code{dsdmsdriver},
+in case the user wants to change the structure of the driver itself).  

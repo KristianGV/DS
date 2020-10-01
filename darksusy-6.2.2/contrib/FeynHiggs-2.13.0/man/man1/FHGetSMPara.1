@@ -1,0 +1,34 @@
+.TH FHGETSMPARA 1 "25-Jan-2017"
+.SH NAME
+.PP
+FHGetSMPara \- retrieves the SM parameters computed from the  
+input values by FHSetSMPara
+.SH SYNOPSIS (Fortran version)
+.PP
+integer error
+.br
+double complex CKM(3,3)
+.br
+double precision DeltaAlfa
+.sp
+subroutine FHGetSMPara(error, CKM, DeltaAlfa)
+.SH SYNOPSIS (Mathematica version)
+.PP
+FHGetSMPara[]
+.SH DESCRIPTION
+FHGetSMPara returns the parameters computed from the input parameters
+by FHSetSMPara(1).
+.SH ARGUMENTS
+.TP
+.B error (output)
+zero if successful, otherwise the line number in GetSMPara.F from which
+the error message was emitted
+.TP
+.B CKM (output)
+the CKM matrix
+.TP
+.B DeltaAlfa (output)
+the (leptonic plus five-flavor hadronic) Delta alpha.
+.SH SEE ALSO
+.PP
+libFH(1)

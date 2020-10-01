@@ -1,0 +1,134 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dark matter self-interactions (si) -- theory}
+\label{sec:si}
+
+The CDM paradigm, resting on cold and collisionless dark matter, describes cosmological structure 
+formation with remarkable accuracy at scales larger than about one Mpc. At smaller cosmological scales, 
+on the other hand, this  paradigm is less well tested, and currently still allows for DM self-interactions  
+as strong as the interaction between nucleons --  and thus much stronger than current limits on
+DM interacting with SM particles. The possibility that DM could be relatively strongly interacting with itself \cite{Spergel:1999mh}
+and thereby leave imprints on cosmological observables related to structure formation
+has therefore seen significant interest in recent years, both from an astrophysical and a model-building
+perspective. Self-interacting DM (SIDM) could even address \cite{Loeb:2010gj,Vogelsberger:2012ku,Peter:2012jh,
+Zavala:2012us,Aarssen:2012fx,Elbert:2014bma,Kamada:2016euw,Robertson:2017mgj} the most pressing 
+potential small-scale problems of $\Lambda$CDM cosmology 
+\cite{Bullock:2017xww}, referred to as `core-vs.-cusp'' \cite{Flores:1994gz,Moore:1994yx}, `too-big-to-fail'
+\cite{BoylanKolchin:2011de,BoylanKolchin:2011dk}, `diversity'  \cite{Oman:2015xda,Oman:2016zjn}
+and `missing satellites' problems \cite{Moore:1999nt,Klypin:1999uc} (the latter problem is addressed for 
+SIDM with late kinetic decoupling, which is a natural combination in many models \cite{Bringmann:2016ilk}).
+Those specific discrepancies with the $\Lambda$CDM paradigm may of course well turn out to be either
+due to  poorly modelled baryonic effects or observational uncertainties -- but these examples serve as 
+evidence that SIDM {\it can} leave observable imprints even in the absence of interactions with the SM.
+An unambiguous detection of such signatures, which are not expected in for example traditional
+WIMP models of DM, would significantly narrow down the range of possible particle explanations
+for the nature of DM.
+
+The traditional reference quantity for  the impact of DM self-interactions on the halo 
+structure is the momentum transfer cross section,
+\be
+\label{eq:sigmat}
+ \sigma_T \equiv \int d\Omega\left(1-\cos\theta\right)\frac{d\sigma}{d\Omega}\,,
+\ee
+where $\sigma$ is the standard cross section for DM-DM scattering. 
+This has the advantage of regulating large forward-scattering amplitudes, which should
+not affect the DM distribution (the same goes for backward scattering which, however,
+is treated symmetrically in this prescription. See Ref.~\cite{Tulin:2013teo,Kahlhoefer:2017umn} 
+for a more detailed discussion).
+The size of this quantity that is of cosmological relevance is very roughly given by
+\be
+  \sigma_T/m_\chi \sim 1\,\mathrm{cm}^2/\mathrm{g}\,.
+\ee
+Cross sections in this ballpark, in other words, may leave observable imprints and possibly address 
+the various $\Lambda$CD; small-scale structure problems mentioned above, while much smaller cross 
+sections have no impact on the structure of DM halos. Much larger values of $\sigma_T/m_\chi$ are 
+ruled out, on the other hand, in particular from observations of galaxy clusters. For a detailed 
+review that summarizes both various constraints on DM self-interactions and
+models that have been discussed in the literature, we refer to Ref.~\cite{Tulin:2017ara}.
+
+The details of the DM self-interactions depend on the underlying particle theory. A simple contact 
+interaction term in the Lagrangian, for example, would lead to a constant (velocity-independent)
+$\sigma_T$. Another well-motivated option is that the interaction is mediated by a massive particle
+with mass $m_{\rm med}$, which leads to a Yukawa potential between the two DM particles:
+\be
+V(r)=\pm\frac{\alpha_\chi}{r} e^{-m_{\rm med} r}\,.
+\ee
+Here, $\alpha_\chi=g_\chi^2/(4\pi)$ describes the coupling strength between mediator and DM particles,
+and the different signs refer to attractive (-) and repulsive (+) potentials. Scalar mediators only generate
+attractive potentials, while for vector mediators this depends on the particles involved in the scattering: 
+for (e.g.~Dirac) DM scattering with anti-DM, the force is attractive, otherwise it is repulsive. An interesting 
+phenomenological aspect for the scattering of nonrelativistic particles in such a potential is the resulting 
+strong velocity-dependence 
+of $\sigma_T$; this allows to achieve large scattering cross sections for the relatively small velocities 
+of $\sim$30\,km/s typically encountered
+in dwarf galaxies (where one observes potential discrepancies with the $\Lambda$CDM expectations)
+while evading the strong bounds at cluster scales for velocities of $\sim$\,1000km/s.
+The transfer cross section resulting from scattering in a Yukawa potential has been extensively 
+studied, and depends on the scattering regime ($v_{\rm rel}$ is the relative velocity between the
+DM particles):
+
+\begin{itemize}
+	\item In the \textbf{{Born} regime}  ($\alpha_\chi m_\chi \lesssim m_{\rm med}$), $\sigma_T$ 
+	can be calculated perturbatively, leading (for both attractive and repulsive potentials) to~\cite{Feng:2009hw}
+	\begin{equation}
+	\sigma_T^{\rm Born} = \frac{8\pi \alpha_\chi^2}{m^2_\chi v^4_{\rm rel}} \left( \ln \left[1+\frac{m^2_\chi v^2_{\rm rel}}{m^2_{\rm med}} \right]-\frac{m^2_\chi v^2_{\rm rel}}{m^2_{\rm med}+m^2_\chi v^2_{\rm rel}}\right)\,.
+	\label{sigmatborn}
+	\end{equation}
+
+	\item In the 
+	\textbf{{classical} regime} ($m_\chi v_{\rm rel} \gtrsim m_{\rm med}$), a large numbers of partial waves
+	contributes such that non-perturbative effects are important. In principle, this can be computed by numerically 
+	solving the Schr\"odinger equation for each case and then summing all contributions  \cite{Tulin:2013teo}.
+         A computationally much more efficient method is to use parameterizations \cite{Cyr-Racine:2015ihg} of 
+         numerical results from the Plasma literature that have been obtained for screened Coulomb 
+         scattering \cite{Khrapak:2003kjw,PhysRevE.70.056405}. For an attractive potential, these are given by
+\smallskip         
+	\begin{eqnarray}
+	\sigma_T^{\mathbf{-}}= \frac{\pi}{m_{\rm med}^2}\times 
+\left\{
+    \begin{array}{ll}        
+    2\, \beta^2 \ln[1+\beta^{-2}] & \textrm{for } \beta \lesssim 10^{-2} \\[0.5ex]
+     \frac{7\beta^{1.8} +1960 (\beta/10)^{10.3}}{1+1.4\beta +0.006 \beta^4 +160(\beta/10)^{10}} & \textrm{for } 10^{-2} \lesssim \beta \lesssim 10^2\\[1ex]
+                     0.81\,(1+\ln \beta -(2\ln\beta)^{-1})^2 & \textrm{for }  \beta \gtrsim 10^2  
+ \end{array}
+ \right.
+ \label{sigmatclassicalattractive}
+	\end{eqnarray}
+\smallskip         
+	where $\beta\equiv 2\alpha_\chi m_{\rm med}/(m_\chi v^2_{\rm rel})$\,, while for a repulsive potential we have 
+\smallskip         
+	\begin{eqnarray}
+	\sigma_T^{\mathbf{+}}= \frac{\pi}{m_{\rm med}^2}\times 
+\left\{
+    \begin{array}{ll}        
+  2\beta^2 \ln [1+\beta^{-2}] & \textrm{for } \beta \lesssim 10^{-2} \\[0.5ex]
+    \frac{8\beta^{1.8}}{1+5\beta^{0.9} +0.85 \beta^{1.6}} & \textrm{for } 10^{-2} \lesssim \beta \lesssim 10^4\\[1ex]
+	(\ln 2\beta -\ln\ln2\beta)^2 & \textrm{for } \beta \gtrsim 10^4
+ \end{array}
+ \right.
+ \label{sigmatclassicalrepulsive}
+	\end{eqnarray}
+\smallskip         
+
+	
+	\item Finally, there is the \textbf{{resonant regime}} (for $m_\chi v_{\rm rel} \lesssim m_{\rm med}$ or 
+	$\alpha_\chi m_\chi \gtrsim m_{\rm med}$). Full numerical solutions can be obtained by solving the 
+	Schr\"odinger equation explicitly in this regime. These are well described by the following analytic expressions
+	that result from approximating the Yukawa potential with a Hulth\'en potential \cite{Tulin:2013teo}
+	\begin{equation}
+	\sigma_T^{\rm Hulth{\'e}n}= \frac{16 \pi}{m_\chi v^2_{\rm rel}} \sin^2\left({\rm Arg}\left[ \frac{i\Gamma [i \Theta v_{\rm rel}]}{\Gamma[\lambda_+]\,\Gamma[\lambda_-]}\right] \right)\,,
+	\label{eq:hulthen}
+	\end{equation}
+
+	where $\Theta\equiv \frac{m_\chi}{\sqrt{2\zeta(3)} m_{\rm med}}$
+	%\sim \frac{m_\chi}{1.55 m_{\rm med}}$ 
+	and $\lambda_{\pm}\equiv 1+i\Theta  v_{\rm rel}/2\pm \sqrt{\alpha_\chi \Theta - \Theta^2 v^2_{\rm rel}/4}$\, for an attractive potential and $\lambda_{\pm}\equiv 1+i\Theta  v_{\rm rel}/2\pm i\sqrt{\alpha_\chi \Theta + \Theta^2 v^2_{\rm rel}/4}$\, for a repulsive potential.
+	
+\end{itemize}
+
+
+
+
+
+
+
+

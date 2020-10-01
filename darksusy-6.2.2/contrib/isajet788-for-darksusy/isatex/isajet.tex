@@ -1,0 +1,88 @@
+% LaTeX 2e
+\documentclass[12pt]{article}
+
+% Page dimensions
+\newdimen\SaveWidth \SaveWidth=\textwidth
+\newdimen\SaveHeight \SaveHeight=\textheight
+\textwidth=6.5in
+\textheight=8.9in
+\advance\SaveWidth by -\textwidth
+\advance\SaveHeight by -\textheight
+\divide\SaveWidth by 2
+\divide\SaveHeight by 2
+\advance\hoffset by \SaveWidth
+\advance\voffset by \SaveHeight
+
+\def\sgn{\mathop{\rm sgn}}
+\def\GeV{{\rm GeV}}
+\def\etmiss{\slashchar{E}_T}
+
+%  \slashchar puts a slash through a character to represent contraction
+%  with Dirac matrices.
+\def\slashchar#1{\setbox0=\hbox{$#1$}           % set a box for #1
+   \dimen0=\wd0                                 % and get its size
+   \setbox1=\hbox{/} \dimen1=\wd1               % get size of /
+   \ifdim\dimen0>\dimen1                        % #1 is bigger
+      \rlap{\hbox to \dimen0{\hfil/\hfil}}      % so center / in box
+      #1                                        % and print #1
+   \else                                        % / is bigger
+      \rlap{\hbox to \dimen1{\hfil$#1$\hfil}}   % so center #1
+      /                                         % and print /
+   \fi}                                         %
+
+%       \simge and \simle make the "greater than about" and the "less
+% than about" symbols with spacing as relations.
+\def\simge{%  ``greater than about'' symbol
+    \mathrel{\rlap{\raise 0.511ex
+        \hbox{$>$}}{\lower 0.511ex \hbox{$\sim$}}}}
+\def\simle{%  ``less than about'' symbol
+    \mathrel{\rlap{\raise 0.511ex 
+        \hbox{$<$}}{\lower 0.511ex \hbox{$\sim$}}}}
+
+% Include common blocks verbatim
+\def\begininc#1{\begin{verbatim}\input{../isainc/#1}}
+
+\begin{document}
+\centerline{\Large\bf ISAJET 7.88}
+\medskip
+\centerline{\Large\bf A Monte Carlo Event Generator}
+\medskip
+\centerline{\Large\bf for $pp$, $\bar pp$, and $e^+e^-$ Reactions}
+\bigskip\bigskip
+\centerline{\bf Frank E. Paige and Serban D. Protopopescu}
+\smallskip
+\centerline{Physics Department}
+\centerline{Brookhaven National Laboratory}
+\centerline{Upton, NY 11973, USA}
+\bigskip
+\centerline{\bf Howard Baer}
+\smallskip
+\centerline{Department of Physics and Astronomy}
+\centerline{University of Oklahoma}
+\centerline{Norman, OK 73019}
+\bigskip
+\centerline{\bf Xerxes Tata}
+\centerline{Department of Physics and Astronomy}
+\centerline{University of Hawaii}
+\centerline{Honolulu, HI 96822}
+
+\bigskip\bigskip
+\tableofcontents
+\newpage
+\input{t01intro.tex}
+\input{t02physics.tex}
+\input{t03install.tex}
+\input{t03sample.tex}
+%\input{t04patchy.tex}
+\input{t05main.tex}
+\input{t06input.tex}
+\input{t07output.tex}
+\input{t08tape.tex}
+\input{t09decay.tex}
+\input{t10ident.tex}
+\input{t11higher.tex}
+\input{t12susy.tex}
+\input{t12susyflav.tex}
+\input{t13change.tex}
+
+\end{document}

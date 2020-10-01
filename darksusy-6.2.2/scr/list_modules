@@ -1,0 +1,2 @@
+ls src_models/ | grep -v common | grep -v include | grep -v docs
+

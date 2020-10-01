@@ -1,0 +1,19 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Self-interactions -- routines}
+
+In \ds, $\sigma_T(v_{\rm rel})/m_\chi$ is provided by an interface function \code{dssigtm} returned
+by the particle module which, from the perspective of the \code{core} library, can take any functional form.
+The function \code{dssigtmav}  then computes the velocity average $\langle\sigma_T\rangle/m_\chi$,
+assuming a Maxwellian velocity distribution of the DM particles; this gives a better estimate of the 
+effect of DM self-interactions than just evaluating \code{dssigtm} directly for a typical halo 
+velocity.
+The \code{core} library furthermore provides several auxiliary routines, to be used by
+any  particle module, for the commonly encountered specific transfer cross sections 
+in the presence of a Yukawa potential as discussed above. In particular, \code{dssisigmatborn} returns the expression given in
+Eq.~(\ref{sigmatborn}), \code{dssisigmatclassical} those given in Eqs.~(\ref{sigmatclassicalattractive}, 
+\ref{sigmatclassicalrepulsive}), and \code{dssisigmatres} those given in Eq.~(\ref{eq:hulthen}).
+For the latter, we adopt the complex gamma function as implemented in the CERN library 
+(based on Ref.~\cite{Luke:1969:SFTb}), and use analytic expansions where a naive usage
+of these routines is problematic due to limited numerical precision (which is relevant for a significant
+fraction of the physically interesting parameter range).
+

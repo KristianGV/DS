@@ -1,0 +1,11 @@
+CC = gcc
+CFLAGS = -O
+MAKE = make
+AR = ar
+SOFTSUSY = /home/kriss/softsusy/softpoint.x
+ISAJET = /home/kriss/isajet/isasugra.x
+SPHENO = /home/kriss/spheno/bin/SPheno
+SUSPECT = /home/kriss/suspect/suspect2
+THDMC = /home/kriss/2HDMC
+HBwithFH = /home/kriss/higgsbounds/example_programs/HBwithFH
+NMSSMTools = /home/kriss/nmssmtools/main

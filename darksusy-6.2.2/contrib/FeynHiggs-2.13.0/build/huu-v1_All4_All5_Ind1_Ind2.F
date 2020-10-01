@@ -1,0 +1,1 @@
+/home/kriss/DS/darksusy-6.2.2/contrib/FeynHiggs-2.13.0/src/Decays/huu/huu-v1_All4_All5_Ind1_Ind2.F

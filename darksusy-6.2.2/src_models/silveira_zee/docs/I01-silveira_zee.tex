@@ -1,0 +1,21 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Silveira-Zee (Scalar Singlet)}
+
+The module \code{silveira\_zee} implements the scalar singlet DM model of Silveira and 
+Zee \cite{Silveira:1985rk}, also referred to as `scalar phantoms' (which is the original name 
+in \cite{Silveira:1985rk}) and `singlet Higgs DM'.  
+This model adds a gauge-singlet real scalar field $S$ to the standard 
+model, with imposed $Z_2$ symmetry $S\to -S$. Its Lagrangian is
+\begin{equation}
+{\cal L}_{\rm SZ} = {\cal L}_{\rm SM} + \frac{1}{2} \partial_\mu S \partial^\mu S - \frac{1}{2} \mu^2 S^2 - \frac{1}{2} \lambda S^2 H^\dagger H,
+\end{equation}
+where $H$ is the Standard Model Higgs doublet. After electroweak symmetry breaking, the $S$ boson 
+acquires a tree-level mass
+\begin{equation}
+m_S = \sqrt{\mu^2 + \frac{1}{2} \lambda v_0^2}\,,
+\end{equation}
+where $v_0=(\sqrt{2} G_F)^{-1/2}=246.2$~GeV is the Higgs vacuum expectation value.
+The module uses the $S$ mass $m_S$ and the $S$-Higgs coupling constant 
+$\lambda$ as model parameters. These parameters are set with a call to
+\code{dsgivemodel\_silveira\_zee}, followed as usual by a call to \code{dsmodelsetup}
+to initialize the model for use with \ds.

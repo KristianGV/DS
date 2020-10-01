@@ -1,0 +1,19 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Initialisation routines}
+
+This directory contains general initialisation routines that need to be called to prepare calculations with 
+\ds, but which are independent of the particle physics. Most importantly, it contains the
+subroutine \code{dsinit}, which should be called at the beginning of any program using
+\ds. In particular, this routine calls various more specific initialisation routines that are relevant
+only for specific applications (such as the relic density calculation) and therefore reside
+in the respective directory in \code{src/}. It also calls \code{dsinit\_module}, which initializes
+the specific particle module that the user has chosen to link to when compiling the main program.
+Another subroutine called by \code{dsinit} is \code{ini/dsreadnuclides}. It reads in names and properties 
+of nuclei and stores them in common blocks, to which both direct detection and solar/earth capture
+routines need access.
+
+Lastly, the directory \code{/ini} also contains two files \code{dsdirname.c.in} and \code{dsvername.c.in}.
+These are needed to provide a system-wide reference to the installation directory and version of
+\ds, respectively. These refer to include files that are set at configure time, \code{dsdir.h} and \code{dsver.h}. The user should never have to modify these manually as they are determined at the configure stage.
+
+

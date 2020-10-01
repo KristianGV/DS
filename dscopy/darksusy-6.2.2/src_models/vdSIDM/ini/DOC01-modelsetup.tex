@@ -1,0 +1,21 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{ch:vdSIDM_ini}
+
+Currently, the 
+module has two concrete example models fully implemented, where DM is a massive Dirac fermion
+$\psi_\chi$, DR is a massless fermion $\psi_{\tilde \gamma}$, and the mediator is either a vector $V$
+or a scalar $\phi$. The interaction parts of the respective
+Lagrangians are thus given by 
+\bea
+\label{sidm_vector}
+\Delta \mathcal{L}_\mathrm{vector}& =&  g_\chi \bar\psi_{\chi} \slashed{V} \psi_{\chi}+g_{\tilde \gamma} \bar\psi_{\tilde \gamma} \slashed{V} \psi_{\tilde \gamma}
+\eea
+and
+\bea
+\label{sidm_scalar}
+\Delta \mathcal{L}_\mathrm{scalar}& =&   g_\chi \bar\psi_\chi \psi_\chi \phi +g_{\tilde \gamma} \bar\psi_{\tilde \gamma} \psi_{\tilde \gamma} \phi \,.
+\eea
+Calling \code{dsgivemodel\_vdSIDM\_vector} or \code{dsgivemodel\_vdSIDM\_scalar} sets the
+DM mass, mediator mass  and couplings for these models after which, as usual, the model is set up by 
+a call to \code{dsmodelsetup}. This routine calculates for example the total decay width of the mediator, for which we add
+the contributions from decay to DR and (for heavy mediators, if kinematically allowed) decay into DM particles.

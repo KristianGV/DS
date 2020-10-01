@@ -1,0 +1,141 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cosmic ray propagation in axially symmetric halos}
+
+There is a clean asymmetry between particles and antiparticles in the standard cosmic ray picture:
+The bulk of cosmic rays -- protons, nuclei and electrons -- are mainly ``primary" species, i.e. particles
+accelerated in astrophysical sources and then copiously injected in the interstellar medium;
+``secondary" components, including antimatter, are instead produced in the interaction of primaries 
+with the interstellar
+medium during the propagation. It follows that there is a pronounced deficit of antimatter compared to matter 
+in the locally measured cosmic ray flux (about 1 antiproton in $10^4$ protons). When considering instead a
+source term due to DM annihilations or decays, a significant particle-antiparticle asymmetry is in general
+not expected, and antiprotons, positrons and antideuterons turn out to be competitive indirect DM probes.
+
+Charged particles propagate diffusively through the regular and turbulent components of Galactic magnetic 
+fields. This makes it more involved for local measurements to track spectral and morphological imprints of 
+DM sources than, e.g., for the gamma-ray and neutrino channels (though searches for spectral features
+in CR positron fluxes still lead to very competitive limits \cite{Bergstrom:2013jra}).
+In fact the transport of cosmic rays in the Galaxy is still a debated
+subject: Most often one refers to the quasi-linear theory picture (with magnetic inhomogeneities as a perturbation 
+compared to regular field lines) in which propagation can be described in terms of a (set of) equation(s) linear
+in the density of a given species, containing terms describing diffusion in real space, diffusion in momentum
+space (the so-called reacceleration), convective effects due to Galactic winds, energy or fragmentation
+losses and primary and secondary sources (see, e.g., Ref.~\cite{Strong:2007nh} for a review).
+Dedicated codes have been developed to solve numerically this transport equation, including GALPROP~\cite{Strong:1998pw}, DRAGON~\cite{Evoli:2016xgn} and PICARD~\cite{Kissmann:2014sia}. 
+
+Here we follow instead a semi-analytical approach, analogous to that developed for the USINE 
+code~\cite{Maurin:2001sj}. In particular, we model
+the propagation of antiprotons and antideuterons by considering the steady state equation~\cite{Bergstrom:1999jc}
+\begin{equation}
+ \frac{\partial{N}}{\partial{t}} = 0 = \nabla \cdot
+ \left(D\,\nabla N\right)
+ - \nabla \cdot \left( \vec{u}\,N \right)
+ - \frac{N}{\tau_N} + Q\,.
+\label{eq:pbardiff}
+\end{equation}
+We solve it for situations where {\it i)} the diffusion coefficient $D$ can have an arbitrary dependence on the particle 
+rigidity but can at most take two different values in the Galactic disc and in the diffusive halo, {\it ii)} the 
+convective velocity $\vec{u}$ has a given fixed modulus and is oriented outwards and perpendicular to the disc,
+{\it iii)} the loss term due to inelastic collisions has an interaction time $\tau_N$ which is energy dependent 
+but spatially constant in the disc and going to infinity in the halo (corresponding to a constant target gas 
+density in the disc and no gas in the halo), {\it iv)} the DM
+source $Q$ is spatially axisymmetric and has a generic energy dendence. Under these
+approximations and assuming, as is usually done, that the propagation volume is a cylinder centred at the disc 
+and that particles can freely
+escape at the boundaries of the diffusion region, Eq.~(\ref{eq:pbardiff}) can be solved analytically by expanding $N$
+in a Fourier-Bessel series; the computation of the flux involves, at each energy, a sum over the series of 
+zeros of a Bessel function of first kind and order zero, and a volume integral of the spatially dependent part in the axisymmetric
+source term $Q$
+ (basically the DM density $\rho_\chi$ for decaying DM and its square for pair annihilating DM) 
+times a
+weight function depending on the given zero in the series (see~\cite{Bergstrom:1999jc} for further details).
+
+Since the path lengths for antiprotons and antideuterons are rather large, of the order of a few kpc, taking average
+values for parameters in the transport equation rather than the more realistic modelling that can be implemented
+in full numerical solutions, has no large impact in case of extended and rather 
+smooth sources such as for DM. 
+Eq.~(\ref{eq:pbardiff}) neglects reacceleration effects, which may in general be relevant at low energies
+(rigidities below a few GV); however even this does not have a large impact in case of the species at hand,
+see, e.g.,~\cite{Evoli:2011id} for a comparison of results with numerical and semi-analytical solutions for cosmic-ray
+antiprotons. The power of our semi-analytic approach is that one can store values of 
+the solution of the transport equation obtained by assuming 
+a given mono-energetic source -- provided by 
+the functions \code{dspbtdaxi} and \code{dsdbtdaxi} for, respectively, antiprotons and antideuterons -- and 
+then apply these as weights to any particle source term $\mathcal{S}_n(E_f)$ as introduced above.
+For antiprotons and antideuterons, this latter step is done in the functions that compute the local galactic differential 
+fluxes from DM annihilation and decay, \code{dspbdphidtaxi} and \code{dsdbdphidtaxi}, respectively.
+Note that while the outputs of \code{dspbtdaxi} and \code{dsdbtdaxi}  are labelled ``confinement time" in the code,
+since they do have a dimension of time and scale the dependence between source and flux, one cannot trade
+them for what is usually intended as confinement time for standard cosmic ray components, given that the
+morphology of the DM source is totally different from supernova remnant distributions usually implemented
+for describing ordinary primary components.
+
+The structure we implemented gives a particularly clear advantage when the code is used to scan over many 
+particle physics DM models, but only over a limited number of propagation parameters and DM density profiles.
+For such an application,  it is useful to tabulate the 'confinement times' (returned by \code{dspbtdaxi} and 
+\code{dsdbtdaxi}) over a predefined range of energy; this is
+done in the functions \code{dspbtdaxitab} and \code{dsdbtdaxitab} when calling the flux routines with an appropriate
+option (and only in case the DM halo profile currently active is within the halo profile database). 
+Such tabulations  can be saved and re-loaded for later use; 
+here the proper table association is ensured by 
+a propagation parameter label setting system in analogy to the one implemented for the halo profile database. 
+Computing such a table on the first call is rather CPU  consuming, especially for DM profiles that are 
+singular towards the Galactic center, so in case only a few flux
+computations are needed it may be better to switch off the tabulation option; this is true also in case the flux is
+needed at a small number of energy values, since the latest 100 (non-equivalent) calls to  
+\code{dspbtdaxi} and \code{dsdbtdaxi}
+are stored in memory (with the corresponding propagation parameters and halo model correctly associated).
+
+The case for positrons is treated analogously, except that energy losses and spatial diffusion are
+the most important effects for propagating cosmic ray leptons. The transport equation we solve 
+semi-analytically therefore has the form~\cite{Baltz:1998xv}
+\begin{equation}
+ \frac{\partial{N}}{\partial{t}} = 0 = \nabla \cdot
+ \left(D\,\nabla N\right)
+ + \frac{\partial}{\partial{p}} \left( \frac{dp}{dt} N \right) + Q\,,
+\label{eq:eplusdiff}
+\end{equation}
+where the functional form of $D$ and $Q$ can be chosen as for antiprotons and antideuterons, 
+and the energy loss rate $dp/dt$ can have a generic
+momentum dependence but needs again to be spatially constant. Assuming the same topology for
+the propagation volume and free escape conditions at the vertical boundaries (to compute the local positron flux the radial boundary turns out to be irrelevant) ,
+the solution of the propagation equation is given in terms of
+a Green's function in energy (the function  \code{dsepgreenaxi} in the code) to be convoluted over the
+source energy spectrum at emission for a given particle DM candidate. This last step is performed
+by the function \code{dsepdndpaxi} returning the local positron number density,
+while \code{dsepdphidpaxi} converts it to a flux and is the function which should be called from the main file.
+The method to implement this solution is a slight generalization of the one described~\cite{Baltz:1998xv} and
+generalizes the one introduced in~\cite{Colafrancesco:2005ji}
+for a spherically symmetric configuration to an axisymmetric system.
+
+The computation of the Green's function involves a volume integral over the spatially dependent part of
+the DM source function $Q$ (again basically the DM density $\rho_\chi$ for decaying DM and its square for pair
+ annihilating DM) 
+and   the implementation via the so-called method of image charges (again a sum over a series)
+of the free escape boundary condition. 
+It can again be CPU expensive for singular halo profiles, but its
+tabulation is always needed since the Green function appears in a convolution. The main limiting factor with
+respect to full numerical solutions is that one is forced to assume an (spatially) average value for $dp/dt$. 
+However this has not a severe
+impact on our results for the local DM-induced positron flux since, especially for energies above 10 GeV, 
+the bulk of the DM contribution to the local flux stems from a rather
+close-by emission volume; one thus just has to make sure to normalize $dp/dt$ to the mean value for 
+{\it local} energy losses, as opposed to the mean value in the Galaxy, which are mainly due to the 
+synchrotron and inverse Compton processes.
+
+While the transport equations (\ref{eq:pbardiff}) and (\ref{eq:eplusdiff}) are essentially the same as considered
+in previous releases of the code, their implementation in the present release is completely new and appears to be
+numerically more stable. In particular cases with very singular DM profiles still give numerically accurate
+results and converge faster
+(in case of antiprotons and antideuterons implementing a procedure which applies to point sources).
+Note however that the case of very singular DM profiles is also the one in which
+ our models or 
+{\it any} propagation model is subject to a significant uncertainty related to the underlying
+physics,
+since propagation in the
+Galactic center region is difficult to model and probably rather different from what can be tested in the
+local neighbourhood by measurements of primary and secondary cosmic rays. Finally, the 
+implementation starting from \ds\ 6 is more flexible regarding parameter choices, such as for the 
+rigidity scaling of the diffusion
+coefficient and energy scaling of energy losses, in a framework which is now fully consistent for
+antiprotons, antideuterons and positrons.

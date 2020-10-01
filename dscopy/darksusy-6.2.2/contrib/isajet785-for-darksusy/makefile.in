@@ -1,0 +1,136 @@
+# makefile for isajet 7.85
+# Date: April 13, 2016
+
+# This file will create isasugra and put it into libisajet.a
+
+FF=@F77@
+FOPT=@FOPT@
+
+DS_ROOT=../..
+LIB=$(DS_ROOT)/lib
+
+########################################################
+### READ THROUGH AND CHANGE THE DEFAULT VALUES BELOW ###
+### BEFORE COMPILING.                                ###
+########################################################
+
+# Obsolete:
+# aldata.o was not included here, instead it was compiled separately and put
+# in the DarkSUSY lib directory. Make sure to link to it whenever you link
+# to libisajet.a.
+# For compatibility with gfortran, aldata.o _is_ included here (after 'BLOCK DATA' has been changed to 'SUBROUTINE').
+
+SRC = aldata.f alqcd.f amass.f amgmw.f ayukdiag.f b0func.f bases.f \
+besk1.f bhinit.f bhplot.f bhrset.f bhsave.f bi.f bk2mvsm.f boostx.f \
+brems.f bschck.f bsdate.f bsdims.f bsetgu.f bsetgv.f bsggut.f bsgrid.f \
+bsinfo.f bsinit.f bsintg.f bslist.f bsordr.f bsparm.f bsprnt.f bsread.f \
+bstcnv.f bstime.f bsutim.f bswrit.f bufin.f bufout.f c0.f cbk2mvsm.f \
+ccon.f cdagger.f charge.f chargino.f chdec.f chint.f ci.f cmatmul.f \
+cmd.f cmodsq.f colr12.f colr13.f colr22.f con.f coup1x.f coup2x.f \
+coup3x.f coup4x.f cputim.f cre.f crge215.f crge601.f crkstp.f csfmul.f \
+csmrgedr.f cteq5l.f ctq5pdf.f ctrace.f ctxc2i.f ctxi2c.f ctxin.f \
+ctxout.f d0.f dadmul.f dagger.f dblpcm.f dblvec.f dboost.f dcabs1.f \
+ddilog.f decay.f decjet.f decoutcoup.f decps1.f decps2.f decrun.f \
+decss3.f dectau.f decva.f dhfill.f dhinit.f dhplot.f di.f diagsqm.f \
+dincgm.f disnan.f dlabad.f dladiv.f dlaisnan.f dlamc1.f dlamc2.f \
+dlamc3.f dlamc4.f dlamc5.f dlamch.f dlapy2.f dlapy3.f dmatmul.f domssm.f \
+downmhcond.f downmhighmh.f downmhighmz.f downmscond.f downsqm.f dre.f \
+drge215.f drge601.f drkstp.f drllyn.f drn.f drnset.f drotsq.f \
+drotsqback.f dscal.f dsmma.f dsmrgedr.f dtrace.f dtrint.f dzasum.f \
+dznrm2.f eaixxx.f eaoxxx.f ebeam.f edit.f eebeg.f eeelel.f eeeler.f \
+eeerel.f eeerer.f eeha.f eehphm.f eemax.f een1n1.f ees1s2.f eesfsf.f \
+eewiwi.f eewiwj.f eezh.f eezizj.f ei.f eigsys.f eisrs1.f elctrn.f epf.f \
+estruc.f evol01.f evol02.f evol03.f evol05.f evol06.f evol07.f evol11.f \
+evolms.f evolve.f fa12.f fa12_integr.f fbrbm.f fes.f flavor.f fntg.f \
+fortop.f frgjet.f frgmnt.f fsixxx.f fsoxxx.f funs.f \
+fvixxx.f fvoxxx.f gamma.f gammac1.f gammac2.f gammahp.f gammasm.f \
+gammawb1.f gammawb2.f gamtot.f gbeam.f ges.f getpas.f getpt.f gettot.f \
+ggggxx.f gggxxx.f gluneno.f gout601.f gstruc.f h2.f hdcyad.f hdcysy.f \
+heavyx.f hermtest.f hevolv.f higgs.f highin.f hioxxx.f hsssxx.f hssxxx.f \
+hvsxxx.f hvvxxx.f idamax.f idanti.f idgen.f ieeeck.f iframs.f ilaenv.f \
+ilazlc.f inisap.f iosxxx.f iovxxx.f ipartns.f ipjset.f iprtns.f irmov0.f \
+isaamu.f isabeg.f isabmm.f isabsg.f isabtn.f isachp.f isaend.f isaevt.f \
+isahep.f isaini.f isajet.f isalha.f isalhd.f isalhe.f isares.f \
+isasee.f isasrt.f isawbg.f isawev.f isawig.f isawnd.f ispjet.f istrad.f \
+istran.f iswdky.f itrans.f ixxxxx.f j3xxxx.f jeexxx.f jetgen.f jgggxx.f \
+jggxxx.f jioxxx.f jssxxx.f jtioxx.f jvssxx.f jvsxxx.f jvvxxx.f jw3wxx.f \
+jwwwxx.f kkgf1.f kkgf2.f kkgf3.f kmin.f label.f lboost.f logerr.f \
+logic.f logmgm.f logmgy.f logmij.f logp.f logphi.f logphw.f logpt.f \
+logqm.f logqt.f logthw.f logx.f logxw.f logyth.f logyw.f lsame.f lstsq.f \
+mass.f masssqm.f mat2vec.f mbias.f mbset.f mginit.f mmamsb.f modsq.f \
+mom2cx.f momntx.f movlev.f mprod2.f mprod2x.f mprod3.f mprod3x.f \
+mprod4x.f mprod5x.f muljet.f nogood.f omega.f ordecr.f order.f orth.f \
+outcoup.f oxxxxx.f pdgid.f piblbl.f piblbr.f pibrbr.f pielel.f pierer.f \
+pillll.f pilllr.f pilrlr.f pinene.f pitltl.f pitltr.f pitrtr.f prtevt.f \
+prtlim.f prtlst.f ptfun.f qcdini.f qcdint.f qcdinz.f qcdjet.f qcdt.f \
+qcdz.f qfunc.f ranf.f ranfgt.f ranfmt.f ranfst.f ranlux.f rdbeg.f \
+rdtape.f readin.f rejfrg.f rejjet.f remsf.f rend.f rescal.f reset.f \
+rge157.f rgeflav.f rgens.f rgeread.f rkstp.f rotate.f rotate215.f \
+rotatesm.f rotback.f rotback215.f rotbacksm.f rotsq.f rotsqback.f \
+rotxxx.f rpdecy.f rpinf1.f rpinf2.f rpint1.f rpint2.f rpint3.f rpmain.f \
+rpmoda.f rpnorm.f rprate.f rprtch.f setcon.f setdky.f seth.f sethss.f \
+setkkg.f setnxt.f settyp.f setw.f sfmul.f shcler.f shfill.f shinit.f \
+shplot.f shrset.f shupdt.f sig0l.f sig0r.f sig0s.f sigdy.f sigdy2.f \
+sigee.f sigfil.f siggam.f sigh.f sigh2.f sigh3.f sighss.f sigint.f \
+sigkkg.f sigpl.f sigpr.f sigps.f sigqcd.f sigsse.f sigssl.f sigssy.f \
+sigssz.f sigtc.f sigtc2.f sigtc3.f sigwh.f sigwhs.f sigww.f sigww2.f \
+smszg.f sorttf.f sortth.f sortzg.f spchck.f sphist.f spinfo.f spline.f \
+sprgen.f spring.f sqdiag.f sqrlam.f sqsix.f ssa0.f ssalfs.f ssb0.f \
+ssb00.f ssb1.f ssb1f.f ssbt20.f ssbt22.f ssc0.f ssd0.f ssd27.f ssdhll.f \
+ssdint.f ssdlam.f ssf.f ssf0.f ssfel.f ssg.f ssglbf.f ssgst.f ssgt.f \
+ssgwq1.f ssgwq2.f ssgwt1.f ssgwt2.f ssgwt3.f ssgwt4.f ssgwt5.f ssgwt6.f \
+ssgwt7.f ssgwt8.f ssgx1.f ssgx10.f ssgx11.f ssgx2.f ssgx3.f ssgx4.f \
+ssgx5.f ssgx6.f ssgx7.f ssgx8.f ssgx9.f ssgzg1.f ssgzg2.f ssgzg3.f \
+ssgzt.f ssh.f ssh0.f sshcc.f sshff.f sshff1.f sshgl.f sshgm.f sshgm1.f \
+sshhx.f sshibf.f sshnn.f sshsf.f sshww.f sshww1.f sshww2.f ssid.f \
+ssl1st.f sslpbf.f sslrt1.f ssm1lp.f ssmass.f ssme3.f ssmhc.f ssmhn.f \
+ssmqcd.f ssmssm.f ssn1st.f ssnorm.f sspole.f ssqkbf.f ssrsgb.f ssrsgl.f \
+ssrsgt.f sssave.f sssnws.f ssssxx.f ssstbf.f sssvme.f sssxxx.f sstest.f \
+sstpbf.f sswibf.f sswwf1.f sswz2p.f sswz3p.f sswzbf.f sswzf1.f sswzf2.f \
+sswzf3.f sswzf4.f sswzf5.f sswzf6.f sswzf7.f ssxint.f ssxlam.f sszhx.f \
+sszibf.f sszwf1.f sszzf1.f sszzf2.f sszzf3.f sszzf4.f sszzf5.f sszzg1.f \
+sszzg2.f sszzg3.f sszzg4.f st1cneu.f st3int.f st3mat.f stbwz1.f stradd.f \
+strotate.f strotback.f struc.f strucw.f sualfe.f sualfs.f sug2bsg.f \
+sugeff.f sugefffl.f sugfrz.f sugmas.f sugra.f sugrge.f surg06.f surg26.f \
+sxxxxx.f symmtest.f szjj1.f szjj2.f szjj3.f szjj4.f szjj5.f szjj6.f \
+szjj7.f tactiv.f tcsfmul.f thetaxy.f timer.f tql2.f tqleig.f tr3x3.f \
+trace.f trdiag.f tred2.f triint.f tsfmul.f twojet.f twokin.f uoutcoup.f \
+upmhcond.f upmhcond2.f upmzmhigh.f upmzmhigh2.f upsqm.f usmma.f \
+vec2mat.f vgen.f visaje.f vssxxx.f vvssxx.f vvsxxx.f vvvxxx.f vxxxxx.f \
+w3w3xx.f wgens.f whiggs.f wilson.f wpair.f wrtqnm.f wwkin.f wwss.f \
+wwst.f wwtt.f wwwwxx.f wzss.f wzst.f wzsu.f wztu.f xerbla.f xhchck.f \
+xhfill.f xhinit.f xhordr.f xhplot.f xhrnge.f xhscle.f xkaim.f xkare.f \
+xwwww.f xwwzz.f xzzww.f xzzzz.f ygenj.f yukdiag.f zaxpy.f zcopy.f \
+zdotc.f zdotu.f zdscal.f zerol.f zgebak.f zgebal.f zgeev.f zgehd2.f \
+zgehrd.f zgemm.f zgemv.f zgerc.f zhseqr.f zjj.f zjj0.f zjj1.f zjj2.f \
+zjj3.f zjj4.f zjj5.f zjj6.f zjj7.f zlacgv.f zlacpy.f zladiv.f zlahqr.f \
+zlahr2.f zlange.f zlaqr0.f zlaqr1.f zlaqr2.f zlaqr3.f zlaqr4.f zlaqr5.f \
+zlarf.f zlarfb.f zlarfg.f zlarft.f zlartg.f zlascl.f zlaset.f zlassq.f \
+zlatrs.f zrot.f zscal.f zswap.f ztrevc.f ztrexc.f ztrmm.f ztrmv.f \
+ztrsv.f zung2r.f zunghr.f zungqr.f zunm2r.f zunmhr.f zunmqr.f zzall.f \
+zzstar.f
+
+OBJ = $(patsubst %.f,%.o,$(SRC))
+
+vpath %.a $(LIB)
+
+#all : libisajet.a aldata.o
+all : libisajet.a
+
+#aldata.o: aldata.f
+#	$(FF) $(FOPT) -c -o $(LIB)/aldata.o aldata.f
+
+libisajet.a: $(OBJ)
+	ar r $(LIB)/libisajet.a $(OBJ)
+	ranlib $(LIB)/libisajet.a
+
+clean:
+	rm -f *.o
+
+.f.o :
+	$(FF) $(FOPT) -c -o $*.o $*.f
+
+#sugeff.o: sugeff.f
+#	f77 -c -o sugeff.o sugeff.f
+
+#.PHONY: aldata.o

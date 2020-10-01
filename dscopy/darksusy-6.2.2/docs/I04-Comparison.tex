@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Comparison to previous \ds\ versions}
+\label{ch:translation}
+
+For those \ds\ users who are familiar with previous version of the code, the main 
+structural difference introduced with \ds\ 6.0 is a highly modular setup that allows to 
+fully disentangle the astrophysics-related parts from those that rely on a specific particle
+physics model (see Chapter 
+\ref{ch:philosophy} for a detailed description). There are also many new or significantly 
+improved physics capabilities introduced after version 5 and 4 \cite{ds4} -- including 
+electroweak and strong corrections to DM annihilation, improved routines to solve
+the Boltzmann equation for chemical and kinetic decoupling, and a new framework to handle 
+the propagation of cosmic rays. For a detailed list of those new features, we refer to the 
+publication describing this release of the code \cite{ds6}.
+
+
+One technical aspect that has changed are the particle codes ($k$-variables), which are 
+now treated as (module-)internal codes. They can be used by the particle physics module if the 
+module so wishes, but the interface functions and routines in \code{ds\_core} instead 
+use PDG codes when referring to particles.
+
+In the course of re-organizing the code, it also became necessary to re-name some of the 
+basic functions and subroutines that existed in earlier versions and which users may have
+become familiar with. For convenience, we therefore list below, in Table \ref{tab:translation},
+ the most commonly used functionalities in version 4 and 5 that have changed in name or 
+ usage with the present version of the code.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{table}[t!]
+%\centering
+%\begin{tabular}[l]{lll}
+\captionsetup{width=\textwidth}
+\begin{longtable}{ p{.33\textwidth}  p{.22\textwidth}  p{.35\textwidth} } 
+\\[1ex]
+routine name up to \ds\ 5 & new routine name & comments\\
+\hline
+\code{dshmset} & \code{dsdmdset\_halomodel} &  \parbox[t]{5.5cm}{Setting up and refering to DM
+halos has fundamentally changed. See Section \ref{sec:halo_general} for an overview and all Chapters with names
+containing  \code{src\_dmd} in Part II of the manual for more details.} \vspace*{1.5ex}\\
+%
+\code{dshmj} & \code{dsjfactor} &  \parbox[t]{5.5cm}{Line-of-sight integrals now take a halo label as input, and can be
+computed for various objects at the same time.} \vspace*{1.5ex}\\
+%
+\code{dssusy} & [\code{dsmodelsetup}] &  \parbox[t]{5.5cm}{Setting up a model (calculating the mass spectrum,  
+relevant 3-particle vertices etc.) now depends on the particle module implementation.} \vspace*{1.5ex}\\
+%
+\parbox[t]{4cm}{\code{dsmhtkd}\\\code{dsmhmcut}} & \parbox[t]{4cm}{\code{dskdtkd}\\\code{dskdmcut}} 
+&  \parbox[t]{5.5cm}{The 'microhalo' routines are now more properly referred to as 'kinetic decoupling' routines.} \vspace*{1.5ex}\\
+%
+\code{dshmrescale\_rho} & ---& \parbox[t]{5.5cm}{A mismatch between local halo density and DM abundance 
+for a given \ds\ module is no longer hidden as a rescaling factor in a common block. Instead, such factors 
+typically enter as explicit parameters in direct and indirect detection routines.} \vspace*{1.5ex}\\
+%
+\code{dshaloyield} & [\code{dsanyield}] & \parbox[t]{5.5cm}{total cosmic ray yield from {\it neutralino} annihilation}
+\vspace*{1.5ex}\\
+%
+\code{dshayield} & \code{dsanyield\_sim} &  \parbox[t]{5.5cm}{simulated cosmic ray yields from individual annihilation/decay channels to SM particles. 
+Note that internal channel codes are now replaced with PDG codes of the final state particles as input.}
+\vspace*{1.5ex}\\
+%
+\code{dshrgacontdiff} & \code{dsgafluxsph} &  \parbox[t]{5.5cm}{Gamma-ray flux routines now work seamlessly together with both the new halo setup and the modular particle physics structure.}
+\vspace*{1.5ex}\\
+%
+\code{dshrgaline} & \parbox[t]{4cm}{\code{dscrgaflux\_line\_v0ann}\\\code{dscrgaflux\_dec}} & \parbox[t]{5.5cm}{Gamma-ray line routines now return both number, energies and widths of all such signals that are present in the current particle setup.}
+\vspace*{1.5ex}\\
+%
+\parbox[t]{4cm}{\code{dshrpbardiff}\\\code{dshrdbardiff}\\\code{dsepdiff}} 
+& \parbox[t]{4cm}{\code{dspbdphidtaxi}\\\code{dsdbdphidtaxi}\\\code{dsepdphidpaxi}} 
+&  \parbox[t]{5.5cm}{Cosmic-ray propagation routines have been re-written 
+from scratch. They are now much more flexible and can be used for any axisymmetric halo/diffusion model.}
+\vspace*{1.5ex}\\
+%
+\code{dsntrates} & \code{dssenu\_rates} &  \parbox[t]{5.5cm}{Neutrino rates from inside the sun or earth}
+\vspace*{1.5ex}\\
+%
+\code{dshrmuhalo} &  \parbox[t]{4cm}{\code{dscrmuflux\_v0ann}\\\code{dscrmuflux\_v0ann}} 
+&  \parbox[t]{5.5cm}{Neutrino-induced muon flux from the halo
+(for annihilating and decaying DM, respectively).}
+\vspace*{1.5ex}\\
+%
+
+\hline
+%\end{tabular}
+\caption{`Translation table' for how the most commonly used functionalities in \ds\ version 5 and earlier have changed with the
+present version of the code. Routines in parentheses, e.g.  [\code{dsanyield}], are no longer part of the \ds\ main library and only 
+provided by specific particle physics modules. For more detailed descriptions of the new routines and functions, see the headers of the respective 
+files. 
+}
+\label{tab:translation}
+\end{longtable}
+%\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%		
+

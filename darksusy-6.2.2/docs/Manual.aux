@@ -1,0 +1,960 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\bibstyle{JHEP}
+\@writefile{toc}{\contentsline {part}{I\hspace  {1em}Prelude}{8}{part.1}\protected@file@percent }
+\citation{ds4}
+\citation{ds6}
+\citation{ds4}
+\citation{ds6}
+\citation{ds6}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{9}{chapter.1}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Quick start guide}{10}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Installation}{10}{section.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Options for install}{11}{subsection.2.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}System requirements}{11}{subsection.2.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Example programs}{11}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Auxiliary example programs}{11}{subsection.2.2.1}\protected@file@percent }
+\newlabel{sec:aux_ex}{{2.2.1}{11}{Auxiliary example programs}{subsection.2.2.1}{}}
+\citation{Zhao:1995cp}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Making your own example programs}{12}{subsection.2.2.2}\protected@file@percent }
+\newlabel{sec:makeownmain}{{2.2.2}{12}{Making your own example programs}{subsection.2.2.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Modifying individual subroutines or functions}{13}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Guiding principles of the code}{14}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:philosophy}{{3}{14}{Guiding principles of the code}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}The main {\sffamily  DarkSUSY}\ library \textsf  {ds\_core}}{14}{section.3.1}\protected@file@percent }
+\citation{Silveira:1985rk}
+\citation{McDonald:1993ex}
+\citation{Burgess:2000yq}
+\citation{Cline:2013gha}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Conceptual illustration of how to use {\sffamily  DarkSUSY}. The main program links to both the main library, \textsf  {ds\_core}, and to \emph  {one} of the available particle physics modules. User-replaceable functions are optional and may be linked to directly from the main program, or indirectly by including them in the various libraries. See \textsf  {examples/dsmain\_wimp.F} for an example of a main program that demonstrates typical usage of {\sffamily  DarkSUSY}\ for different particle physics modules.\relax }}{15}{figure.caption.3}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:concept}{{3.1}{15}{Conceptual illustration of how to use \ds . The main program links to both the main library, \code {ds\_core}, and to \emph {one} of the available particle physics modules. User-replaceable functions are optional and may be linked to directly from the main program, or indirectly by including them in the various libraries. See \code {examples/dsmain\_wimp.F} for an example of a main program that demonstrates typical usage of \ds \ for different particle physics modules.\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Particle physics modules}{15}{section.3.2}\protected@file@percent }
+\newlabel{sec:particle_modules}{{3.2}{15}{Particle physics modules}{section.3.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Organization of the main library \textsf  {ds\_core}: all functions and subroutines reside in the \textsf  {src/} folder of the {\sffamily  DarkSUSY}\ installation, with the names of the subdirectories indicating the subject area. (Note: this table is automatically generated from the actual directory structure in \textsf  {src/}.) \relax }}{16}{table.caption.4}\protected@file@percent }
+\newlabel{tab:dsmain}{{3.1}{16}{Organization of the main library \code {ds\_core}: all functions and subroutines reside in the \code {src/} folder of the \ds \ installation, with the names of the subdirectories indicating the subject area. (Note: this table is automatically generated from the actual directory structure in \code {src/}.) \relax }{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Using a particle physics module}{16}{subsection.3.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces List of particle physics modules currently available in \textsf  {src\_models}. (Note: this table is automatically generated from the actual content of \textsf  {src\_models}.)\relax }}{17}{table.caption.5}\protected@file@percent }
+\newlabel{tab:modules}{{3.2}{17}{List of particle physics modules currently available in \code {src\_models}. (Note: this table is automatically generated from the actual content of \code {src\_models}.)\relax }{table.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Adding a new particle physics module}{17}{subsection.3.2.2}\protected@file@percent }
+\citation{1965TrAlm...5...87E}
+\citation{Navarro:1995iw}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Halo models}{18}{section.3.3}\protected@file@percent }
+\newlabel{sec:halo_general}{{3.3}{18}{Halo models}{section.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Interface functions}{18}{section.3.4}\protected@file@percent }
+\newlabel{sec:interface}{{3.4}{18}{Interface functions}{section.3.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Table of interface functions, which modules that contain them (with numbering from table\nobreakspace  {}\ref  {tab:modules}, where they are used and a short description of them. (Note: this table is automatically generated from scanning through the particle physics modules in \textsf  {src\_models}. The description is taken from the \textsf  {empty} module routine headers.)\relax }}{19}{table.caption.6}\protected@file@percent }
+\newlabel{tab:if}{{3.3}{19}{Table of interface functions, which modules that contain them (with numbering from table~\ref {tab:modules}, where they are used and a short description of them. (Note: this table is automatically generated from scanning through the particle physics modules in \code {src\_models}. The description is taken from the \code {empty} module routine headers.)\relax }{table.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Commonly used functions}{19}{section.3.5}\protected@file@percent }
+\citation{Sjostrand:2006za}
+\citation{Cirelli:2010xx}
+\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces List of commonly used functions and subroutines. (Note: this table is automatically generated from the routines in \textsf  {src} that have the commonly used tag in their header.)\relax }}{20}{table.caption.7}\protected@file@percent }
+\newlabel{tab:culist}{{3.4}{20}{List of commonly used functions and subroutines. (Note: this table is automatically generated from the routines in \code {src} that have the commonly used tag in their header.)\relax }{table.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.6}Replaceable functions}{20}{section.3.6}\protected@file@percent }
+\newlabel{sec:replaceable}{{3.6}{20}{Replaceable functions}{section.3.6}{}}
+\citation{ds4}
+\citation{ds6}
+\gdef \LT@i {\LT@entry 
+    {1}{154.01901pt}\LT@entry 
+    {1}{106.67934pt}\LT@entry 
+    {1}{162.628pt}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Comparison to previous {\sffamily  DarkSUSY}\ versions}{22}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:translation}{{4}{22}{Comparison to previous \ds \ versions}{chapter.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces `Translation table' for how the most commonly used functionalities in {\sffamily  DarkSUSY}\ version 5 and earlier have changed with the present version of the code. Routines in parentheses, e.g. [\textsf  {dsanyield}], are no longer part of the {\sffamily  DarkSUSY}\ main library and only provided by specific particle physics modules. For more detailed descriptions of the new routines and functions, see the headers of the respective files. \relax }}{23}{table.4.1}\protected@file@percent }
+\newlabel{tab:translation}{{4.1}{23}{`Translation table' for how the most commonly used functionalities in \ds \ version 5 and earlier have changed with the present version of the code. Routines in parentheses, e.g. [\code {dsanyield}], are no longer part of the \ds \ main library and only provided by specific particle physics modules. For more detailed descriptions of the new routines and functions, see the headers of the respective files. \relax }{table.4.1}{}}
+\citation{ds4}
+\citation{ds6}
+\citation{Gondolo:1990dk}
+\citation{Edsjo:1997bg}
+\citation{Edsjo:2003us}
+\citation{Bringmann:2009vf}
+\citation{Bergstrom:1998zs}
+\citation{Bergstrom:1998xh}
+\citation{Baltz:1998xv}
+\citation{Bergstrom:1999jc}
+\citation{Bringmann:2015cpa}
+\citation{Bergstrom:1995cz}
+\citation{Bergstrom:1997fh}
+\citation{Ullio:1997ke}
+\citation{Bringmann:2007nk}
+\citation{Bergstrom:2008gr}
+\citation{Bringmann:2013oja}
+\citation{Bringmann:2017sko}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Original articles}{24}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{sec:DS_papers}{{5}{24}{Original articles}{chapter.5}{}}
+\@writefile{toc}{\contentsline {part}{II\hspace  {1em}Main DarkSUSY routines in src/}{25}{part.2}\protected@file@percent }
+\citation{Sjostrand:2006za}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}an\_yield: Annihilation yields in the halo -- yields from simulations}{26}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/an_yield}{{6}{26}{an\_yield: Annihilation yields in the halo -- yields from simulations}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Annihilation in the halo, yields -- theory}{26}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Monte Carlo simulations}{26}{subsection.6.1.1}\protected@file@percent }
+\newlabel{sec:ha-mcsim}{{6.1.1}{26}{Monte Carlo simulations}{subsection.6.1.1}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}aux: General routines}{28}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/aux}{{7}{28}{aux: General routines}{chapter.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}General routines}{28}{section.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}aux\_xdiag: Diagonalization routines}{29}{chapter.8}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/aux_xdiag}{{8}{29}{aux\_xdiag: Diagonalization routines}{chapter.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}XDIAG}{29}{section.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}cr\_aux: Cosmic rays -- general}{30}{chapter.9}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/cr_aux}{{9}{30}{cr\_aux: Cosmic rays -- general}{chapter.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}Cosmic Rays -- auxiliary routines}{30}{section.9.1}\protected@file@percent }
+\citation{Bergstrom:2013jra}
+\citation{Strong:2007nh}
+\citation{Strong:1998pw}
+\citation{Evoli:2016xgn}
+\citation{Kissmann:2014sia}
+\citation{Maurin:2001sj}
+\citation{Bergstrom:1999jc}
+\citation{Bergstrom:1999jc}
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}cr\_axi: Cosmic rays -- diffusion routines for axisymmetric distributions}{31}{chapter.10}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/cr_axi}{{10}{31}{cr\_axi: Cosmic rays -- diffusion routines for axisymmetric distributions}{chapter.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}Cosmic ray propagation in axially symmetric halos}{31}{section.10.1}\protected@file@percent }
+\newlabel{eq:pbardiff}{{10.1}{31}{Cosmic ray propagation in axially symmetric halos}{equation.10.1.1}{}}
+\citation{Evoli:2011id}
+\citation{Baltz:1998xv}
+\citation{Baltz:1998xv}
+\citation{Colafrancesco:2005ji}
+\newlabel{eq:eplusdiff}{{10.2}{32}{Cosmic ray propagation in axially symmetric halos}{equation.10.1.2}{}}
+\citation{Turner:1986vr}
+\citation{Ipser:1987ru}
+\citation{Freese:1989tg}
+\citation{Berezinsky:1994wva}
+\citation{Lake:1990du}
+\citation{Silk:1992bh}
+\citation{CalcaneoRoldan:2000yt}
+\citation{Bergstrom:1998zs}
+\citation{Bergstrom:1998jj}
+\citation{Bergstrom:2000bk}
+\citation{Baltz:1999ra}
+\citation{Cline:1990mr}
+\citation{Gao:1991rz}
+\citation{Bergstrom:2001jj}
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}cr\_gamma: Cosmic rays -- Gamma fluxes}{34}{chapter.11}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/cr_gamma}{{11}{34}{cr\_gamma: Cosmic rays -- Gamma fluxes}{chapter.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}Gamma rays from the halo -- theory}{34}{section.11.1}\protected@file@percent }
+\newlabel{sec:cr_gamma}{{11.1}{34}{Gamma rays from the halo -- theory}{section.11.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}Continuous gamma yields and line signals}{35}{section.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.3}Fluxes}{35}{section.11.3}\protected@file@percent }
+\newlabel{psource}{{11.1}{35}{Fluxes}{equation.11.3.1}{}}
+\newlabel{eq:Sann}{{11.2}{35}{Fluxes}{equation.11.3.2}{}}
+\citation{Belanger:2012zr}
+\citation{Belanger:2014bga}
+\citation{Ko:2014nha}
+\citation{Choi:2015bya}
+\citation{Arina:2014fna}
+\citation{xxx}
+\citation{xxx}
+\newlabel{eq:Sdec}{{11.3}{36}{Fluxes}{equation.11.3.3}{}}
+\newlabel{eq:phiann}{{11.6}{36}{Fluxes}{equation.11.3.6}{}}
+\newlabel{eq:phidec}{{11.7}{36}{Fluxes}{equation.11.3.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.4}Gamma rays from the halo -- routines}{36}{section.11.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {12}cr\_nu: Cosmic rays -- Neutrino fluxes}{37}{chapter.12}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/cr_nu}{{12}{37}{cr\_nu: Cosmic rays -- Neutrino fluxes}{chapter.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.1}Neutrino fluxes from the halo -- theory}{37}{section.12.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {13}cr\_ps: Cosmic rays -- point sources}{38}{chapter.13}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/cr_ps}{{13}{38}{cr\_ps: Cosmic rays -- point sources}{chapter.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.1}Cosmic Ray propagation for point sources}{38}{section.13.1}\protected@file@percent }
+\citation{Fitzpatrick:2012ix}
+\citation{GondoloScopel}
+\@writefile{toc}{\contentsline {chapter}{\numberline {14}dd: Direct detection}{39}{chapter.14}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/dd}{{14}{39}{dd: Direct detection}{chapter.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {14.1}Direct detection -- theory}{39}{section.14.1}\protected@file@percent }
+\newlabel{eq:dRdE}{{14.1}{39}{Direct detection -- theory}{equation.14.1.1}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {15}dmd\_astro: Astrophysical source functions}{40}{chapter.15}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/dmd_astro}{{15}{40}{dmd\_astro: Astrophysical source functions}{chapter.15}{}}
+\citation{1965TrAlm...5...87E}
+\citation{Navarro:1995iw}
+\citation{Maccio:2008pcd}
+\citation{Schaye:2014tpa}
+\citation{Schaller:2014uwa}
+\citation{Wang:2015jpa}
+\citation{Tollet:2015gqa}
+\@writefile{toc}{\contentsline {chapter}{\numberline {16}dmd\_mod: Dark matter distributions}{41}{chapter.16}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/dmd_mod}{{16}{41}{dmd\_mod: Dark matter distributions}{chapter.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {16.1}Dark matter distributions -- theory}{41}{section.16.1}\protected@file@percent }
+\newlabel{sec:halo}{{16.1}{41}{Dark matter distributions -- theory}{section.16.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {16.1.1}Rescaling of the WIMP density}{41}{subsection.16.1.1}\protected@file@percent }
+\newlabel{sec:rescale}{{16.1.1}{41}{Rescaling of the WIMP density}{subsection.16.1.1}{}}
+\citation{1965TrAlm...5...87E}
+\citation{Navarro:1995iw}
+\citation{XXX}
+\@writefile{toc}{\contentsline {section}{\numberline {16.2}Implementation in {\sffamily  DarkSUSY}}{42}{section.16.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {16.2.1}Dark matter distributions -- routines}{43}{subsection.16.2.1}\protected@file@percent }
+\citation{1915MNRAS..76...37E}
+\citation{Catena:2011kv}
+\@writefile{toc}{\contentsline {chapter}{\numberline {17}dmd\_vel: Dark matter velocity distributions}{44}{chapter.17}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/dmd_vel}{{17}{44}{dmd\_vel: Dark matter velocity distributions}{chapter.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {17.1}Dark matter phase-space distributions -- theory}{44}{section.17.1}\protected@file@percent }
+\newlabel{sec:dmd_vel}{{17.1}{44}{Dark matter phase-space distributions -- theory}{section.17.1}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {18}ini: Initialization routines}{45}{chapter.18}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/ini}{{18}{45}{ini: Initialization routines}{chapter.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {18.1}Initialisation routines}{45}{section.18.1}\protected@file@percent }
+\citation{Bringmann:2006mu}
+\citation{Bringmann:2009vf}
+\citation{Bringmann:2009vf}
+\@writefile{toc}{\contentsline {chapter}{\numberline {19}kd: Kinetic decoupling}{46}{chapter.19}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/kd}{{19}{46}{kd: Kinetic decoupling}{chapter.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {19.1}Kinetic decoupling and microhalos (kd) -- theory}{46}{section.19.1}\protected@file@percent }
+\newlabel{sec:kd}{{19.1}{46}{Kinetic decoupling and microhalos (kd) -- theory}{section.19.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.1.1}Kinetic decoupling}{46}{subsection.19.1.1}\protected@file@percent }
+\newlabel{eq:fullboltz}{{19.1}{46}{Kinetic decoupling}{equation.19.1.1}{}}
+\newlabel{TchiT}{{19.3}{46}{Kinetic decoupling}{equation.19.1.3}{}}
+\citation{Binder:2017rgn}
+\citation{Bringmann:2009vf}
+\citation{Bringmann:2016ilk}
+\citation{KasaharaPHD}
+\citation{Gondolo:2012vh}
+\citation{Green:2005fa}
+\citation{Bringmann:2009vf}
+\citation{Loeb:2005pm}
+\citation{Bertschinger:2006nq}
+\newlabel{dydx}{{19.6}{47}{Kinetic decoupling}{equation.19.1.6}{}}
+\newlabel{fT}{{19.7}{47}{Kinetic decoupling}{equation.19.1.7}{}}
+\newlabel{maverage}{{19.8}{47}{Kinetic decoupling}{equation.19.1.8}{}}
+\newlabel{eq:tkddef}{{19.9}{47}{Kinetic decoupling}{equation.19.1.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.1.2}The smallest protohalos}{47}{subsection.19.1.2}\protected@file@percent }
+\citation{Diemand:2005vz}
+\citation{Bringmann:2006mu}
+\@writefile{toc}{\contentsline {section}{\numberline {19.2}Kinetic decoupling -- routines}{48}{section.19.2}\protected@file@percent }
+\citation{Griest:1990kh}
+\citation{Edsjo:1997bg}
+\@writefile{toc}{\contentsline {chapter}{\numberline {20}rd: Relic density}{49}{chapter.20}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/rd}{{20}{49}{rd: Relic density}{chapter.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {20.1}Relic density -- theoretical background}{49}{section.20.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.1.1}The Boltzmann equation and thermal averaging}{49}{subsection.20.1.1}\protected@file@percent }
+\newlabel{sec:Boltzmann}{{20.1.1}{49}{The Boltzmann equation and thermal averaging}{subsection.20.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.1.2}Review of the Boltzmann equation with coannihilations}{49}{subsection.20.1.2}\protected@file@percent }
+\newlabel{RD:review}{{20.1.2}{49}{Review of the Boltzmann equation with coannihilations}{subsection.20.1.2}{}}
+\newlabel{eq:Boltzmann}{{20.1}{49}{Review of the Boltzmann equation with coannihilations}{equation.20.1.1}{}}
+\newlabel{eq:Boltzmann2}{{20.12}{50}{Review of the Boltzmann equation with coannihilations}{equation.20.1.12}{}}
+\newlabel{eq:sigmaveffdef}{{20.13}{50}{Review of the Boltzmann equation with coannihilations}{equation.20.1.13}{}}
+\citation{Srednicki:1988ce}
+\citation{Gondolo:1990dk}
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.1.3}Thermal averaging}{51}{subsection.20.1.3}\protected@file@percent }
+\newlabel{sec:thermav}{{20.1.3}{51}{Thermal averaging}{subsection.20.1.3}{}}
+\newlabel{eq:sigmaveff}{{20.14}{51}{Thermal averaging}{equation.20.1.14}{}}
+\newlabel{eq:neq}{{20.15}{51}{Thermal averaging}{equation.20.1.15}{}}
+\newlabel{eq:Aij2}{{20.17}{51}{Thermal averaging}{equation.20.1.17}{}}
+\newlabel{eq:Wijcross}{{20.18}{51}{Thermal averaging}{equation.20.1.18}{}}
+\newlabel{eq:Aij2b}{{20.22}{52}{Thermal averaging}{equation.20.1.22}{}}
+\newlabel{eq:As}{{20.31}{52}{Thermal averaging}{equation.20.1.31}{}}
+\newlabel{eq:peff}{{20.33}{52}{Thermal averaging}{equation.20.1.33}{}}
+\citation{Gondolo:1990dk}
+\citation{Gondolo:1990dk}
+\newlabel{eq:weff}{{20.34}{53}{Thermal averaging}{equation.20.1.34}{}}
+\newlabel{eq:Apeff}{{20.37}{53}{Thermal averaging}{equation.20.1.37}{}}
+\newlabel{eq:sigmavefffin2}{{20.39}{53}{Thermal averaging}{equation.20.1.39}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.1.4}Reformulation of the Boltzmann equation}{53}{subsection.20.1.4}\protected@file@percent }
+\newlabel{eq:ydef}{{20.40}{53}{Reformulation of the Boltzmann equation}{equation.20.1.40}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20.1}{\ignorespaces The effective invariant annihiliation rate $W_{\rm  eff}$ as a function of $p_{\rm  eff}$ for an example \textsf  {mssm} model. The final state threshold for annihilation into $W^+ W^-$ and the coannihilation thresholds, as given by Eq.\nobreakspace  {}(\ref {eq:weff}), are indicated. The $\chi _2^0 \chi _2^0$ coannihilation threshold is too small to be seen.\relax }}{54}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:effrate}{{20.1}{54}{The effective invariant annihiliation rate $W_{\rm eff}$ as a function of $p_{\rm eff}$ for an example \code {mssm} model. The final state threshold for annihilation into $W^+ W^-$ and the coannihilation thresholds, as given by Eq.~(\protect \ref {eq:weff}), are indicated. The $\chi _2^0 \chi _2^0$ coannihilation threshold is too small to be seen.\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20.2}{\ignorespaces Total differential annihilation rate per unit volume $dA/dp_{\rm  eff}$ for the same model as in Fig.\nobreakspace  {}\ref {fig:effrate}, evaluated at a temperature $T=m_\chi /20$, typical of freeze-out. Notice the Boltzmann suppression at high $p_{\rm  eff}$.\relax }}{55}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:k1effrate}{{20.2}{55}{Total differential annihilation rate per unit volume $dA/dp_{\rm eff}$ for the same model as in Fig.~\protect \ref {fig:effrate}, evaluated at a temperature $T=m_\chi /20$, typical of freeze-out. Notice the Boltzmann suppression at high $p_{\rm eff}$.\relax }{figure.caption.9}{}}
+\citation{Gondolo:1990dk}
+\citation{Drees:2015exa}
+\newlabel{eq:entropycons}{{20.42}{56}{Reformulation of the Boltzmann equation}{equation.20.1.42}{}}
+\newlabel{eq:Boltzmann3}{{20.44}{56}{Reformulation of the Boltzmann equation}{equation.20.1.44}{}}
+\newlabel{eq:Boltzmann3bis}{{20.45}{56}{Reformulation of the Boltzmann equation}{equation.20.1.45}{}}
+\newlabel{eq:geffheff}{{20.48}{56}{Reformulation of the Boltzmann equation}{equation.20.1.48}{}}
+\newlabel{eq:Boltzmann4}{{20.49}{56}{Reformulation of the Boltzmann equation}{equation.20.1.49}{}}
+\newlabel{eq:omegah2}{{20.53}{57}{Reformulation of the Boltzmann equation}{equation.20.1.53}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {20.2}Relic density -- numerical integration of the density equation}{57}{section.20.2}\protected@file@percent }
+\newlabel{sec:numdens}{{20.2}{57}{Relic density -- numerical integration of the density equation}{section.20.2}{}}
+\newlabel{eq:Boltzmann4}{{20.54}{57}{Relic density -- numerical integration of the density equation}{equation.20.2.54}{}}
+\newlabel{eq:evol}{{20.55}{57}{Relic density -- numerical integration of the density equation}{equation.20.2.55}{}}
+\newlabel{eq:y_one}{{20.59}{57}{Relic density -- numerical integration of the density equation}{equation.20.2.59}{}}
+\newlabel{eq:y_two}{{20.64}{58}{Relic density -- numerical integration of the density equation}{equation.20.2.64}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {20.3}Relic density -- routines}{58}{section.20.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.3.1}Global parameters}{58}{subsection.20.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.3.2}Brief description of the internal routines}{59}{subsection.20.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {21}se\_aux: Auxiliary routines for WIMP annihilation in the Sun/Earth}{61}{chapter.21}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/se_aux}{{21}{61}{se\_aux: Auxiliary routines for WIMP annihilation in the Sun/Earth}{chapter.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {21.1}Sun and Earth models -- auxiliary routines}{61}{section.21.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {22}se\_mod: Sun and Earth models}{62}{chapter.22}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/se_mod}{{22}{62}{se\_mod: Sun and Earth models}{chapter.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {22.1}Sun and Earth models -- theory}{62}{section.22.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {22.2}Sun and Earth models -- routines}{62}{section.22.2}\protected@file@percent }
+\citation{Krauss:1985unpub}
+\citation{Press:1985ug}
+\citation{Silk:1985ax}
+\citation{Krauss:1985ks}
+\citation{Krauss:1985aaa}
+\citation{Gaisser:1986ha}
+\citation{Griest:1986yu}
+\citation{Hagelin:1986gv}
+\citation{Freese:1985qw}
+\citation{Kamionkowski:1991nj}
+\citation{Halzen:1991kh}
+\citation{Bottino:1991dy}
+\citation{Bottino:1994xp}
+\citation{Gandhi:1993ce}
+\citation{Bergstrom:1996kp}
+\citation{Bergstrom:1998xh}
+\citation{Halzen:1996su}
+\@writefile{toc}{\contentsline {chapter}{\numberline {23}se\_nu: Capture and annihilation in the Sun/Earth}{63}{chapter.23}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/se_nu}{{23}{63}{se\_nu: Capture and annihilation in the Sun/Earth}{chapter.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {23.1}Neutrinos from the Sun and Earth -- theory}{63}{section.23.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.1.1}Neutrino yield from annihilations}{63}{subsection.23.1.1}\protected@file@percent }
+\citation{Ritz:1987mh}
+\citation{Giudice:1988vs}
+\citation{Halzen:1991kh}
+\citation{Drees:1993bh}
+\citation{Gandhi:1993ce}
+\citation{Bottino:1994xp}
+\citation{Jungman:1994jr}
+\citation{Berezinsky:1996ga}
+\citation{Bergstrom:1998xh}
+\newlabel{eq:muflux}{{23.2}{64}{Neutrino yield from annihilations}{equation.23.1.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.1.2}Evolution of the number density in the Earth/Sun}{64}{subsection.23.1.2}\protected@file@percent }
+\newlabel{eqx.1}{{23.3}{64}{Evolution of the number density in the Earth/Sun}{equation.23.1.3}{}}
+\newlabel{eqx.2}{{23.4}{64}{Evolution of the number density in the Earth/Sun}{equation.23.1.4}{}}
+\newlabel{eq6.3}{{23.5}{64}{Evolution of the number density in the Earth/Sun}{equation.23.1.5}{}}
+\citation{Bergstrom:1998xh}
+\citation{Kamionkowski:1994dp}
+\citation{Edsjo:1995zc}
+\citation{Bergstrom:1997tp}
+\citation{Jungman:1995df}
+\citation{Gould:1987ir}
+\citation{Jungman:1995df}
+\citation{Jungman:1995df}
+\citation{Jungman:1995df}
+\citation{Kamionkowski:1991nj}
+\newlabel{eq6.4}{{23.6}{65}{Evolution of the number density in the Earth/Sun}{equation.23.1.6}{}}
+\newlabel{eq:tanh}{{23.7}{65}{Evolution of the number density in the Earth/Sun}{equation.23.1.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.1.3}Approximate capture rate expressions}{65}{subsection.23.1.3}\protected@file@percent }
+\citation{Jungman:1995df}
+\citation{Bahcall:2000nu}
+\citation{Jungman:1995df}
+\citation{Bahcall:2000nu}
+\citation{Jungman:1995df}
+\citation{Jungman:1995df}
+\citation{Bahcall:2000nu}
+\citation{Jungman:1995df}
+\citation{2003TrGeo...2..547M}
+\citation{2003TrGeo...2..547M}
+\citation{Gould:1987ir}
+\citation{2003TrGeo...2..547M}
+\citation{2003TrGeo...2..547M}
+\citation{Gould:1987ir}
+\citation{2003TrGeo...2..547M}
+\@writefile{lot}{\contentsline {table}{\numberline {23.1}{\ignorespaces The composition of the Sun with average parameters to be used in the approximative relations given in \cite  {Jungman:1995df}. These values are updated with the solar model of \cite  {Bahcall:2000nu} and differs slightly from the values used in \cite  {Jungman:1995df}.\relax }}{66}{table.caption.10}\protected@file@percent }
+\newlabel{tab:suncomp}{{23.1}{66}{The composition of the Sun with average parameters to be used in the approximative relations given in \cite {Jungman:1995df}. These values are updated with the solar model of \cite {Bahcall:2000nu} and differs slightly from the values used in \cite {Jungman:1995df}.\relax }{table.caption.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {23.2}{\ignorespaces The composition of the Earth's core and mantle. The core mass fractions are from \cite  {2003TrGeo...2..547M}[Table 4] and the mantle mass fractions are from \cite  {2003TrGeo...2..547M}[Table 2]. The average mass fractions and potentials in the last two columns are weighted averages assuming a core mass of $1.93\cdot 10^{24}$ kg and a mantle mass of $4.04\cdot 10^{24}$ kg with average potentials (relative to the surface) of 1.6 in the core and 1.2 in the mantle \cite  {Gould:1987ir}.\relax }}{66}{table.caption.11}\protected@file@percent }
+\newlabel{tab:earthcomp}{{23.2}{66}{The composition of the Earth's core and mantle. The core mass fractions are from \cite {2003TrGeo...2..547M}[Table 4] and the mantle mass fractions are from \cite {2003TrGeo...2..547M}[Table 2]. The average mass fractions and potentials in the last two columns are weighted averages assuming a core mass of $1.93\cdot 10^{24}$ kg and a mantle mass of $4.04\cdot 10^{24}$ kg with average potentials (relative to the surface) of 1.6 in the core and 1.2 in the mantle \cite {Gould:1987ir}.\relax }{table.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.1.4}Earth and Sun composition}{66}{subsection.23.1.4}\protected@file@percent }
+\citation{EncBrit}
+\citation{Gould:1987ir}
+\citation{Gould:1987ir}
+\@writefile{lof}{\contentsline {figure}{\numberline {23.1}{\ignorespaces In a) the density profile and in b) the escape velocity in the Earth is shown.\relax }}{67}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:eadensvesc}{{23.1}{67}{In a) the density profile and in b) the escape velocity in the Earth is shown.\relax }{figure.caption.12}{}}
+\newlabel{eq:vesc}{{23.10}{67}{Earth and Sun composition}{equation.23.1.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.1.5}More accurate capture rate expressions}{67}{subsection.23.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.1.6}Accurate capture rates in the Earth for general velocity distributions}{67}{subsection.23.1.6}\protected@file@percent }
+\citation{Gould:1987ir}
+\citation{Gould:1987ir}
+\citation{Gould:1987ir}
+\citation{Gould:1987ir}
+\citation{Jungman:1995df}
+\newlabel{eq:dcdv}{{23.11}{68}{Accurate capture rates in the Earth for general velocity distributions}{equation.23.1.11}{}}
+\newlabel{eq:womega}{{23.15}{68}{Accurate capture rates in the Earth for general velocity distributions}{equation.23.1.15}{}}
+\newlabel{eq:umax}{{23.17}{68}{Accurate capture rates in the Earth for general velocity distributions}{equation.23.1.17}{}}
+\newlabel{eq:sigma_i}{{23.18}{68}{Accurate capture rates in the Earth for general velocity distributions}{equation.23.1.18}{}}
+\citation{Gould:1991aa}
+\citation{Gould:1987ir}
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.1.7}Accurate capture rates for the Earth for a Maxwell-Boltzmann velocity distribution}{69}{subsection.23.1.7}\protected@file@percent }
+\newlabel{eq:fstaru}{{23.21}{69}{Accurate capture rates for the Earth for a Maxwell-Boltzmann velocity distribution}{equation.23.1.21}{}}
+\newlabel{eq:dcdvmb}{{23.22}{69}{Accurate capture rates for the Earth for a Maxwell-Boltzmann velocity distribution}{equation.23.1.22}{}}
+\citation{Gould:1987ir}
+\citation{Gould:1991aa}
+\citation{Farinella:1994aa}
+\citation{Gould:1999je}
+\citation{Lundberg:2004dn}
+\citation{Lundberg:2004dn}
+\newlabel{eq:moderf}{{23.23}{70}{Accurate capture rates for the Earth for a Maxwell-Boltzmann velocity distribution}{equation.23.1.23}{}}
+\newlabel{ctotmb}{{23.25}{70}{Accurate capture rates for the Earth for a Maxwell-Boltzmann velocity distribution}{equation.23.1.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.1.8}Effects of WIMP diffusion in the solar system}{70}{subsection.23.1.8}\protected@file@percent }
+\citation{Jungman:1995df}
+\citation{Gould:1987ir}
+\@writefile{toc}{\contentsline {section}{\numberline {23.2}Neutrinos from Sun and Earth -- routines}{71}{section.23.2}\protected@file@percent }
+\citation{Edsjo:2007ws}
+\citation{Sjostrand:2006za}
+\citation{Ritz:1987mh}
+\citation{Edsjo:1997hp}
+\citation{Edsjo:2007ns}
+\citation{Groom:2000in}
+\citation{Edsjo:2007ws}
+\citation{Blennow:2007tw}
+\@writefile{toc}{\contentsline {chapter}{\numberline {24}se\_yield: Yields from annihilation in the Sun/Earth}{72}{chapter.24}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/se_yield}{{24}{72}{se\_yield: Yields from annihilation in the Sun/Earth}{chapter.24}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {24.1}Muon yields from annihilation in the Earth/Sun -- theory}{72}{section.24.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {24.1.1}Monte Carlo simulations with WimpSim}{72}{subsection.24.1.1}\protected@file@percent }
+\newlabel{sec:nt-mcsim}{{24.1.1}{72}{Monte Carlo simulations with WimpSim}{subsection.24.1.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {24.1}{\ignorespaces The annihilation channels \textsf  {ch} used in \textsf  {dswayieldone}. Also shown are the internal channel numbers \textsf  {chi} used for the fundamental channels used in the simulations (used by routine \textsf  {dswayieldf}). To save some additional space with the data files in memory, there are also array index channel numbers \textsf  {chii} that are only used internally to access the right elements of the yield arrays. $S$ denotes scalars (Higgs bosons). \relax }}{74}{table.caption.13}\protected@file@percent }
+\newlabel{tab:wa-channels}{{24.1}{74}{The annihilation channels \code {ch} used in \code {dswayieldone}. Also shown are the internal channel numbers \code {chi} used for the fundamental channels used in the simulations (used by routine \code {dswayieldf}). To save some additional space with the data files in memory, there are also array index channel numbers \code {chii} that are only used internally to access the right elements of the yield arrays. $S$ denotes scalars (Higgs bosons). \relax }{table.caption.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {24.2}{\ignorespaces The neutral scalar (Higgs) decay width channels used. In {\sffamily  DarkSUSY}\tmspace  +\thinmuskip {.1667em} these are stored in the array \textsf  {hdwidth(i,j)} where \textsf  {i} is the decay channel index above and \textsf  {j} is the Higgs number (1--3 for $H_1^0$, $H_2^0$ and $H_3^0$ respectively). For the \textsf  {wa} routines, these decay branching ratios (partial width divided by total width) are stored in \textsf  {dswas0br(i,j)}. \relax }}{74}{table.caption.14}\protected@file@percent }
+\newlabel{tab:hdecay0}{{24.2}{74}{The neutral scalar (Higgs) decay width channels used. In \ds \, these are stored in the array \code {hdwidth(i,j)} where \code {i} is the decay channel index above and \code {j} is the Higgs number (1--3 for $H_1^0$, $H_2^0$ and $H_3^0$ respectively). For the \code {wa} routines, these decay branching ratios (partial width divided by total width) are stored in \code {dswas0br(i,j)}. \relax }{table.caption.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {24.3}{\ignorespaces The (positively) charged scalar (Higgs) decay width channels used. In {\sffamily  DarkSUSY}\tmspace  +\thinmuskip {.1667em} these are stored in the array \textsf  {hdwidth(i,4)} where \textsf  {i} is the decay channel index above. For the \textsf  {wa} routines, these decay branching ratios (partial width divided by total width) are stored in \textsf  {dswascbr(i)}. \relax }}{75}{table.caption.15}\protected@file@percent }
+\newlabel{tab:hdecay+}{{24.3}{75}{The (positively) charged scalar (Higgs) decay width channels used. In \ds \, these are stored in the array \code {hdwidth(i,4)} where \code {i} is the decay channel index above. For the \code {wa} routines, these decay branching ratios (partial width divided by total width) are stored in \code {dswascbr(i)}. \relax }{table.caption.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {24.4}{\ignorespaces The yield types available from the \textsf  {wa} routines. All of these yields are at the detector (currently IceCube). Note that the units are for integrated yields (\textsf  {kind}=1), for differential yields (\textsf  {kind}=2), the units should be multiplied by GeV$^{-1}$ degree$^{-1}$. CC int.\ = charged current interactions. NC int.\ = neutral current interactions. \relax }}{76}{table.caption.16}\protected@file@percent }
+\newlabel{tab:wa-types}{{24.4}{76}{The yield types available from the \code {wa} routines. All of these yields are at the detector (currently IceCube). Note that the units are for integrated yields (\code {kind}=1), for differential yields (\code {kind}=2), the units should be multiplied by GeV$^{-1}$ degree$^{-1}$. CC int.\ = charged current interactions. NC int.\ = neutral current interactions. \relax }{table.caption.16}{}}
+\citation{Spergel:1999mh}
+\citation{Loeb:2010gj}
+\citation{Vogelsberger:2012ku}
+\citation{Peter:2012jh}
+\citation{Zavala:2012us}
+\citation{Aarssen:2012fx}
+\citation{Elbert:2014bma}
+\citation{Kamada:2016euw}
+\citation{Robertson:2017mgj}
+\citation{Bullock:2017xww}
+\citation{Flores:1994gz}
+\citation{Moore:1994yx}
+\citation{BoylanKolchin:2011de}
+\citation{BoylanKolchin:2011dk}
+\citation{Oman:2015xda}
+\citation{Oman:2016zjn}
+\citation{Moore:1999nt}
+\citation{Klypin:1999uc}
+\citation{Bringmann:2016ilk}
+\citation{Tulin:2013teo}
+\citation{Kahlhoefer:2017umn}
+\citation{Tulin:2017ara}
+\@writefile{toc}{\contentsline {chapter}{\numberline {25}si: Self-interactions}{77}{chapter.25}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:src/si}{{25}{77}{si: Self-interactions}{chapter.25}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {25.1}Dark matter self-interactions (si) -- theory}{77}{section.25.1}\protected@file@percent }
+\newlabel{sec:si}{{25.1}{77}{Dark matter self-interactions (si) -- theory}{section.25.1}{}}
+\newlabel{eq:sigmat}{{25.1}{77}{Dark matter self-interactions (si) -- theory}{equation.25.1.1}{}}
+\citation{Feng:2009hw}
+\citation{Tulin:2013teo}
+\citation{Cyr-Racine:2015ihg}
+\citation{Khrapak:2003kjw}
+\citation{PhysRevE.70.056405}
+\citation{Tulin:2013teo}
+\newlabel{sigmatborn}{{25.4}{78}{Dark matter self-interactions (si) -- theory}{equation.25.1.4}{}}
+\newlabel{sigmatclassicalattractive}{{25.5}{78}{Dark matter self-interactions (si) -- theory}{equation.25.1.5}{}}
+\newlabel{sigmatclassicalrepulsive}{{25.6}{78}{Dark matter self-interactions (si) -- theory}{equation.25.1.6}{}}
+\newlabel{eq:hulthen}{{25.7}{78}{Dark matter self-interactions (si) -- theory}{equation.25.1.7}{}}
+\citation{Luke:1969:SFTb}
+\@writefile{toc}{\contentsline {section}{\numberline {25.2}Self-interactions -- routines}{79}{section.25.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {part}{III\hspace  {1em}Particle physics modules in src\_models}{80}{part.3}\protected@file@percent }
+\citation{Bringmann:2017sko}
+\@writefile{toc}{\contentsline {chapter}{\numberline {26}Basic principles and common routines}{81}{chapter.26}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {26.1}\textsf  {common/aux}: auxiliary routines}{81}{section.26.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {26.2}\textsf  {common/sm}: standard model}{81}{section.26.2}\protected@file@percent }
+\citation{Groom:2000in}
+\citation{Chetyrkin:2000yt}
+\@writefile{toc}{\contentsline {chapter}{\numberline {27}The empty model}{83}{chapter.27}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {28}Generic decaying dark matter}{84}{chapter.28}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:decay}{{28}{84}{Generic decaying dark matter}{chapter.28}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {29}Generic WIMPs}{85}{chapter.29}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:genWIMP}{{29}{85}{Generic WIMPs}{chapter.29}{}}
+\citation{ds4}
+\citation{Bergstrom:1995cz}
+\citation{Haber:1984rc}
+\citation{Gunion:1984yn}
+\citation{Paige:2003mg}
+\citation{isajet_www}
+\citation{Skands:2003cj}
+\citation{Allanach:2008qq}
+\citation{Drees:1996pk}
+\citation{Pierce:1993gj}
+\citation{Lahanas:1993ib}
+\citation{Drees:1996pk}
+\citation{Heinemeyer:1998yj}
+\citation{feynhiggs_www}
+\citation{Heinemeyer:1998jw}
+\citation{Heinemeyer:1998np}
+\citation{Heinemeyer:1999be}
+\citation{ds4}
+\@writefile{toc}{\contentsline {chapter}{\numberline {30}The Minimal Supersymmetric Standard Model}{86}{chapter.30}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\citation{Workgroup:2017lvb}
+\citation{Balazs:2017moi}
+\citation{Bechtle:2008jh}
+\citation{Aad:2014wea}
+\citation{ds4}
+\citation{Mahmoudi:2007vz}
+\citation{Workgroup:2017myk}
+\citation{Lees:2012wg}
+\citation{Lees:2012ym}
+\citation{Belle:2016ufb}
+\citation{Aaij:2017vad}
+\citation{Moroi:1995yh}
+\citation{Bennett:2006fi}
+\citation{Workgroup:2017bkh}
+\@writefile{toc}{\contentsline {section}{\numberline {30.1}mssm/ac: Accelerator constraints}{87}{section.30.1}\protected@file@percent }
+\newlabel{sec:src_models/mssm/ac}{{30.1}{87}{mssm/ac: Accelerator constraints}{section.30.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.1.1}Accelerator bounds}{87}{subsection.30.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {30.1}{\ignorespaces The bits of \textsf  {excl} are set to indicate by which process this particular model is excluded. Check if a bit is set with \textsf  {btest(excl,bit)}.\relax }}{87}{table.caption.17}\protected@file@percent }
+\newlabel{tab:acexcl}{{30.1}{87}{The bits of \code {excl} are set to indicate by which process this particular model is excluded. Check if a bit is set with \code {btest(excl,bit)}.\relax }{table.caption.17}{}}
+\citation{reduce}
+\citation{form2f}
+\@writefile{toc}{\contentsline {section}{\numberline {30.2}mssm/an: (Co-)annihilation cross sections}{88}{section.30.2}\protected@file@percent }
+\newlabel{sec:src_models/mssm/an}{{30.2}{88}{mssm/an: (Co-)annihilation cross sections}{section.30.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.2.1}Annihilation cross sections -- theory }{88}{subsection.30.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.2.1.1}Annihilation cross sections}{88}{subsubsection.30.2.1.1}\protected@file@percent }
+\newlabel{sec:AnnCross}{{30.2.1.1}{88}{Annihilation cross sections}{subsubsection.30.2.1.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.2.1.2}Coannihilation diagrams}{88}{subsubsection.30.2.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.2.1.3}Neutralino and chargino annihilation}{88}{subsubsection.30.2.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Neutralino-neutralino annihilation}{88}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Neutralino-chargino annihilation}{89}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Chargino-chargino annihilation}{89}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.2.1.4}Squark-squark annihilation}{89}{subsubsection.30.2.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {d}^i_{a}\tilde  {d}_{b}^{i*}$ annihilation}{90}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {d}^i_{a}\tilde  {d}_{b}^{j*}$ annihilation ($i \ne  j$)}{90}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {d}^i_{a}\tilde  {d}_{b}^{i}$ annihilation}{90}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {d}^i_{a}\tilde  {d}_{b}^{j}$ annihilation ($i \ne  j$)}{90}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}^i_{a}\tilde  {u}_{b}^{i*}$ annihilation}{91}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}^i_a\tilde  {u}^{j*}_b$ annihilation ($i \ne  j$)}{91}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}^i_a \tilde  {u}^{i}_b$ annihilation}{91}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}^i_a \tilde  {u}^{j}_b$ annihilation ($i \ne  j$)}{91}{section*.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}^i_a \tilde  {d}_{b}^{i*}$ annihilation}{91}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}_a^i \tilde  {d}_{b}^{j*}$ annihilation ($i \ne  j$)}{92}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}_a^i \tilde  {d}_{b}^{i}$ annihilation}{92}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}_a^i \tilde  {d}_{b}^{j}$ annihilation ($i \ne  j$)}{92}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.2.1.5}Squark-neutralino annihilation}{93}{subsubsection.30.2.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}^i_{a} \tilde  {\chi }_{j}^{0}$ annihilation}{93}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {d}^i_{a} \tilde  {\chi }_{j}^{0}$ annihilation}{93}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.2.1.6}Squark-chargino annihilation}{93}{subsubsection.30.2.1.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}^i_{a} \tilde  {\chi }_{c}^{+}$ annihilation}{93}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {u}^{i*}_{a} \tilde  {\chi }_{c}^{+}$ annihilation}{93}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {d}^{i}_{a} \tilde  {\chi }_{c}^{+}$ annihilation}{94}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$\tilde  {d}^{i*}_{a} \tilde  {\chi }_{c}^{+}$ annihilation}{94}{section*.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.2.1.7}Degrees of freedom}{94}{subsubsection.30.2.1.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.2.2}Annihilation routines - general remarks}{94}{subsection.30.2.2}\protected@file@percent }
+\citation{Bergstrom:1997fh}
+\citation{Ullio:1997ke}
+\citation{Hisano:2003ec}
+\citation{Hisano:2004ds}
+\citation{Bringmann:2007nk}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.2.2.1}General routines}{95}{subsubsection.30.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.2.2.2}Neutralino and chargino (co)annihilation cross sections}{95}{subsubsection.30.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {30.3}mssm/an\_1l: Annihilation cross sections (1-loop)}{95}{section.30.3}\protected@file@percent }
+\newlabel{sec:src_models/mssm/an_1l}{{30.3}{95}{mssm/an\_1l: Annihilation cross sections (1-loop)}{section.30.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.3.1}Annihilation cross sections at 1-loop -- general }{95}{subsection.30.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {30.4}mssm/an\_ib: Internal bremsstrahlung}{95}{section.30.4}\protected@file@percent }
+\newlabel{sec:src_models/mssm/an_ib}{{30.4}{95}{mssm/an\_ib: Internal bremsstrahlung}{section.30.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.4.1}Internal Bremsstrahlung (IB) -- theory}{95}{subsection.30.4.1}\protected@file@percent }
+\citation{Bringmann:2007nk}
+\citation{Birkedal:2005ep}
+\citation{Bergstrom:2004cy}
+\citation{Bringmann:2007nk}
+\citation{Bergstrom:1989jr}
+\citation{Bringmann:2007nk}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.4.1.1}General considerations}{96}{subsubsection.30.4.1.1}\protected@file@percent }
+\newlabel{fsr}{{30.3}{96}{General considerations}{equation.30.4.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.4.1.2}IB from neutralino annihilations}{96}{subsubsection.30.4.1.2}\protected@file@percent }
+\citation{Bringmann:2007nk}
+\citation{Bergstrom:2005ss}
+\citation{Sjostrand:2006za}
+\citation{Bringmann:2007nk}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.4.1.3}The implementation in {\sffamily  DarkSUSY}}{97}{subsubsection.30.4.1.3}\protected@file@percent }
+\citation{Edsjo:2003us}
+\citation{form2f}
+\citation{Edsjo:1997bg}
+\@writefile{toc}{\contentsline {section}{\numberline {30.5}mssm/an\_sf: Annihilation cross sections (with sfermions)}{98}{section.30.5}\protected@file@percent }
+\newlabel{sec:src_models/mssm/an_sf}{{30.5}{98}{mssm/an\_sf: Annihilation cross sections (with sfermions)}{section.30.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.5.1}Annihilation cross sections with sfermions -- general }{98}{subsection.30.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {30.6}mssm/an\_stu: $t$, $u$ and $s$ diagrams for $ff$-annihilation}{98}{section.30.6}\protected@file@percent }
+\newlabel{sec:src_models/mssm/an_stu}{{30.6}{98}{mssm/an\_stu: $t$, $u$ and $s$ diagrams for $ff$-annihilation}{section.30.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.6.1}Annihilation amplitudes for fermion-fermion annihilation}{98}{subsection.30.6.1}\protected@file@percent }
+\citation{Goodman:1984dc}
+\citation{Bergstrom:1995cz}
+\citation{Bottino:1996eu}
+\citation{Gould:1987ir}
+\citation{Ellis:1987sh}
+\citation{Ellis:1991ef}
+\citation{Engel:1991wq}
+\citation{Griest:1988ma}
+\citation{Barbieri:1988zs}
+\citation{Gelmini:1990je}
+\citation{Kamionkowski:1991nj}
+\citation{Bottino:1993aa}
+\@writefile{toc}{\contentsline {section}{\numberline {30.7}mssm/dd: Direct detection}{99}{section.30.7}\protected@file@percent }
+\newlabel{sec:src_models/mssm/dd}{{30.7}{99}{mssm/dd: Direct detection}{section.30.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.7.1}Direct detection -- theory}{99}{subsection.30.7.1}\protected@file@percent }
+\newlabel{detrate1}{{30.11}{99}{Direct detection -- theory}{equation.30.7.11}{}}
+\citation{Gasser:1990ce}
+\citation{Adams:1995ufa}
+\citation{Jaffe:1989jz}
+\newlabel{GS}{{30.14}{100}{Direct detection -- theory}{equation.30.7.14}{}}
+\newlabel{GA}{{30.15}{100}{Direct detection -- theory}{equation.30.7.15}{}}
+\citation{Engel:1989ix}
+\citation{ds4}
+\citation{Haber:1984rc}
+\citation{Gunion:1984yn}
+\citation{Haber:1988px}
+\citation{Dimopoulos:1995kn}
+\citation{Ellis:1990nz}
+\citation{Ellis:1991zd}
+\citation{Brignole:1991pq}
+\citation{Brignole:1991pq}
+\citation{Drees:1991mx}
+\citation{Carena:1995bx}
+\citation{Carena:1995wu}
+\citation{Hahn:2010te}
+\newlabel{detrate2}{{30.31}{101}{Direct detection -- theory}{equation.30.7.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {30.8}mssm/ge: General SUSY model setup: masses, vertices etc}{101}{section.30.8}\protected@file@percent }
+\newlabel{sec:src_models/mssm/ge}{{30.8}{101}{mssm/ge: General SUSY model setup: masses, vertices etc}{section.30.8}{}}
+\newlabel{sec:ge}{{30.8}{101}{mssm/ge: General SUSY model setup: masses, vertices etc}{section.30.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.8.1}Supersymmetric model}{101}{subsection.30.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.8.1.1}Parameters}{101}{subsubsection.30.8.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.8.1.2}Mass spectrum}{101}{subsubsection.30.8.1.2}\protected@file@percent }
+\citation{Drees:1996pk}
+\@writefile{lot}{\contentsline {table}{\numberline {30.2}{\ignorespaces Higgs partial widths \textsf  {hdwidth(i,j)}. Index \textsf  {i} refers to the decay channel and index \textsf  {j} to the Higgs boson. All widths are given in GeV\spacefactor \@m {}. Note that typically we have that $m_{H_2}< m_{H_3}<m_{H^+}<m_{H_1}$ so many of these decay channels are not kinematically allowed, but included for completeness. If the \textsf  {HDECAY} interface is used, the channels where $m_{H_2}< m_{H_3}<m_{H^+}<m_{H_1}$ is not satisfied are not included. Channels 16--19 are only included if HDECAY is used.\relax }}{102}{table.caption.39}\protected@file@percent }
+\newlabel{tab:hwidth}{{30.2}{102}{Higgs partial widths \code {hdwidth(i,j)}. Index \code {i} refers to the decay channel and index \code {j} to the Higgs boson. All widths are given in GeV\@. Note that typically we have that $m_{H_2}< m_{H_3}<m_{H^+}<m_{H_1}$ so many of these decay channels are not kinematically allowed, but included for completeness. If the \code {HDECAY} interface is used, the channels where $m_{H_2}< m_{H_3}<m_{H^+}<m_{H_1}$ is not satisfied are not included. Channels 16--19 are only included if HDECAY is used.\relax }{table.caption.39}{}}
+\citation{Olive:2016xmw}
+\newlabel{mutilde}{{30.41}{103}{Mass spectrum}{equation.30.8.41}{}}
+\newlabel{mdtilde}{{30.42}{103}{Mass spectrum}{equation.30.8.42}{}}
+\newlabel{metilde}{{30.44}{103}{Mass spectrum}{equation.30.8.44}{}}
+\newlabel{tab:2}{{\caption@xref {tab:2}{ on input line 5915}}{104}{Mass spectrum}{table.caption.40}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {30.3}{\ignorespaces Particle codes (synonyms are separated by commas). \relax }}{104}{table.caption.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.8.1.3}Three-particle vertices}{104}{subsubsection.30.8.1.3}\protected@file@percent }
+\citation{Haber:1984rc}
+\citation{Gunion:1984yn}
+\citation{Haber:1988px}
+\citation{haber97}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.8.2}General supersymmetry -- routines}{106}{subsection.30.8.2}\protected@file@percent }
+\citation{Skands:2003cj}
+\citation{Allanach:2008qq}
+\citation{Hahn:2006nq}
+\@writefile{toc}{\contentsline {section}{\numberline {30.9}mssm/ge\_cmssm: cMSSM interface (Isasugra)}{107}{section.30.9}\protected@file@percent }
+\newlabel{sec:src_models/mssm/ge_cmssm}{{30.9}{107}{mssm/ge\_cmssm: cMSSM interface (Isasugra)}{section.30.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.9.1}mSUGRA (ISASUGRA) interface to DarkSUSY}{107}{subsection.30.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {30.10}mssm/ge\_slha: SUSY Les Houches Accord interface}{107}{section.30.10}\protected@file@percent }
+\newlabel{sec:src_models/mssm/ge_slha}{{30.10}{107}{mssm/ge\_slha: SUSY Les Houches Accord interface}{section.30.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.10.1}SUSY Les Houches Accord}{107}{subsection.30.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {30.11}mssm/ini: Initialization routines}{107}{section.30.11}\protected@file@percent }
+\newlabel{sec:src_models/mssm/ini}{{30.11}{107}{mssm/ini: Initialization routines}{section.30.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.11.1}Initialization routines}{107}{subsection.30.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {30.12}mssm/rd: Relic density}{108}{section.30.12}\protected@file@percent }
+\newlabel{sec:src_models/mssm/rd}{{30.12}{108}{mssm/rd: Relic density}{section.30.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.12.1}Relic density of neutralinos}{108}{subsection.30.12.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.12.2}Internal degrees of freedom}{108}{subsection.30.12.2}\protected@file@percent }
+\newlabel{sec:dof}{{30.12.2}{108}{Internal degrees of freedom}{subsection.30.12.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.12.2.1}Neutralino-chargino annihilation}{108}{subsubsection.30.12.2.1}\protected@file@percent }
+\newlabel{eq:weffneucha-a}{{30.60}{109}{Neutralino-chargino annihilation}{equation.30.12.60}{}}
+\newlabel{eq:weffneucha-b}{{30.61}{109}{Neutralino-chargino annihilation}{equation.30.12.61}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.12.2.2}Chargino-chargino annihilation}{109}{subsubsection.30.12.2.2}\protected@file@percent }
+\newlabel{eq:weffchacha-a}{{30.63}{109}{Chargino-chargino annihilation}{equation.30.12.63}{}}
+\newlabel{eq:weffchacha-b}{{30.64}{109}{Chargino-chargino annihilation}{equation.30.12.64}{}}
+\newlabel{eq:weffchacha-a-ident}{{30.66}{110}{Chargino-chargino annihilation}{equation.30.12.66}{}}
+\newlabel{eq:weffchacha-b-ident}{{30.67}{110}{Chargino-chargino annihilation}{equation.30.12.67}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.12.2.3}Neutralino-sfermion annihilation}{110}{subsubsection.30.12.2.3}\protected@file@percent }
+\newlabel{eq:weffneusf-a}{{30.69}{110}{Neutralino-sfermion annihilation}{equation.30.12.69}{}}
+\newlabel{eq:weffneusf-b}{{30.70}{110}{Neutralino-sfermion annihilation}{equation.30.12.70}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.12.2.4}Chargino-sfermion annihilation}{111}{subsubsection.30.12.2.4}\protected@file@percent }
+\newlabel{eq:weffchasf-a}{{30.73}{111}{Chargino-sfermion annihilation}{equation.30.12.73}{}}
+\newlabel{eq:weffchasf-b}{{30.74}{111}{Chargino-sfermion annihilation}{equation.30.12.74}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.12.2.5}Sfermion-sfermion annihilation}{111}{subsubsection.30.12.2.5}\protected@file@percent }
+\newlabel{eq:weffsfsf-a}{{30.77}{112}{Sfermion-sfermion annihilation}{equation.30.12.77}{}}
+\newlabel{eq:weffsfsf-b}{{30.78}{112}{Sfermion-sfermion annihilation}{equation.30.12.78}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.12.2.6}Squark-squark annihilation}{112}{subsubsection.30.12.2.6}\protected@file@percent }
+\newlabel{sec:sqsq}{{30.12.2.6}{112}{Squark-squark annihilation}{subsubsection.30.12.2.6}{}}
+\newlabel{eq:weffsqsq-a}{{30.80}{112}{Squark-squark annihilation}{equation.30.12.80}{}}
+\newlabel{eq:weffsqsq-b}{{30.81}{113}{Squark-squark annihilation}{equation.30.12.81}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.12.2.7}Sfermion-squark annihilation}{113}{subsubsection.30.12.2.7}\protected@file@percent }
+\newlabel{sec:sfsq}{{30.12.2.7}{113}{Sfermion-squark annihilation}{subsubsection.30.12.2.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {30.12.2.8}Summary of degrees of freedom}{113}{subsubsection.30.12.2.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {30.13}Relic density -- more details on routines}{113}{section.30.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {30.13.1}Global parameters}{113}{subsection.30.13.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {30.4}{\ignorespaces The bits of \textsf  {copart} are set to indicate which initial states that are included in the coannihilation calculation. In the output file \textsf  {*.omegaco}, the value of \textsf  {copart} is written in octal format. In PAW \textsf  {cop1} and \textsf  {cop2} are available. Check if a bit is set with \textsf  {btest(cop1,bit)}.\relax }}{114}{table.caption.41}\protected@file@percent }
+\newlabel{tab:copart}{{30.4}{114}{The bits of \code {copart} are set to indicate which initial states that are included in the coannihilation calculation. In the output file \code {*.omegaco}, the value of \code {copart} is written in octal format. In PAW \code {cop1} and \code {cop2} are available. Check if a bit is set with \code {btest(cop1,bit)}.\relax }{table.caption.41}{}}
+\citation{Silveira:1985rk}
+\citation{Silveira:1985rk}
+\@writefile{toc}{\contentsline {chapter}{\numberline {31}Silveira-Zee (Scalar Singlet)}{115}{chapter.31}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {32}Self-Interacting Dark Matter}{116}{chapter.32}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:vdSIDM}{{32}{116}{Self-Interacting Dark Matter}{chapter.32}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {32.1}vdSIDM/an: Annihilation routines}{116}{section.32.1}\protected@file@percent }
+\newlabel{sec:src_models/vdSIDM/an}{{32.1}{116}{vdSIDM/an: Annihilation routines}{section.32.1}{}}
+\newlabel{ch:vdSIDM_an}{{32.1}{116}{vdSIDM/an: Annihilation routines}{section.32.1}{}}
+\citation{Cassel:2009wt}
+\citation{Tulin:2013teo}
+\citation{Bringmann:2016ilk}
+\@writefile{toc}{\contentsline {section}{\numberline {32.2}vdSIDM/cr: Cosmic rays}{117}{section.32.2}\protected@file@percent }
+\newlabel{sec:src_models/vdSIDM/cr}{{32.2}{117}{vdSIDM/cr: Cosmic rays}{section.32.2}{}}
+\newlabel{ch:vdSIDM_cr}{{32.2}{117}{vdSIDM/cr: Cosmic rays}{section.32.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {32.3}vdSIDM/ini: Model setup}{117}{section.32.3}\protected@file@percent }
+\newlabel{sec:src_models/vdSIDM/ini}{{32.3}{117}{vdSIDM/ini: Model setup}{section.32.3}{}}
+\newlabel{ch:vdSIDM_ini}{{32.3}{117}{vdSIDM/ini: Model setup}{section.32.3}{}}
+\newlabel{sidm_vector}{{32.6}{117}{vdSIDM/ini: Model setup}{equation.32.3.6}{}}
+\newlabel{sidm_scalar}{{32.7}{117}{vdSIDM/ini: Model setup}{equation.32.3.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {32.4}vdSIDM/kd: Kinetic decoupling}{117}{section.32.4}\protected@file@percent }
+\newlabel{sec:src_models/vdSIDM/kd}{{32.4}{117}{vdSIDM/kd: Kinetic decoupling}{section.32.4}{}}
+\newlabel{ch:vdSIDM_kd}{{32.4}{117}{vdSIDM/kd: Kinetic decoupling}{section.32.4}{}}
+\citation{Bringmann:2016ilk}
+\bibdata{DS}
+\@writefile{toc}{\contentsline {section}{\numberline {32.5}vdSIDM/rd: Relic density}{118}{section.32.5}\protected@file@percent }
+\newlabel{sec:src_models/vdSIDM/rd}{{32.5}{118}{vdSIDM/rd: Relic density}{section.32.5}{}}
+\newlabel{ch:vdSIDM_rd}{{32.5}{118}{vdSIDM/rd: Relic density}{section.32.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {32.6}vdSIDM/si: Dark matter self-interactions}{118}{section.32.6}\protected@file@percent }
+\newlabel{sec:src_models/vdSIDM/si}{{32.6}{118}{vdSIDM/si: Dark matter self-interactions}{section.32.6}{}}
+\newlabel{ch:vdSIDM_si}{{32.6}{118}{vdSIDM/si: Dark matter self-interactions}{section.32.6}{}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{118}{section.32.6}\protected@file@percent }
+\bibcite{ds4}{1}
+\bibcite{ds6}{2}
+\bibcite{Zhao:1995cp}{3}
+\bibcite{Silveira:1985rk}{4}
+\bibcite{McDonald:1993ex}{5}
+\bibcite{Burgess:2000yq}{6}
+\bibcite{Cline:2013gha}{7}
+\bibcite{1965TrAlm...5...87E}{8}
+\bibcite{Navarro:1995iw}{9}
+\bibcite{Sjostrand:2006za}{10}
+\bibcite{Cirelli:2010xx}{11}
+\bibcite{Gondolo:1990dk}{12}
+\bibcite{Edsjo:1997bg}{13}
+\bibcite{Edsjo:2003us}{14}
+\bibcite{Bringmann:2009vf}{15}
+\bibcite{Bergstrom:1998zs}{16}
+\bibcite{Bergstrom:1998xh}{17}
+\bibcite{Baltz:1998xv}{18}
+\bibcite{Bergstrom:1999jc}{19}
+\bibcite{Bringmann:2015cpa}{20}
+\bibcite{Bergstrom:1995cz}{21}
+\bibcite{Bergstrom:1997fh}{22}
+\bibcite{Ullio:1997ke}{23}
+\bibcite{Bringmann:2007nk}{24}
+\bibcite{Bergstrom:2008gr}{25}
+\bibcite{Bringmann:2013oja}{26}
+\bibcite{Bringmann:2017sko}{27}
+\bibcite{Turner:1986vr}{28}
+\bibcite{Ipser:1987ru}{29}
+\bibcite{Freese:1989tg}{30}
+\bibcite{Berezinsky:1994wva}{31}
+\bibcite{Lake:1990du}{32}
+\bibcite{Silk:1992bh}{33}
+\bibcite{CalcaneoRoldan:2000yt}{34}
+\bibcite{Bergstrom:1998jj}{35}
+\bibcite{Bergstrom:2000bk}{36}
+\bibcite{Baltz:1999ra}{37}
+\bibcite{Cline:1990mr}{38}
+\bibcite{Gao:1991rz}{39}
+\bibcite{Bergstrom:2001jj}{40}
+\bibcite{Belanger:2012zr}{41}
+\bibcite{Belanger:2014bga}{42}
+\bibcite{Ko:2014nha}{43}
+\bibcite{Choi:2015bya}{44}
+\bibcite{Arina:2014fna}{45}
+\bibcite{Fitzpatrick:2012ix}{46}
+\bibcite{GondoloScopel}{47}
+\bibcite{Maccio:2008pcd}{48}
+\bibcite{Schaye:2014tpa}{49}
+\bibcite{Schaller:2014uwa}{50}
+\bibcite{Wang:2015jpa}{51}
+\bibcite{Tollet:2015gqa}{52}
+\bibcite{Bringmann:2006mu}{53}
+\bibcite{Binder:2017rgn}{54}
+\bibcite{Bringmann:2016ilk}{55}
+\bibcite{KasaharaPHD}{56}
+\bibcite{Gondolo:2012vh}{57}
+\bibcite{Green:2005fa}{58}
+\bibcite{Loeb:2005pm}{59}
+\bibcite{Bertschinger:2006nq}{60}
+\bibcite{Diemand:2005vz}{61}
+\bibcite{Griest:1990kh}{62}
+\bibcite{Srednicki:1988ce}{63}
+\bibcite{Drees:2015exa}{64}
+\bibcite{Krauss:1985unpub}{65}
+\bibcite{Press:1985ug}{66}
+\bibcite{Silk:1985ax}{67}
+\bibcite{Krauss:1985ks}{68}
+\bibcite{Krauss:1985aaa}{69}
+\bibcite{Gaisser:1986ha}{70}
+\bibcite{Griest:1986yu}{71}
+\bibcite{Hagelin:1986gv}{72}
+\bibcite{Freese:1985qw}{73}
+\bibcite{Kamionkowski:1991nj}{74}
+\bibcite{Halzen:1991kh}{75}
+\bibcite{Bottino:1991dy}{76}
+\bibcite{Bottino:1994xp}{77}
+\bibcite{Gandhi:1993ce}{78}
+\bibcite{Bergstrom:1996kp}{79}
+\bibcite{Halzen:1996su}{80}
+\bibcite{Ritz:1987mh}{81}
+\bibcite{Giudice:1988vs}{82}
+\bibcite{Drees:1993bh}{83}
+\bibcite{Jungman:1994jr}{84}
+\bibcite{Berezinsky:1996ga}{85}
+\bibcite{Kamionkowski:1994dp}{86}
+\bibcite{Edsjo:1995zc}{87}
+\bibcite{Bergstrom:1997tp}{88}
+\bibcite{Jungman:1995df}{89}
+\bibcite{Gould:1987ir}{90}
+\bibcite{Bahcall:2000nu}{91}
+\bibcite{2003TrGeo...2..547M}{92}
+\bibcite{EncBrit}{93}
+\bibcite{Gould:1991aa}{94}
+\bibcite{Farinella:1994aa}{95}
+\bibcite{Gould:1999je}{96}
+\bibcite{Lundberg:2004dn}{97}
+\bibcite{Edsjo:2007ws}{98}
+\bibcite{Edsjo:1997hp}{99}
+\bibcite{Edsjo:2007ns}{100}
+\bibcite{Groom:2000in}{101}
+\bibcite{Blennow:2007tw}{102}
+\bibcite{Spergel:1999mh}{103}
+\bibcite{Loeb:2010gj}{104}
+\bibcite{Vogelsberger:2012ku}{105}
+\bibcite{Peter:2012jh}{106}
+\bibcite{Zavala:2012us}{107}
+\bibcite{Aarssen:2012fx}{108}
+\bibcite{Elbert:2014bma}{109}
+\bibcite{Kamada:2016euw}{110}
+\bibcite{Robertson:2017mgj}{111}
+\bibcite{Bullock:2017xww}{112}
+\bibcite{Flores:1994gz}{113}
+\bibcite{Moore:1994yx}{114}
+\bibcite{BoylanKolchin:2011de}{115}
+\bibcite{BoylanKolchin:2011dk}{116}
+\bibcite{Oman:2015xda}{117}
+\bibcite{Oman:2016zjn}{118}
+\bibcite{Moore:1999nt}{119}
+\bibcite{Klypin:1999uc}{120}
+\bibcite{Tulin:2013teo}{121}
+\bibcite{Kahlhoefer:2017umn}{122}
+\bibcite{Tulin:2017ara}{123}
+\bibcite{Feng:2009hw}{124}
+\bibcite{Cyr-Racine:2015ihg}{125}
+\bibcite{Khrapak:2003kjw}{126}
+\bibcite{PhysRevE.70.056405}{127}
+\bibcite{Luke:1969:SFTb}{128}
+\bibcite{Chetyrkin:2000yt}{129}
+\bibcite{Haber:1984rc}{130}
+\bibcite{Gunion:1984yn}{131}
+\bibcite{Paige:2003mg}{132}
+\bibcite{isajet_www}{133}
+\bibcite{Skands:2003cj}{134}
+\bibcite{Allanach:2008qq}{135}
+\bibcite{Drees:1996pk}{136}
+\bibcite{Pierce:1993gj}{137}
+\bibcite{Lahanas:1993ib}{138}
+\bibcite{Heinemeyer:1998yj}{139}
+\bibcite{feynhiggs_www}{140}
+\bibcite{Heinemeyer:1998jw}{141}
+\bibcite{Heinemeyer:1998np}{142}
+\bibcite{Heinemeyer:1999be}{143}
+\bibcite{Workgroup:2017lvb}{144}
+\bibcite{Balazs:2017moi}{145}
+\bibcite{Bechtle:2008jh}{146}
+\bibcite{Aad:2014wea}{147}
+\bibcite{Mahmoudi:2007vz}{148}
+\bibcite{Workgroup:2017myk}{149}
+\bibcite{Lees:2012wg}{150}
+\bibcite{Lees:2012ym}{151}
+\bibcite{Belle:2016ufb}{152}
+\bibcite{Aaij:2017vad}{153}
+\bibcite{Moroi:1995yh}{154}
+\bibcite{Bennett:2006fi}{155}
+\bibcite{Workgroup:2017bkh}{156}
+\bibcite{reduce}{157}
+\bibcite{form2f}{158}
+\bibcite{Birkedal:2005ep}{159}
+\bibcite{Bergstrom:2004cy}{160}
+\bibcite{Bergstrom:1989jr}{161}
+\bibcite{Bergstrom:2005ss}{162}
+\bibcite{Goodman:1984dc}{163}
+\bibcite{Bottino:1996eu}{164}
+\bibcite{Ellis:1987sh}{165}
+\bibcite{Ellis:1991ef}{166}
+\bibcite{Engel:1991wq}{167}
+\bibcite{Griest:1988ma}{168}
+\bibcite{Barbieri:1988zs}{169}
+\bibcite{Gelmini:1990je}{170}
+\bibcite{Bottino:1993aa}{171}
+\bibcite{Gasser:1990ce}{172}
+\bibcite{Adams:1995ufa}{173}
+\bibcite{Jaffe:1989jz}{174}
+\bibcite{Engel:1989ix}{175}
+\bibcite{Haber:1988px}{176}
+\bibcite{Dimopoulos:1995kn}{177}
+\bibcite{Ellis:1990nz}{178}
+\bibcite{Ellis:1991zd}{179}
+\bibcite{Brignole:1991pq}{180}
+\bibcite{Drees:1991mx}{181}
+\bibcite{Carena:1995bx}{182}
+\bibcite{Carena:1995wu}{183}
+\bibcite{Hahn:2010te}{184}
+\bibcite{Olive:2016xmw}{185}
+\bibcite{haber97}{186}
+\bibcite{Hahn:2006nq}{187}
+\bibcite{Cassel:2009wt}{188}

@@ -1,0 +1,4 @@
+./configure CC=gcc CFLAGS="-g -fPIC" CXX=g++ CXXFLAGS="-g -fPIC" FC=gfortran FCFLAGS="-O -ffixed-line-length-none -fopenmp -ffpe-summary=none -fPIC"
+#./configure CC=gcc CFLAGS="-g -fPIC" CXX=g++ CXXFLAGS="-g -fPIC" FC=gfortran-mp-5 FCFLAGS="-O -ffixed-line-length-none -fopenmp -ffpe-summary=none -fPIC"
+# ./configure CC=gcc CFLAGS=-g CXX=g++ CXXFLAGS=-g FC=gfortran FCFLAGS="-O -ffixed-line-length-none -fopenmp -fbounds-check -g -fcheck=all -Wall"
+

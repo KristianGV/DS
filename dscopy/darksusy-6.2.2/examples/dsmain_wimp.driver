@@ -1,0 +1,11 @@
+mssm
+
+# On line 1, put the name of the particle module to be linked to here.
+#
+# Note that this is optional,
+# i.e. the values are only used if make is called without any further parameters. 
+# Alternatively you can call
+#
+#  make -B DS_MODULE=<your_module_choice> -B DS_HMODULE=<your_halo_module_choice>
+#
+# which overrides the entry in dsmain_wimp.driver.

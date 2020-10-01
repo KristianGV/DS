@@ -1,0 +1,19 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Initialization routines}
+
+Before \ds\ is used for some calculations, it needs to be
+initialized. This is done with a call to \codeb{dsinit}, 
+which in turn calls the particle-specific initialization routine 
+\code{dsinit\_module} that resides in each module.
+This means that the call to \codeb{dsinit} should be the first call in
+any program using \ds. Any calls the user makes to other routines,
+either to calculte things or select a different model (e.g.\ a
+different halo model) should come after the call to \codeb{dsinit}.
+
+In the \code{mssm} module, the routine \code{dsinit\_module}  that all standard parameters 
+are defined, such as standard model parameters and particle codes.
+ It also sets more particle-specific defaults for \ds\ routines where this is
+ available, via calls to routines such as \code{dsddset\_mssm}  
+ and \code{dsanset\_mssm}.
+

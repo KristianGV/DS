@@ -1,0 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kinetic decoupling -- routines}
+
+Before using any of the routines provided in {\tt src/kd} for the first time, one has to 
+call \ftb{dskdset} in order to make some necessary initializations; in particular, a call
+to this routine ensures that the relevant tables for the relativistic degrees of freedom in the
+early universe are correctly read in. Typically, the subroutines of greatest interest will be 
+\ftb{dskdtkd} and \ftb{dskdmcut}, and there should be no need to call any of the other routines directly.
+
+\ftb{dskdtkd} numerically solves the Boltzmann equation (\ref{dydx}) and determines
+$T_{\rm kd}$ as given in Eq.~(\ref{eq:tkddef}). Here, special care is taken to 
+accurately handle potential resonances in the scattering amplitude; to this end, 
+\ftb{dskdboltz\_init} identifies the location of all relevant resonances and passes this
+information to \ftb{dskdgammarate} where the integral of Eq.~(\ref{fT}) is performed.
+
+Finally, \ftb{dskdmcut} returns the mass cutoff in the power spectrum, with an input parameter 
+determining whether it is $M_{\rm fs}$ or $M_{\rm ao}$; the default call results in 
+$M_{\rm cut}=\max\left[M_{\rm fs},M_{\rm ao}\right]$, i.e.~the mass of 
+the smallest protohalos.
+
+There are three interface functions that a particle physics module must provide for the inetic
+decoupling routines in \code{src/} to work: \code{dskdm2} returns the full scattering matrix element squared, evaluated 
+at $t=0$ or averaged over $t$, while \code{dskdm2simp} returns only the leading contribution
+for small $\omega$ (expressed as a simple power-law in $\omega$, in which case there exists an
+analytic solution for $T_\mathrm{kd}$ \cite{Bringmann:2006mu}). Lastly, the particle physics
+module must provide a routine \code{dskdparticles} which, in analogy to the routine  \code{dsrdparticles}
+for the case of chemical decoupling
+discussed above, sets the location of resonances in $\left|\mathcal{M}\right|^2$.

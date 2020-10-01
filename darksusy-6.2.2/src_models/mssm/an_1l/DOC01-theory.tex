@@ -1,0 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Annihilation cross sections at 1-loop -- general }
+
+The annihilation cross sections at 1-loop that we have implemented in
+\ds\ are those to $\gamma \gamma$, $Z \gamma$ and $g g$. The
+derivation of these is described in the works \cite{Bergstrom:1997fh,Ullio:1997ke}.
+Let us mention that these one-loop expressions formally violate unitarity for diagrams
+with electroweak gauge-boson exchange because they do not take into account the 
+nonperturbative effects related to multiple electroweak gauge boson exchange (`Sommerfeld
+effect') as described in \cite{Hisano:2003ec,Hisano:2004ds}. In practice, one can still trust 
+the result for sub-TeV neutralinos -- but should keep in mind that the implemented cross 
+sections become unphysical in the limit $m_W/m_\chi \to 0$.
+
+To see how these routines are called, see the file
+\codeb{src\_models/mssm/an/dsandwdcosnn.f} where the $\gamma \gamma$, $Z \gamma$
+and $g g$ contributions are added to the annihilation cross section at
+the end.

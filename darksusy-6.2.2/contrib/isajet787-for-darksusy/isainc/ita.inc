@@ -1,0 +1,3 @@
+      COMMON/ITA/ITA,ITB
+      SAVE /ITA/
+      INTEGER   ITA,ITB

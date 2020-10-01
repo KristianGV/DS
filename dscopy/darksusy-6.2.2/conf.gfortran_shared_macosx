@@ -1,0 +1,3 @@
+./configure CC=gcc CFLAGS="-g -fPIC" CXX=g++ CXXFLAGS="-g -fPIC" FC=gfortran FCFLAGS="-O -ffixed-line-length-none -fopenmp -ffpe-summary=none -fPIC -Wl,-commons,use_dylibs"
+# ./configure CC=gcc CFLAGS=-g CXX=g++ CXXFLAGS=-g FC=gfortran FCFLAGS="-O -ffixed-line-length-none -fopenmp -fbounds-check -g -fcheck=all -Wall"
+

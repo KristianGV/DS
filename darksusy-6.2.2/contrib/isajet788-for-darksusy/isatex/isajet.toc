@@ -1,0 +1,101 @@
+\contentsline {section}{\numberline {1}Introduction}{5}
+\contentsline {section}{\numberline {2}Physics}{6}
+\contentsline {subsection}{\numberline {2.1}Hard Scattering}{6}
+\contentsline {subsubsection}{\numberline {2.1.1}Minbias}{6}
+\contentsline {subsubsection}{\numberline {2.1.2}Twojet}{6}
+\contentsline {subsubsection}{\numberline {2.1.3}Drellyan}{7}
+\contentsline {subsubsection}{\numberline {2.1.4}Photon}{8}
+\contentsline {subsubsection}{\numberline {2.1.5}Wpair}{8}
+\contentsline {subsubsection}{\numberline {2.1.6}Higgs}{9}
+\contentsline {subsubsection}{\numberline {2.1.7}WHiggs}{10}
+\contentsline {subsubsection}{\numberline {2.1.8}SUSY}{10}
+\contentsline {subsubsection}{\numberline {2.1.9}SUSY Models}{12}
+\contentsline {subsubsection}{\numberline {2.1.10}$e^+e^-$}{15}
+\contentsline {subsubsection}{\numberline {2.1.11}Technicolor}{16}
+\contentsline {subsubsection}{\numberline {2.1.12}Extra Dimensions}{17}
+\contentsline {subsection}{\numberline {2.2}Multiparton Hard Scattering}{17}
+\contentsline {subsubsection}{\numberline {2.2.1}$Z + {\rm 2\ jets}$}{18}
+\contentsline {subsection}{\numberline {2.3}QCD Radiative Corrections}{18}
+\contentsline {subsection}{\numberline {2.4}Jet Fragmentation:}{20}
+\contentsline {subsection}{\numberline {2.5}Beam Jets}{20}
+\contentsline {section}{\numberline {3}Installation}{22}
+\contentsline {section}{\numberline {4}Sample Jobs}{24}
+\contentsline {subsection}{\numberline {4.1}DEC VMS}{28}
+\contentsline {subsection}{\numberline {4.2}IBM VM/CMS}{28}
+\contentsline {subsection}{\numberline {4.3}Unix}{28}
+\contentsline {section}{\numberline {5}Main Program}{29}
+\contentsline {subsection}{\numberline {5.1}Interactive Interface}{30}
+\contentsline {subsection}{\numberline {5.2}User Control of Event Loop}{31}
+\contentsline {subsection}{\numberline {5.3}Multiple Event Streams}{32}
+\contentsline {subsection}{\numberline {5.4}Main Programs for ISASUSY and ISASUGRA}{34}
+\contentsline {section}{\numberline {6}Input}{36}
+\contentsline {subsection}{\numberline {6.1}Input Format}{36}
+\contentsline {subsection}{\numberline {6.2}Optional Parameters}{37}
+\contentsline {subsection}{\numberline {6.3}Kinematic and Parton-type Parameters}{48}
+\contentsline {subsection}{\numberline {6.4}SUSY Parameters}{49}
+\contentsline {subsection}{\numberline {6.5}Forced Decay Modes}{51}
+\contentsline {subsection}{\numberline {6.6}Parton Distributions}{52}
+\contentsline {subsection}{\numberline {6.7}Multiparton Processes}{52}
+\contentsline {section}{\numberline {7}Output}{54}
+\contentsline {subsection}{\numberline {7.1}Beginning Record}{54}
+\contentsline {subsection}{\numberline {7.2}Event Record}{57}
+\contentsline {subsection}{\numberline {7.3}End Record}{63}
+\contentsline {subsection}{\numberline {7.4}LesHouches Event output}{63}
+\contentsline {section}{\numberline {8}File Reading}{65}
+\contentsline {section}{\numberline {9}Decay Table}{67}
+\contentsline {section}{\numberline {10}IDENT Codes}{68}
+\contentsline {section}{\numberline {11}Higher Order Processes}{78}
+\contentsline {section}{\numberline {12}ISASUSY: Decay Modes in the Minimal Supersymmetric Model}{81}
+\contentsline {section}{\numberline {13}IsaTools }{89}
+\contentsline {subsection}{\numberline {13.1}IsaRED (H. Baer, C. Balazs and \relax $\@@underline {\hbox {\setbox \tw@ \hbox {\color@setgroup A. Belyaev\color@endgroup }\dp \tw@ \z@ \box \tw@ }}\mathsurround \z@ $\relax )}{89}
+\contentsline {subsection}{\numberline {13.2}IsaBSG (H. Baer and \relax $\@@underline {\hbox {\setbox \tw@ \hbox {\color@setgroup M. Brhlik\color@endgroup }\dp \tw@ \z@ \box \tw@ }}\mathsurround \z@ $\relax )}{89}
+\contentsline {subsection}{\numberline {13.3}IsaAMU ({\relax $\@@underline {\hbox {\setbox \tw@ \hbox {\color@setgroup H. Baer\color@endgroup }\dp \tw@ \z@ \box \tw@ }}\mathsurround \z@ $\relax } and C. Balazs)}{90}
+\contentsline {subsection}{\numberline {13.4}IsaBMM (\relax $\@@underline {\hbox {\setbox \tw@ \hbox {\color@setgroup J. K. Mizukoshi\color@endgroup }\dp \tw@ \z@ \box \tw@ }}\mathsurround \z@ $\relax , X. Tata and Y. Wang)}{90}
+\contentsline {subsection}{\numberline {13.5}IsaRES (C. Balazs, \relax $\@@underline {\hbox {\setbox \tw@ \hbox {\color@setgroup A. Belyaev\color@endgroup }\dp \tw@ \z@ \box \tw@ }}\mathsurround \z@ $\relax and M. Brhlik)}{91}
+\contentsline {subsection}{\numberline {13.6}Compiling and Using IsaTools (\relax $\@@underline {\hbox {\setbox \tw@ \hbox {\color@setgroup F. Paige\color@endgroup }\dp \tw@ \z@ \box \tw@ }}\mathsurround \z@ $\relax )}{92}
+\contentsline {section}{\numberline {14}Deriving the Weak Scale Couplings from the RGEs: \texttt {RGE\discretionary {-}{}{}FLAV}}{94}
+\contentsline {subsection}{\numberline {14.1}The Input File}{96}
+\contentsline {subsection}{\numberline {14.2}Entering a General Unitary Matrix}{97}
+\contentsline {subsection}{\numberline {14.3}Weak Scale Boundary Conditions}{98}
+\contentsline {subsection}{\numberline {14.4}Boundary Conditions at the High Scale}{99}
+\contentsline {subsection}{\numberline {14.5}Electroweak Symmetry Breaking}{100}
+\contentsline {subsection}{\numberline {14.6}Iterative Stage}{101}
+\contentsline {subsection}{\numberline {14.7}\texttt {RGE\discretionary {-}{}{}FLAV}\nobreakspace {}Output}{103}
+\contentsline {subsection}{\numberline {14.8}The Decay Subroutine, \texttt {SQSIX}}{105}
+\contentsline {section}{\numberline {15}Changes in Recent Versions}{107}
+\contentsline {subsection}{\numberline {15.1}Version\nobreakspace {}7.88, January 2018}{107}
+\contentsline {subsection}{\numberline {15.2}Version\nobreakspace {}7.87, July 2017}{107}
+\contentsline {subsection}{\numberline {15.3}Version\nobreakspace {}7.86, January 2017}{107}
+\contentsline {subsection}{\numberline {15.4}Version\nobreakspace {}7.85, November 2015}{107}
+\contentsline {subsection}{\numberline {15.5}Version\nobreakspace {}7.84, June 2014}{108}
+\contentsline {subsection}{\numberline {15.6}Version\nobreakspace {}7.83, June 2012}{108}
+\contentsline {subsection}{\numberline {15.7}Version\nobreakspace {}7.82, June 2011}{108}
+\contentsline {subsection}{\numberline {15.8}Version\nobreakspace {}7.81, April 2011}{109}
+\contentsline {subsection}{\numberline {15.9}Version\nobreakspace {}7.80, October 2009}{109}
+\contentsline {subsection}{\numberline {15.10}Version\nobreakspace {}7.79, December 2008}{109}
+\contentsline {subsection}{\numberline {15.11}Version\nobreakspace {}7.78, March 2008}{110}
+\contentsline {subsection}{\numberline {15.12}Version\nobreakspace {}7.75, January 2007}{110}
+\contentsline {subsection}{\numberline {15.13}Version\nobreakspace {}7.74, February 2006}{111}
+\contentsline {subsection}{\numberline {15.14}Version\nobreakspace {}7.72, August 2005}{111}
+\contentsline {subsection}{\numberline {15.15}Version\nobreakspace {}7.70, October 2004}{112}
+\contentsline {subsection}{\numberline {15.16}Version\nobreakspace {}7.69, August 2003}{112}
+\contentsline {subsection}{\numberline {15.17}Version\nobreakspace {}7.64, September 2002}{113}
+\contentsline {subsection}{\numberline {15.18}Version\nobreakspace {}7.63, April 2002}{113}
+\contentsline {subsection}{\numberline {15.19}Version\nobreakspace {}7.58, August 2001}{113}
+\contentsline {subsection}{\numberline {15.20}Version\nobreakspace {}7.51, May 2000}{114}
+\contentsline {subsection}{\numberline {15.21}Version\nobreakspace {}7.47, December 1999}{114}
+\contentsline {subsection}{\numberline {15.22}Version\nobreakspace {}7.44, April 1999}{115}
+\contentsline {subsection}{\numberline {15.23}Version\nobreakspace {}7.42, January 1999}{115}
+\contentsline {subsection}{\numberline {15.24}Version\nobreakspace {}7.40, October 1998}{116}
+\contentsline {subsection}{\numberline {15.25}Version\nobreakspace {}7.37, April 1998}{116}
+\contentsline {subsection}{\numberline {15.26}Version 7.32, November 1997}{117}
+\contentsline {subsection}{\numberline {15.27}Version 7.31, August 1997}{117}
+\contentsline {subsection}{\numberline {15.28}Version 7.30, July 1997}{117}
+\contentsline {subsection}{\numberline {15.29}Version 7.29, May 1997}{118}
+\contentsline {subsection}{\numberline {15.30}Version 7.27, January 1997}{118}
+\contentsline {subsection}{\numberline {15.31}Version 7.22, July 1996}{119}
+\contentsline {subsection}{\numberline {15.32}Version 7.20, June 1996}{119}
+\contentsline {subsection}{\numberline {15.33}Version 7.16, October 1995}{119}
+\contentsline {subsection}{\numberline {15.34}Version 7.13, September 1994}{120}
+\contentsline {subsection}{\numberline {15.35}Version 7.11, September 1994}{120}
+\contentsline {subsection}{\numberline {15.36}Version 7.10, July 1994}{121}

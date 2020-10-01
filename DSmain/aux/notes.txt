@@ -1,0 +1,7 @@
+Stuff to fix:
+
+  1)  Unsure which lower bound on ds integral to take! 2*mdm**2 or (ma1+m2)**2.
+
+  2)  Make test functions!
+
+

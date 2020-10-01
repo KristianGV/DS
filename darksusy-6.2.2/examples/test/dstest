@@ -1,0 +1,48 @@
+#!/bin/bash
+# This script executes all test programs for the various modules
+# and then prints out a summary
+
+# For the MSSM, we only use the short version of the test program
+./dstest_mssm<<END
+0
+END
+# This would work only in FORTRAN >=2008, so we write+read from disk instead...
+# status_mssm=$?
+status_mssm="X"
+file="./dstest_mssm.out"
+while IFS= read -r line
+do status_mssm="$line"
+done < "$file"
+rm "$file"
+
+./dstest_silveira_zee
+#status_silveira_zee=$?
+status_silveira_zee="X"
+file="./dstest_silveira_zee.out"
+while IFS= read -r line
+do status_silveira_zee="$line"
+done < "$file"
+rm "$file"
+
+./dstest_genWIMP
+#status_genWIMP=$?
+status_genWIMP="X"
+file="./dstest_genWIMP.out"
+while IFS= read -r line
+do status_genWIMP="$line"
+done < "$file"
+rm "$file"
+
+
+echo ""
+echo ""
+echo "===================================="
+echo "Summary of performed DarkSUSY tests"
+echo "===================================="
+echo ""
+echo "Number of errors reported by dstest_mssm:         $status_mssm"
+echo "Number of errors reported by dstest_silveira_zee: $status_silveira_zee"
+echo "Number of errors reported by dstest_genWIMP:      $status_genWIMP"
+echo ""
+echo "===================================="
+echo ""

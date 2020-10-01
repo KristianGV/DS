@@ -1,0 +1,4 @@
+#!/bin/bash
+cd $(dirname "$0")/..
+grep "$@" src/include/*.h src_models/*/include/*.h src/*/*.f src/*/*.F src_models/*/*/*.f src_models/*/*/*.F examples/*/*.f examples/*/*.F
+

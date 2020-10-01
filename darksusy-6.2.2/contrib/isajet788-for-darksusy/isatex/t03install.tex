@@ -1,0 +1,78 @@
+\newpage
+\section{Installation\label{INSTALL}}
+
+      Beginning with Version 7.87, ISAJET is distributed as a single
+Unix tar file. Unpacking this in an empty directory gives
+\begin{verbatim}
+Makefile  isadecay.dat  isainc/  isajet/   isaplt/  isared/  isatex/
+runjet.f  sample.inrge  ssrun.f  sugrun.f
+\end{verbatim}
+
+Directory \verb|isainc/| contains all the include files, primarily
+COMMON blocks. Directory \verb|isajet/| contains most of the Fortran
+source code including ISASUSY, which was previously separate. Directory
+\verb|isaplt/| contains the (obsolete) HBOOK-based simple analysis
+framework. Directory \verb|isared/| contains the machine-generated code
+that calculates the relic density of dark matter. Directory
+\verb|isatex/| contains the \LaTeX{} source for the documentation. There
+are also Fortran files for the main programs, two data files, and a Unix
+Makefile.
+
+The C Preprocessor (\verb|cpp|) directive \verb|#include| is used to
+include COMMON blocks from \verb|isainc/| into the Fortran source code,
+so \verb|isainc/| must be in the include path. A \LaTeX{} macro handles
+includes for the documentation. Conditional code is mostly handled using
+the \verb|#ifdef|\dots\verb|#endif| and \verb|#define| directives. In a
+few places slightly more complicated conditional expressions are needed.
+By convention, all \verb|#define| flags are upper case and end in
+\verb|_X|.
+
+All Fortran source files include \verb|PILOT.inc| at the beginning. This
+contains \verb|cpp| directives that define the default:
+\begin{verbatim}
+#define DOUBLE_X
+#define STDIO_X
+#define MOVEFTN_X
+#define RANLUX_X
+#define NOCERN_X
+#define ISATOOLS_X
+#define ISAFLAVR_X
+#undef  PRTEESIG_X
+\end{verbatim}
+where, for example, \verb|DOUBLE_X| means to use DOUBLE PRECISION where
+needed. It also defines a number of switches to select options for
+various operating systems and compilers. The \verb|LINUX_X| switch
+selects additional features for Linux with the \verb|gfortran| compiler:
+\begin{verbatim}
+#ifdef  LINUX_X
+#define IMPNONE_X
+#define IDATE_X
+#define ETIME_X
+#endif
+\end{verbatim}
+Thus adding \verb|-DLINUX_X| as a compiler option selects the defaults
+and enables the date/time features. \verb|MACOS_X| is also provided;
+currently it is identical. Several obsolete versions are also defined,
+even the original one for the CDC 7600. There are also additional, more
+specialized \verb|cpp| flags. The \verb|cpp| directives can be expanded 
+running stand-alone \verb|cpp|, e.g.,
+\begin{verbatim}
+cpp -I../isainc -DCDC_X aldata.f | grep -v # > aldata.for
+\end{verbatim}
+But do not expect old versions to be usable.
+
+To compile ISAJET, first edit the top-level Makefile and select (or
+modify) the compiler \verb|FC|, the compiler options \verb|FFLAGS|, and
+the loader options \verb|LFLAGS| and \verb|LIBS|. Then run \verb|make|
+in the top level directory, which will also run it in the
+subdirectories. That will produce two libraries: \verb|libisajet.a| from
+the \verb|isajet/| directory files and \verb|libisared.a| from the
+relic density code in \verb|isared/|. (Both libraries are produced even
+if \verb|NOISATOOLS_X| is defined but will not be used.) It will produce
+the event generator executable \verb|isajet.x|; sample jobs for it are
+given in the following sections. It will also produce executables
+\verb|isasusy.x| and \verb|isasugra.x| for the SUSY model calculations.
+
+The main programs supplied should work with any modern Unix-based compiler.
+Other main programs for (very) old systems are discussed in
+Section~\ref{MAIN}.

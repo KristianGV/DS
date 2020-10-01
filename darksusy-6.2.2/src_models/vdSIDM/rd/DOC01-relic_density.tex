@@ -1,0 +1,30 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{ch:vdSIDM_rd}
+
+In \code{src\_models/vdSIDM/rd} we collect a set of routines to handle the temperature of the dark sector
+in this module. First of all, the interface function \code{dsrdxi} returns the temperature ratio $\xi=T_{\tilde\gamma}/T$,
+where $T$ is the photon temperature. This is calculated by assuming that the two sectors were  in thermal
+equilubrium ($\xi=1$) at very early times when the DM particles were still relativistic, e.g.~due to some portal
+that is effective only at very high energies and hence not relevant for the low-energy Lagrangian. 
+After decoupling of the two sectors at a temperature $T_\mathrm{dc}\gg m_\chi$, 
+entropy would be separately conserved, which implies that the temperature evolves as 
+\be
+ \xi(T) = 
+ \frac{\left[{g_*^\mathrm{SM}}(T)/{g_*^\mathrm{DS}(T)}\right]^\frac13}
+ {\left[{g_*^\mathrm{SM}}(T_\mathrm{dc})/{g_*^\mathrm{DS}(T_\mathrm{dc})}\right]^\frac13}\,,
+ \ee
+where $g_*^{\mathrm{SM}, \mathrm{DS}}$ are the entropy degrees of freedom in the visible
+and dark sector, respectively. Of course,  \code{dsrdxi} could be replaced in the usual way by any user-supplied function 
+in order to implement a different scenario for how the temperature of the dark sector evolves with time.
+Care must be taken, however, to ensure that such an implementation is consistent with the model assumptions.
+A constant value of $\xi$ for example, as is often assumed for illustration, is {\it not} consistent with the assumption
+that there is no interaction between dark and visible sector.
+
+Any additional relativistic energy density, as provided by the DR particles, is conventionally stated in terms of
+\be
+ \Delta N_\mathrm{eff}\equiv \frac{\rho_\mathrm{DS}}{\rho_\mathrm{1\nu}}=  
+ \frac47g_*^\mathrm{DS}\left(\frac{T_{\tilde\gamma}}{T_\nu}\right)^4\,,
+\ee
+where $\rho_\mathrm{1\nu}$ is the energy density contributed by one massless neutrino species, and $T_\nu$ is the neutrino
+temperature (which differs from the photon temperature after $e^\pm$ annihilation). For convenience, \ds\ provides a 
+function \code{dsrddeltaneff} to compute $\Delta N_\mathrm{eff}$ as a function of (photon) temperature.

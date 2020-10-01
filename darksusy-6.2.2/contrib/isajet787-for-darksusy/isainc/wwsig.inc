@@ -1,0 +1,3 @@
+      COMMON/WWSIG/WWSIG
+      SAVE /WWSIG/
+      REAL      WWSIG

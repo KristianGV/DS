@@ -1,0 +1,570 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Relic density of neutralinos}
+
+In the folder \codeb{mssm/rd}, we provide one of the two interface functions
+that are necessary for the \code{core} library to solve the Boltzmann
+equation for any cold dark matter particle and hence calculate its
+relic density:\footnote{
+The other, \code{dsanwx}, returns the effective invariant rate and resides
+in \code{mssm/an/}.
+}
+ \code{dsrdparticles} determines which particles  can coannihilate (based on
+    their mass differences) and puts these particles into a common
+    block for the annihilation rate routines (\codeb{dsanwx}); 
+   it also checks where we have resonances and thresholds and adds
+    these to an array, which is passed to the relic density
+    routines. The relic density routines then use this knowledge to
+    make sure the tabulation of the cross section and the integrations
+    are performed correctly at these difficult points.
+
+For convenience, we include one further routine in this folder: \code{dsrdwrate}
+writes the invariant rate to a specified unit. This is mostly useful for debugging
+purposes. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Internal degrees of freedom}
+\label{sec:dof}
+
+In Section \ref{RD:review}, we have reviewed the standard way of calculating the
+relic density. Here, we add some comments which are specific to the 
+implementation of the effective invariant rate in the \code{mssm} module
+
+%\index{degrees of freedom}
+If we look at Eqs.~(\ref{eq:weff}) and (\ref{eq:sigmavefffin2}) we see
+that we have a freedom on how to treat particles degenerate in mass,
+e.g.\ a chargino can be treated either 
+\begin{enumerate}
+\item[a)]
+  as two separate species
+  $\chi_{i}^+$ and $\chi_{i}^-$, each with internal degrees of freedom
+  $g_{\chi^+}=g_{\chi^-}=2$, or,
+\item[b)]
+  as a single species
+  $\chi_{i}^\pm$ with $g_{\chi_{i}^\pm}=4$ internal degrees of freedom. 
+\end{enumerate}
+Of course the two views are equivalent, we just have to be careful 
+including the $g_{i}$'s consistently whichever view we take.
+In a), we have the advantage that all the $W_{ij}$ that enter into 
+Eq.~(\ref{eq:weff}) enter as they are, i.e.\ without any correction 
+factors for the degrees of freedom. On the other hand we get many 
+terms in the sum that are identical and we need some book-keeping 
+machinery to avoid calculating identical terms more than once. On the 
+other hand, with option b), the sum over $W_{ij}$ in Eq.~(\ref{eq:weff}) 
+is much simpler only containing terms that are not identical (except 
+for the trivial identity $W_{ij}=W_{ji}$ which is easily taken care of). 
+However, the individual $W_{ij}$ will be some linear combinations of 
+the more basic $W_{ij}$ entering in option a), where the coefficients 
+have to be calculated for each specific type of initial condition. 
+
+Below we will perform this calculation to show how the $W_{ij}$ look 
+like in option b) for different initial states. We will use a prime on 
+the $W_{ij}$ when they refer to these combined states to indicate the 
+difference.
+
+%%%%%
+\subsubsection{Neutralino-chargino annihilation}
+
+The starting point is Eq.~(\ref{eq:weff}) which we will use to define 
+the $W_{ij}$ in option b) such that $W_{\rm eff}$ is the same as in 
+option a). Eq.~(\ref{eq:sigmavefffin2}) is then guaranteed to be the 
+same in both cases since the sum in the denominator is linear in $g_{i}$.
+
+Now consider annihilation between $\chi_{i}^0$ and $\chi_{c}^+$ or 
+$\chi_{c}^-$. The corresponding terms in Eq.~(\ref{eq:weff}) does for 
+option a) read
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W_{ij}
+    =
+    \frac{p_{ic}}{p_{11}} \frac{2 \cdot 2}{2^2}
+    \bigg[ 
+    W_{\chi_{i}^0 \chi_{c}^+} +
+    W_{\chi_{i}^0 \chi_{c}^-} +
+    \underbrace{W_{\chi_{c}^+ \chi_{i}^0}}_{W_{\chi_{i}^0 \chi_{c}^+}} +
+    \underbrace{W_{\chi_{c}^- \chi_{i}^0}}_{W_{\chi_{i}^0 \chi_{c}^-}}
+    \bigg] \nonumber \\
+    & = & 2 \frac{p_{ic}}{p_{11}} 
+    \bigg[
+    W_{\chi_{i}^0 \chi_{c}^+} +
+    \underbrace{W_{\chi_{i}^0 \chi_{c}^-}}_{W_{\chi_{i}^0 \chi_{c}^+}}
+    \bigg]
+    = 4 \frac{p_{ic}}{p_{11}} 
+    W_{\chi_{i}^0 \chi_{c}^+}
+    \label{eq:weffneucha-a}
+\end{eqnarray}
+
+For option b), we instead get
+\begin{equation}
+    W_{\rm eff} = \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W_{ij}
+    =
+    \frac{p_{ic}}{p_{11}} \frac{2 \cdot 4}{2^2}
+    \bigg[ 
+    W'_{\chi_{i}^0 \chi_{c}^\pm} +
+    \underbrace{W'_{\chi_{c}^\pm \chi_{i}^0}}_{W'_{\chi_{i}^0 \chi_{c}^\pm}}
+    \bigg]
+    =
+    4 \frac{p_{ic}}{p_{11}} W'_{\chi_{i}^0 \chi_{c}^\pm}
+    \label{eq:weffneucha-b}
+\end{equation}
+Comparing Eq.~(\ref{eq:weffneucha-b}) and Eq.~(\ref{eq:weffneucha-a}) 
+we see that they are indentical if we make the identification
+\begin{equation}
+    W'_{\chi_{i}^0 \chi_{c}^\pm} \equiv W_{\chi_{i}^0 \chi_{c}^+}
+\end{equation}
+
+%%%%%
+\subsubsection{Chargino-chargino annihilation}
+
+First consider the case where we include the terms in the sum for 
+which we have annihilation between $\chi_{c}^+$ or $\chi_{c}^-$ and 
+$\chi_{d}^+$ or $\chi_{d}^-$ with $c \ne d$.
+
+In option a), the corresponding terms in Eq.~(\ref{eq:weff}) reads
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W_{ij} \nonumber \\
+    & = &
+    \frac{p_{cd}}{p_{11}} \frac{2 \cdot 2}{2^2}
+    \bigg[ 
+    W_{\chi_{c}^+ \chi_{d}^+} +
+    W_{\chi_{c}^+ \chi_{d}^-} +
+    W_{\chi_{c}^- \chi_{d}^+} +
+    W_{\chi_{c}^- \chi_{d}^-} \nonumber \\
+    & & +
+    \underbrace{W_{\chi_{d}^+ \chi_{c}^+}}_{W_{\chi_{c}^+ \chi_{d}^+}} +
+    \underbrace{W_{\chi_{d}^+ \chi_{c}^-}}_{W_{\chi_{c}^- \chi_{d}^+}} +
+    \underbrace{W_{\chi_{d}^- \chi_{c}^+}}_{W_{\chi_{c}^+ \chi_{d}^-}} +
+    \underbrace{W_{\chi_{d}^- \chi_{c}^-}}_{W_{\chi_{c}^- \chi_{d}^-}}
+    \bigg] \nonumber \\
+    & = & 
+    2 \frac{p_{cd}}{p_{11}}
+    \bigg[
+    W_{\chi_{c}^+ \chi_{d}^+} +
+    W_{\chi_{c}^+ \chi_{d}^-} +
+    \underbrace{W_{\chi_{c}^- \chi_{d}^+}}_{W_{\chi_{c}^+ \chi_{d}^-}} +
+    \underbrace{W_{\chi_{c}^- \chi_{d}^-}}_{W_{\chi_{c}^+ \chi_{d}^+}}
+    \bigg] \nonumber \\
+    & = & 
+    4 \frac{p_{cd}}{p_{11}}
+    \bigg[
+    W_{\chi_{c}^+ \chi_{d}^+} +
+    W_{\chi_{c}^+ \chi_{d}^-}
+    \bigg]
+    \label{eq:weffchacha-a}
+\end{eqnarray}
+In option b), the corresponding terms would instead read
+\begin{equation}
+    W_{\rm eff} = \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W'_{ij} =
+    \frac{p_{cd}}{p_{11}} \frac{4 \cdot 4}{2^2}
+    \bigg[ 
+    W'_{\chi_{c}^\pm \chi_{d}^\pm} +
+    \underbrace{W'_{\chi_{d}^\pm \chi_{c}^\pm}}_{W'_{\chi_{c}^\pm \chi_{d}^\pm}}
+    \bigg]
+     = 8 \frac{p_{cd}}{p_{11}} W'_{\chi_{c}^\pm \chi_{d}^\pm}
+    \label{eq:weffchacha-b}
+\end{equation}
+Comparing Eq.~(\ref{eq:weffchacha-a}) and Eq.~(\ref{eq:weffchacha-b}) 
+we see that they are identical if we make the following identifcation
+\begin{equation}
+    W'_{\chi_{c}^\pm \chi_{d}^\pm} \equiv \frac{1}{2} 
+        \bigg[
+    W_{\chi_{c}^+ \chi_{d}^+} +
+    W_{\chi_{c}^+ \chi_{d}^-}
+    \bigg]
+\end{equation} 
+
+For clarity, let's also consider the case where $c=d$.
+In option a), the terms in $W_{\rm eff}$ are
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W_{ij}
+    =
+    \frac{p_{cc}}{p_{11}} \frac{2 \cdot 2}{2^2}
+    \bigg[ 
+    W_{\chi_{c}^+ \chi_{c}^+} +
+    W_{\chi_{c}^+ \chi_{c}^-} +
+    \underbrace{W_{\chi_{c}^- \chi_{c}^+}}_{W_{\chi_{c}^+ \chi_{c}^-}} +
+    \underbrace{W_{\chi_{c}^- \chi_{c}^-}}_{W_{\chi_{c}^+ \chi_{c}^+}}
+    \bigg] 
+    \nonumber \\
+    & = &
+    2 \frac{p_{cc}}{p_{11}}
+    \bigg[
+    W_{\chi_{c}^+ \chi_{c}^+} +
+    W_{\chi_{c}^+ \chi_{c}^-}
+    \bigg]
+    \label{eq:weffchacha-a-ident}
+\end{eqnarray}
+In option b), the corresponding term would instead read
+\begin{equation}
+    W_{\rm eff} = \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W'_{ij} =
+    \frac{p_{cc}}{p_{11}} \frac{4 \cdot 4}{2^2}
+    W'_{\chi_{c}^\pm \chi_{c}^\pm} +
+     = 4 \frac{p_{cc}}{p_{11}} W'_{\chi_{c}^\pm \chi_{c}^\pm}
+    \label{eq:weffchacha-b-ident}
+\end{equation}
+Comparing Eq.~(\ref{eq:weffchacha-a-ident}) and 
+Eq.~(\ref{eq:weffchacha-b-ident}) 
+we see that they are identical if we make the following identifcation
+\begin{equation}
+    W'_{\chi_{c}^\pm \chi_{c}^\pm} \equiv \frac{1}{2} 
+        \bigg[
+    W_{\chi_{c}^+ \chi_{c}^+} +
+    W_{\chi_{c}^+ \chi_{c}^-}
+    \bigg]
+\end{equation} 
+i.e.\ the same identification as in the case $c \ne d$.
+
+%%%%%
+\subsubsection{Neutralino-sfermion annihilation}
+
+For each sfermion we have in total four different states,
+$\tilde{f}_{1}$, $\tilde{f}_{2}$, $\tilde{f}_{1}^{*}$ and
+$\tilde{f}_{2}^{*}$.  Of these, the $\tilde{f}_{1}$ and
+$\tilde{f}_{2}$ in general have different masses and have to be treated
+separately.  Considering only one mass eigenstate $\tilde{f}_{k}$,
+option a) then means that we treat $\tilde{f}_{k}$ and
+$\tilde{f}_{k}^{*}$ as two separate species with $g_{i}=1$ degree of
+freedom each, whereas option b) means that we treat them as one
+species $\tilde{f}'_{k}$ with $g_{i}=2$ degrees of freedom.  As
+before, the prime indicates that we mean both the particle and the
+antiparticle state.
+
+Note, that for squarks we also have the number of colours $N_c=3$ to take into account.
+In option a) we should choose to treat even colour state differently, i.e.\ $g_i=1$, whereas $g_i=6$ in case b). 
+The expressions would be the same as above except that both the expression in a) and b) would be multiplied by the colour factor $N_c=3$. The expression relating case a) and case b) is thus unaffected by this colour factor. Note however, that in option b) we take the average over the squark colours (or in this case calculate it only for one colour. See sections \ref{sec:sqsq} and \ref{sec:sfsq} below for more details.
+
+For option a), Eq.~(\ref{eq:weff}) then reads
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W_{ij}
+    =
+    \frac{p_{ik}}{p_{11}} \frac{2 \cdot 1}{2^2}
+    \bigg[ 
+    W_{\chi_{i}^0 \tilde{f}_{k}} +
+    W_{\chi_{i}^0 \tilde{f}_{k}^*} +
+    \underbrace{W_{\tilde{f}_{k} \chi_{i}^0}}_{W_{\chi_{i}^0 \tilde{f}_{k}}} +
+    \underbrace{W_{\tilde{f}_{k}^{*} \chi_{i}^0}}_{W_{\chi_{i}^0 \tilde{f}_{k}^*}}
+    \bigg] 
+    \nonumber \\
+    & = &
+    \frac{p_{ik}}{p_{11}}
+    \bigg[
+    W_{\chi_{i}^0 \tilde{f}_{k}} +
+    \underbrace{W_{\chi_{i}^0 \tilde{f}_{k}^*}}_{W_{\chi_{i}^0 \tilde{f}_{k}}}
+    \bigg]
+    =
+    2 \frac{p_{ik}}{p_{11}}
+    W_{\chi_{i}^0 \tilde{f}_{k}}
+    \label{eq:weffneusf-a}
+\end{eqnarray}
+whereas for option b), Eq.~(\ref{eq:weff}) reads
+\begin{equation}
+    W_{\rm eff} = \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W'_{ij}
+    =
+    \frac{p_{ik}}{p_{11}} \frac{2 \cdot 2}{2^2}
+    \bigg[ 
+    W'_{\chi_{i}^0 \tilde{f'}_{k}} +
+    \underbrace{W'_{\tilde{f'}_{k} \chi_{i}^0}}_{W'_{\chi_{i}^0 \tilde{f'}_{k}}}
+    \bigg] 
+    =
+    2 \frac{p_{ik}}{p_{11}}
+    W'_{\chi_{i}^0 \tilde{f'}_{k}}
+    \label{eq:weffneusf-b}
+\end{equation}
+Comparing Eq.~(\ref{eq:weffneusf-b}) and Eq.~(\ref{eq:weffneusf-a}) we 
+see that they are indentical if we make the identification
+\begin{equation}
+    W'_{\chi_{i}^0 \tilde{f'}_{k}} \equiv W_{\chi_{i}^0 \tilde{f}_{k}}
+\end{equation}
+
+For clarity, for squarks the corresponding expression would be
+\begin{equation}
+    W'_{\chi_{i}^0 \tilde{q'}_{k}} \equiv
+   \frac{1}{3}\sum_{a=1}^3 W_{\chi_{i}^0 \tilde{q}_{k}^a}
+\end{equation}
+where $a$ is a colour index.
+
+%%%%%
+\subsubsection{Chargino-sfermion annihilation}
+
+In option a) the chargino has $g_i=2$ and the sfermion has $g_i=1$ degrees of freedom, whereas in option b), the chargino has $g_i=4$ and the sfermion has $g_i=2$ degrees of freedom
+
+For option a), Eq.~(\ref{eq:weff}) then reads
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W_{ij} \nonumber \\
+    & = &
+    \frac{p_{ck}}{p_{11}} \frac{2 \cdot 1}{2^2}
+    \bigg[ 
+    W_{\chi_{c}^+ \tilde{f}_{k}} +
+    W_{\chi_{c}^+ \tilde{f}_{k}^*} +
+    W_{\chi_{c}^- \tilde{f}_{k}} +
+    W_{\chi_{c}^- \tilde{f}_{k}^*} \nonumber \\
+    & & +
+    \underbrace{W_{\tilde{f}_{k} \chi_{c}^+}}_
+      {W_{\chi_{c}^+ \tilde{f}_{k}}} +
+    \underbrace{W_{\tilde{f}_{k}^* \chi_{c}^+}}_
+      {W_{\chi_{c}^+ \tilde{f}_{k}^*}} +
+    \underbrace{W_{\tilde{f}_{k} \chi_{c}^-}}_
+      {W_{\chi_{c}^- \tilde{f}_{k}}} +
+    \underbrace{W_{\tilde{f}_{k}^* \chi_{c}^-}}_
+      {W_{\chi_{c}^- \tilde{f}_{k}^*}}
+    \bigg] \nonumber \\
+    & = &
+    \frac{p_{ck}}{p_{11}}
+    \bigg[ 
+    W_{\chi_{c}^+ \tilde{f}_{k}} +
+    W_{\chi_{c}^+ \tilde{f}_{k}^*} +
+    \underbrace{W_{\chi_{c}^- \tilde{f}_{k}}}_
+      {W_{\chi_{c}^+ \tilde{f}_{k}^*}} +
+    \underbrace{W_{\chi_{c}^- \tilde{f}_{k}^*}}_
+      {W_{\chi_{c}^+ \tilde{f}_{k}}}
+    \bigg]
+    = 
+    2 \frac{p_{ck}}{p_{11}}
+    \bigg[ 
+    W_{\chi_{c}^+ \tilde{f}_{k}} +
+    W_{\chi_{c}^+ \tilde{f}_{k}^*} \bigg]
+    \label{eq:weffchasf-a}
+\end{eqnarray}
+
+In option b), Eq.~(\ref{eq:weff}) reads
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W'_{ij}
+    =
+    \frac{p_{ck}}{p_{11}} \frac{4 \cdot 2}{2^2}
+    \bigg[ 
+    W'_{\chi_{c}^\pm \tilde{f'}_{k}} +
+    \underbrace{W'_{\tilde{f'}_{k} \chi_{c}^\pm}}_
+      {W'_{\chi_{c}^\pm \tilde{f'}_{k}}} \bigg]
+    = 4 \frac{p_{ck}}{p_{11}} W'_{\chi_{c}^\pm \tilde{f'}_{k}}
+    \label{eq:weffchasf-b}
+\end{eqnarray}
+
+Comparing Eq.~(\ref{eq:weffchasf-b}) and Eq.~(\ref{eq:weffchasf-a}) we 
+see that they are indentical if we make the identification
+\begin{equation}
+    W'_{\chi_{c}^\pm \tilde{f'}_{k}} \equiv
+    \frac{1}{2} \bigg[ 
+    W_{\chi_{c}^+ \tilde{f}_{k}} + 
+    W_{\chi_{c}^+ \tilde{f}_{k}^*}
+    \bigg] 
+\end{equation}
+
+For clarity, for squarks the corresponding expression would be
+\begin{equation}
+    W'_{\chi_{c}^\pm \tilde{q'}_{k}} \equiv
+    \frac{1}{2} \frac{1}{3}\sum_{a=1}^3 \bigg[ 
+    W_{\chi_{c}^+ \tilde{q}_{k}^a} + 
+    W_{\chi_{c}^+ \tilde{q}_{k}^{a*}}
+    \bigg] 
+\end{equation}
+where $a$ is a colour index.
+
+
+%%%%%
+\subsubsection{Sfermion-sfermion annihilation}
+
+First consider the case where we have annihilation between sfmerions 
+of different types, i.e.\ annihilation between $\tilde{f}_{k}$ or 
+$\tilde{f}_{k}^{*}$ and $\tilde{f}_{l}$ or $\tilde{f}_{l}^{*}$.
+
+For option a), Eq.~(\ref{eq:weff}) then reads
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W_{ij}
+    \nonumber \\
+    & = & \frac{p_{kl}}{p_{11}} \frac{1 \cdot 1}{2^2}
+    \bigg[ 
+    W_{\tilde{f}_{k} \tilde{f}_{l}} +
+    W_{\tilde{f}_{k} \tilde{f}_{l}^{*}} +
+    W_{\tilde{f}_{k}^{*} \tilde{f}_{l}} +
+    W_{\tilde{f}_{k}^{*} \tilde{f}_{l}^{*}} \nonumber \\
+    & & +
+    \underbrace{W_{\tilde{f}_{l} \tilde{f}_{k}}}_
+       {W_{\tilde{f}_{k} \tilde{f}_{l}}} +
+    \underbrace{W_{\tilde{f}_{l} \tilde{f}_{k}^{*}}}_
+       {W_{\tilde{f}_{k}^{*} \tilde{f}_{l}}} +
+    \underbrace{W_{\tilde{f}_{l}^{*} \tilde{f}_{k}}}_
+       {W_{\tilde{f}_{k} \tilde{f}_{l}^{*}}} +
+    \underbrace{W_{\tilde{f}_{l}^{*} \tilde{f}_{k}^{*}}}_
+       {W_{\tilde{f}_{k}^{*} \tilde{f}_{l}^{*}}}
+    \bigg]  \nonumber \\
+    & = &
+    \frac{1}{2} \frac{p_{kl}}{p_{11}}
+    \bigg[ 
+    W_{\tilde{f}_{k} \tilde{f}_{l}} +
+    W_{\tilde{f}_{k} \tilde{f}_{l}^{*}} +
+    \underbrace{W_{\tilde{f}_{k}^{*} \tilde{f}_{l}}}_
+        {W_{\tilde{f}_{k} \tilde{f}_{l}^{*}}} +
+    \underbrace{W_{\tilde{f}_{k}^{*} \tilde{f}_{l}^{*}}}_
+        {W_{\tilde{f}_{k} \tilde{f}_{l}}}
+    \bigg] 
+    = \frac{p_{kl}}{p_{11}}
+    \bigg[ 
+    W_{\tilde{f}_{k} \tilde{f}_{l}} +
+    W_{\tilde{f}_{k} \tilde{f}_{l}^{*}}
+    \bigg] \label{eq:weffsfsf-a}
+\end{eqnarray}    
+
+In option b) we would get 
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W'_{ij}
+    \nonumber \\
+    & = & \frac{p_{kl}}{p_{11}} \frac{2 \cdot 2}{2^2}
+    \bigg[ 
+    W'_{\tilde{f'}_{k} \tilde{f'}_{l}} +
+    \underbrace{W'_{\tilde{f'}_{l} \tilde{f'}_{k}}}_
+       {W'_{\tilde{f'}_{k} \tilde{f'}_{l}}} \bigg]
+    = 2 \frac{p_{kl}}{p_{11}} \bigg[
+    W'_{\tilde{f'}_{k} \tilde{f'}_{l}}\bigg]
+    \label{eq:weffsfsf-b}
+\end{eqnarray}
+Comparing Eq.~(\ref{eq:weffsfsf-b}) and Eq.~(\ref{eq:weffsfsf-a}) we 
+see that they are indentical if we make the identification
+\begin{equation}
+    W'_{\tilde{f'}_{k} \tilde{f'}_{l}} \equiv 
+    \frac{1}{2} \bigg[
+    W_{\tilde{f}_{k} \tilde{f}_{l}} + 
+    W_{\tilde{f}_{k} \tilde{f}_{l}^*} \bigg] 
+\end{equation}
+It is easy to show that this relation holds true even if $k=l$.
+
+%%%%%
+\subsubsection{Squark-squark annihilation}
+\label{sec:sqsq}
+
+Even though we treated sfermion-sfermion annihilation in the previous subsection, squarks have colour which can complicate things, so let's for clarity consider squarks separately.
+
+Let's denote the squarks $\tilde{q}_k^a$ where $a$ is now a colour index. In option a) we will let each colour be a seprate species, which means that $g_i=1$ in this case. In option b) we will instead have $g_i=6$.
+
+In option a) we would have 
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W_{ij}
+    \nonumber \\
+    & = & \frac{p_{kl}}{p_{11}} \frac{1 \cdot 1}{2^2}
+    \sum_{a,b=1}^3 \bigg[ 
+    W_{\tilde{q}_{k}^a \tilde{q}_{l}^b} +
+    W_{\tilde{q}_{k}^a \tilde{q}_{l}^{b*}} +
+    W_{\tilde{q}_{k}^{a*} \tilde{q}_{l}^b} +
+    W_{\tilde{q}_{k}^{a*} \tilde{q}_{l}^{b*}} \nonumber \\
+    & & +
+    \underbrace{W_{\tilde{q}_{l}^a \tilde{q}_{k}^b}}_
+       {W_{\tilde{q}_{k}^a \tilde{q}_{l}^b}} +
+    \underbrace{W_{\tilde{q}_{l}^a \tilde{q}_{k}^{b*}}}_
+       {W_{\tilde{q}_{k}^{a*} \tilde{q}_{l}^b}} +
+    \underbrace{W_{\tilde{q}_{l}^{a*} \tilde{q}_{k}^b}}_
+       {W_{\tilde{q}_{k}^a \tilde{q}_{l}^{b*}}} +
+    \underbrace{W_{\tilde{q}_{l}^{a*} \tilde{q}_{k}^{b*}}}_
+       {W_{\tilde{q}_{k}^{a*} \tilde{q}_{l}^{b*}}}
+    \bigg]  \nonumber \\
+    & = &
+    \frac{1}{2} \frac{p_{kl}}{p_{11}}
+    \sum_{a,b=1}^3 \bigg[ 
+    W_{\tilde{q}_{k}^a \tilde{f}_{l}^b} +
+    W_{\tilde{q}_{k}^a \tilde{f}_{l}^{b*}} +
+    \underbrace{W_{\tilde{q}_{k}^{a*} \tilde{q}_{l}^b}}_
+        {W_{\tilde{q}_{k}^a \tilde{q}_{l}^{b*}}} +
+    \underbrace{W_{\tilde{q}_{k}^{a*} \tilde{q}_{l}^{b*}}}_
+        {W_{\tilde{q}_{k}^a \tilde{q}_{l}^b}}
+    \bigg] 
+    = \frac{p_{kl}}{p_{11}}
+    \sum_{a,b=1}^3 \bigg[ 
+    W_{\tilde{q}_{k}^a \tilde{q}_{l}^b} +
+    W_{\tilde{q}_{k}^a \tilde{q}_{l}^{b*}}
+    \bigg] \label{eq:weffsqsq-a}
+\end{eqnarray}    
+
+In option b) we would get 
+\begin{eqnarray}
+    W_{\rm eff} & = & \sum_{ij}\frac{p_{ij}}{p_{11}} 
+    \frac{g_{i}g_{j}}{g_{1}^2} W'_{ij}
+    \nonumber \\
+    & = & \frac{p_{kl}}{p_{11}} \frac{6 \cdot 6}{2^2}
+    \bigg[ 
+    W'_{\tilde{q'}_{k} \tilde{q'}_{l}} +
+    \underbrace{W'_{\tilde{q'}_{l} \tilde{q'}_{k}}}_
+       {W'_{\tilde{q'}_{k} \tilde{q'}_{l}}} \bigg]
+    = 18 \frac{p_{kl}}{p_{11}} \bigg[
+    W'_{\tilde{q'}_{k} \tilde{q'}_{l}}\bigg]
+    \label{eq:weffsqsq-b}
+\end{eqnarray}
+Comparing Eq.~(\ref{eq:weffsqsq-b}) and Eq.~(\ref{eq:weffsqsq-a}) we 
+see that they are indentical if we make the identification
+\begin{equation}
+    W'_{\tilde{q'}_{k} \tilde{q'}_{l}} \equiv 
+    \frac{1}{2} \frac{1}{9}\sum_{a,b=1}^3 \bigg[
+    W_{\tilde{q}_{k}^a \tilde{q}_{l}^b} + 
+    W_{\tilde{q}_{k}^a \tilde{q}_{l}^{b*}} \bigg] 
+\end{equation}
+i.e. we get the same relation as for other sfermions, the only difference being that
+we in option b) should also take the average over the colour states. 
+
+%%%%%
+\subsubsection{Sfermion-squark annihilation}
+\label{sec:sfsq}
+
+For clarity, if we have annihilation between a non-coloured sfermion and a squark, we would in the same way as in the previous subsection get
+\begin{equation}
+    W'_{\tilde{f'}_{k} \tilde{q'}_{l}} \equiv 
+    \frac{1}{2} \frac{1}{3}\sum_{b=1}^3 \bigg[
+    W_{\tilde{f}_{k} \tilde{q}_{l}^b} + 
+    W_{\tilde{f}_{k} \tilde{q}_{l}^{b*}} \bigg] 
+\end{equation}
+
+
+%%%%%
+\subsubsection{Summary of degrees of freedom}
+
+We have found above the following relations between option b) and option a),
+\begin{equation}
+  \left\{ \begin{array}{lcl}
+% neutralino-chargino
+  W'_{\chi_{i}^0 \chi_{j}^\pm} & \equiv & W_{\chi_{i}^0 \chi_{j}^+} = 
+    W_{\chi_{i}^0 \chi_{j}^-} \quad , \quad \forall\ i=1,\ldots,4,\ 
+    j=1,2 \anl
+% chargino-chargino
+  W'_{\chi_{i}^\pm \chi_{j}^\pm} & \equiv & \frac{1}{2} 
+  \left[ W_{\chi_{i}^+ \chi_{j}^+} +  
+  W_{\chi_{i}^+ \chi_{j}^-}\right] = 
+  \frac{1}{2} \left[ W_{\chi_{i}^- \chi_{j}^-} +  
+  W_{\chi_{i}^- \chi_{j}^+}\right] \quad , \quad \forall\ i=1,2,\ j=1,2 \anl
+% neutralino-sfermion
+  W'_{\chi_{i}^0 \tilde{f'}_{k}} & \equiv & W_{\chi_{i}^0 \tilde{f}_{k}}
+  \quad , \quad \forall i=1,\ldots 4,\ k=1,2 \anl
+% chargino-sfermion
+  W'_{\chi_{c}^\pm \tilde{f'}_{k}} & \equiv &
+    \frac{1}{2} \left[ 
+    W_{\chi_{c}^+ \tilde{f}_{k}} + 
+    W_{\chi_{c}^+ \tilde{f}_{k}^*}
+    \right]
+  \quad , \quad \forall c=1,2,\ k=1,2 \anl
+% sfermion-sfmerion
+  W'_{\tilde{f'}_{k} \tilde{f'}_{l}} & \equiv & 
+    \frac{1}{2} \left[
+    W_{\tilde{f}_{k} \tilde{f}_{l}} + 
+    W_{\tilde{f}_{k} \tilde{f}_{l}^*} \right] 
+  \quad , \quad \forall k=1,2,\ l=1,2 \anl
+% squark-squark
+  W'_{\tilde{q'}_{k} \tilde{q'}_{l}} & \equiv & 
+    \frac{1}{2} \frac{1}{9}\sum_{a,b=1}^3 \left[
+    W_{\tilde{q}_{k}^a \tilde{q}_{l}^b} + 
+    W_{\tilde{q}_{k}^a \tilde{q}_{l}^{b*}} \right] 
+  \quad , \quad \forall k=1,2,\ l=1,2
+  \end{array} \right.
+\end{equation}
+We don't list all the possible cases with squarks explicitly, the principle being that we in option b) should take the \emph{average} over the squark colour states (see the squark-squark entry in the list above).
+
+We will choose option b) and the code (\code{dsandwdcoscn}, \code{dsandwdcoscn}, \code{dsasdwdcossfsf} and \code{dsasdwdcossfchi}) should thus return $W'$ as defined above. Note again that squarks are assumed to have $g_i=6$ degrees of freedom in this convention and the summing over colours should also be taken into account in the code.
+
+

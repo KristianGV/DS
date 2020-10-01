@@ -1,0 +1,30 @@
+Pdf manual
+==========
+
+Documentation for DarkSUSY is available in pdf format. You can create it by:
+
+1. In the DarkSUSY root directory, type  (if you have already compiled,
+   skip this step)
+
+   ./configure
+
+2. Type
+
+   make manual-short
+
+This requires that you have latex installed on your system. After this, you
+should have Manual.pdf in the docs/ directory. You can also create a long
+version, by typing
+
+   make docs
+
+You will also find Manual-long.pdf, which contains the same information
+as Manual.pdf, but additionally all subroutine and function headers.
+
+For both versions, note the
+
+DISCLAIMER. This manual is work in progress. In particular for version 6.0
+of the code, parts II (general routines in the core library) and III 
+(particle modules) of the Manual are at times still in a rather
+preliminary shape.
+

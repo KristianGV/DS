@@ -1,0 +1,694 @@
+%
+\newcommand{\mgut}{M_{\mathrm{GUT}}}
+\newcommand{\msusy}{M_{\mathrm{SUSY}}}
+%
+\newcommand{\progrge}{\texttt{RGE\-FLAV}}
+\newcommand{\progstd}{\texttt{SQSIX}}
+\newcommand{\progisa}{\texttt{ISA\-JET}}
+\newcommand{\progisasug}{\texttt{ISA\-SUGRA}}
+\newcommand{\progstone}{\texttt{ST1CNEU}}
+\newcommand{\inrge}{\texttt{Prefix.rgein}}
+\newcommand{\fortran}{\texttt{FORTRAN}}
+\newcommand{\wout}{\texttt{Prefix.wkout}}
+\newcommand{\gout}{\texttt{Prefix.gtout}}
+\newcommand{\prefix}{\texttt{Prefix}}
+%
+\def\dblone{\hbox{$\mbox{\boldmath$1$}\hskip -1.2pt
+                          \vrule depth 0pt height 1.6ex width 0.7pt
+                          \vrule depth 0pt height 0.3pt width 0.12em$}}
+%
+\def\sn{s} 
+\def\cs{c}
+%
+\newcommand{\ba}{{\mathbf{a}}}
+\newcommand{\bdf}{{\mathbf{f}}}
+\newcommand{\bdl}{\mbox{\boldmath$\lambda$}}
+\newcommand{\bdm}{{\mathbf{m}}}
+\newcommand{\bftuqnb}{\tilde{\mathbf{f}}^Q_u}
+\newcommand{\bfturnb}{\tilde{\mathbf{f}}^{u_R}_u}
+\newcommand{\bftdqnb}{\tilde{\mathbf{f}}^Q_d}
+\newcommand{\bftdrnb}{\tilde{\mathbf{f}}^{d_R}_d}
+\newcommand{\bftelnb}{\tilde{\mathbf{f}}^L_e}
+\newcommand{\bfternb}{\tilde{\mathbf{f}}^{e_R}_e}
+\newcommand{\bgtpqnb}{\tilde{\mathbf{g}}'^Q}
+\newcommand{\bgtplnb}{\tilde{\mathbf{g}}'^L}
+\newcommand{\bgtpurnb}{\tilde{\mathbf{g}}'^{u_R}}
+\newcommand{\bgtpdrnb}{\tilde{\mathbf{g}}'^{d_R}}
+\newcommand{\bgtpernb}{\tilde{\mathbf{g}}'^{e_R}}
+\newcommand{\bgtqnb}{\tilde{\mathbf{g}}^Q}
+\newcommand{\bgtlnb}{\tilde{\mathbf{g}}^L}
+\newcommand{\bgtsqnb}{\tilde{\mathbf{g}}_s^{Q}}
+\newcommand{\bgtsurnb}{\tilde{\mathbf{g}}_s^{u_R}}
+\newcommand{\bgtsdrnb}{\tilde{\mathbf{g}}_s^{d_R}}
+%
+\newcommand{\gtphu}{\tilde{g}'^{h_u}}
+\newcommand{\gtphd}{\tilde{g}'^{h_d}}
+\newcommand{\gthu}{\tilde{g}^{h_u}}
+\newcommand{\gthd}{\tilde{g}^{h_d}}
+%
+\newcommand{\mtsq}{\left|\tilde{\mu}\right|^{2}}
+\newcommand{\mhusq}{m^{2}_{H_{u}}}
+\newcommand{\mhdsq}{m^{2}_{H_{d}}}
+%
+\newcommand{\mtsfuhu}{(\tilde{\mu}^{*}{\mathbf{f}}^{h_{u}}_{u})}
+\newcommand{\mtsfdhd}{(\tilde{\mu}^{*}{\mathbf{f}}^{h_{d}}_{d})}
+\newcommand{\mtsfehd}{(\tilde{\mu}^{*}{\mathbf{f}}^{h_{d}}_{e})}
+\newcommand{\mtsfuhunb}{\tilde{\mu}^{*}{\mathbf{f}}^{h_{u}}_{u}}
+\newcommand{\mtsfdhdnb}{\tilde{\mu}^{*}{\mathbf{f}}^{h_{d}}_{d}}
+\newcommand{\mtsfehdnb}{\tilde{\mu}^{*}{\mathbf{f}}^{h_{d}}_{e}}
+%
+\newcommand{\msb}{$\overline{\mathrm{MS}}$}
+\newcommand{\drb}{$\overline{\mathrm{DR}}$}
+\newcommand{\mmsb}{\overline{\mathrm{MS}}}
+%
+
+%British commands
+\newenvironment{itemise}{\begin{itemize}}{\end{itemize}}
+
+\newpage
+\section{Deriving the Weak Scale Couplings from the RGEs:
+\progrge}\label{sec:rgeflav}
+
+A number of subroutines, collectively called \progrge, are made
+available as part of the \progisa~distribution from \progisa~7.81 and
+later. When activated through a choice in \progisasug, the
+\progrge~code will recalculate the RGE running of dimensionless and
+dimensionful parameters in the MSSM, taking into account the full flavor
+structure of the quarks and squarks \cite{RGE1,RGE2,diss}. The output
+consists of all dimensionless and dimensionful parameters (at both high
+scale and weak scale) with full flavor structure, and both the up- and
+down-type $(6\times6)$ squark mass matrices.
+
+The \progrge~code contains threshold corrections to the one-loop RGEs
+for both the MSSM and SM in addition to the usual two-loop MSSM/SM RGEs
+in the \drb~scheme. The two-loop RGEs do not contain (numerically higher
+order) threshold effects, and, for the gauge and Yukawa couplings, we
+use the MSSM form above $Q=m_{H}$, the scale of the heavy Higgs scalar
+mass, and the SM form below $Q=m_{H}$.
+
+This section aims to provide an overall description of the code and the
+various issues encountered in the procedure. After outlining the broad
+approach, we will consider each segment of the code individually, from
+the input file, through the choice and application of the various
+boundary conditions, to the final output.
+
+\subsection*{General Outline}
+
+\progrge~has been designed to be used in combination with \progisasug,
+and is called at the end of the \progisasug~code.  The inputs to
+\progisasug~will be used by \progrge~as the initial conditions, as will
+some variables from the main run.  The first step to activate \progrge~
+is to input a filename prefix such as \prefix.  Then, a general outline
+of the order in which \progrge~carries out the various steps is:
+\begin{enumerate}
+\item Read the input file \inrge~that contains all the choices available to the user. A user-modifiable sample file called \texttt{sample.rgein} is included with the
+\progisa~ distribution.
+\item Introduce gauge couplings, light quark Yukawa couplings, third generation Yukawa couplings (from \progisasug's main run) and the SM Higgs field VEV all at $M_{Z}$.
+\item Run the gauge couplings and diagonal Yukawa matrices to $m_{t}$. At this scale, insert \progisasug's earlier value for $f_{t}(m_{t})$ and rotate the Yukawa coupling matrices into the current basis using user defined rotations.
+\item Run up to the high scale using appropriate thresholds, whose values (without taking flavor into account) have already been obtained, to transform SM running into MSSM running.
+\item Insert high scale boundary conditions. It is after this step that we begin the iterative loop.
+\item Run back down to the weak scale, decoupling particles as their thresholds are passed.
+\item At the scale of the heavy Higgs scalar mass, $m_{H}$, change over to the new set of RGEs, with restricted Lagrangian terms, as a result of the decoupling of the heavy Higgs boson terms \cite{RGE2}. Save the values of the couplings at $m_{H}$ for use when running back up.
+\item At $\msusy$, defined as $\sqrt{m_{\tilde{t}_{L}}m_{\tilde{t}_{R}}}$, apply the electroweak symmetry breaking conditions and radiative corrections to the third generation Yukawa couplings \cite{pierce}.
+\item Once the running reaches $m_{t}$ rotate back to the basis in which the Yukawa matrices are diagonal, reset $f_{t}(m_{t})$ to the value used previously and continue running to $M_{Z}$. From now on $f_{t}$ remains in the theory all the way to $M_{Z}$ and will therefore change the running of the various couplings from that obtained during the first upwards run.
+\item Reset the values of the gauge and all Yukawa couplings other than $f_{t}$ at $M_Z$.
+\item Run back up to the high scale, applying the rotation (and boundary condition on $f_{t}$) at $m_{t}$ and the thresholds as before.
+\item Reset the high scale values of the $\ba$-parameters and SSB mass matrices and iterate.
+\item On the final run, stop at $m_{H}$, the heavy Higgs threshold, and output the couplings at this scale.
+\item At present, the code then calls \progstd, which is discussed in Subsec.~\ref{sec:std}.
+\end{enumerate} The code cannot be run independently from the
+\progisa~distribution because there are some common blocks which must be
+filled for
+\progrge~to execute properly. These common blocks are:
+\begin{itemise}
+\item \texttt{SUGPAS}~and \texttt{SUGMG}: Contain the initial values of the various thresholds.
+\item \texttt{WKYUK}: Contains the weak scale third generation Yukawa couplings.
+\item \texttt{BSG}: Contains the radiative corrections to the Yukawa couplings.
+\item \texttt{RGEMS}: Contains the value of $\msusy$~and the value of $\mu$ at this scale.
+\end{itemise}
+
+The user may use non-universal GUT scale boundary conditions according
+to the choices given by \progisasug~and available in the input file
+(discussed next), but the user must also enter approximate mSUGRA
+conditions before \progrge~can begin the iterative process. In the case
+that running does not continue all the way up to the GUT scale,
+\textit{e.g.}, in GMSB models, Question 6. of the input file
+\inrge~allows for an optional input of the high scale value at which the
+boundary conditions are specified.
+
+\subsection{The Input File} Once \progrge~is called at the end of
+\progisasug, it reads the input from \inrge, a sample of which is
+included with the
+\progisa~distribution as file \texttt{sample.rgein}.  The choices, numbered
+in the same order as the input file, are:
+\begin{enumerate}
+\item Whether to use the complete two-loop equations. If the following line is `\verb+0+', only one-loop RGEs will be calculated, but threshold effects will still be included. Choosing to only calculate one-loop running speeds up the program by around 15\%.
+\item This item allows the user to choose between complex inputs and real inputs. If the next line is `\verb+1+', all inputs must be in complex form and the KM matrix will include a phase. If `\verb+0+'~is entered, any optional inputs which follow must be single numbers representing one real entry each. Otherwise the program will print an error message and continue no further. Choosing to use a real KM matrix and real boundary conditions dramatically speeds up the running of the RGEs.
+\item When the answer to Question 2.~is `\verb+1+' the user may wish to enter a phase for $\mu$ as opposed to a simple sign. If the  user answers yes, the optional setting for \texttt{THETA} on the next line is used, otherwise this value is ignored, and a sign for $\mu$ consistent with the \progisasug~input is used.
+\item If the response to Question 4.~is `\verb+1+' the program will not attempt to change the thresholds from those obtained by the main \progisasug~run. Otherwise, thresholds for: the left- and right-handed squarks and sleptons (\textit{i.e.}, the eigenvalues of the SSB sfermion mass matrices), the higgsino ($\mu$), the bino ($M_{1}$) and the winos ($M_{2}$), will be set during the running of \progrge.
+\item The mSUGRA GUT scale inputs used by \progisasug~are automatically passed to \progrge, but they are only all used if the user sets this entry to `\verb+1+'. If so, reading of the input file moves to Question 17. Otherwise, reading continues to the non-universal inputs, $6.-16.$
+\end{enumerate}
+
+Inputs $6.-16.$ are the alternative GUT scale inputs. We will deal with
+these inputs in more detail in Sec.~\ref{sec:gutins}. After taking care
+of the GUT scale inputs, the file continues with the choices relating to
+the weak scale rotations ${\mathbf{V}}_{L,R}(u,d)$, which are the
+unitary matrices that diagonalise the Yukawa coupling matrices. For the
+up-type quarks we use the relation
+\begin{equation}\label{eq:yukrot}
+{\bdf}^{\mathrm{diag}}_{u}={\mathbf{V}}^{T}_{L}(u){\bdf}_{u}{\mathbf{V}}^{*}_{R}(u)\;,
+\end{equation} and similarly for the down-type quarks. See,
+\textit{e.g.}, Sec.~V. of Ref.~\cite{RGE1} for a more detailed
+discussion.
+\begin{enumerate}\setcounter{enumi}{16}
+\item The first choice in the final section is the basis in which to output the results. Since $SU(2)$ is broken in the quark mass basis, we only use this basis for the weak scale inputs. Instead, the output is in a current basis in which either the up- or down-type quarks are diagonal at $m_{t}$, thereby retaining $SU(2)$ invariance. Note that when interfacing with \progstd, described in Sec.~\ref{sec:std}, the answer to Question 17.~\textit{must} be `\verb+1+' since we wish to associate the $\tilde{c}_{L,R}$ squarks with the $c$ quark mass eigenstate.
+\item This question asks whether the user should enter their own choice of general rotation matrices, as described in Sec.~\ref{sec:genu}. These matrices will be used to rotate the mass basis quark Yukawa matrices into the current basis and therefore this corresponds to a choice of current basis. Note, however, that the output is always in a current basis where either the up- or down-type quarks are diagonal at $m_{t}$. If the user chooses `\verb+1+', the inputs for Question 21.~will be read next. If not, the file proceeds to the next question, which allows for more basic choices for the rotation matrices.
+\item Here the user chooses the form of ${\mathbf{V}}_{L}(u)$. Either
+they can choose to have ${\mathbf{V}}_{L}(u)={\mathbf{K}}$, or
+${\mathbf{V}}_{L}(u)=\dblone$. The program will ensure that
+${\mathbf{V}}_{L}(d)$ is fixed so that the appropriate combination of
+these two matrices is the correct KM matrix, ${\mathbf{K}}$, according
+to %
+\begin{equation}\label{eq:vudkm}
+{\mathbf{K}}\equiv{{\bf{V}}^\dagger_L}(u) {\bf{V}}_L(d)\;.
+\end{equation} %
+\item If the KM matrix is the only source of flavor-violation, the form of the ${\mathbf{V}}_{R}(u,d)$ matrices is unimportant. In this entry the user is given a restricted choice for the matrices ${\mathbf{V}}_{R}(u,d)$ which serve as default entries if the response to Question 18.~is `\verb+0+'. Either both ${\mathbf{V}}_{R}(u)$ and ${\mathbf{V}}_{R}(d)$ are the unit matrix or ${\mathbf{V}}_{R}(u)={\mathbf{K}}^{\dagger}$ and ${\mathbf{V}}_{R}(d)={\mathbf{K}}$.
+\item The final entries are the choice of parameters which will be used to define the rotation matrices if the response to Question 18.~is `\verb+1+'. If the user has chosen to have real running in Question 2.~the phase in these inputs is ignored. For more detail on the way these inputs are converted into unitary matrices, see Sec.~\ref{sec:genu}.
+\end{enumerate} We now move on to consider some of the above inputs in
+more detail.
+
+\subsection{Entering a General Unitary Matrix}\label{sec:genu}
+
+As mentioned above, Question 21.~of \inrge~allows the user to define
+their own ${\mathbf{V}}_{L,R}(u,d)$ matrices. Since the KM matrix must
+still be correct, ${\mathbf{V}}_L(u)$, ${\mathbf{V}}_R(u)$,
+${\mathbf{V}}_R(d)$ are taken in as inputs and ${\mathbf{V}}_L(d)$ is
+then fixed by requiring that (\ref{eq:vudkm}) is satisfied.
+
+In order to guarantee the unitary nature of the rotation\footnote{The
+matrices ${\bf V}_{L,R}(u)$ should be numerically unitary to high
+accuracy.}, the input file reads three angles ($\alpha$, $\beta$ and
+$\gamma$) and a phase ($\delta$) using a similar parametrisation to that
+used for the KM matrix. Each unitary matrix, ${\mathbf{U}}$, is given by
+%
+\begin{equation}\label{eq:rotin} {\mathbf{U}}=\left(\begin{array}{ccc} 1
+& 0 & 0 \\ 0 & \cs_{\gamma} &
+\sn_{\gamma} \\ 0 & -\sn_{\gamma} & \cs_{\gamma} \\
+\end{array}\right)
+\left(\begin{array}{ccc}
+\cs_{\beta} & 0 & \sn_{\beta}e^{-i\delta} \\ 0 & 1 & 0 \\
+-\sn_{\beta}e^{i\delta} & 0 & \cs_{\beta} \\
+\end{array}\right)
+\left(\begin{array}{ccc}
+\cs_{\alpha} & \sn_{\alpha} & 0 \\ -\sn_{\alpha} & \cs_{\alpha} & 0 \\ 0
+& 0 & 1 \\
+\end{array}\right)\;,
+\end{equation} % where $\sn_{\alpha}=\sin{\alpha}$,
+$\cs_{\alpha}=\cos{\alpha}$, etc. Note that this is not the most general
+unitary matrix possible, which would include an additional two phases.
+However, it is considered that for the time being this choice of inputs
+will suffice for most practical applications, and the addition of two
+phases would require only a minor change to the code.
+
+\subsection{Weak Scale Boundary Conditions}
+
+Once \progisasug~calls the main program, and the input file has been
+read, \progrge~fixes the weak scale boundary conditions and runs them up
+to the GUT scale using the subroutine \texttt{UPMZMHIGH}. For the gauge
+sector, we take as our input the current PDG values \cite{pdg} %
+\begin{eqnarray*} &\alpha^{-1}_{em}(M_{Z})=127.925\pm0.016\;;\\
+&\alpha_{s}(M_{Z},\mmsb)=0.1176\pm0.002\;;\\
+&\sin^{2}{\theta_{W}}(M_{Z},\mmsb)=0.23119\pm0.00014\;.
+\end{eqnarray*} % These are the couplings extracted using the effective
+theory with the electroweak gauge bosons and the top quark integrated
+out at $Q=M_{Z}$. In order to use the SM evolution for $Q>M_{Z}$, we
+must match these couplings to those of the full SM, which to two-loop
+accuracy implies that the SM gauge couplings in the \msb~scheme are
+given by \cite{weingandothers}, %
+\begin{eqnarray}
+\frac{1}{\alpha_{1}(M_{Z})}&=&\frac{3}{5}\left[\frac{1-\sin^{2}{\theta_{W}}(M_{Z})}{\alpha_{em}(M_{Z})}\right]+\frac{3}{5}\left[1-\sin^{2}{\theta_{W}}(M_{Z})\right]4\pi\Omega(M_{Z})\;,\\
+\frac{1}{\alpha_{2}(M_{Z})}&=&\frac{\sin^{2}{\theta_{W}}(M_{Z})}{\alpha_{em}(M_{Z})}+\sin^{2}{\theta_{W}}(M_{Z})4\pi\Omega(M_{Z})\;,\\
+\frac{1}{\alpha_{3}(M_{Z})}&=&\frac{1}{\alpha_{s}(M_{Z})}+4\pi\Omega_{3}(M_{Z})\;,
+\end{eqnarray} % where %
+\begin{eqnarray}
+\Omega(\mu)&=&\frac{1}{24\pi^{2}}\left[1-21\ln{\left(\frac{M_{W}}{\mu}\right)}\right]+\frac{2}{9\pi^{2}}\ln{\left(\frac{m_t}{\mu}\right)}\;,\\
+\Omega_{3}(\mu)&=&\frac{2}{24\pi^{2}}\ln{\left(\frac{m_{t}}{\mu}\right)}\;.
+\end{eqnarray} % Notice that in order to preserve the $SU(2)$ symmetry
+of the effective theory down to $Q=M_Z$, we have integrated out the top
+quark at $Q=M_Z$ rather than at its mass as we do for all other
+particles.  This is the origin of the $\ln(m_t/\mu)$ terms in the
+matching conditions for the gauge couplings above. Since we decouple all
+SUSY particles as well as the additional Higgs bosons at the scale of
+their mass, we do not get corresponding jumps in the gauge couplings as
+these decouple.
+
+Next, we convert the values of these gauge couplings in the
+\msb~scheme to their corresponding values in the \drb~scheme and use the
+results as boundary conditions at $Q=M_Z$ when solving the RGEs.
+
+For the Yukawa couplings, we begin with the quark masses at $Q=M_{Z}$
+(the masses of the light quarks and leptons at $M_{Z}$ can be found in
+Ref.~\cite{fusaoka}), and convert to SM Yukawa coupling matrices using
+$v_{SM}=248.6/\sqrt{2}$~GeV as in Ref.~\cite{pierce}. The masses of the
+first two generations of quarks have substantial error, which leads to a
+corresponding error in the Yukawa coupling. The third generation quark
+masses are more precisely known and in practice the values of the third
+generation Yukawa couplings are taken from
+\progisasug, with bottom and tau Yukawa couplings at the scale $Q=M_{Z}$
+and the top Yukawa coupling at $Q=m_{t}$. In extracting these Yukawa
+couplings we include SUSY radiative corrections
+\cite{pierce} at $M_{\mathrm{SUSY}}$ obtained by \progisasug~during its
+execution, with inter-generation quark mixing neglected.
+
+These diagonal Yukawa couplings, which are in the ``quark mass basis''
+are run to $m_{t}$ with no flavor structure since it is a good
+approximation that the running is mainly due to the strong coupling. At
+$m_{t}$ all three Yukawa matrices are rotated to the user's choice of
+current basis using the SM version of (\ref{eq:yukrot}), replacing
+$\bdf_u$ with $\bdl_u=\sin{\beta}\
+\bdf_u$, and the corresponding relation for $\bdl_{d}\ (=\cos{\beta}\
+\bdf_d)$.
+
+Running then continues to the GUT scale with a basic RGE subroutine,
+\texttt{RGE215}, which only contains the RGEs necessary for running the
+gauge and Yukawa couplings, and implements only rudimentary thresholds.
+When we reach the scale $Q=m_{H}$ in the course of running up, we switch
+from SM Yukawa matrices ($\bdl_{u,d,e}$) to MSSM Yukawa matrices
+($\bdf_{u,d,e}$) and from the SM VEV ($v_{SM}$) to the VEVs in the two
+Higgs doublet model:  % $$ v_{SM}\equiv\sqrt{v^{2}_{u}+v^{2}_{d}} $$ %
+
+The subroutine \texttt{HIGHIN} takes care of the boundary conditions at
+the high scale as discussed next.
+
+\subsection{Boundary Conditions at the High Scale}\label{sec:gutins}
+
+The running is deemed to have reached the GUT scale when
+$\alpha_{1}(Q)-\alpha_{2}(Q)$ becomes negative, unless the user
+responded to Question 6.~with a fixed $M_{\mathrm{HIGH}}$, in which case
+the running terminates at the value that was chosen in \inrge.
+
+Since the purpose of \progrge~is to simulate flavor physics of
+sparticles in as general a way as possible, subject to experimental
+constraints that seem to suggest that flavor physics is largely
+restricted by the structure of the Yukawa coupling matrices, we use a
+general parametrisation for SSB parameters that does not introduce a new
+source of flavor-violation, but allows for non-universality of model
+parameters. A different source of flavor-violation can easily be
+incorporated by allowing for additional, arbitrary contributions to the
+SSB mass and trilinear parameter matrices. We parametrize the SSB
+sfermion mass and ${\ba}$-parameter matrices at the high scale as, %
+\begin{eqnarray}
+\bdm^2_{Q,L}&=&m^2_{\{Q,L\}0}\dblone+{\mathbf{T}}_{Q,L}\\
+\bdm^2_{U,D,E}&=&m^2_{\{U,D,E\}0}[c_{U,D,E}\dblone+R_{U,D,E}\bdf^T_{u,d,e}
+\bdf^*_{u,d,e}+S_{U,D,E}(\bdf^T_{u,d,e}\bdf^*_{u,d,e})^2]+{\mathbf{T}}_{U,D,E}\label{eq:GUTboundsferm}\\
+\ba_{u,d,e}&=&\bdf_{u,d,e}[A_{\{u,d,e\}0}\dblone+W_{u,d,e}\bdf^\dagger_{u,d,e}\bdf_{u,d,e}+X_{u,d,e}(\bdf^\dagger_{u,d,e}\bdf_{u,d,e})^2]+{\mathbf{Z}}_{u,d,e}\;,
+\label{eq:GUTboundtri}
+\end{eqnarray} % where $c_{U,D,E}=0$ or $1$, and ${\bdf}_{u,d,e}$ are
+the superpotential Yukawa coupling matrices {\it in an arbitrary current
+basis} at the same scale at which the SSB parameters of the model are
+specified. The matrices ${\mathbf{T}}_{Q,L,U,D,E}$ and
+${\mathbf{Z}}_{u,d,e}$ have been introduced only to allow for additional
+sources of flavor-violation not contained in the Yukawa couplings.
+Setting ${\mathbf{T}}_{Q,L,U,D,E}={\mathbf{Z}}_{u,d,e}=$~{\boldmath$0$}
+gives us the most general parametrisation of the three-generation
+$R$-parity conserving MSSM where the Yukawa coupling matrices are the
+sole source of flavor-violation.
+
+Questions 9.~to~16. in \inrge~allow the user to choose arbitrary values
+of all the input coefficients above, subject to the constraint that
+${\mathbf{T}}_{Q,L,U,D,E}$ are Hermitian. The familiar universal mSUGRA
+boundary conditions are reproduced by setting $c_{U,D,E}=1$;
+$m^{2}_{\{Q,L\}0}=m^{2}_{\{U,D,E\}0}=m^{2}_{0}$;
+$A_{\left\{u,d,e\right\}0}=A_{0}$;
+$R_{U,D,E}=S_{U,D,E}=W_{u,d,e}=X_{u,d,e}=0$;
+${\mathbf{T}}_{Q,L}={\mathbf{T}}_{U,D,E}={\mathbf{Z}}_{u,d,e}=$~{\boldmath$0$}
+in (\ref{eq:GUTboundsferm})-(\ref{eq:GUTboundtri}).
+
+The remaining GUT scale inputs \mbox{---} namely, those for the gaugino
+and Higgs boson scalar masses \mbox{---} are simple numbers, which can
+be either given by the mSUGRA parameters passed from the
+\progisasug~main code, or entered by the user in Questions. 7.~and~8. of
+\inrge.
+
+\subsection{Electroweak Symmetry Breaking}
+
+After fixing the high scale parameters, the program proceeds to the
+subroutine \texttt{DOWNMHIGHMZ}, which runs the entire collection of
+RGEs contained in the subroutine \texttt{RGE646}. At each step, the code
+checks to see whether the scale is below $\msusy$ and, at the point
+$\msusy$ is passed, applies the electroweak breaking conditions using
+the subroutine \texttt{DOWNMSCOND}.
+
+Since $\msusy$ is at the scale
+$\sqrt{m_{\tilde{t}_{L}}m_{\tilde{t}_{R}}}$, the electroweak symmetry
+breaking conditions will always be applied at a scale smaller than the
+mass of the heaviest SUSY particle. As a result, $\mu$, the higgsino
+mass parameter, is no longer equal to $\tilde{\mu}$, the parameter that
+enters the Higgs potential. Moreover, the Higgs potential depends only
+on $M^{2}_{H_{u}}\equiv\left(\mhusq+\mtsq\right)$ and
+$M^{2}_{H_{d}}\equiv\left(\mhdsq+\mtsq\right)$, so that it is not
+possible to separate $\left|\tilde{\mu}\right|^2$ from the SSB
+parameters $m_{H_u}^2$ and $m_{H_d}^2$ that we specify at the high
+scale. Notice, however, that we can define the relations %
+\begin{eqnarray*} &\left(M^{2}_{H_{u}}+M^{2}_{H_{d}}\right)\equiv
+m^{2}_{H_{u}}+m^{2}_{H_{d}}+2\left|\tilde{\mu}\right|^{2}\quad\mathrm{and}\\
+&\left(M^{2}_{H_{d}}-M^{2}_{H_{u}}\right)\equiv
+m^{2}_{H_{d}}-m^{2}_{H_{u}}\;.
+\end{eqnarray*} % so that the tree-level minimisation conditions of the
+Higgs potential can be written as, %
+\begin{eqnarray}
+&b=\sn\cs\left(M^{2}_{H_{u}}+M^{2}_{H_{d}}\right)\label{eq:EWSB2}\\
+&\left(M^{2}_{H_{u}}+M^{2}_{H_{d}}\right)=-\frac{1}{\cos{2\beta}}\left(M^{2}_{H_{d}}-M^{2}_{H_{u}}\right)-\frac{1}{2}\left(g'^{2}+g^{2}\right)\left(v^{2}_{u}+v^{2}_{d}\right)\label{eq:EWSB}\;.
+\end{eqnarray} % The second of these fixes the sum
+$(M^{2}_{H_{u}}+M^{2}_{H_{d}})$ in terms of the difference.  Since we
+know this difference at the high scale, we can evolve this down to
+$M_{\rm SUSY}$ (along with other SSB parameters) during the iterative
+process that we use to solve the RGEs. At $Q=M_{\mathrm{SUSY}}$ we use
+(\ref{eq:EWSB}) to solve for $(M^{2}_{H_{u}}+M^{2}_{H_{d}})$, which can
+be evolved back up to the high scale, and during the running we can fix
+$\tilde{\mu}=\mu$ at the scale of the heaviest SUSY particle. At the
+high scale we reset the difference, $(M^{2}_{H_{u}}-M^{2}_{H_{d}})$, to
+its input value and iterate as per the discussion in
+Sec.~\ref{sec:iterate}. The value of the higgsino parameter $\mu$ can
+then be obtained at all scales using the relevant RGE \cite{RGE2}.
+
+Finally, the $b$-parameter can be eliminated in favour of $\tan{\beta}$
+using (\ref{eq:EWSB2}). Although the $b$-parameter is complex in
+general, our decision to make $v_{u}$ and $v_{d}$ real and
+positive\footnote{We can always make a gauge transformation such that
+just the lower component of $H_u$ has a VEV, and that this VEV is real
+and positive. Then the minimization of the scalar potential in the Higgs
+sector requires that the VEV of $H_d$ is aligned; \textit{i.e.}, is also
+in its lower component. This alignment is a result of dynamics. Finally,
+we can redefine the phase of the doublet superfield ${\hat{H}}_d$ so
+that $v_d$ is real and positive. This is not compulsory, but is the
+customary practice that allows us to define $\tan\beta$ to be real and
+positive.} requires that $b$ also be real and positive at the scale
+$\msusy$. Our parameter does, however, retain the ability to develop
+complex parts as a result of the running, and will not necessarily
+remain real at all scales.
+
+Up to this point, we have ignored another potential complication that
+arises if $\msusy<m_{H}$. In this case, the heavy particles of the Higgs
+sector have decoupled by the time we apply the electroweak symmetry
+breaking conditions, and we only have the light doublet in the effective
+theory that we use to calculate the RGEs. In this case, the heavy Higgs
+doublet mass term
+$\left[\cs^{2}\left(m^{2}_{H_{u}}+\left|\tilde{\mu}\right|^{2}\right)+\sn^{2}\left(m^{2}_{H_{d}}+\left|\tilde{\mu}\right|^{2}\right)+\sn\cs\left(b+b^{*}\right)\right]$
+and the mixing terms,
+$\left[\sn\cs\left(m^{2}_{H_{u}}+\left|\tilde{\mu}\right|^{2}\right)-\sn\cs\left(m^{2}_{H_{d}}+\left|\tilde{\mu}\right|^{2}\right)+\sn^{2}b-\cs^{2}b^{*}\right]$
+(and its complex conjugate), together with $\tan\beta$, are frozen at
+their values at $Q=m_H$, while the light doublet mass parameter,
+$\left[\sn^{2}\left(m^{2}_{H_{u}}+\left|\tilde{\mu}\right|^{2}\right)+\cs^{2}\left(m^{2}_{H_{d}}+\left|\tilde{\mu}\right|^{2}\right)-\sn\cs\left(b+b^{*}\right)\right]$,
+along with $v_{\rm SM}$, continue to evolve down to $M_{\rm SUSY}$. The
+three frozen coefficients together with the evolved mass term for the
+light doublet must therefore be used to solve for
+$\left(m^{2}_{H_{d}}+\left|\tilde{\mu}\right|^{2}\right)$,
+$\left(m^{2}_{H_{u}}+\left|\tilde{\mu}\right|^{2}\right)$ and the
+complex $b$-parameter. We can then find a solution in the same manner as
+for $\msusy>m_H$.
+
+Before closing this section, we should add that although we have
+discussed EWSB\glossary{name={EWSB},description={Electroweak Symmetry
+Breaking}} conditions only at tree-level, in practice we minimize the
+one-loop effective potential including effects of third generation
+Yukawa couplings, but ignoring all flavor-mixing effects. These
+corrections, which effectively shift the Higgs boson SSB mass squared
+parameters by $\Sigma_u$ and $\Sigma_d$, respectively, are evaluated by
+replacing $f_{t,b,\tau}$ in the standard relations by the (3,3) element
+of the corresponding Yukawa matrices in the basis where they are
+diagonal at $m_{t}$, and with the dimensionful parameters also replaced
+by the (3,3) element of the corresponding matrix (or the appropriate
+frozen value).
+
+
+\subsection{Iterative Stage}\label{sec:iterate}
+
+Now that the boundary conditions are defined at each of the three
+relevant scales, the iteration can begin. The subroutines
+\texttt{DOWNMHIGHMZ} and \texttt{UPMZMHIGH2} implement the running in
+each direction. The iteration takes place a fixed number of times,
+chosen so that the RGEs reach a stable solution.
+
+Unless the user has answered `\verb+1+' to using fixed thresholds from
+the main \progisasug~run in Question 4.~of \inrge, the program will
+alter all the thresholds on each downwards run, except those for the
+gluinos and heavy Higgs fields, which are fixed at the locations
+obtained earlier by \progisasug.
+
+The running is carried out as follows:
+
+\subsubsection*{Downwards running}
+
+The subroutine first runs from the GUT scale to the highest threshold
+with the number of steps given by the variable \texttt{NSTEP}. During
+the $i$th iteration, this variable has the value $100\times(1.6)^{i}$,
+until we reach iteration number $5$ at which point it becomes fixed at
+$100\times(1.6)^{5}$. If this is the first iteration, the thresholds are
+taken to be the current \progisasug~thresholds. Running continues
+between thresholds (inserting the boundary conditions at $m_{H}$ and
+$\msusy$ when necessary) with the number of steps given by
+\begin{equation}
+\mathrm{Number\ of\ Steps}=\frac{\left|\log{\left(Q_{1}/Q_{2}\right)}\right|}{\log{(M_{HIGH}/m_{t})}}\times(25\times\mathtt{NSTEP})\;,
+\end{equation} where $Q_{1}$ and $Q_{2}$ are the scales of the two
+thresholds between which the running is being carried out. The factor
+$25$ was chosen to ensure enough sampling between the thresholds without
+unnecessarily slowing down processing time.
+
+At each step, the SSB sfermion mass matrices are diagonalised. If the
+user has not fixed the thresholds to be the same as those passed from
+the \progisasug~main code, the derived eigenvalues are checked to see if
+any matter sfermions have decoupled. When one of these sparticles does
+decouple, the subroutine \texttt{CHDEC} carries out the following
+procedure:
+\begin{enumerate}
+\item Remove the influence of the decoupled particle in the RGE running of the remaining couplings.
+\item Store the eigenvectors of the mass matrix so that the rotation between the diagonal basis at the decoupling scale and the original current basis is saved.
+\item Store all the entries of the mass matrix itself so that they can be used as a boundary condition when running up.
+\item Call the subroutine \texttt{REMSF} so that, in the basis where the mass matrix is diagonal, the entry corresponding to the decoupled particle is set to zero. This ensures that the eigenvector for this particle is removed from the original current basis matrix and cannot influence further downward running.
+\end{enumerate} The subroutine continues to run down until it reaches
+$m_{t}$, where it rotates from the current basis back to the basis in
+which the Yukawa matrices are diagonal.\footnote{Rather than diagonalise
+the Yukawa matrices at this scale, \progrge~uses the rotation matrices,
+${\mathbf{V}}_{L,R}(u,d)$ that were used on the first upwards running.
+Practically, this means that the rotation matrices are one of the
+boundary conditions on our iterative running.} Running resumes using the
+SM \drb~RGEs in \texttt{SMRGEDR}, \textit{without decoupling the top
+quark}, to the scale $M_{Z}$.
+
+The integration of the RGEs is carried out by the \texttt{CERNLIB}
+routine \texttt{RKSTP}. The RGE subroutine, \texttt{RGE646}, contains
+RGEs for all couplings with and without tildes and with full thresholds
+for the one-loop running. The quartic couplings are entered separately,
+but they are set to be equal to their SM counterparts since the RGEs for
+the quartics are unavailable at this time. In addition, \texttt{RGE646}
+contains the two-loop terms from the RGEs, which depend only on the MSSM
+values of the couplings. In order to obtain an estimate of the two-loop
+contributions, the pure MSSM RGEs are solved even below all thresholds
+and these MSSM couplings are used for the two-loop level running of the
+SUSY couplings. This is acceptable since we are only trying to achieve
+two-loop level accuracy, and threshold effects in the two-loop terms are
+numerically much smaller.
+
+Once we have decoupled at least one of the matter sfermions, the
+right-hand side of the RGEs are calculated in the basis where the
+squark/slepton matrices are diagonal at the decoupling scale. This is
+still a current basis, since the quarks and leptons are rotated by the
+same amount as the squarks and sleptons. \texttt{RGE646} rotates all
+couplings into this basis when calculating the right-hand side of the
+RGEs and, at the end of the subroutine, rotates the result back to the
+original current basis.
+
+Note that if the location of the thresholds is altered every iteration,
+the Yukawa couplings are unable to reach a convergent solution. This is
+because moving the thresholds can disrupt the fine cancellation that is
+required to obtain vanishing values at $m_{t}$ for the off-diagonal
+elements of the Yukawa matrices in their mass basis. We therefore only
+allow \progrge~to change the locations of the thresholds for the first
+ten iterations. This ensures that the Yukawa couplings converge as
+closely as allowed by the numerical accuracy of the machine.
+
+\subsubsection*{Upwards running}
+
+Before commencing the run back up to the GUT scale, the boundary
+conditions at $M_{Z}$ \mbox{---} the gauge couplings and Yukawa coupling
+matrices in the quark mass basis \mbox{---} are reset. Running then
+continues to $m_{t}$, where the top quark Yukawa coupling is reset and
+the Yukawa matrices are rotated into the current basis, and then
+continues again until the first threshold above $m_{t}$ is reached.
+
+The upwards running makes no changes to the thresholds. At each step,
+the subroutine checks whether a threshold has been passed. If so, the
+influence of the particle in question is removed from the RGEs, and if
+this is a matter sfermion threshold the soft mass matrix is set to the
+value which was saved at this point during the downward run.
+
+The RGE subroutine \texttt{RGE646} is used just as with downwards
+running. When we have some but not all matter sfermions present in the
+theory, we rotate to the basis where the soft mass matrix for the
+sfermions in question is diagonal at the scale of decoupling. We know
+what this rotation is since it too was saved in the previous run down.
+
+Once all the thresholds have been passed, the RGEs are equivalent to the
+standard MSSM RGEs and running continues in a straightforward manner
+until the high scale is reached. Residual inaccuracies in the running
+mean that the tilde-couplings are not precisely equal to their non-tilde
+counterparts once we have passed the highest SUSY threshold. Since these
+differences can feed back into the other couplings via the RGEs, we set
+the tilde-couplings equal to the usual SUSY couplings once the highest
+SUSY threshold has been passed. Also, if the answer to Question 6. is
+`\verb+0+', since the scale at which the gauge couplings unify may be
+altered by the location of the thresholds, we allow the running to
+continue past the unification scale from the previous iteration, and
+increase the number of steps for this iteration so that the step-size
+remains constant.
+
+We have checked that if we do not reset the weak scale boundary
+conditions, and instead use the final values from the previous call to
+\texttt{DOWNMHIGHMZ}, the upwards running is precisely the same as the
+downwards running.
+
+\subsection{\progrge~Output}
+
+The iterative section exits at the high scale after resetting the GUT
+scale boundary conditions. In order to provide useful output, the code
+makes one final downward run to $m_{H}$. This scale was chosen due to
+its significance as a point where a number of the operators in the
+Lagrangian change, however, the output scale could have been chosen to
+be anywhere between the two extremes of the running. It is expected that
+$m_{H}$ will be fairly close to the scale at which the user will be
+using the couplings for their calculations.
+
+The code writes out two files that contain all the dimensionless and
+dimensionful couplings of the theory, \wout~and \gout. The first line of
+each file contains information on the scale at which the couplings are
+valid, which in the case of \wout~is $Q=m_H$. Each set of numbers is
+labelled with the coupling to which they refer, in the order laid out in
+Table~\ref{tab:output}, %
+\begin{table}\label{tab:output}
+\centering
+\begin{tabular}{cc||cc} {\texttt{COUPLINGS}}&$g_1\quad g_2\quad
+g_3$&{\texttt{FTQ\_U}}&$\bftuqnb$\\[1pt]
+{\texttt{f\_U}}&${\mathbf{f}}_u$&{\texttt{FTQ\_D}}&$\bftdqnb$\\[1pt]
+{\texttt{f\_D}}&${\mathbf{f}}_d$&{\texttt{FTL\_E}}&$\bftelnb$\\[1pt]
+{\texttt{f\_E}}&${\mathbf{f}}_e$&{\texttt{FTU\_U}}&$\bfturnb$\\[1pt]
+{\texttt{GAUGINO MASSES M}}&$M_1\quad M_2\quad
+M_3$&{\texttt{FTD\_D}}&$\bftdrnb$\\[1pt] {\texttt{GAUGINO MASSES
+M$^\prime$}}&$M'_1\quad M'_2\quad
+M'_3$&{\texttt{FTE\_E}}&$\bfternb$\\[1pt]
+{\texttt{a\_U}}&${\mathbf{a}}_u$&{\texttt{sGTPH\_U AND
+cGTPH\_D}}&$\sn\gtphu\quad\cs\gtphd$\\[1pt]
+{\texttt{a\_D}}&${\mathbf{a}}_d$&{\texttt{sGTH\_U AND
+cGTH\_D}}&$\sn\gthu\quad\cs\gthd$\\[1pt] \cline{3-4}
+{\texttt{a\_E}}&${\mathbf{a}}_e$&\multicolumn{2}{l}{\underline{MSSM
+Section - both files}}\\[1pt] {\texttt{SQUARED HIGGS
+MASSES}}&$m^2_{H_u}\quad m^2_{H_d}$&{\texttt{COUPLINGS}}&$g_1\quad
+g_2\quad g_3$\\[1pt]
+{\texttt{M\_Q\^{}2}}&${\mathbf{m}}^2_Q$&{\texttt{f\_U}}&${\mathbf{f}}_u$\\[1pt]
+{\texttt{M\_L\^{}2}}&${\mathbf{m}}^2_L$&{\texttt{f\_D}}&${\mathbf{f}}_d$\\[1pt]
+{\texttt{M\_U\^{}2}}&${\mathbf{m}}^2_U$&{\texttt{f\_E}}&${\mathbf{f}}_e$\\[1pt]
+{\texttt{M\_D\^{}2}}&${\mathbf{m}}^2_D$&{\texttt{GAUGINO
+MASSES}}&$M_1\quad M_2\quad M_3$\\[1pt]
+{\texttt{M\_E\^{}2}}&${\mathbf{m}}^2_E$&{\texttt{a\_U}}&${\mathbf{a}}_u$\\[1pt]
+{\texttt{MU AND B}}&$\mu\quad b$&{\texttt{a\_D}}&${\mathbf{a}}_d$\\[1pt]
+{\texttt{V\_U AND V\_D}}&$v_u\quad
+v_d$&{\texttt{a\_E}}&${\mathbf{a}}_e$\\[1pt]
+\cline{1-2}
+\multicolumn{2}{l||}{\underline{\wout~only}}&{\texttt{SQUARED HIGGS
+MASSES}}&$m^2_{H_u}\quad m^2_{H_d}$\\[1pt]
+{\texttt{lambda\_U}}&$\bdl_u$&{\texttt{M\_Q\^{}2}}&${\mathbf{m}}^2_Q$\\[1pt]
+{\texttt{lambda\_D}}&$\bdl_d$&{\texttt{M\_L\^{}2}}&${\mathbf{m}}^2_L$\\[1pt]
+{\texttt{lambda\_E}}&$\bdl_e$&{\texttt{M\_U\^{}2}}&${\mathbf{m}}^2_U$\\[1pt]
+{\texttt{GTP\_Q}}&$\bgtpqnb$&{\texttt{M\_D\^{}2}}&${\mathbf{m}}^2_D$\\[1pt]
+{\texttt{GTP\_L}}&$\bgtplnb$&{\texttt{M\_E\^{}2}}&${\mathbf{m}}^2_E$\\[1pt]
+{\texttt{GTP\_U}}&$\bgtpurnb$&{\texttt{MU AND B}}&$\mu\quad b$\\[1pt]
+\cline{3-4}
+{\texttt{GTP\_D}}&$\bgtpdrnb$&\multicolumn{2}{l}{\underline{\wout~only}}\\[1pt]
+{\texttt{GTP\_E}}&$\bgtpernb$&{\texttt{TRI\_U}}&$\left[\sn{\mathbf{a}}_u-\cs\mtsfuhu\right]$\\[3pt]
+{\texttt{GTPH\_U AND
+GTPH\_D}}&$\gtphu\quad\gtphd$&{\texttt{TRI\_D}}&$\left[\cs{\mathbf{a}}_d-\sn\mtsfdhd\right]$\\[3pt]
+{\texttt{GT\_Q}}&$\bgtqnb$&{\texttt{TRI\_E}}&$\left[\cs{\mathbf{a}}_e-\sn\mtsfehd\right]$\\[1pt]
+{\texttt{GT\_L}}&$\bgtlnb$&{\texttt{M\_HUD}}&$\ast$\\[1pt]
+{\texttt{GTH\_U AND GTH\_D}}&$\gthu\quad\gthd$&{\texttt{SM VEV AND
+LAMBDA\_SM}}&$v_{SM}\quad\lambda$\\[1pt]
+{\texttt{GTS\_Q}}&$\bgtsqnb$&{\texttt{MTSF\_U}}&$\mtsfuhunb$\\[1pt]
+{\texttt{GTS\_U}}&$\bgtsurnb$&{\texttt{MTSF\_D}}&$\mtsfdhdnb$\\[1pt]
+{\texttt{GTS\_D}}&$\bgtsdrnb$&{\texttt{MTSF\_E}}&$\mtsfehdnb$
+\end{tabular}
+\caption{The various dimensionless and dimensionful couplings contained within the output files \wout~and \gout~in the order in which they are printed. Note the two sections that are only printed in \wout, and the section that contains couplings derived using the MSSM RGEs only. The entry marked with an asterisk is: $\left[\sn^{2}\left(m^{2}_{H_{u}}+\left|\tilde{\mu}\right|^{2}\right)+\cs^{2}\left(m^{2}_{H_{d}}+\left|\tilde{\mu}\right|^{2}\right)-\sn\cs\left(b+b^{*}\right)\right]$.}
+\end{table} % and matrices are presented in the standard matrix
+arrangement, for example %
+\begin{eqnarray*}
+&\begin{array}{cccc}\multicolumn{2}{l}{{\mathbf{f}}_u:}\\&({\mathbf{f}}_u)_{11}&({\mathbf{f}}_u)_{12}&({\mathbf{f}}_u)_{13}\\&({\mathbf{f}}_u)_{21}&({\mathbf{f}}_u)_{22}&({\mathbf{f}}_u)_{23}\\&({\mathbf{f}}_u)_{31}&({\mathbf{f}}_u)_{32}&({\mathbf{f}}_u)_{33}\end{array}
+\end{eqnarray*} % Note that since there are many couplings, such as
+$\bftuqnb$, that are equal to their MSSM counterparts at the GUT scale,
+these are not included in \gout, which is a much smaller file. The
+notation used in Table~\ref{tab:output} is described in full in
+Refs.~\cite{RGE1,RGE2}.
+
+Both \wout~and \gout~are written in the basis chosen by the user in
+Question 17.~of \inrge, where either the up- or the down-type Yukawa
+couplings are diagonal at $m_{t}$. For any specific calculation, the
+user can then simply evolve these couplings to higher or lower scales as
+desired, without the need to iterate. The output (in the basis where the
+up-type Yukawa coupling is diagonal) will be used in the subroutine
+\progstd~to calculate the $\tilde{t}_{1}$ decay rate, as described next.
+
+
+\subsection{The Decay Subroutine, \progstd}\label{sec:std}
+
+\progstd~takes the full list of dimensionless and dimensionful couplings
+and calculates the two $(6\times6)$ squark mass matrices. Having found
+these in the basis chosen by the user in the input file, it diagonalises
+one of the two mass matrices. If the user chose for the up-type quark
+Yukawa coupling matrix to be diagonal at $m_t$ (in the answer to
+Question 17. of \inrge), the up-type squark mass matrix will be
+diagonalised. Conversely, if the down-type quark Yukawa coupling matrix
+was chosen to be diagonal at $m_t$, then the down-type squark mass
+matrix will be diagonalised. If the user has chosen for the up-type
+squark mass matrix to be diagonalised, the final step is a call to
+\progstone, which finds the rate for the decay $\tilde{t}_{1}\rightarrow
+c\tilde{Z}_1$. The code carries out this procedure as follows.
+
+\begin{enumerate}
+\item Since the couplings are received from \progrge~at $Q=m_H$, \progstd~first evolves the couplings to the scale at which the decay is to be calculated, which we choose to be the lightest of the eigenvalues of the left- and right-handed soft mass matrices for the up-type (or down-type) squarks, using the subroutine \texttt{DECRUN}.
+\item When the program arrives at the required scale, the mass matrices are reconstructed using the saved eigenvalues and eigenvectors from the running procedure. In other words, we recreate the mass matrices in the basis where the squarks are diagonal using the eigenvalues of each squark at its decoupling scale.
+\item We then rotate from the squark mass basis to the current basis
+chosen in the input file, using the known eigenvectors in this basis.
+
+\item Once we have all the couplings at the correct scale in the basis where the quark Yukawa coupling is diagonal at $m_t$, we construct the $(6\times6)$ mass matrix using (52)-(54) of Ref.~\cite{RGE2} in the subroutines \texttt{UPSQM} and \texttt{DOWNSQM} \mbox{---} remembering to use the restricted set of couplings if we are calculating the decay at a scale $Q<m_{H}$.
+\item The mass matrix is then diagonalised in \texttt{USMMA} (or
+\texttt{DSMMA} in the case that the down-type squarks are diagonalised),
+to find the eigenvalues and eigenvectors.
+
+\item Finally, if the up-type squarks were diagonalised (and unless the kinematics forbid this decay from occurring), the decay rate calculation for $\tilde{t}_{1}\rightarrow c\tilde{Z}_1$ from (60) of Ref.~\cite{RGE2} is carried out. To find the rate, we must know $\bgtpqnb$, $\bgtqnb$, $\bgtpurnb$, $\bftuqnb$, and $\bfturnb$, along with the masses and mixings of the squarks and neutralinos.
+\end{enumerate}
+
+The final result for the $\tilde{t}_{1}\rightarrow c\tilde{Z}_1$ rate is
+compared to the rate obtained using the single-step estimate in (8.21)
+of Ref.~\cite{diss} and these two results are printed to the screen.
+
+
+\def\refname{\large\bf References for \progrge}
+\begin{thebibliography}{99} %
+\bibitem{RGE1} A.~D. Box and X.~Tata, Phys. Rev. D \textbf{77}, 055007
+(2008) %
+\bibitem{RGE2} A.~D. Box and X.~Tata, Phys. Rev. D \textbf{79}, 035004
+(2009) %
+\bibitem{diss} A.~D. Box, {a}rXiv:hep-ph/0811.2444 (2008) %
+\bibitem{pierce} D.~Pierce, J.~A. Bagger, K.~Matchev and R.~Zhang, Nucl.
+Phys. B
+\textbf{491}, 3 (1997) %
+\bibitem{pdg} C.~\mbox{Amsler} et~al. {(Particle Data Group)}, Phys.
+Lett. B
+\textbf{667}, 1 (2008) %
+\bibitem{weingandothers} S.~Weinberg, Phys. Lett. B \textbf{91}, 51
+(1980); L.~Hall, Nucl. Phys. B \textbf{491}, 3 (1997); B.~Ovrut and
+H.~J. Schnitzer, Nucl. Phys. B \textbf{184}, 109 (1981); K.~G.
+Chetyrkin, B.~A. Kniehl and M.~Steinhauser, prl \textbf{79}, 2184
+(1997); See also, B.~Wright, arXiv:hep-ph/9404217 (1994) and H.~Baer,
+J.~Ferrandis, S.~Kraml and W.~Porod, Phys. Rev. D {\bf 73}, 015010
+(2006) for discussions of this in the SUSY context.  %
+\bibitem{fusaoka} H.~Fusaoka and Y.~Koide, Phys. Rev. D \textbf{57},
+3986 (1998) %
+\end{thebibliography}

@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The Minimal Supersymmetric Standard Model}
+
+The implementation of the minimal supersymmetric standard model (MSSM)
+in the module \code{mssm} mainly follows that of \ds versions 4 \cite{ds4}
+(see also Section \ref{sec:ge} in this manual). 
+In particular, the conventions 
+for the superpotential and soft supersymmetry-breaking potential are the same as 
+implemented in \cite{Bergstrom:1995cz}, and thus similar to \cite{Haber:1984rc,Gunion:1984yn}.
+The full set of input parameters to be provided at the weak scale thus consists of the 
+pseudoscalar mass ($m_A$), 
+the ratio of Higgs vacuum expectation values ($\tan\beta$), the Higgsino ($\mu$) and 
+gaugino ($M_1$, $M_2$, $M_3$) mass parameters, trilinear couplings ($A_{Eaa}$,
+$A_{Uaa}$, $A_{Daa}$, with $a=1,2,3$) as well as  soft sfermion masses ($M^2_{Qaa}$, 
+$M^2_{Laa}$, $M^2_{Uaa}$, $M^2_{Daa}$, $M^2_{Eaa}$, with $a=1,2,3$).\footnote{
+Note that currently only diagonal matrices are allowed.  While not being the most general
+ansatz possible, this implies the absence of flavour changing neutral currents at tree-level  
+in all sectors of the model.
+}
+Internally, those values are stored in \code{mssm} common blocks. The user may either 
+provide them directly or by setting up pre-defined phenomenological MSSM models
+with a reduced number of parameters
+through a call to a routine like \code{dsgive\_model} or  \code{dsgive\_model25}
+(followed by a call to \code{dsmodelsetup}). The 
+former sets up the simplest of those models, defined by the input parameters  
+$\mu$, $M_2$, $m_A$, $\tan\beta$, a common scalar mass $m_0$, and trilinear 
+parameters $A_t$ and $A_b$; $M_1$ and $M_3$ are then calculated by assuming the 
+GUT condition, and the remaining MSSM parameters are 
+ given by ${\bf M}_Q = {\bf M}_U = {\bf M}_D = {\bf M}_E = {\bf M}_L = m_0{\bf 1}$, 
+ ${\bf A}_U = {\rm diag}(0,0,A_t)$, ${\bf A}_D = {\rm diag}(0,0,A_b)$, ${\bf A}_E = {\bf 0}$. 
+ Similarly, \code{dsgive\_model25} sets up a pMSSM model with 25 free parameters
+ (see the header of that file for details). Alternatively, all those values can be set by 
+ reading in an SLHA file, or providing GUT scale parameters in the case of cMSSM
+ models (via an interface to the \code{ISASUGRA} code, as included in ISAJET \cite{Paige:2003mg,isajet_www}).
+ 
+Compared to previous versions of the code, \ds\ 6 has a new interface to read and write SUSY 
+Les Houches Accord (SLHA) files \cite{Skands:2003cj,Allanach:2008qq}. 
+\comment{would be good to give some details here, also a warning that not everything is perfect
+yet!}
+ 
+
+ All particle and sparticle masses are stored in a common block array \code{mass()}. For 
+ neutralino masses, we include the leading loop corrections \cite{Drees:1996pk,
+ Pierce:1993gj,Lahanas:1993ib}
+ but neglect the relatively small corrections for charginos \cite{Drees:1996pk} 
+ (in both cases, masses cannot be negative in our convention).\footnote{
+ Unless, of course, those values are provided by an SLHA file. This comment also applies to the following 
+ simplifications concerning both sparticle masses and widths.
+ }
+ Likewise, all mixing matrices and decay widths are available as common block arrays. 
+ The latter are currently only computed for the Higgs particles (via an interface to the
+ \code{FeynHiggs} \cite{Heinemeyer:1998yj,feynhiggs_www,Heinemeyer:1998jw,
+ Heinemeyer:1998np,Heinemeyer:1999be} package),
+ while the other sparticles have fictitious widths of 0.5\% of the sparticle mass (for the 
+ sole purpose of regularizing annihilation amplitudes close to poles). Again, the 
+ conventions for masses and mixings follow exactly those of Ref.~\cite{ds4}, to which we 
+ refer for further details.

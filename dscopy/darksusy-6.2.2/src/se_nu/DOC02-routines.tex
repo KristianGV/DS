@@ -1,0 +1,22 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Neutrinos from Sun and Earth --  routines}
+
+This folder contains routines to calculate the
+neutrino-induced muon flux from the Earth and the Sun in various
+models. 
+
+There are several different methods of calculation available (determined
+by \texttt{secalcmet} in \texttt{dssecom.h}). Method 1 uses the
+approximate formulae for the capture rates in the Earth/Sun from the
+Jungman, Kamionkowski and Griest review \cite{Jungman:1995df}. Method 2, uses the
+same expression for the Sun, but the full expression from Gould
+\cite{Gould:1987ir} for capture in the Earth. Method 4 uses a full numerical integration over the velocity distribution (instead of assuming that it is Gaussian) and method 5, finally, also performs a full numerical integration over the momentum transfer in the form factors (instead of assuming exponential form factors). The default is to use method 5, but instead of using the numerical routines directly, tables are used. One can always force using the numerical routines instead of the tables if one so wishes. There are several options regarding how many elements to incluce in the Sun summation over elements ('lo', 'med' and 'hi').
+The easiest way to select method is by
+calling \texttt{dssenu\_set}. For the Earth, method 5 is not expected to make a large difference due to the smaller momentum transfers in the Earth and method 5 reverts back to method 4 for the Earth.
+
+A call to 
+\texttt{dssenu\_set('default')} is made in \texttt{dsinit}, but can be
+changed by the user by calling \texttt{dssenu\_set} after \texttt{dsinit}.
+
+To calculate the neutrino-induced muon flux from the Earth, you call
+\ftb{dssenu\_rates}. 

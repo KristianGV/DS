@@ -1,0 +1,17 @@
+README - FeynHiggs in DarkSUSY
+
+To use FeynHiggs in DarkSUSY, perform the following modifications when you
+have downloaded FeynHiggs:
+
+* Changes to avoid name clashes (on case-insensitive file systems)
+  when creating a shared library:
+  * Rename the following files
+      src/Flavour/Bsll.F to FH_Bsll.F
+      src/Flavour/Bsgamma.F to FH_Bsgamma.F
+      src/Main/AlphaS.F to FH_AlphaS.F
+      src/Util/Interpoalte to FH_Interpolate.F
+  * Modify src/makefile to change
+      Bsll to FH_Bsll
+      Bsgamma to FH_Bsgamma
+      AlphaS to FH_AlphaS
+      Interpolate to FH_Interpolate

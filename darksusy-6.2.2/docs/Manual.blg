@@ -1,0 +1,81 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Manual.aux
+The style file: JHEP.bst
+Case mismatch error between cite keys XXX and xxx
+---line 228 of file Manual.aux
+ : \citation{XXX
+ :              }
+I'm skipping whatever remains of this command
+Reallocated field_info (elt_size=4) to 11030 items from 5000.
+Database file #1: DS.bib
+Warning--string name "pub-academic" is undefined
+--line 5 of file DS.bib
+Warning--string name "pub-academic:adr" is undefined
+--line 6 of file DS.bib
+Repeated entry---line 3065 of file DS.bib
+ : @article{Spergel:1999mh
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4464 of file DS.bib
+ : @article{Binder:2017rgn
+ :                        ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "Bergstrom:2013jra"
+Warning--I didn't find a database entry for "Strong:2007nh"
+Warning--I didn't find a database entry for "Strong:1998pw"
+Warning--I didn't find a database entry for "Evoli:2016xgn"
+Warning--I didn't find a database entry for "Kissmann:2014sia"
+Warning--I didn't find a database entry for "Maurin:2001sj"
+Warning--I didn't find a database entry for "Evoli:2011id"
+Warning--I didn't find a database entry for "Colafrancesco:2005ji"
+Warning--I didn't find a database entry for "xxx"
+Warning--I didn't find a database entry for "1915MNRAS..76...37E"
+Warning--I didn't find a database entry for "Catena:2011kv"
+Warning--I didn't find a database entry for "Hisano:2003ec"
+Warning--I didn't find a database entry for "Hisano:2004ds"
+Warning--empty title in Krauss:1985unpub
+Warning--empty author and editor in EncBrit
+Warning--empty publisher in Luke:1969:SFTb
+You've used 188 entries,
+            2217 wiz_defined-function locations,
+            2140 strings with 44632 characters,
+and the built_in function-call counts, 62717 in all, are:
+= -- 6493
+> -- 2391
+< -- 0
++ -- 700
+- -- 512
+* -- 5405
+:= -- 8576
+add.period$ -- 191
+call.type$ -- 188
+change.case$ -- 180
+chr.to.int$ -- 0
+cite$ -- 191
+duplicate$ -- 3095
+empty$ -- 5563
+format.name$ -- 512
+if$ -- 16511
+int.to.chr$ -- 0
+int.to.str$ -- 188
+missing$ -- 705
+newline$ -- 572
+num.names$ -- 185
+pop$ -- 369
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 2543
+stack$ -- 0
+substring$ -- 3410
+swap$ -- 1622
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 3
+while$ -- 453
+width$ -- 191
+write$ -- 1967
+(There were 3 error messages)

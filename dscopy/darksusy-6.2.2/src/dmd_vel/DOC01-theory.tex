@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dark matter phase-space distributions -- theory}
+\label{sec:dmd_vel}
+
+The DM velocity and density profiles cannot be chosen independently,
+in principle, but have to satisfy consistency relations. For 
+a spherically symmetric and isotropic system, e.g., the two profiles are related by the 
+Eddington equation \cite{1915MNRAS..76...37E,Catena:2011kv}. A fully self-consistent 
+implementation of phase-space distributions will be available with a later \ds\ version,
+at which point the directory \code{dmd\_vel} will become obsolete. 
+
+Until then, the user can freely choose a DM velocity distribution among those provided in 
+\code{src/dmd\_vel} -- but should keep in mind this consistency requirement 
+when comparing direct detection rates (which require the local DM velocity profile) to, e.g., 
+the gamma-ray flux from the galactic center 
+(which requires choosing a density profile). Concretely, it is the function \code{dshmuDF}
+that returns the 3D distribution function $f(\mathbf{v})$ needed by the direct detection routines. 
+It allows to switch between various pre-implemented functional forms, including tabulated
+velocity profiles, but can of course also be replaced by an arbitrary function supplied by the user
+(c.f.~Section \ref{sec:replaceable}).
+ 
+
+One of these options is the often adopted truncated gaussian, which in the detector frame 
+moving at
+speed $v_O$ relative to the galactic halo reads
+\begin{equation}
+   f(v) = {1\over {\mathcal N}_{\rm cut}} { v^2 \over u v_O \sigma} \left\{
+   \exp\left[{-{(u-v_O)^2\over2\sigma^2}}\right] -
+   \exp\left[{-{\min(u+v_O,v_{\rm cut})^2\over2\sigma^2}}\right]
+   \right\}
+\end{equation}
+for $ v_{\rm esc} < v < \sqrt{v_{\rm esc}^2 + (v_O + v_{\rm cut} ) ^2
+} $ and zero otherwise, with $ u = \sqrt{v^2 + v_{\rm esc}^2} $ and
+\begin{equation}
+   {\mathcal N}_{\rm cut} =
+   {v_{\rm cut}\over\sigma} \exp\left( {-{v_{\rm cut}^2\over2\sigma^2}} \right)
+   -
+   \sqrt{\pi\over2} {\rm erf} \left( {v_{\rm cut}\over\sqrt{2}\sigma} \right) .
+\end{equation}
+As default, we have taken the halo line-of-sight (one-dimensional) velocity
+dispersion $\sigma = $120 km/s,\footnote{Other authors write
+   $\exp(-3v^2/2\overline{v}^2)$, in which case $\overline{v} = \sqrt{3}
+   \sigma$.}  the galactic escape speed $ v_{\rm cut} = $ 600 km/s, the relative
+Earth-halo speed $ v_O = $ 264 km/s (a yearly average) and the Earth escape
+speed $ v_{\rm esc} = $ 11.9 km/s. These parameters can be changed by
+the user. 
+
+

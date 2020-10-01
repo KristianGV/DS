@@ -1,0 +1,41 @@
+.TH FHCONSTRAINTS 1 "9-Feb-2017"
+.SH NAME
+.PP
+FHConstraints \- evaluate electroweak precision observables
+.SH SYNOPSIS (Fortran version)
+.PP
+integer error, ccb
+.br
+double precision gm2
+.br
+double precision edmeTh, edmn, edmHg
+.sp
+subroutine FHConstraints(error, gm2,
+.br
+  edmeTh, edmn, edmHg,
+.br
+  ccb)
+.SH SYNOPSIS (Mathematica version)
+.PP
+FHConstraints[]
+.SH DESCRIPTION
+FHConstraints evaluates further constraints, currently g_mu - 2 and
+electric dipole moments.
+.SH ARGUMENTS
+.TP
+.B error (output)
+zero if successful, otherwise the line number in Constraints.F from
+which the error message was emitted.
+.TP
+.B gm2 (output)
+the anomalous magnetic moment of the muon, (g_mu - 2),
+.TP
+.B edmeTh, edmn, edmHg (output)
+the electric dipole moments of the electron (derived from Thorium, 
+edmeTh), the neutron (edmn), and mercury (edmHg).
+.TP
+.B ccb (output)
+whether the parameter point corresponds to a colour-breaking minimum.
+.SH SEE ALSO
+.PP
+libFH(1)

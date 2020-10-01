@@ -1,0 +1,97 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{General supersymmetry -- routines}
+
+Input parameters, options, results, etc.\ are contained in common blocks in the
+file \ft{dsmssm.h}, which the user has to include. The input parameters
+are ($a=1,2,3$) \newline\begin{tabular}{llll} \ft{ma}$=m_A$, & \ft{tanbe}$=\tan\beta$, & \ft{mu}$=\mu$, &
+  \ft{m1}$=M_1$, \\
+  \ft{m2}$=M_2$, & \ft{m3}$=M_3$, & \ft{asofte($a$)}$=A_{Eaa}$, &
+  {asoftu($a$)}$=A_{Uaa}$, \\
+  \ft{asoftd($a$)}$=A_{Daa}$, & \ft{mass2q($a$)}$=M^2_{Qaa}$, & {\tt
+    mass2l($a$)}$=M^2_{Laa}$, &
+  \ft{mass2u($a$)}$=M^2_{Uaa}$, \\
+  \ft{mass2d($a$)}$=M^2_{Daa}$, &
+  \ft{mass2e($a$)}$=M^2_{Eaa}$. & & \\
+\end{tabular}\newline
+The options are (see previous subsections for a description)
+\newline
+\ft{higloop} choice of tree-level or radiatively corrected Higgs boson
+  masses; 
+\newline 
+\ft{neuloop} choice of tree-level or radiatively corrected neutralino
+  masses; 
+\newline
+\ft{msquarks,msleptons} choice of squark and slepton masses.
+
+\bigskip
+
+To initialize \ds\ for a new model, you should call
+\begin{sub}{subroutine \textbf{dsmodelsetup}(unphys,warning)}
+  \itit{Purpose:} To calculate the particle spectrum, widths and
+    couplings.
+  \itit{Output:} 
+  \itv{unphys}{i} non-zero if the model is unphysical
+  \itv{warning}{i} non-zero if (typically the Higgs) code has issued a warning.
+\end{sub}
+which calculates couplings, masses and some basic cross sections.
+
+The following subroutines specify the values of the model parameters,
+and read/write them to a file. The user should create his own versions
+by editing a copy of them. Please call them with a different name.
+
+\begin{sub}{subroutine
+  \textbf{dsgive\_model}(mu,m2,ma,tanbe,msq,atm,abm)}
+  \itit{Purpose:} Set the MSSM parameters as specified by the
+  arguments.
+  \itit{Inputs:}
+  \itv{mu}{r8} The $\mu$ parameter in GeV.
+  \itv{m2}{r8} The $M_2$ parameter in GeV.
+  \itv{ma}{r8} The mass of the CP-odd Higgs boson, $m_A$ in
+  GeV.
+  \itv{tanbe}{r8} $\tan \beta$.
+  \itv{msq}{r8} Sets ${\bf M}^Q$, etc.\ to a common mass
+  scale $m_0$ in GeV.
+  \itv{atm}{r8} Sets $A_t$ in units of $m_0$ (range: -3 --- 3).
+  \itv{abm}{r8} Sets $A_b$ in units of $m_0$ (range: -3 --- 3).
+\end{sub}
+
+There are also routines to setup more general MSSM models, the currently most general being \code{dsgive\_model25}.
+
+The following subroutines are useful in the analysis.
+
+\begin{sub}{subroutine \ftb{wspctm}(unit)}
+  \itit{Purpose:} Write the particle mass spectrum and mixing matrices
+  to unit \ft{unit}.
+  \itit{Inputs:}
+  \itv{unit}{i} Unit number to write to.
+\end{sub}
+
+\begin{sub}{subroutine \ftb{wvertx}(unit)}
+  \itit{Purpose:} Write all non-vanishing three-particle vertices to
+  unit \ft{unit}.
+  \itit{Inputs:}
+  \itv{unit}{i} Unit number to write to.
+\end{sub}
+
+\begin{sub}{subroutine \ftb{wunph}(unit)}
+  \itit{Purpose:} Write the reason for which the model is not
+  physically acceptable (tachyons, etc.) to unit \ft{unit}.
+  \itit{Inputs:}
+  \itv{unit}{i} Unit number to write to.
+\end{sub}
+
+\begin{sub}{subroutine \ftb{wexcl}(unit)}
+  \itit{Purpose:} Write the reason(s) for which the model is
+  experimentally excluded  to unit \t{unit}.
+  \itit{Inputs:}
+  \itv{unit}{i} Unit number to write to.
+\end{sub}  
+
+\begin{sub}{subroutine \ftb{dswhwar}(unit)}
+  \itit{Purpose:} Write the reason(s) for which the Higgs
+  calculation issued warnings to unit \ft{unit}.
+  \itit{Inputs:}
+  \itv{unit}{i} Unit number to write to.
+\end{sub}  
+
+

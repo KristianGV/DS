@@ -1,0 +1,66 @@
+# Makefile for the DarkSUSY library
+# Technical questions about this makefile should be directed to
+# Joakim Edsjo, edsjo@fysik.su.se
+# Date: August 29, 2000. 2015.
+
+# As a uses you shouldn't have to change anything in this file.
+# You should only change in the makefile in the DarkSUSY root directory.
+
+###############################################
+#### DO NOT CHANGE ANYTHING BELOW THIS LINE ###
+###############################################
+
+# Here we set where the library goes and where include files are.
+
+LIB=../lib
+#TSPACKDIR=/home/kriss/darksusy-6.2.2/contrib/TSPACK
+BUILD=../tmp/build-src
+USER_BUILD=../tmp/build-src-user
+
+vpath %.a $(LIB)
+
+DIRS = an_yield aux aux_xcernlib aux_xdiag aux_xquadpack cr_aux cr_axi \
+cr_gamma cr_nu cr_ps dd dmd_astro dmd_aux dmd_mod dmd_vel fi ini kd rd \
+se_aux se_mod se_nu se_yield si ucmh
+
+USER_DIRS = user_replaceables
+
+DOBJ = $(DIRS:%=%_obj)
+
+USER_DOBJ = $(USER_DIRS:%=%_obj)
+
+# Trick to call main makefile in case make is called in src directory.
+all-local : make-lib
+
+make-lib :
+	cd ..; make dslib
+
+all : libds_core.a libds_core_user.a
+
+libds_core.a : $(DOBJ)
+	ar rS $(LIB)/libds_core.a $(BUILD)/*.o
+	ranlib $(LIB)/libds_core.a
+
+libds_core_user.a : $(USER_DOBJ)
+
+libds_core.so: $(DOBJ)
+	$(FF) $(FOPT) -shared $(BUILD)/*.o $(LIB)/libFH.so $(LIB)/libHB.so \
+$(LIB)/libisajet.so -o $(LIB)/libds_core.so
+
+$(DOBJ) : 
+	cd $(@:_obj=) ; make all
+
+$(USER_DOBJ) : 
+	cd $(@:_obj=) ; make all
+
+.PHONY: clean distclean $(DOBJ)
+distclean : clean
+	rm $(LIB)/libds_core.a
+	rm $(LIB)/libds_core_user.a
+	rm $(LIB)/libds_core.so
+
+clean : 
+	rm -f */*.o 
+
+
+.NOTPARALLEL: 

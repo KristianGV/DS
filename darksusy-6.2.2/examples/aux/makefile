@@ -1,0 +1,260 @@
+# This folder 'aux' is for auxiliary programs that some users might
+# find useful. The aim here is that both the auxiliary main programs, but also
+# this makefile should prove useful when you design your own programs (and
+# makefiles).
+#
+# Notes regarding makefiles: In DarkSUSY, we use autoconf which creates
+# makefiles from templates, files with names makefile.in. ./configure then
+# creates a makefile from the corresponsing makefile.in. Hence, if you change
+# the makefile here, make sure to change examples/aux/makefile.in and not
+# examples/aux/makefile as the latter will be overwritten everytime you
+# run configure. If you copy this makefile (or makefile.in) to use as a
+# starting point for your own makefiles, you can either use makefile.in
+# as your starting point (if you intend to use it in an autoconf setting,
+# or use makefile as your staring point if you don't use autoconf).
+# During configure, when makefile is created, all variables of type
+# @NAME@ in makefile.in will be replaced with their value set in the
+# configure script.
+#
+# Compared to the examples/makefile.in, we here try to setup the
+# makefile.in in a simpler way as we don't need the flexibility of changing
+# particle physics modules as we do in examples/makefile.in.
+
+#FF=$(FC)
+FF=gfortran
+
+### Compiler options ###
+
+# Options for linux
+FOPT = -O -ffixed-line-length-none -fopenmp
+
+### Setups for the DarkSUSY install directory ###
+
+# Determine where to install stuff (prefix is set in configure)
+prefix=/home/kriss/DS/darksusy-6.2.2
+# DS_INSTALL is where the library and data files will be installed
+DS_INSTALL=${prefix}
+
+LIB=$(DS_INSTALL)/lib
+INC=-I./ -I./user_replaceables -I$(DS_INSTALL)/src/user_replaceables -I$(DS_INSTALL)/src/include -I$(DS_INSTALL)/src_models/include -I$(DS_INSTALL)/contrib/include
+# These are include directories for particle physics modules (if needed)
+INC_MSSM=-I$(DS_INSTALL)/src_models/mssm/include
+INC_GENERIC=-I$(DS_INSTALL)/src_models/generic_wimp/include
+INC_SILVEIRAZEE=-I$(DS_INSTALL)/src_models/silveira_zee/include
+INC_vdSIDM=-I$(DS_INSTALL)/src_models/vdSIDM/include
+cfitsio=.
+
+# The script below creates a temporary library from different input libraries
+# and object files. The purpose of this is to make sure we include
+# files in the proper order (i.e. in the order they appear as arguments)
+# so that default object files can be replaced by user object files.
+ADD_SCR=$(DS_INSTALL)/scr/add_libs.pl
+
+
+all: flxconv flxconvplot generic_wimp_oh2 generic_wimp_oh2_threshold wimpyields caprates caprates_ff ucmh_test ScalarSinglet_RD vdSIDM_RD DMhalo_bypass DMhalo_new DMhalo_predef DMhalo_table DMhalo_bypass_prep caprates caprates_ff DDCR_limits DDCR_flux DD_example
+
+
+
+### We below give makefile commands to build our example programs.
+### These can also serve as examples on how to write your own makefiles
+### for your own programs.
+### For each main program, we need to specify which particle physics module
+### to use and where the include files are located for this module.
+### Hence, to switch module you need to change the DS_MODULE and INC_MODULE
+### declarations for that program (you might also need to add more
+### libraries to include if your module relies on other packages).
+### For the concept of replaceable functions to work on all platforms
+### we provide a script, called via $(ADD_SCR) that adds libraries together
+### and it will pick the objects in these libraries in the order of the
+### arguments. Hence, in the examples below, the user replaceable objects
+### (given in libds_*user.a) will replace the default ones as those libraries
+### come before the default libraries in the list of libraries to add.
+
+flxconv : DS_MODULE = generic_wimp
+flxconv : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+flxconv : flxconv.f
+flxconv : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o flxconv flxconv.f \
+	libds_tmp.a 
+	rm -f libds_tmp.a
+
+flxconvplot : DS_MODULE = generic_wimp
+flxconvplot : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+flxconvplot : flxconvplot.f 
+flxconvplot : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o flxconvplot flxconvplot.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+DDCR_flux : DS_MODULE = generic_wimp
+DDCR_flux : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+DDCR_flux : DDCR_flux.f
+DDCR_flux : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o DDCR_flux DDCR_flux.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+DDCR_limits : DS_MODULE = generic_wimp
+DDCR_limits : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+DDCR_limits : DDCR_limits.f
+DDCR_limits : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o DDCR_limits DDCR_limits.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+DD_example : DS_MODULE = generic_wimp
+DD_example : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+DD_example : DD_example.f
+DD_example : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o DD_example DD_example.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+generic_wimp_oh2 : DS_MODULE = generic_wimp
+generic_wimp_oh2 : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+generic_wimp_oh2 : generic_wimp_oh2.f
+generic_wimp_oh2 : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o generic_wimp_oh2 generic_wimp_oh2.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+generic_wimp_oh2_threshold : DS_MODULE = generic_wimp
+generic_wimp_oh2_threshold : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+generic_wimp_oh2_threshold : generic_wimp_oh2.f user_replaceables/dsanwx.f
+generic_wimp_oh2_threshold : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o generic_wimp_oh2_threshold generic_wimp_oh2.f user_replaceables/dsanwx.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+wimpyields : DS_MODULE = generic_wimp
+wimpyields : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+wimpyields : wimpyields.f
+wimpyields : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o wimpyields wimpyields.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+caprates : DS_MODULE = generic_wimp
+caprates : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+caprates : caprates.f
+caprates : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o caprates caprates.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+caprates_ff : DS_MODULE = generic_wimp
+caprates_ff : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+caprates_ff : caprates_ff.f
+caprates_ff : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o caprates_ff caprates_ff.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+ucmh_test : DS_MODULE = generic_wimp
+ucmh_test : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+ucmh_test : ucmh_test.f
+ucmh_test : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o ucmh_test ucmh_test.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+# Note that in this example we also link to healpix and cfitsio as it is
+# needed by the line of sight integration. However, we actually don't have to
+# link to a particle physics module as we actually don't need it at all here.
+
+DMhalo_los : DMhalo_los.f
+DMhalo_los : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_core_user.a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) -L$(LIB) -o DMhalo_los DMhalo_los.f \
+	libds_tmp.a -lhealpix -lcfitsio
+	rm -f libds_tmp.a
+
+# The below commented out code gives the same result as above, but linking to
+# the generic_wimp module (but actually not using it).
+#
+#DMhalo_los : DS_MODULE = generic_wimp
+#DMhalo_los : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+#DMhalo_los : DMhalo_los.f
+#DMhalo_los : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+#	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+#	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o DMhalo_los DMhalo_los.f \
+	libds_tmp.a -lhealpix -lcfitsio
+#	rm -f libds_tmp.a
+
+
+DMhalo_bypass : DS_MODULE = generic_wimp
+DMhalo_bypass : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+DMhalo_bypass : DMhalo_bypass.f
+DMhalo_bypass : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o DMhalo_bypass DMhalo_bypass.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+DMhalo_new : DS_MODULE = generic_wimp
+DMhalo_new : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+DMhalo_new : DMhalo_new.f
+DMhalo_new : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o DMhalo_new DMhalo_new.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+DMhalo_predef : DS_MODULE = generic_wimp
+DMhalo_predef : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+DMhalo_predef : DMhalo_predef.f
+DMhalo_predef : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o DMhalo_predef DMhalo_predef.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+DMhalo_table : DS_MODULE = generic_wimp
+DMhalo_table : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+DMhalo_table : DMhalo_table.f
+DMhalo_table : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o DMhalo_table DMhalo_table.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+DMhalo_bypass_prep : DS_MODULE = generic_wimp
+DMhalo_bypass_prep : INC_MODULE = -I$(DS_INSTALL)/src_models/generic_wimp/include
+DMhalo_bypass_prep : DMhalo_bypass_prep.f
+DMhalo_bypass_prep : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o DMhalo_bypass_prep DMhalo_bypass_prep.f \
+	libds_tmp.a
+	rm -f libds_tmp.a
+
+ScalarSinglet_RD : DS_MODULE = silveira_zee
+ScalarSinglet_RD : INC_MODULE = -I$(DS_INSTALL)/src_models/silveira_zee/include
+ScalarSinglet_RD : ScalarSinglet_RD.f
+ScalarSinglet_RD : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o ScalarSinglet_RD ScalarSinglet_RD.f \
+	libds_tmp.a 
+	rm -f libds_tmp.a
+
+vdSIDM_RD : DS_MODULE = vdSIDM
+vdSIDM_RD : INC_MODULE = -I$(DS_INSTALL)/src_models/vdSIDM/include
+vdSIDM_RD : vdSIDM_RD.f
+vdSIDM_RD : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
+	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) -o vdSIDM_RD vdSIDM_RD.f \
+	libds_tmp.a 
+	rm -f libds_tmp.a
+
+
+.NOTPARALLEL: 

@@ -1,0 +1,38 @@
+\section{Introduction\label{INTRO}}
+
+      ISAJET is a Monte Carlo program which simulates $pp$, 
+$\bar pp$ and $e^+e^-$ interactions at high energies. 
+ISAJET is based on
+perturbative QCD plus phenomenological models for parton and beam jet
+fragmentation. Events are generated in four distinct steps:
+\begin{itemize}
+\item A primary hard scattering is generated according to the
+appropriate QCD cross section.
+\item QCD radiative corrections are added for both the initial and the
+final state.
+\item Partons are fragmented into hadrons independently, and particles
+with lifetimes less than about $10^{-12}$ seconds are decayed.
+\item Beam jets are added assuming that these are identical to a
+minimum bias event at the remaining energy.
+\end{itemize}
+
+      ISAJET incorporates ISASUSY, which evaluates branching ratios for
+the minimal supersymmetric extension of the standard model. H.~Baer and
+X.~Tata are coauthors of this package, and they have done the original
+calculations with various collaborators. See the ISASUSY documentation
+in the patch Section~\ref{SUSY}.
+
+      ISAJET is now mainly developed and tested on Linux and Mac OSX
+with the \verb|gfortran| compiler. Earlier versions have run on various
+Unix systems, IBM VM/CMS, DEC VMS, and CDC 7600. ISAJET is written
+mainly in ANSI standard FORTRAN 77, but it does contain some extensions
+except in the ANSI version. The code is maintained with a combination of
+RCS, the Revision Control System, \verb|cpp|, the C Preprocessor; see
+Section~\ref{INSTALL} for details. A tar file is available from
+\begin{verbatim}
+http://www.nhn.ou.edu/~isajet
+\end{verbatim}
+
+      ISAPLT contains the skeleton of an HBOOK histogramming job, a
+trivial calorimeter simulation, and a jet-finding algorithm. These are
+provided for convenience only and are not supported.

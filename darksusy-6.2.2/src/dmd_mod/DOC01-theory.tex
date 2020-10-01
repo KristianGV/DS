@@ -1,0 +1,140 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dark matter distributions -- theory}
+\label{sec:halo}
+
+All the dark matter detection rates depend in one way or another on
+the properties of the Milky Way dark matter halo. We will here outline
+the halo model that by default is included with \ds.
+
+Observationally, the distribution of DM on scales relevant for DM searches is only poorly constrained. 
+The situation is somewhat improved when instead referring to the results of large $N$-body simulations 
+of gravitational clustering, which consistently find that DM halos {\it on average} are well described
+by Einasto \cite{1965TrAlm...5...87E} or Navarro-Frenk-White profiles \cite{Navarro:1995iw}, with
+the halo mass being essentially the only free parameter (after taking into account that the halo 
+concentration strongly correlates with the halo mass \cite{Maccio:2008pcd}). On the other hand, there is 
+a considerable halo-to-halo scatter associated to these findings, so that it remains challenging
+to make concrete predictions for individual objects -- in particular if they are located in 
+cosmologically somewhat `special' environments like in the case of the Milky Way and its
+embedding in the Local Group. Even worse,
+baryonic physics can have a large impact on the DM profiles, especially on their inner parts 
+most relevant for indirect detection, and even though hydrodynamic simulations taking into
+account such effect have made tremendous progress in recent 
+years \cite{Schaye:2014tpa, Schaller:2014uwa, Wang:2015jpa, Tollet:2015gqa}, there is 
+still a significant uncertainty related to the modelling of the underlying processes.
+In light of this situation, there is a considerable degree of freedom concerning halo models
+and the DM density profiles, and a code computing observables related to DM should be
+able to fully explore this freedom. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Rescaling of the WIMP density}
+\label{sec:rescale}
+
+While it is natural to assume that the DM particles described by a given
+particle module implemented in \ds\ make up most of the DM 
+in our galaxy, they may also just constitute a sub-dominant part
+of a multi-component realization of DM. What is more, there might 
+be both a thermal contribution to the cosmological DM abundance
+-- as computed by the relic density routines in \ds -- and a non-thermal
+contribution, e.g.~via out-of-equilibrium production or via the decay
+of heavier particles.
+%
+In this context, it is important to remember that DM detection rates
+only depend on the {\it local} DM density {\it of that particular DM candidate}. 
+For the case of direct detection, e.g.,
+the rate scales linearly with the local density {\it at earth}, while
+for indirect detection it scales linearly or quadratically with the
+local DM density {\it at the point of of decay or or annihilation}, respectively.
+
+In previous versions of the code, the ratio of thermal relic abundance returned
+by \code{dsrdomega} and observed cosmological DM abundance
+was used to internally rescale the results from rate calculations. For the reasons
+given above, this is not fully satisfactory and in any case obscures the origin
+of this rescaling. Starting from \ds\ 6, this is therefore no longer the case. 
+All rate routines now assume that the local DM density equals the local density
+in the particular DM candidate realized in the particle module -- 
+unless they explicitly take the local DM density as an input parameter 
+(which in that case refers to the local density in the particles described by the
+respective \ds\ module). An example for such an exception are the 
+neutrino telescope routines, because the combined effect of DM capture and
+annihilation makes the dependence on the local DM density more complicated.
+In all other cases, e.g.~if DM rate routines just take a halo label as input,
+the user has to make sure to rescale the rates, as described above, {\it by hand}
+to reflect possible sub-dominant DM populations.
+
+
+
+
+\section{Implementation in \ds}
+
+The implementation of dark matter halo models and related quantities in the library 
+\code{ds\_core} follows a new and highly flexible scheme, compared to earlier versions of the code,
+avoiding pre-defined hardcoded functions. 
+For convenience a few pre-defined options are provided, however these can be either complemented by other profiles
+eventually needed, or the entire sample configuration can be simply replaced linking to a user-defined setup 
+- in both cases without editing routines provided in this release of the code. 
+A further improvement compared to previous versions of \ds\ is that different dark matter density profiles, possibly referring to 
+different dark matter detection targets, can be defined at the same time: E.g., one can easily
+switch back and forth from a computation of the local positron flux induced by dark matter annihilations or decays in the
+Milky Way halo to the computation of the gamma-ray flux from an external halo or a Milky Way satellite within the same   
+particle physics scenario. Finally the present implementation simplifies the task of keeping track of consistent definitions 
+for related quantities, such as, e.g., a proper connection between the dark matter profile and the source function 
+for a given dark matter yield (see Chapter \ref{ch:src/an_yield}), or calling within an axisymmetric coordinate system a spherically symmetric function 
+(and preventing the opposite). 
+
+At the basis of the implementation, there is the subroutine \code{dsdmsdriver} routine which acts as an interface to quantities related to
+the dark matter density profiles. This routine must contain a complete set of instructions on how to retrieve the different observables: E.g.~it checks the scaling of the various DM source functions (Chapter \ref{ch:src/an_yield}
+with the DM density $\rho_\chi$ -- namely $\rho$ for decaying dark matter and $\rho^2$
+for dark matter pair annihilations (in case the effect of substructures is neglected) -- and passes this information
+to the routines for propagations of charged cosmic rays in the Galaxy (Chapter \ref{ch:src/cr_axi}), 
+%at a given position in the Galaxy, and 
+assuming that such source function is axisymmetric; line of sight integration routines (needed, e.g. for the computation of gamma-ray fluxes, see Chapter \ref{ch:src/cr_gamma})
+call this same subroutine, but may assume instead that the corresponding source function is spherically symmetric. The routine 
+\code{dsdmsdriver} must contain the specification on whether the dark matter density profile is spherically symmetric 
+or axisymmetric, and in the first case provide a consistent numerical output to both calls, in the latter return an error to the
+second call (since a spherically symmetric profile was expected). It may also be useful to use the \code{dsdmsdriver} routine for 
+initialization calls, for instance to set parameters for a given parametric density profile, and test calls, for instance to print
+which dark matter profile is currently active within a set of available profiles. The input/output structure of the routine is rather
+general, with the first entry being however fixed to an integer flag specifying the action of the routine; currently 
+available values and relative action are implicitly defined (through integer variables 
+%which are hopefully self-explanatory, 
+such as `\code{idmddensph}' referring to the spherical dark matter density profile) in an include file and are global parameter. 
+Such set of definitions should not be changed, but can be enlarged in case further profile-related quantities would be needed.
+
+While a specific \code{dsdmsdriver} routine should match the user needs in the problem at hand, the present release provides
+a sample version, illustrating the flexibility of the setup. In particular the version included in the library \code{ds\_core} assumes that the dark
+matter density profile is spherically symmetric and does not include dark matter substructure; it allows to choose as dark matter 
+profile one among three parametric profiles, namely the Einasto \cite{1965TrAlm...5...87E}, the Navarro-Frenk-White \cite{Navarro:1995iw}
+and the Burkert \cite{XXX} profiles, or a profile interpolated from a table of values of the dark matter density at a given radius. 
+Besides providing parameters as needed in case of parametric profiles, to complete the initialization of a profile one should also specify: 
+{\sl i)} an inner truncation radius, namely some $r_{ic}$ fixing $\rho(r)=\rho(r_{ic})$ for any $r<r_{ic}$ (the choice has an impact on predictions
+for dark matter rates only for very singular dark matter profiles; choosing a value which is not too small allows for a faster numerical 
+convergence of some rate computations); {\sl ii)} an outer truncation radius, namely some $r_{oc}$ beyond which the profile is assumed to 
+be zero; {\sl iii)} the distance from the observer of the center of the profile, corresponding to the Sun galactocentric distance only in case 
+the profile refers to the Milky Way; {\sl iv)} whether it is a profile that refers to the Milky Way and hence for which rates that are Milky Way 
+specific, such as the local contribution to antimatter fluxes, can be computed;  {\sl v)} whether it is a profile to be saved in a halo profile
+database for later use. 
+
+Regarding this last point, the code implements a procedure of associating the set of entries fully specifying a halo 
+profile (namely the choice of the parametric profile, the corresponding parameters and and the entries {\sl i)}--{\sl v)} above) to a given {\it input 
+label}, and this can be reloaded at any time when needed; in particular all indirect detection flux routines have the label among their 
+input parameters, so that in case of several dark matter detection targets or several profiles for the same targets it becomes unambiguous 
+which profile is being considered. On the other hand it may be the case that the user needs to loop over many different profiles without 
+keeping track of all of them for later reuse (e.g., in a scan over parameter space in the estimate of line of sight integrals towards a 
+dwarf satellite); in such case the profile can be defined as ``temporary", with only the latest set temporary profile available at any given time.
+For halos that are stored in the halo profile database, one can save and/or read from disc tabulated quantities, such as, e.g., the Green 
+function needed for the computation of the local positron flux, for temporary profiles tables can (or in some cases need) to be computed 
+running the code but are overwritten any time the temporary profile is changed. While in the previous releases of \ds,  halo parameters 
+were typically set via common blocks to be included in the main file, the default \code{dsdmsdriver.f} implements a procedure in which,
+when initializing a given halo profile, parameters are given as an input in association with a corresponding parameter label, and profile 
+settings are specified as character strings appearing within the profile label. 
+
+Along with the default \code{dsdmsdriver.f} routine, which is unfortunately rather involved since it 
+allows for several different options, in the present release we provide example main files which illustrate 
+a few of the possible user needs.
+Those are described in the `quick start' part of this manual, see Section \ref{sec:aux_ex}, and cover 
+examples of how to use pre-defined halo profiles, read in tabulated profiles as well as how to create
+completely new ones.
+
+ 

@@ -1,0 +1,250 @@
+#include "PILOT.inc"
+        REAL FUNCTION PITLTR(P2,G1,G2,G3,CTHW)
+C-----------------------------------------------------------------------
+C          PITLTR: off-diagonal t squark self-energy
+C     Taken from Damien M. Pierce, Jonathan A. Bagger, Konstantin T. Matchev,
+C     Ren-jie Zhang, Nucl.Phys.B491:3-67,1997, hep-ph/9606211
+C          P2 = 4-momentum squared
+C          CTHW = Cos(theta_W) in DR bar scheme
+C-----------------------------------------------------------------------
+#ifdef IMPNONE_X
+      IMPLICIT NONE
+#endif
+#include "sssm.inc"
+#include "sspar.inc"
+#include "sugmg.inc"
+#include "ssinf.inc"
+      COMPLEX*16 SSB0,SSG,SSF
+      DOUBLE PRECISION SSA0
+      COMPLEX TEMP,N(4,4),AC0TTR(4),AC0TTL(4),BC0TTR(4),BC0TTL(4)
+     $,FTTLR(4),GTTLR(4)
+      REAL P2,P,GG,GGP,CTHW,CHWW2,BE,FT,FB,G1,G2,G3
+     $,MH0(4),MHP(2),LHTLTI(4,2),LHTLBI(2,2),FBTLR(4),VMAT(2,2)
+     $,UMAT(2,2),GBTLR(4),AP0TTR(4),AP0TTL(4),BP0TTR(4),BP0TTL(4)
+     $,APPBTL(2),APPBTR(2),BPPBTL(2),BPPBTR(2)
+     $,ACPBTL(2),ACPBTR(2),BCPBTL(2),BCPBTR(2)
+     $,LSTLTL(2),LSTLTR(2),LHTLTL(2),LHTLTR(2),LSTLTI(2,2)
+     $,LHTLBL(2),LHTLBR(2)
+     $,LHTRTI(4,2),LHTRBI(2,2),LSTRTR(2),LHTRTR(2),LSTRTI(2,2)
+     $,LHTRBR(2),LHTRBL(2)
+      REAL COST,SINT,COST2,SINT2,COSB,SINB,COSB2,SINB2
+     $,COSL,SINL,COSL2,SINL2,THX,THY
+      REAL SINA2,COSA2,SINBE2,COSBE2,I3UL,YUR,YUL
+     $,EUL,EUR,SWW2,GUL,GUR,SINA,COSA,SINBE,COSBE
+      INTEGER I,II,THIW1,THIW2
+      COMPLEX IMAG
+      PARAMETER (IMAG=(0.,1.))
+      REAL PI,SR2
+      PI=4*ATAN(1.)
+      SR2=SQRT(2.)
+      P=SQRT(P2)
+      CHWW2=CTHW**2
+      COST=COS(THETAT)
+      SINT=SIN(THETAT)
+      COSB=COS(THETAB)
+      SINB=SIN(THETAB)
+      COSL=COS(THETAL)
+      SINL=SIN(THETAL)
+      COST2=COST**2
+      SINT2=1-COST2
+      COSB2=COSB**2
+      SINB2=1-COSB2
+      COSL2=COSL**2
+      SINL2=1-COSL2
+      GG=G2
+      GGP=SQRT(3./5.)*G1
+      BE=ATAN(VUQ/VDQ)
+      FT=MTQ/VUQ
+      FB=MBQ/VDQ
+      SINA2=SIN(ALFAH)**2
+      COSA2=COS(ALFAH)**2
+      SINBE2=SIN(BE)**2
+      COSBE2=COS(BE)**2
+      SINA=SIN(ALFAH)
+      COSA=COS(ALFAH)
+      SINBE=SIN(BE)
+      COSBE=COS(BE)
+      MH0(1)=MSS(30)
+      MH0(2)=MSS(29)
+      MH0(3)=AMZ
+      MH0(4)=MSS(31)
+      MHP(2)=AMW
+      MHP(1)=MSS(32)
+      I3UL=1./2.
+      YUR=-4./3.
+      YUL=1./3.
+      EUL=2./3.
+      EUR=-2./3.
+      SWW2=1-(AMW/AMZ)**2
+      EUR=-2./3.
+      GUR=-EUR*SWW2
+      GUL=I3UL-EUL*SWW2
+      THX=SIGN(1.,TAN(GAMMAL))
+      THY=SIGN(1.,TAN(GAMMAR))
+      IF (SIGN(1.,AMW1SS).EQ.1.) THEN
+         THIW1=0
+      ELSE
+         THIW1=1
+      END IF
+      IF (SIGN(1.,AMW2SS).EQ.1.) THEN
+         THIW2=0
+      ELSE
+         THIW2=1
+      END IF
+      UMAT(1,1)=-(-1)**THIW1*SIN(GAMMAR)
+      UMAT(1,2)=(-1)**THIW1*COS(GAMMAR)
+      UMAT(2,1)=-(-1)**THIW2*THY*COS(GAMMAR)
+      UMAT(2,2)=-(-1)**THIW2*THY*SIN(GAMMAR)
+      VMAT(1,1)=-SIN(GAMMAL)
+      VMAT(1,2)=COS(GAMMAL)
+      VMAT(2,1)=-THX*COS(GAMMAL)
+      VMAT(2,2)=-THX*SIN(GAMMAL)
+      DO II=1,4
+        IF (SIGN(1.,AMZISS(II)).EQ.1.) THEN
+          I=0
+        ELSE
+          I=1
+        END IF
+        N(II,1)=-IMAG**I*ZMIXSS(4,II)
+        N(II,2)=-IMAG**I*ZMIXSS(3,II)
+        N(II,3)=IMAG**I*ZMIXSS(2,II)
+        N(II,4)=IMAG**I*ZMIXSS(1,II)
+      ENDDO
+      DO I=1,4
+        AP0TTR(I)=0.
+        AP0TTL(I)=0.
+        BP0TTR(I)=0.
+        BP0TTL(I)=0.
+        AC0TTR(I)=0.
+        AC0TTL(I)=0.
+        BC0TTR(I)=0.
+        BC0TTL(I)=0.
+      ENDDO
+      AP0TTR(1)=GGP/SR2*YUR
+      BP0TTL(1)=GGP/SR2*YUL
+      BP0TTL(2)=SR2*GG*I3UL
+      AP0TTL(4)=FT
+      BP0TTR(4)=FT
+      DO I=1,4
+        DO II=1,4
+          AC0TTR(I)=AC0TTR(I)+CONJG(N(I,II))*AP0TTR(II)
+          AC0TTL(I)=AC0TTL(I)+CONJG(N(I,II))*AP0TTL(II)
+          BC0TTR(I)=BC0TTR(I)+N(I,II)*BC0TTR(II)
+          BC0TTL(I)=BC0TTL(I)+N(I,II)*BC0TTL(II)
+        ENDDO
+      ENDDO
+      DO I=1,4
+        FTTLR(I)=CONJG(AC0TTL(I))*AC0TTR(I)
+     $+CONJG(BC0TTL(I))*BC0TTR(I)
+        GTTLR(I)=CONJG(BC0TTL(I))*AC0TTR(I)
+     $+CONJG(AC0TTL(I))*BC0TTR(I)
+      ENDDO
+      DO I=1,2
+        APPBTL(I)=0.
+        APPBTR(I)=0.
+        BPPBTL(I)=0.
+        BPPBTR(I)=0.
+        ACPBTL(I)=0.
+        ACPBTR(I)=0.
+        BCPBTL(I)=0.
+        BCPBTR(I)=0.
+      ENDDO
+      APPBTL(1)=GG
+      BPPBTL(2)=-FB
+      APPBTR(2)=-FT
+      DO I=1,2
+        DO II=1,2
+          ACPBTL(I)=ACPBTL(I)+VMAT(I,II)*APPBTL(II)
+          ACPBTR(I)=ACPBTR(I)+VMAT(I,II)*APPBTR(II)
+          BCPBTL(I)=BCPBTL(I)+UMAT(I,II)*BPPBTL(II)
+          BCPBTR(I)=BCPBTR(I)+UMAT(I,II)*BPPBTR(II)
+        ENDDO
+      ENDDO
+      DO I=1,2
+        FBTLR(I)=ACPBTL(I)*ACPBTR(I)+BCPBTL(I)*BCPBTR(I)
+        GBTLR(I)=BCPBTL(I)*ACPBTR(I)+ACPBTL(I)*BCPBTR(I)
+      ENDDO
+      LSTLTL(1)=GG*AMZ/CTHW*GUL*COSBE
+      LSTLTR(1)=-FT/SR2*TWOM1
+      LSTLTL(2)=-GG*AMZ/CTHW*GUL*SINBE+SR2*FT*MTQ
+      LSTLTR(2)=-FT/SR2*AAT
+C     First index is for Higgs sector, second is for sfermion
+      LSTLTI(1,1)=LSTLTL(1)*COST-LSTLTR(1)*SINT
+      LSTLTI(1,2)=LSTLTL(1)*SINT+LSTLTR(1)*COST
+      LSTLTI(2,1)=LSTLTL(2)*COST-LSTLTR(2)*SINT
+      LSTLTI(2,2)=LSTLTL(2)*SINT+LSTLTR(2)*COST
+      LHTLTI(1,1)=COSA*LSTLTI(1,1)-SINA*LSTLTI(2,1)
+      LHTLTI(1,2)=COSA*LSTLTI(1,2)-SINA*LSTLTI(2,2)
+      LHTLTI(2,1)=SINA*LSTLTI(1,1)+COSA*LSTLTI(2,1)
+      LHTLTI(2,2)=SINA*LSTLTI(1,2)+COSA*LSTLTI(2,2)
+      LHTLTL(1)=0.
+      LHTLTR(1)=FT/SR2*(-TWOM1*COSBE-AAT*SINBE)
+      LHTLTL(2)=0.
+      LHTLTR(2)=-FT/SR2*(-TWOM1*SINBE+AAT*COSBE)
+      LHTLTI(3,1)=LHTLTL(1)*COST-LHTLTR(1)*SINT
+      LHTLTI(3,2)=LHTLTL(1)*SINT+LHTLTR(1)*COST
+      LHTLTI(4,1)=LHTLTL(2)*COST-LHTLTR(2)*SINT
+      LHTLTI(4,2)=LHTLTL(2)*SINT+LHTLTR(2)*COST
+      LHTLBL(1)=-GG*AMW/SR2*(COSBE2-SINBE2)-FT*MTQ*SINBE
+     $+FB*MBQ*COSBE
+      LHTLBR(1)=FB*(-TWOM1*SINBE-AAB*COSBE)
+      LHTLBL(2)=GG*AMW/SR2*2.*COSBE*SINBE-FT*MTQ*COSBE
+     $-FB*MBQ*SINBE
+      LHTLBR(2)=FB*(-TWOM1*COSBE+AAB*SINBE)
+      LHTLBI(1,1)=LHTLBL(1)*COSB-LHTLBR(1)*SINB
+      LHTLBI(1,2)=LHTLBL(1)*SINB+LHTLBR(1)*COSB
+      LHTLBI(2,1)=LHTLBL(2)*COSB-LHTLBR(2)*SINB
+      LHTLBI(2,2)=LHTLBL(2)*SINB+LHTLBR(2)*COSB
+      LSTRTR(1)=GG*AMZ/CTHW*GUR*COSBE
+      LSTRTR(2)=-GG*AMZ/CTHW*GUR*SINBE+SR2*FT*MTQ
+      LSTRTI(1,1)=LSTLTR(1)*COST-LSTRTR(1)*SINT
+      LSTRTI(1,2)=LSTLTR(1)*SINT+LSTRTR(1)*COST
+      LSTRTI(2,1)=LSTLTR(2)*COST-LSTRTR(2)*SINT
+      LSTRTI(2,2)=LSTLTR(2)*SINT+LSTRTR(2)*COST
+      LHTRTI(1,1)=COSA*LSTRTI(1,1)-SINA*LSTRTI(2,1)
+      LHTRTI(1,2)=COSA*LSTRTI(1,2)-SINA*LSTRTI(2,2)
+      LHTRTI(2,1)=SINA*LSTRTI(1,1)+COSA*LSTRTI(2,1)
+      LHTRTI(2,2)=SINA*LSTRTI(1,2)+COSA*LSTRTI(2,2)
+      LHTRTR(1)=0.
+      LHTRTR(2)=0.
+      LHTRTI(3,1)=-LHTLTR(1)*COST-LHTRTR(1)*SINT
+      LHTRTI(3,2)=-LHTLTR(1)*SINT+LHTRTR(1)*COST
+      LHTRTI(4,1)=-LHTLTR(2)*COST-LHTRTR(2)*SINT
+      LHTRTI(4,2)=-LHTLTR(2)*SINT+LHTRTR(2)*COST
+      LHTRBR(1)=0.
+      LHTRBL(1)=-FT*(-TWOM1*COSBE-AAT*SINBE)
+      LHTRBR(2)=-FT*MBQ*COSBE-FB*MTQ*SINBE
+      LHTRBL(2)=FB*(-TWOM1*SINBE+AAT*COSBE)
+      LHTRBI(1,1)=LHTRBL(1)*COSB-LHTRBR(1)*SINB
+      LHTRBI(1,2)=LHTRBL(1)*SINB+LHTRBR(1)*COSB
+      LHTRBI(2,1)=LHTRBL(2)*COSB-LHTRBR(2)*SINB
+      LHTRBI(2,2)=LHTRBL(2)*SINB+LHTRBR(2)*COSB
+      TEMP=4.*G3**2/3.*(-4.*MSS(1)*SGNM3*MTQ*SSB0(P2,MSS(1),AMTP)
+     $-SINT*COST*(SSF(P,MSS(13),0.)-SSF(P,MSS(12),0.)
+     $-SSA0(MSS(13))+SSA0(MSS(12))))
+     $-FT/2.*3.*FT*2.*SINT*COST*(SSA0(MSS(13))-SSA0(MSS(12)))
+     $-GGP**2/4.*YUL*YUR*SINT*COST*(SSA0(MSS(13))-SSA0(MSS(12)))
+     $-(2./3.)**2*4.*PI/137.036*SINT*COST*(SSF(P,MSS(13),0.)
+     $-SSF(P,MSS(12),0.))+GG**2/CHWW2*GUL*GUR*SINT*COST
+     $*(SSF(P,MSS(13),AMZ)-SSF(P,MSS(12),AMZ))
+      DO I=1,4
+          TEMP=TEMP+LHTLTI(I,1)*LHTRTI(I,1)
+     $*SSB0(P2,MH0(I),MSS(13))+LHTLTI(I,2)*LHTRTI(I,2)
+     $*SSB0(P2,MH0(I),MSS(12))
+      ENDDO
+      DO I=1,2
+        DO II=1,2
+          TEMP=TEMP+LHTLBI(I,II)*LHTRBI(I,II)*SSB0(P2,MSS(9+II),MHP(I))
+        ENDDO
+      ENDDO
+      DO I=1,4
+        TEMP=TEMP+FTTLR(I)*SSG(P,ABS(MSS(22+I)),AMTP)
+     $-2.*GTTLR(I)*ABS(MSS(22+I))*MTQ*SSB0(P2,ABS(MSS(22+I)),AMTP)
+      ENDDO
+      DO I=1,2
+        TEMP=TEMP+FBTLR(I)*SSG(P,ABS(MSS(26+I)),AMBT)
+     $-2.*GBTLR(I)*ABS(MSS(26+I))*MBQ*SSB0(P2,ABS(MSS(26+I)),AMBT)
+      ENDDO
+      PITLTR=REAL(TEMP)/16./PI**2
+      RETURN
+      END

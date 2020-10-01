@@ -1,0 +1,75 @@
+# Makefile for src/ucmh directory
+# Author: Joakim Edsjo, edsjo@fysik.su.se
+# Changed by Paolo Gondolo (2011), Joakim Edsjo (2013, 2014, 2015, 2016, 2017)
+# This file is automatically created by makemf.pl.
+
+# Define fortran compiler and options (set when ./configure is run
+# in the DarkSUSY root directory).
+FF=@F77@
+FOPT=@FOPT@
+
+FC=$(FF)
+FFLAGS=$(FOPT) -c $(DINC)
+
+CC=@CC@
+COPT=@CFLAGS@
+CCFLAGS=$(COPT) -c $(DINC)
+
+# Dependencies and libraries
+INC=../include ../../contrib/include
+DINC=-I../include -I../../contrib/include
+DOBJ=../../tmp/build-src
+
+INC_DEP = dslocal.h dsmpconst.h dsucmh.h
+
+vpath %.h $(INC)
+
+SRC = dsageatz.f dshmucmhrho.f dshmucmhset.f dshmucmhsetprofile.f \
+dspbh_init.f dspbh_limits.f dsucmh_alphaintegrand.f dsucmh_aontsq.f \
+dsucmh_beta_generalised.f dsucmh_beta_powerlaw_running.f \
+dsucmh_beta_powerlaw_step.f dsucmh_betaf16.f dsucmh_betaf17.f \
+dsucmh_betah15.f dsucmh_betah16.f dsucmh_betaintegrand.f \
+dsucmh_deltahsq.f dsucmh_dmin.f dsucmh_f_cs.f dsucmh_f_generalised.f \
+dsucmh_f_ng_feeder.f dsucmh_f_ng_hierarchical.f dsucmh_f_powerlaw.f \
+dsucmh_f_powerlaw_running.f dsucmh_f_powerlaw_step.f dsucmh_flux.f \
+dsucmh_fmax_gamma_diffuse.f dsucmh_fmax_gamma_exgalptsrc.f \
+dsucmh_fmax_gamma_galptsrc.f dsucmh_fmax_reion.f dsucmh_init_profile.f \
+dsucmh_initdens_ptrans.f dsucmh_jpntsrc.f dsucmh_localmass.f \
+dsucmh_mass_cs.f dsucmh_mass_ptrans.f dsucmh_mathcalT.f dsucmh_midinf.f \
+dsucmh_midpnt.f dsucmh_mvar_generalised.f dsucmh_mvar_powerlaw_running.f \
+dsucmh_mvar_powerlaw_step.f dsucmh_numdens_ptrans.f \
+dsucmh_numerical_dens.f dsucmh_qromo.f dsucmh_transfunc.f \
+dsucmh_transfunc_rad.f
+
+OBJ1 = $(patsubst %.f,$(DOBJ)/%.o,$(SRC))
+
+OBJ2 = $(patsubst %.F,$(DOBJ)/%.o,$(OBJ1))
+
+OBJ3 = $(patsubst %.f90,$(DOBJ)/%.o,$(OBJ2))
+
+OBJ4 = $(patsubst %.F90,$(DOBJ)/%.o,$(OBJ3))
+
+OBJ = $(patsubst %.c,$(DOBJ)/%.o,$(OBJ4))
+
+all : $(OBJ)  mods
+
+$(DOBJ)/%.o : %.F $(INC_DEP) 
+	$(FC) $(FFLAGS) $< -o $@
+
+$(DOBJ)/%.o : %.f $(INC_DEP) 
+	$(FC) $(FFLAGS) $< -o $@
+
+$(DOBJ)/%.o : %.F90 $(INC_DEP) 
+	$(FC) $(FFLAGS) $< -o $@
+
+$(DOBJ)/%.o : %.f90 $(INC_DEP) 
+	$(FC) $(FFLAGS) $< -o $@
+
+$(DOBJ)/%.o : %.c $(INC_DEP) 
+	$(CC) $(CCFLAGS) $< -o $@
+
+
+mods : 
+	if [ -f *.mod ]; then\
+		cp -p *.mod ../include/ ;\
+	fi

@@ -1,0 +1,194 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Quick start guide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Installation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+To get started, first download \ds\ from {\tt www.darksusy.org} and unpack the tar file. To compile, run the
+following in the folder where you unpacked it
+
+\begin{verbatim}
+./configure
+make
+\end{verbatim}
+
+You will then have compiled the main \ds\  library, as well as all supplied particle physics 
+modules. To test whether the installation was successful, type
+
+\begin{verbatim}
+cd examples/test
+./dstest
+\end{verbatim}
+
+The program will take up to a minute to run and reports if there are any problems.\footnote{
+Strictly speaking, this is only a test of the default particle physics module, \code{mssm}.
+To see what happens behind the scenes, you can run in verbose mode by 
+replacing `\code{testlevel/2/}' with  `\code{testlevel/1/}' at the beginning of dstest.f. Then type \code{make} and run \code{dstest} again.
+The program is also extensively commented, and can be used to learn about which \ds\ routines to call.
+}
+
+At the end, you should get an output of this form
+
+\begin{verbatim}
+ The DarkSUSY test program ran successfully
+ Total time needed (in seconds):    54.858052000000001     
+ Total number of errors in dstest:            0
+\end{verbatim}
+
+If you get something else then 0 errors, you should check the output more carefully. The way the test program runs is that for each observable it compares the result with a pre-calculated value. If the difference is larger than 0.3\% an error is issued. You normally would not expect larger differences than this due to just numerical errors.
+
+\bigskip
+Even if you now have \ds\ running, it is more fun to start doing some calculations on your own. Possible next steps are explained in 
+the next Sections.
+
+\bigskip
+\centerline{\bfseries Happy running!}
+
+\subsection{Options for install}
+%%%%%%%%%%
+Even if the above install usually works, sometimes you want to use special options, like a specific compiler. Most options are specified at the time of configure and then propagated through to the \ds\ makefiles. Examples of options are
+\begin{itemize}
+\item To specify that you want to compile with \code{gfortran}, you can e.g.\ run \code{configure} with the following options (on one line)
+\begin{verbatim}
+./configure CC=gcc CFLAGS=-g CXX=g++ CXXFLAGS=-g FC=gfortran
+FCFLAGS="-O -ffixed-line-length-none -fopenmp"
+\end{verbatim}
+\end{itemize}
+For your convenience, this particular choice is a available as a script \code{conf.gfortran} that can be invoked instead of the string above.
+
+
+\subsection{System requirements}
+%%%%%%%%%%
+
+\ds\ should run on most Linux/Unix systems including Mac OS X. You need to have a Fortran, C and C++ compiler available and the typical developer tools (like \code{make} and \code{ranlib}). You also need to have \code{perl} installed. If you are creating new particle physics modules and want to use the tools available to automatically create makefiles for you, you also need to have \code{autoconf} installed.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example programs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\ds\ is primarily a library that is intended to be used with your own main programs. However, to get you started, we supply a few sample programs in the \code{/examples} directory. These can be used as they are, but they are also extensively commented to help you understand which routines you are supposed to call for the most typical calculations. The most instructive general-purpose programs in \code{/examples}, apart from the already 
+mentioned \code{/test/dstest}, are
+
+\begin{description}
+
+\item{\codeb{dsmain\_wimp.F}} An example main program to calculate various DM observables. It can be the starting point if you want to write 
+your own programs (see below).
+%(make a copy of it, add the build rules to \code{examples/makefile.in} and then configure again). 
+%\tb{I would definitley not encourage users to change {\it anything} in the DS install directory. Especially makefile.in's ...}
+Note that you can run {\it the same code} with different particle modules that provide a WIMP DM candidate (the default is the \code{mssm} module);
+simply do\\
+{\code{./$>$ make -B dsmain\_wimp DS\_MODULE=$\langle$MY\_MODULE$\rangle$}}\\
+ and then \code{./dsmain\_wimp} in the \code{/examples} directory.
+Choosing \code{$\langle$MY\_MODULE$\rangle$=generic\_wimp}, e.g., will produce results for a generic WIMP DM candidate 
+(see Chapter \ref{ch:genWIMP} for details on the implementation).
+
+\item{\codeb{dsmain\_decay.f}} A main program that calculates the same observables, where relevant, as  \code{dsmain\_wimp.F} -- but for a
+generic decaying DM candidate (see Chapter \ref{ch:decay} for details on the implementation) rather than a WIMP.
+\end{description}
+
+
+\subsection{Auxiliary example programs}
+\label{sec:aux_ex}
+
+In the folder \code{examples/aux/} we list a set of auxiliary example programs that illustrate
+more specific usage of \ds. These example programs are typically set up for specific particle physics 
+modules (often \code{generic\_wimp})  but, as explained below in more detail, it is straightforward to use them 
+for other particle physics modules as well.
+%
+Some of the currently available auxiliary example programs are
+%\comment{automatic list generation would be nice, but IMHO not necessary. Also: once the list becomes
+% too long, it should not be part of the `quick start' guide anymore...}
+
+\begin{description}
+\item[\code{flxconv.f}] This program can be used to convert between different fluxes from the Sun and the Earth. It can be use to convert a limit on a muon flux to a limit on the scattering cross section, or to a limit on the annihilation rate (or vice versa).
+\item[\code{DMhalo\_predef.f}] This program illustrates how to use the default version of \code{dsdmsdriver} 
+(provided with the \ds\ release) to load additional profiles into the currently active halo database by using its 
+pre-defined halo parameterizations.
+\item[\code{DMhalo\_table.f}] This program demonstrates how to load a halo profile from a table in an 
+accompanying data file.
+\item[\code{DMhalo\_new.f}] This program demonstrates how to correctly extend \code{dsdmsdriver} when adding a new profile parameterization in order to consistently make it available to all \ds\ routines that rely on the 
+DM density (in this concrete example, we add the spherical Zhao profile \cite{Zhao:1995cp}, 
+aka $\alpha\beta\gamma$ profile).
+\item[\code{DMhalo\_bypass.f}] Here, we  demonstrate a work-around of completely bypassing the default \code{dsdmsdriver} setup when switching to a user-provided new DM density profile. While easier to 
+implement than \code{DMhalo\_new.f}, such an approach has the significant drawback that the advanced \ds\ 
+system of automatic tabulation of quantities related to DM rates cannot easily be exploited.
+\item[\code{generic\_wimp\_oh2.f}] This program calculates the annihilation cross section needed to produce the correct relic density (as measured by Planck within errors). It does this for a range of WIMP masses so that you can plot e.g. the required annihilation cross section versus mass. It also let's you incorporate threshold effects (either as a hard cut, default), or with a more sophisticated sub-threshold treatment, that also illustrates the use of replaceable functions.
+\item[\code{ScalarSinglet\_RD.f}] This program calculates the couplings required to get the correct relic density in the Silveira-Zee (scalar singlet) model.
+\item[\code{ucmh\_test.f}] This program is an example of how the ultra-compact mini halo routines can be used.
+\item[\code{wimpyields.f}] This is a simple program that sets up a generic WIMP with a given mass that annihilates to a given channel and then calculates the yields of different particles from the hadronization/decay of the annihilation products.
+\item[\code{caprates.f}] This is a simple program that scans a range of WIMP masses and calculates the capture rates in the Sun via spin-independent and spin-dependent scattering. 
+\item[\code{caprates\_ff.f}] This program is similar to \code{caprates.f}, but a bit more advanced as it performs the capture rate calculation with the most complete numerical setup and also calculates the capture rate on individual elements in the Sun.
+\end{description}
+
+
+
+\subsection{Making your own example programs}
+\label{sec:makeownmain}
+The simplest way to create your own example program is to copy one of the Fortran example files 
+in \code{examples/aux/} to a directory of your choice,  then change the name of that file and modify it. 
+You also need to copy the makefile from \code{examples/aux/} to the same directory, 
+and make sure that you update the name of the file that you just changed.\footnote{%
+If you want, you can delete all the blocks for the other (not needed) example programs, in order 
+to have the makefile look clearer and easier to understand.
+}
+Running `\code{make}' then compiles your own new example program without touching the release
+version of the \ds\ code. Always keeping your own code, or your modifications of \ds, separate like this
+is the recommended way to proceed because it facilitates debugging and minimizes the risk of 
+introducing errors. Don't modify any of the \ds\ \code{makefile}s directly as they are overwritten every time you run \code{configure}.
+
+\bigskip
+\noindent
+If you want to {\it compile with a different particle physics modules}, you will in general need to do go 
+through three simple steps:
+\begin{enumerate}
+\item change the corresponding block in the makefile, i.e.~simply set the variable \code{DS\_MODULE} 
+         to a different value (you may also have to add additional libraries, e.g.~\code{lisajet} for  the \code{mssm}
+         module)
+\item update the model setup routines to the new particle module (see the various example 
+programs; for more details, have a look at the respective Section of this manual and the header of  setup
+routines starting with \code{dsgivemodel}).
+\item make sure that your main program only calls routines that are supported for the new particle module.
+(If it doesn't, it will not compile, stating the functions that are not supported)
+\end{enumerate}
+An explicit demonstration of how all these three steps are taken care of in one single example is provided in \code{dsmain\_wimp.F}. 
+Note that the pre-compiler 
+directives in that example are only necessary if you want to be able to compile the {\it same} code 
+with two (or more) different particle modules.
+
+
+%\tb{I would definitley not encourage users to change {\it anything} in the DS install directory ...}
+%One simple way to create your own example program is to add them to e.g.\ the \code{examples/aux} directory, modify \code{makefile.in}\footnote{Note, if you change \code{makefile} instead of \code{makefile.in} your changes will be overwritten next time you run \code{configure}. Hence, you should modify the \code{makefile.in} instead.} by copy-pasting the
+%make instructions for another program, run \code{configure} (in the \ds\ root
+%directory) and then compile. Alternatively, you can of course put your programs wherever you like, but this could be an easy way to get going.
+
+%\subsection{A note on compiling with a different particle physics modules}
+%If you want to use one of these example programs with a different particle physics module, you need to change the actual program to call the correct
+%model setup routines for your particle physics module of choice (see e.g.\ \code{dsmain\_wimp.F} how this can be done). You then modify \code{makefile.in} to change to your new particle physics module, run \code{configure} (in the \ds\ root directory) and then compile again.
+%\tb{I would definitley not encourage users to change {\it anything} in the DS install directory. Especially makefile.in's ...}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modifying individual subroutines or functions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ If you want to modify some existing \ds\ function or subroutine, \emph{don't do it,} instead add your own routine as a replaceable function (see also Section \ref{sec:replaceable}), 
+ by running the script \code{scr/make\_replaceable.pl} on the routine you wish to have a user-replaceable version of.
+You will then find that version in the corresponding \code{user\_replaceables} folder, 
+where you can edit it to your liking. 
+{
+Following these steps, it is guaranteed that the newly created user-replaceable function
+is properly included in the library where the original DS function used to be, with all 
+makefiles being automagically updated. 
+
+An alternative -- and often even simpler -- way of using user-replaceable functions is to leave 
+the DS libraries untouched, and to 
+instead link to the user-supplied function only when making the main program (this option
+is indicated in the left-most part of Fig.~\ref{fig:concept}}). For an explicit example,
+see (the makefile for) \code{generic\_wimp\_oh2.f}.
+

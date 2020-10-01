@@ -1,0 +1,386 @@
+#include "PILOT.inc"
+      SUBROUTINE DOMSSM
+C-----------------------------------------------------------------------
+C          Initialize MSSM masses and decay modes from ISASUSY. 
+C          Check for validity with ISAJET masses.
+C          Decay modes are transfered to /DKYTAB/ by /SETDKY/.
+C
+C          F.E. Paige, November, 1992
+C
+C          Ver. 7.01: Add test so that AMASS is not called if ID = 0
+C          Ver. 7.07: Add checking for LEP bounds.
+C          Ver. 7.10: Add SUGRA interface
+C          Ver. 7.32: Extend to large tanb solution
+C          Ver. 7.33: Add gauge-mediated SUSY model
+C          Ver. 7.38: NOGRAV turns off gravitino and weaker decays
+C
+C-----------------------------------------------------------------------
+#ifdef IMPNONE_X
+      IMPLICIT NONE
+#endif
+C          ISAJET common blocks
+#include "itapes.inc"
+#include "qlmass.inc"
+#include "xmssm.inc"
+#include "nodcay.inc"
+C          ISASUSY common blocks
+#include "sslun.inc"
+#include "ssmode.inc"
+#include "sssm.inc"
+#include "sspar.inc"
+#include "sstype.inc"
+#include "sugmg.inc"
+#include "sugpas.inc"
+#include "sugxin.inc"
+#include "sugnu.inc"
+C
+      INTEGER NOUT
+      PARAMETER (NOUT=33)
+      INTEGER IDOUT(NOUT)
+      REAL AMASS,AMPL
+      REAL AMI,SUMGAM,SUMMJ,WIDMX
+      REAL QSUSY,ASMB,MBMB,ASMT,MTMT,SUALFS,PI,GG
+      DOUBLE PRECISION SSMQCD
+      INTEGER I,J,K,IFL1,IFL2,IFL3,JSPIN,INDEX,IALLOW,IITEST,IMDL
+      INTEGER IMHL,IMHC,IMSQ
+C
+      DATA IDOUT/
+     $IDTP,ISGL,ISUPL,ISDNL,ISSTL,ISCHL,ISBT1,ISTP1,ISUPR,ISDNR,
+     $ISSTR,ISCHR,ISBT2,ISTP2,ISEL,ISMUL,ISTAU1,ISNEL,ISNML,ISNTL,
+     $ISER,ISMUR,ISTAU2,ISZ1,ISZ2,ISZ3,ISZ4,ISW1,ISW2,
+     $ISHL,ISHH,ISHA,ISHC/
+      DATA AMPL/2.4E18/,IAL3UN/0/
+C
+C          Generate masses and decays
+C
+C     FIRST SET HIGH SCALE FOR SUSY BCs; default is M_GUT
+      XSUGIN(7)=XSBCS
+      IF (XMGVTO.LT.1.E19) AMGVSS=XMGVTO
+      IF(.NOT.GOMSSM) RETURN
+      LOUT=ITLIS
+      IF (AL3UNI) IAL3UN=1
+      IF (INUHM.EQ.1) THEN
+        MU=XNUSUG(19)
+        AMHA=XNUSUG(20)
+        TWOM1=-MU
+      END IF
+      IF(GOSUG) THEN
+C          SUGRA input
+C          First solve renormalization group equations
+        IF (XMAJNR.LT.1.E19) THEN
+          XNRIN(1)=XMN3NR
+          XNRIN(2)=XMAJNR
+          XNRIN(3)=XANSS
+          XNRIN(4)=XNRSS
+        ELSE
+          XNRIN(2)=1.E20
+        END IF
+        IF (GOAMSB.OR.GOMMAM.OR.GOHCAM) THEN
+          XA0SU=0.
+          XAMIN(1)=XCQAM
+          XAMIN(2)=XCDAM
+          XAMIN(3)=XCUAM
+          XAMIN(4)=XCLAM
+          XAMIN(5)=XCEAM
+          XAMIN(6)=XCHDAM
+          XAMIN(7)=XCHUAM
+          XAMIN(8)=XL1AM
+          XAMIN(9)=XL2AM
+          XAMIN(10)=XL3AM
+          XAMIN(11)=XM0SU
+          IF (GOAMSB) THEN
+            IMDL=7
+            CALL SUGRA(XM0SU,XMHSU,XA0SU,XTGBSU,XSMUSU,AMASS(6),IMDL)
+          ELSE IF (GOMMAM) THEN
+            IMDL=9
+            CALL SUGRA(XM0SU,XMHSU,XA0SU,XTGBSU,XSMUSU,AMASS(6),IMDL)
+          ELSE IF (GOHCAM) THEN
+            IMDL=10
+            CALL SUGRA(0.,XMHSU,XA0SU,XTGBSU,XSMUSU,AMASS(6),IMDL)
+          END IF
+        ELSE IF (GOGMIR) THEN
+          IMDL=12
+          XAMIN(11)=XM0SU
+          XAMIN(1)=XCQAM
+          XAMIN(2)=XCHUAM
+          XAMIN(3)=XCHDAM
+          XAMIN(4)=XA0SU
+          XAMIN(5)=XCDAM
+          CALL SUGRA(XM0SU,XMHSU,XA0SU,XTGBSU,XSMUSU,AMASS(6),IMDL)
+        ELSE IF (GONAMS) THEN
+          IMDL=13
+          XAMIN(10)=XM0SU
+          XAMIN(11)=XM3SU
+          XAMIN(1)=XA0SU
+          MU=XNUSUG(19)
+          AMHA=XNUSUG(20)
+          TWOM1=-MU
+          XSMUSU=SIGN(1.,MU)
+          CALL SUGRA(XM0SU,XMHSU,XA0SU,XTGBSU,XSMUSU,AMASS(6),IMDL)
+        ELSE
+          IMDL=1
+          CALL SUGRA(XM0SU,XMHSU,XA0SU,XTGBSU,XSMUSU,AMASS(6),IMDL)
+        END IF
+        IF (NOGOOD.EQ.1) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: TACHYONIC PARTICLES!'
+        ELSE IF (NOGOOD.EQ.2) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: NO EW SYMMETRY BREAKING!'
+        ELSE IF (NOGOOD.EQ.3) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: M(H_P)^2<0!'
+        ELSE IF (NOGOOD.EQ.4) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: YUKAWA>10!'
+        ELSE IF (NOGOOD.EQ.5) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: Z1SS NOT LSP!'
+        ELSE IF (NOGOOD.EQ.7) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: XT EWSB IS BAD!'
+        ELSE IF (NOGOOD.EQ.8) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: MHL^2<0!'
+        ELSE IF (NOGOOD.EQ.9) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: M(3RD)^2<0!'
+        END IF
+        IF (MHPNEG.EQ.1) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: M(H_P)^2<0!!'
+          NOGOOD=3
+        END IF
+        IF (MSQNEG.EQ.1) THEN
+          WRITE(LOUT,*) 'SUGRA BAD POINT: M(3rd)^2<0!!'
+          NOGOOD=9
+        END IF
+        IF(NOGOOD.NE.0) STOP99
+        IF(ITACHY.NE.0) THEN
+          WRITE(LOUT,*) 'WARNING: TACHYONIC SLEPTONS AT GUT SCALE'
+          WRITE(LOUT,*) '         POINT MAY BE INVALID'
+        ENDIF
+C          Then calculate masses and decays
+        CALL SSMSSM(XISAIN(1),XISAIN(2),XISAIN(3),
+     $ XISAIN(4),XISAIN(5),XISAIN(6),XISAIN(7),XISAIN(8),XISAIN(9),
+     $ XISAIN(10),XISAIN(11),XISAIN(12),XISAIN(13),XISAIN(14),
+     $ XISAIN(15),XISAIN(16),XISAIN(17),XISAIN(18),XISAIN(19),
+     $ XISAIN(20),XISAIN(21),XISAIN(22),XISAIN(23),XISAIN(24),
+     $ AMASS(6),IALLOW,IMDL,IMHL,IMHC,IMSQ)
+      ELSE IF(GOGMSB) THEN
+C          GMSB input
+        XGMIN(8)=XRSLGM
+        XGMIN(9)=XDHDGM
+        XGMIN(10)=XDHUGM
+        XGMIN(11)=XDYGM
+        XGMIN(12)=XN51GM
+        XGMIN(13)=XN52GM
+        XGMIN(14)=XN53GM
+C          First solve renormalization group equations
+        IMDL=2
+        CALL SUGRA(XLAMGM,XMESGM,XN5GM,XTGBSU,XSMUSU,AMASS(6),IMDL)
+        IF (NOGOOD.EQ.1) THEN
+          WRITE(LOUT,*) 'GMSB BAD POINT: TACHYONIC PARTICLES!'
+        ELSE IF (NOGOOD.EQ.2) THEN
+          WRITE(LOUT,*) 'GMSB BAD POINT: NO EW SYMMETRY BREAKING!'
+        ELSE IF (NOGOOD.EQ.3) THEN
+          WRITE(LOUT,*) 'GMSB BAD POINT: M(H_P)^2<0!'
+        ELSE IF (NOGOOD.EQ.4) THEN
+          WRITE(LOUT,*) 'GMSB BAD POINT: YUKAWA>100!'
+        ELSE IF (NOGOOD.EQ.7) THEN
+          WRITE(LOUT,*) 'GMSB BAD POINT: XT EWSB IS BAD!'
+        ELSE IF (NOGOOD.EQ.8) THEN
+          WRITE(LOUT,*) 'GMSB BAD POINT: MHL^2<0!'
+        ELSE IF (NOGOOD.EQ.9) THEN
+          WRITE(LOUT,*) 'GMSB BAD POINT: M(3RD)^2<0!'
+        END IF
+        IF (MHPNEG.EQ.1) THEN
+          WRITE(LOUT,*) 'GMSB BAD POINT: M(H_P)^2<0!!'
+          NOGOOD=3
+        END IF
+        IF(NOGOOD.NE.0) STOP99
+        IF(ITACHY.NE.0) THEN
+          WRITE(LOUT,*) 'WARNING: TACHYONIC SLEPTONS AT HIGH SCALE'
+          WRITE(LOUT,*) '         POINT MAY BE INVALID'
+        ENDIF
+C          Then calculate masses and decays
+        AMGVSS=XLAMGM*XMESGM*XCMGV/SQRT(3.)/AMPL
+        CALL SSMSSM(XISAIN(1),XISAIN(2),XISAIN(3),
+     $  XISAIN(4),XISAIN(5),XISAIN(6),XISAIN(7),XISAIN(8),XISAIN(9),
+     $  XISAIN(10),XISAIN(11),XISAIN(12),XISAIN(13),XISAIN(14),
+     $  XISAIN(15),XISAIN(16),XISAIN(17),XISAIN(18),XISAIN(19),
+     $  XISAIN(20),XISAIN(21),XISAIN(22),XISAIN(23),XISAIN(24),
+     $  AMASS(6),IALLOW,IMDL,IMHL,IMHC,IMSQ)
+      ELSE
+C          Weak scale input
+C          Values of 1.E20 indicate that SSMASS should calculate
+C          M_1 and M_2 from M_3
+C          First do fermion masses at QSUSY since SUGRA is not called
+        QSUSY=SQRT(XQ3SS*XTRSS)
+        PI=4.*ATAN(1.)
+C          Define heavy quark pole masses and LambdaQCD:
+        AMBT=AMASS(5)
+        AMTP=AMASS(6)
+        ALQCD4=0.177
+        ASMB=SUALFS(AMBT**2,.36,AMTP,3)
+        MBMB=AMBT*(1.-4*ASMB/3./PI)
+        MBQ=SSMQCD(DBLE(MBMB),DBLE(QSUSY))
+        ASMT=SUALFS(AMTP**2,.36,AMTP,3)
+        MTMT=AMTP/(1.+4*ASMT/3./PI+(16.11-1.04*(5.-6.63/AMTP))*
+     $  (ASMT/PI)**2)
+        MTQ=SSMQCD(DBLE(MTMT),DBLE(QSUSY))
+        MLQ=1.7463
+C       Define TANBQ parameters= TANB for MSSM runs, but not for SUGRA
+        AMW=80.423
+        ALFAEM=1./128.
+        SN2THW=.232
+        GG=SQRT(4*PI*ALFAEM/SN2THW)
+        VUQ=SQRT(2*AMW**2/GG**2/(1.+1./XTBSS**2))
+        VDQ=VUQ/XTBSS
+        CALL SSMSSM(XGLSS,XMUSS,XHASS,XTBSS,XQ1SS,XDRSS,XURSS,XL1SS,
+     $  XERSS,XQ2SS,XSRSS,XCRSS,XL2SS,XMRSS,XQ3SS,XBRSS,XTRSS,XL3SS,
+     $  XTARSS,XATSS,XABSS,XATASS,XM1SS,XM2SS,AMASS(6),IALLOW,0,
+     $IMHL,IMHC,IMSQ)
+      ENDIF
+C
+C          Test parameters
+C
+      IF(IALLOW.NE.0) THEN
+        WRITE(LOUT,1000)
+1000    FORMAT(//' MSSM WARNING: Z1SS IS NOT LSP')
+      ENDIF
+      CALL SSTEST(IALLOW)
+      IITEST=IALLOW/2
+      IF(MOD(IITEST,2).NE.0) THEN
+        WRITE(LOUT,1002)
+1002    FORMAT(' MSSM WARNING: Z -> Z1SS Z1SS TOO BIG')
+      ENDIF
+      IITEST=IITEST/2
+      IF(MOD(IITEST,2).NE.0) THEN
+        WRITE(LOUT,1004)
+1004    FORMAT(' MSSM WARNING: Z -> CHARGINOS ALLOWED')
+      ENDIF
+      IITEST=IITEST/2
+      IF(MOD(IITEST,2).NE.0) THEN
+        WRITE(LOUT,1008)
+1008    FORMAT(' MSSM WARNING: Z -> Z1SS Z2SS TOO BIG')
+      ENDIF
+      IITEST=IITEST/2
+      IF(MOD(IITEST,2).NE.0) THEN
+        WRITE(LOUT,1008)
+1016    FORMAT(' MSSM WARNING: Z -> SQUARKS OR SLEPTONS')
+      ENDIF
+      IITEST=IITEST/2
+      IF(MOD(IITEST,2).NE.0) THEN
+        WRITE(LOUT,1032)
+1032    FORMAT(' MSSM WARNING: Z -> Z* HL0 TOO BIG')
+      ENDIF
+      IITEST=IITEST/2
+      IF(MOD(IITEST,2).NE.0) THEN
+        WRITE(LOUT,1064)
+1064    FORMAT(' MSSM WARNING: Z -> HL0 HA0 ALLOWED')
+      ENDIF
+      IITEST=IITEST/2
+      IF(MOD(IITEST,2).NE.0) THEN
+        WRITE(LOUT,1128)
+1128    FORMAT(' MSSM WARNING: Z -> H+ H- ALLOWED')
+      ENDIF
+C
+C          Store masses in /QLMASS/
+C
+      CALL FLAVOR(ISUPL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMULSS
+      CALL FLAVOR(ISDNL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMDLSS
+      CALL FLAVOR(ISSTL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMSLSS
+      CALL FLAVOR(ISCHL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMCLSS
+      CALL FLAVOR(ISBT1,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMB1SS
+      CALL FLAVOR(ISTP1,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMT1SS
+      CALL FLAVOR(ISUPR,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMURSS
+      CALL FLAVOR(ISDNR,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMDRSS
+      CALL FLAVOR(ISSTR,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMSRSS
+      CALL FLAVOR(ISCHR,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMCRSS
+      CALL FLAVOR(ISBT2,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMB2SS
+      CALL FLAVOR(ISTP2,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMT2SS
+C
+      CALL FLAVOR(ISNEL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMN1SS
+      CALL FLAVOR(ISEL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMELSS
+      CALL FLAVOR(ISNML,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMN2SS
+      CALL FLAVOR(ISMUL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMMLSS
+      CALL FLAVOR(ISNTL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMN3SS
+      CALL FLAVOR(ISTAU1,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AML1SS
+      CALL FLAVOR(ISER,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMERSS
+      CALL FLAVOR(ISMUR,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AMMRSS
+      CALL FLAVOR(ISTAU2,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=AML2SS
+C
+      CALL FLAVOR(ISGL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMGLSS)
+      CALL FLAVOR(ISZ1,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMZ1SS)
+      CALL FLAVOR(ISZ2,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMZ2SS)
+      CALL FLAVOR(ISZ3,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMZ3SS)
+      CALL FLAVOR(ISZ4,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMZ4SS)
+      CALL FLAVOR(ISW1,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMW1SS)
+      CALL FLAVOR(ISW2,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMW2SS)
+C
+      CALL FLAVOR(ISHL,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMHL)
+      CALL FLAVOR(ISHH,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMHH)
+      CALL FLAVOR(ISHA,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMHA)
+      CALL FLAVOR(ISHC,IFL1,IFL2,IFL3,JSPIN,INDEX)
+      AMLEP(INDEX)=ABS(AMHC)
+C
+C          Check decays with ISAJET masses
+C          NOGRAV turns off gravitino decays and all weaker ones
+C
+      WIDMX=0
+      IF(NOGRAV) THEN
+        DO 90 J=1,NSSMOD
+          DO 91 K=1,5
+            IF(JSSMOD(K,J).EQ.ISGRAV) WIDMX=MAX(WIDMX,GSSMOD(J))
+91        CONTINUE
+90      CONTINUE
+      ENDIF
+      WIDMX=1.01*WIDMX
+C
+      DO 100 I=1,NOUT
+        SUMGAM=0
+        AMI=AMASS(IDOUT(I))
+        DO 110 J=1,NSSMOD
+          IF(IDOUT(I).NE.ISSMOD(J)) GO TO 110
+          SUMMJ=0
+          DO 111 K=1,5
+            IF(JSSMOD(K,J).NE.0) SUMMJ=SUMMJ+AMASS(JSSMOD(K,J))
+111       CONTINUE
+          IF(SUMMJ.GE.AMI.OR.GSSMOD(J).LT.WIDMX) GSSMOD(J)=0
+          SUMGAM=SUMGAM+GSSMOD(J)
+110     CONTINUE
+        DO 120 J=1,NSSMOD
+          IF(IDOUT(I).NE.ISSMOD(J)) GO TO 120
+          IF(SUMGAM.NE.0) THEN
+            BSSMOD(J)=GSSMOD(J)/SUMGAM
+          ELSE
+            BSSMOD(J)=0
+          ENDIF
+120     CONTINUE
+100   CONTINUE
+C
+      RETURN
+      END

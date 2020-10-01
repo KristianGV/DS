@@ -1,0 +1,19 @@
+#! /bin/sh
+./configure<<EOF
+3
+gfortran
+
+-I/home/kriss/DS/darksusy-6.2.2/contrib/Healpix_3.40/include -DGFORTRAN -fno-second-underscore -O -ffixed-line-length-none -fopenmp
+
+gcc
+
+
+
+../../lib
+N
+0
+Y
+N
+N
+0
+EOF

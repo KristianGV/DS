@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Basic principles and common routines}
+
+The general concept of  a particle physics module, and how it communicates with the \code{core}
+library via interface functions, was already introduced in Chapter \ref{ch:philosophy} -- see in particular
+Section \ref{sec:particle_modules}, and Table \ref{tab:if} for an automatically updated list of all interface 
+functions that the \code{core} library is aware of. Note that there is no {\it principal} restriction on 
+which interface functions a particle module must provide: the main program will determine
+at compilation time whether it needs a functionality of the \code{core} library that requires 
+certain interface functions to exist.
+
+Every particle physics module must provide an independent representation of the
+full particle content of the respective particle theory. How this is done is fully flexible, and 
+completely up to the module. In practice, however, there are common frameworks,
+like the Standard Model, that appear repeatedly. For convenience, we therefore store auxiliary 
+routines and setups that {\it may} be used by more than just one particle module in 
+\code{src\_models/common}. Common blocks and header files included by more than one
+particle module are found in \code{src\_model/include}. In order to keep up the modularity
+of the code, routines in \code{src\_models/common} thus {\it only} include files in 
+\code{src\_model/include}.
+
+\comment{The subsections below should probably be automatically harvested -- but this does not work (yet)...}
+
+
+\section{\code{common/aux}: auxiliary routines}
+
+Here we collect various routines that belong to particle physics, and hence do not reside in \code{ds\_core},
+but are not only useful for one specific particle module. Currently, the most important are
+\begin{itemize}
+\item A set of functions to handle {\it unique model IDs} for each particle model, which is essential
+        in order not to repeat identical calculations when changing the model and thus to optimize 
+        numerical performance. A new such model 
+        ID should be assigned with \code{dsnewidnumber} whenever a new particle model is initalized 
+        (for the modules provided with the \ds\ release, this is automatically done in \code{dsmodelsetup}).
+        Any routine in \code{src\_models} can test with \code{dsidnumberset} whether this ID number
+        is indeed set, and retrieve its value with \code{dsidnumber} (which then can be compared 
+        to the locally stored value of the ID number that was valid at the time when the respective routine 
+        was called the previous time).
+\item The function \code{dsanthreshold} returns the correction factor to a 2-body rate close to a 
+         kinematical threshold, resulting from the fact that one or both of the particles may be slightly off-shell.
+         This implements the simplified treatment presented in Ref.~\cite{Bringmann:2017sko}, c.f.~their Fig.~5,
+         and hence assumes that the decay products of the virtual particle are (effectively) massless.
+\end{itemize}
+
+
+\section{\code{common/sm}: standard model}
+
+The routines collected in this folder provide a convenient shortcut to include the most basic 
+properties of the standard model in a BSM particle module. Currently, the most important functionalites
+collected here are given by
+
+\begin{itemize}
+\item An initialization routine \code{dsinit\_sm}, which can be called directly from the corresponding 
+        \code{dsinit\_module}. After a call to this routine, the functions \code{dsmass(kPDG)} and 
+        \code{dswidth(kPDG)} correctly return masses and widths of the standard model particles 
+        -- \code{kPDG} being the PDG code  \cite{Groom:2000in} -- as stored centrally in 
+        \code{src\_models/include/dssmparam.h}.
+\item Running quark masses are provided up to the 4-loop level, with SM contributions only, 
+         both for pole and $\overline{MS}$ masses \cite{Chetyrkin:2000yt}.
+\item The SM contributions to the strong coupling constant are also provided up to the 4-loop level.
+ \item Another convenience function is \code{dsgf2s2thw}, which calculates $\sin^2(\theta_W)$ at the 
+         $m_Z$ scale: in praxis, its most important application is to ensure that a particle module can adopt a 
+         consistent relation between $m_Z$ and $m_W$, which for example can be crucial in order to 
+         keep large numerical cancellations under control.
+\end{itemize}
+
+Let us stress that standard model physics in \ds\  is by far not restricted to the 
+routines collected in \code{common/sm}. Much is presently still contained in the \code{mssm} module.
+It will be (further) disentangled from the SUSY-specific parts as new modules are added to the code that
+require this functionality. 
+
+

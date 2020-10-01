@@ -1,0 +1,16 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{ch:vdSIDM_kd}
+
+DM particles are kept in local thermal equilibrium via scattering with the 
+DR particles. This is dominated by $t$-channel exchange of mediator particles, for which we implement
+ the momentum-averaged scattering amplitude returned from Ref.~\cite{Bringmann:2016ilk}:
+\bea
+\left\langle \left| \mathcal{M}\right|^2 \right\rangle_t^\mathrm{vector} &=&
+\frac{256}{3}g_\chi^2g_{\tilde \gamma}^2 \left(\frac{m_\chi}{m_V}\right)^4\left(\frac{\omega}{m_\chi}\right)^2\,,\\
+\left\langle \left| \mathcal{M}\right|^2 \right\rangle_t^\mathrm{scalar} &=&
+\frac{512}{3}g_\chi^2g_{\tilde \gamma}^2 \left(\frac{m_\chi}{m_\phi}\right)^4\left(\frac{\omega}{m_\chi}\right)^2\,,
+\eea
+where $\omega$ is the energy of the DR particle. We also add the amplitudes for DM scattering directly 
+off heat bath vector mediators, $\left\langle \left| \mathcal{M}\right|^2 \right\rangle_t=64g_\chi^4/3$, and scalar mediators,   
+$\left\langle \left| \mathcal{M}\right|^2 \right\rangle_t=16g_\chi^4/3$ \cite{Bringmann:2016ilk}.
+The interface function \code{dskdm2} returns the sum of these two contributions.

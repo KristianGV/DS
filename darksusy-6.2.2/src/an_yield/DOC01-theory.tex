@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Annihilation in the halo, yields -- theory}
+
+Here we calculate yields of different particles from annihilation of dark matter particles in the halo.
+
+% \subsection{Cross sections and yields}
+
+\comment{This description is outdated, and does not really reflect how we do things! So it's commented
+out for the moment...}
+
+%First, we need to define what we mean with a yield and a cross section. If we only have two-body final states, it is fairly straightforward to define the cross section and the yield per annihilation. The problem arises when we want to include also three-body final states, where we cannot consistently define a cross section for the two-body final states and the three-body ones. E.g.\ there will be an overlap between the final states $c\bar{c}$ and $c\bar{c}g$. We need to address what we mean with these concepts when we define the function(s) the particle physics module is required to provide. 
+%
+%We then in principle have three choices:
+%\begin{enumerate}
+%\item We define the cross section as the total cross section including three-body final states and define the yields per annihilation, were an annihilation is meant the annihilation described by the total cross section. In this case the sum of branching fractions over two-body final state will not necessarily equal 1. Also, the handling of possible overlap between two-body and three-body final states need to be handled in both the cross section and the yield routine.
+%\item We define the cross section as the total cross section to all two-body final states and define the yields per annihilation to two-body final states. In this case the sum of branching fractions to all two-body final states should be one. Also, in this case, the possible overlap between two-body and final states only need to be considered in the yield routine.
+%\item We don't provide the cross section and yields separately and instead just provide the source function which is essentially the product of the two.
+%\end{enumerate}
+%The last option is in principle the most general as it could also include decaying dark matter in a consistent way. It would also give the highest flexibility and the least risk of using the routines incorrectly. However, it would also be the one furthest away from how results from different experiments or properties of particle physics models are usually presented. Hence, even if this option is the most appealing from a physics point of view, we will not adopt it here. Instead we choose the first option as the concept of cross section in this case is closest to what it is usually considered to mean.
+
+\subsection{Monte Carlo simulations}
+\label{sec:ha-mcsim}
+
+We need to evaluate the yield of different particles per WIMP annihilation.
+The hadronization and/or decay of the annihilation products are
+simulated with {\sc Pythia} \cite{Sjostrand:2006za} 6.426.
+The simulations are done for a set of 18 WIMP
+masses, $m_{\chi}$ = 10, 25, 50, 80.3, 91.2, 100, 150, 176, 200, 250,
+350, 500, 750, 1000, 1500, 2000, 3000 and 5000 GeV\@. We tabulate the
+yields and then interpolate these tables in \ds.
+
+     The simulations are here
+     simpler than those for annihilation in the Sun/Earth
+    since we don't have a surrounding medium that can stop the
+     annihilation products.  We here simulate for 8 `fundamental'
+     annihilation channels $c\bar{c}$, $b\bar{b}$,
+     $t\bar{t}$, $\tau^+\tau^-$, $W^+W^-$, $Z^0 Z^{0}$, $g g$ and
+     $\mu^{+} \mu^{-}$. Compared to the simulations in the Earth and
+     the Sun, we now let pions and kaons decay and we also let
+     antineutrons decay to antiprotons. For each mass we simulate
+     $2.5 \times 10^{6}$ annihilations and tabulate the yield of
+     antiprotons, positrons, gamma rays (not the gamma lines),
+     muon neutrinos and neutrino-to-muon conversion rates and the
+     neutrino-induced muon yield, where in the last two cases the
+     neutrino-nucleon interactions has been simulated with {\sc
+     Pythia} as outlined in section~\ref{sec:nt-mcsim}
+
+
+With these simulations, we can calculate the yield for any of these
+particles for a given particle physics model. In \texttt{src}, we only include the channels that are actually simulated. In the different particle physics modules in \texttt{src\_model}, the summation over all possible final states and possibly more complex channels, like scalars decaying to other particles is done.
+
+Note that simulations are typically done without specifying a particular polarization state of the final state particles. This is however not entirely correct as the possible polarization states will depend on the particle physics model we have. 
+
+Even if the simulations are not performed in this more general way yet, we have set up the structure here to eventually provide the yields in this form. In particular the most general routine to calculate the yields from any of the simulated channels is \ftb{dsanyield\_sim\_ls}. Apart from the mass, energy and yield type, this routine also takes are arguments the PDG codes of the final state particles and the polarization state of the final state. In particular, you are required to provide the quantum numbers
+\begin{eqnarray*}
+j &=& \mbox{the quantum number for the total angular momentum} \\
+P &=& \mbox{the parity of the final state}\\
+l &=& \mbox{the quantum number for the orbital angular momentum in the final state} \\
+s &=& \mbox{the quantum number for the total spin in the final state} 
+\end{eqnarray*}
+We want to move in a direction where this routine is the one that should be used. While getting there, we also provide a simpler routine which just gives the polarization state in terms of helcity and polarization, \ftb{dsanyield\_sim}. This routine takes the PDG code of the final state and the polarization as
+\begin{itemize}
+\item Left-handed or right-handed polarization for fermions. 
+\item Longitudinal or transverse polarization for vector bosons.
+\end{itemize}
+This routine for simplicity assumes that the final state particles have the same polarization state.
+
+

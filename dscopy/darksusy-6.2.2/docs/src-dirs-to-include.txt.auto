@@ -1,0 +1,112 @@
+# This file includes the directories in src/ and src_models/,
+# which should be searched by the script headers2tex.pl.
+# The script will look in these
+# directories for documentation tex-files and for headers in the
+# Fortran routines.
+#
+# The format below is that each directory resides on one row with the first
+# element being the directory name and the rest being the title
+# of that chapter as it will appear in the manual. The order in which 
+# the directories appear below is the order in which the chapters/sections will
+# appear in the manual. Note that for particle physics modules, the first entry
+# should be to the subdirectory docs where general text and documentation 
+# about the model should be given.
+# This version of the file is automatically created by makemf.pl
+#
+src/an_yield src/an\_yield
+src/aux src/aux
+src/aux_xcernlib src/aux\_xcernlib
+src/aux_xdiag src/aux\_xdiag
+src/aux_xquadpack src/aux\_xquadpack
+src/cr_aux src/cr\_aux
+src/cr_axi src/cr\_axi
+src/cr_gamma src/cr\_gamma
+src/cr_nu src/cr\_nu
+src/cr_ps src/cr\_ps
+src/dd src/dd
+src/dmd_astro src/dmd\_astro
+src/dmd_aux src/dmd\_aux
+src/dmd_mod src/dmd\_mod
+src/dmd_vel src/dmd\_vel
+src/ini src/ini
+src/kd src/kd
+src/rd src/rd
+src/se_aux src/se\_aux
+src/se_mod src/se\_mod
+src/se_nu src/se\_nu
+src/se_yield src/se\_yield
+src/si src/si
+src/ucmh src/ucmh
+src_models/common/docs Module common
+src_models/common/aux src\_models/common/aux
+src_models/common/sm src\_models/common/sm
+src_models/empty/docs Module empty
+src_models/empty/ac src\_models/empty/ac
+src_models/empty/an src\_models/empty/an
+src_models/empty/cr src\_models/empty/cr
+src_models/empty/dd src\_models/empty/dd
+src_models/empty/ge src\_models/empty/ge
+src_models/empty/ini src\_models/empty/ini
+src_models/empty/kd src\_models/empty/kd
+src_models/empty/rd src\_models/empty/rd
+src_models/empty/se_yield src\_models/empty/se\_yield
+src_models/empty/si src\_models/empty/si
+src_models/generic_decayingDM/docs Module generic_decayingDM
+src_models/generic_decayingDM/cr src\_models/generic\_decayingDM/cr
+src_models/generic_decayingDM/dec src\_models/generic\_decayingDM/dec
+src_models/generic_decayingDM/ge src\_models/generic\_decayingDM/ge
+src_models/generic_decayingDM/ini src\_models/generic\_decayingDM/ini
+src_models/generic_wimp/docs Module generic_wimp
+src_models/generic_wimp/an src\_models/generic\_wimp/an
+src_models/generic_wimp/cr src\_models/generic\_wimp/cr
+src_models/generic_wimp/dd src\_models/generic\_wimp/dd
+src_models/generic_wimp/ge src\_models/generic\_wimp/ge
+src_models/generic_wimp/ini src\_models/generic\_wimp/ini
+src_models/generic_wimp/kd src\_models/generic\_wimp/kd
+src_models/generic_wimp/rd src\_models/generic\_wimp/rd
+src_models/generic_wimp/se_yield src\_models/generic\_wimp/se\_yield
+src_models/mssm/docs Module mssm
+src_models/mssm/ac src\_models/mssm/ac
+src_models/mssm/ac_bsg src\_models/mssm/ac\_bsg
+src_models/mssm/an src\_models/mssm/an
+src_models/mssm/an_1l src\_models/mssm/an\_1l
+src_models/mssm/an_ib src\_models/mssm/an\_ib
+src_models/mssm/an_ib2 src\_models/mssm/an\_ib2
+src_models/mssm/an_ib3 src\_models/mssm/an\_ib3
+src_models/mssm/an_sf src\_models/mssm/an\_sf
+src_models/mssm/an_stu src\_models/mssm/an\_stu
+src_models/mssm/an_yield src\_models/mssm/an\_yield
+src_models/mssm/an_yield_casc src\_models/mssm/an\_yield\_casc
+src_models/mssm/cr src\_models/mssm/cr
+src_models/mssm/dd src\_models/mssm/dd
+src_models/mssm/examples_aux src\_models/mssm/examples\_aux
+src_models/mssm/ge src\_models/mssm/ge
+src_models/mssm/ge_cmssm src\_models/mssm/ge\_cmssm
+src_models/mssm/ge_slha src\_models/mssm/ge\_slha
+src_models/mssm/ini src\_models/mssm/ini
+src_models/mssm/kd src\_models/mssm/kd
+src_models/mssm/rd src\_models/mssm/rd
+src_models/mssm/se_yield src\_models/mssm/se\_yield
+src_models/mssm/se_yield_casc src\_models/mssm/se\_yield\_casc
+src_models/mssm/xfeynhiggs src\_models/mssm/xfeynhiggs
+src_models/mssm/xhiggsbounds src\_models/mssm/xhiggsbounds
+src_models/mssm/xsuperiso src\_models/mssm/xsuperiso
+src_models/silveira_zee/docs Module silveira_zee
+src_models/silveira_zee/an src\_models/silveira\_zee/an
+src_models/silveira_zee/cr src\_models/silveira\_zee/cr
+src_models/silveira_zee/dd src\_models/silveira\_zee/dd
+src_models/silveira_zee/ge src\_models/silveira\_zee/ge
+src_models/silveira_zee/ini src\_models/silveira\_zee/ini
+src_models/silveira_zee/kd src\_models/silveira\_zee/kd
+src_models/silveira_zee/rd src\_models/silveira\_zee/rd
+src_models/silveira_zee/se_yield src\_models/silveira\_zee/se\_yield
+src_models/vdSIDM/docs Module vdSIDM
+src_models/vdSIDM/an src\_models/vdSIDM/an
+src_models/vdSIDM/cr src\_models/vdSIDM/cr
+src_models/vdSIDM/dd src\_models/vdSIDM/dd
+src_models/vdSIDM/ge src\_models/vdSIDM/ge
+src_models/vdSIDM/ini src\_models/vdSIDM/ini
+src_models/vdSIDM/kd src\_models/vdSIDM/kd
+src_models/vdSIDM/rd src\_models/vdSIDM/rd
+src_models/vdSIDM/se_yield src\_models/vdSIDM/se\_yield
+src_models/vdSIDM/si src\_models/vdSIDM/si

@@ -1,0 +1,33 @@
+C----------------------------------------------------------
+      FUNCTION EEN1N1(Z)
+      IMPLICIT NONE
+      COMMON/BSQRK/ RS,M1,M2,AE,BE,PROPZ,E4,MZ
+      COMMON/EPOL/ FLEM,FREP,FREM,FLEP
+      COMMON/STUFF/ UNITS,PI
+      COMMON/SFSF/QF,ALR,NC
+      COMMON/N1N1/ G,COSGR,SINGR,MWI
+      REAL Z,SSXLAM,EEN1N1
+      REAL RS,M1,M2,AE,BE,PROPZ,E4,MZ,G,COSGR,SINGR,MWI(2)
+      REAL FLEM,FREP,FREM,FLEP,UNITS,PI
+      REAL QF,ALR,NC
+      REAL S,P,E,PHIRL,SIGRL,SIGLR
+      REAL ANMBN,TM1,TM2,TM3,TM4,TM5,TM6
+      S=RS**2
+      P=SQRT(SSXLAM(S,M1**2,M2**2))/2./RS
+      E=RS/2.
+      PHIRL=2*ALR**2*(AE+BE)**2*S/PROPZ
+      SIGRL=E4*(1-Z**2)*P**3*PHIRL/E**3/256./PI
+      ANMBN=ALR/2.
+      TM1=4*E4*ANMBN**2*(AE-BE)**2/PROPZ
+      TM2=(G*SINGR)**4/(2*E*(E-P*Z)+MWI(1)**2-M1**2)**2
+      TM3=(G*COSGR)**4/(2*E*(E-P*Z)+MWI(2)**2-M1**2)**2
+      TM4=-4*SQRT(E4)*G*G*ANMBN*(AE-BE)*(S-MZ**2)*SINGR**2/
+     ,PROPZ/(2*E*(E-P*Z)+MWI(1)**2-M1**2)
+      TM5=-4*SQRT(E4)*G*G*ANMBN*(AE-BE)*(S-MZ**2)*COSGR**2/
+     ,PROPZ/(2*E*(E-P*Z)+MWI(2)**2-M1**2)
+      TM6=2*G**4*SINGR**2*COSGR**2/
+     ,(2*E*(E-P*Z)+MWI(1)**2-M1**2)/(2*E*(E-P*Z)+MWI(2)**2-M1**2)
+      SIGLR=P**3*E*(1.-Z**2)*(TM1+TM2+TM3+TM4+TM5+TM6)/8./PI/S
+      EEN1N1=(FLEM*FREP*SIGLR+FREM*FLEP*SIGRL)*UNITS
+      RETURN
+      END

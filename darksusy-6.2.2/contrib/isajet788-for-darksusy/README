@@ -1,0 +1,31 @@
+The general procedure to get isajet (or really isasugra) for DarkSUSY is:
+
+* Download isajet from
+  http://www.nhn.ou.edu/~isajet/
+
+* As of version 7.87 it is now distributed as a tar file. Unpack it in
+  contrib/isajet-<version>-for-darksusy
+
+* Remove isajet/isared.f and isared/ (as we don't need them for DarkSUSY).
+
+* NOTICE: for compatibility with gfortran, change 'BLOCK DATA' to
+  'SUBROUTINE' in aldata.f. You may need to make the file write-able
+  as the files by default are read-only.
+
+* Rename the common block SEED in isainc/seed.inc to e.g. SEEDg as the
+  SEED common block is in conflict with other codes when using with gambit.
+  (Change SEED to SEEDg also in ranfgt.f and ranfst.f-should not be needed)
+
+* rename Makefile to makefile.in and modify it to set compiler and
+  compiler options from DS configure
+
+* Modify isajet/Makefile to make it build a shared library as well
+
+* Check that the interface in src_models/mssm/ge_cmssm is OK with the new
+  version (.e.g. that the common blocks are defined correctly in
+  src_models/mssm/include/dsisasugra.h).
+
+* Try to compile dsmain_wimp.f with this new version and run it for a cMSSM
+  model. If it works, everything is fine. However, there may be some more
+  of the small files that are needed. Then add them and try again.
+

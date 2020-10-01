@@ -1,0 +1,24 @@
+C----------------------------------------------------------
+      FUNCTION EESFSF(Z)
+      IMPLICIT NONE
+      COMMON/BSQRK/ RS,M1,M2,AE,BE,PROPZ,E4,MZ
+      COMMON/EPOL/ FLEM,FREP,FREM,FLEP
+      COMMON/STUFF/ UNITS,PI
+      COMMON/SFSF/QF,ALR,NC
+      REAL Z,SSXLAM,EESFSF
+      REAL RS,M1,M2,AE,BE,PROPZ,E4,MZ 
+      REAL FLEM,FREP,FREM,FLEP,UNITS,PI
+      REAL QF,ALR,NC
+      REAL S,P,E,PHILR,PHIRL,SIGLR,SIGRL
+      S=RS**2
+      P=SQRT(SSXLAM(S,M1**2,M2**2))/2./RS
+      E=RS/2.
+      PHILR=8.*QF**2/S+(2*ALR**2*(AE-BE)**2*S-8.*(AE-BE)*QF*ALR*
+     ,(S-MZ**2))/PROPZ
+      PHIRL=8.*QF**2/S+(2*ALR**2*(AE+BE)**2*S-8.*(AE+BE)*QF*ALR*
+     ,(S-MZ**2))/PROPZ
+      SIGLR=NC*E4*(1-Z**2)*P**3/E**3/256./PI*PHILR
+      SIGRL=NC*E4*(1-Z**2)*P**3/E**3/256./PI*PHIRL
+      EESFSF=(FLEM*FREP*SIGLR+FREM*FLEP*SIGRL)*UNITS
+      RETURN
+      END

@@ -1,0 +1,20 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Generic WIMPs}
+\label{ch:genWIMP}
+
+Similar to the case of \code{generic\_decayingDM}, the module \code{generic\_wimp} provides 
+a simple phenomenological template for a large class of DM candidates. Rather than being based 
+on an actual particle physics model, it mostly serves to provide an illustration of how the functionalities 
+of DarkSUSY can be used in phenomenological studies of ‘vanilla’ WIMP DM, when only providing 
+the absolute minimum of input parameters.
+
+A generic WIMP model in DarkSUSY is set up by a call to \code{dsgivemodel\_generic\_wimp}, 
+and hence fully defined by the input parameters of that routine: the mass $m_\chi$ of the DM particle 
+and a flag stating whether the DM particle is its own anti-particle or not; a constant annihilation 
+rate $\sigma v$ in the CMS frame, along with the dominant annihilation channel into SM particles
+(as usual stated in terms of PDG codes); finally, the spin-independent 
+scattering cross section $\sigma_{\rm SI}$ of DM with nucleons.
+
+This simple setup allows to use essentially the full functionality of the \code{core} library,
+from relic density calculation to direct detection rates and cosmic ray propagation and
+indirect detection signals in general.

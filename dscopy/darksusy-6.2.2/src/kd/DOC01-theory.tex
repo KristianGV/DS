@@ -1,0 +1,155 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kinetic decoupling and microhalos (kd) -- theory}
+\label{sec:kd}
+
+
+Even after \emph{chemical decoupling}, which sets the DM relic density (see Section 
+\ref{sec:Boltzmann}), DM  frequently scatters with the very abundant 
+standard model particles and thereby stays in local thermal equilibrium with the 
+heat bath until the temperature has dropped by another factor of between 10 and
+ a few 1000; after \emph{kinetic decoupling}, even these scattering events cease and DM 
+no longer interacts with standard model particles. Inhomogeneities 
+in the DM density can only develop after this has happenened, and the DM particles have
+sufficiently cooled down so that free streaming becomes negligible.
+The scale of kinetic decoupling can therefore directly be translated 
+into a cutoff in the power spectrum of (dark) matter fluctuations and thus the size of the 
+smallest (at least when not taking into account primordial black holes) gravitationally 
+bound objects in the universe.
+
+
+
+\subsection{Kinetic decoupling}
+
+The process of kinetic decoupling is governed by the full Boltzmann equation for the WIMP 
+distribution function $f(\mathbf{x},\mathbf{p})$, which in 
+a flat Friedmann-Robertson Walker spacetime reads
+\begin{equation}
+  \label{eq:fullboltz}
+  E(\partial_t-H\,\mathbf{p}\cdot\nabla_\mathbf{p})\,f=C[f]\,,
+\end{equation}
+where $C[f]$ is known as the collision term.
+The Boltzmann equation quoted in Eq.~(\ref{eq:Boltzmann}) for the description of 
+the (chemical) DM freeze-out process is actually just the first moment of 
+this expression, i.e.~obtained by integrating it over $\int d^3p$ (after dividing it by $E$). 
+As was realized int \cite{Bringmann:2006mu,Bringmann:2009vf}, kinetic decoupling can be decribed to a very high precision 
+by considering, instead, the \emph{second} moment of Eq.~(\ref{eq:fullboltz}). For this purpose,
+one introduces the WIMP "temperature" $T_\chi$,
+\begin{equation}
+  \int\frac{d^3p}{(2\pi)^3}\mathbf{p}^2f(\mathbf{p})\equiv3\,m_\chi T_\chi n_\chi\,,
+\end{equation}
+as a parameter that characterizes the deviation from thermal equilibrium (for which 
+$T_\chi=T$ holds). 
+After kinetic
+decoupling, the DM `temperature' will simply decrease due to the expansion of the universe and, 
+for non-relativistic DM, scale like $T_\chi\propto a^{-2}$. It is thus natural
+ to define the moment of decoupling as the transition between these two regimes \cite{Bringmann:2009vf}.
+Allowing for the scattering partners to have a different temperature ($T_{\tilde\gamma}$) than the photons ($T$), this implies
+\be
+\label{TchiT}
+\,T_\chi(T)=\left\{
+\begin{array}{cc}
+T_{\tilde\gamma}(T) & \mathrm{for}~T\gtrsim T_\mathrm{kd} \\
+T_{\tilde\gamma} (T_\mathrm{kd})\left(\frac{a(T_\mathrm{kd})}{a(T)}\right)^2& \mathrm{for}~T\lesssim T_\mathrm{kd}
+\end{array}
+\right. 
+\ee
+
+For practical purposes, one may now further introduce
+\begin{eqnarray}
+   x &\equiv& m_\chi/T\,,\\
+   y &\equiv& {m_\chi T_\chi}{s^{-2/3}}\,.
+\end{eqnarray}
+Multiplying Eq.(\ref{eq:fullboltz}) by $\mathbf{p}^2/E$, integrating it 
+over $\mathbf{p}$ and keeping only the leading order terms\footnote{
+For very early decoupling, next-order correction terms may become relevant \cite{Binder:2017rgn}.
+}
+ in $\mathbf{p}^2/m_\chi^2$ 
+then results in \cite{Bringmann:2009vf,Bringmann:2016ilk}
+\be
+\label{dydx}
+\frac{d\log y}{d\log x}=\left(1-\frac{1}{3}\frac{d \log g_{*S}}{d\log x}\right)
+\frac{\gamma(T_{\tilde\gamma})}{H(T)}\left(\frac{y_\mathrm{eq}}{y}-1\right)\,.
+\ee
+Here, $g_{*S}$ is the number of effective entropy degrees of freedom, $y_\mathrm{eq}$ is the 
+value of $y$ in thermal equilibrium and $\gamma$ denotes the momentum transfer rate, 
+\be
+\label{fT}
+ \gamma (T_{\tilde\gamma})=\frac{1}{48\pi^3g_\chi T_{\tilde\gamma}m_\chi^3}
+ \sum_i
+ \int d\omega\,k^4
+ \left(1\mp g_i^\pm\right)g_i^\pm(\omega)
+  \mathop{\hspace{-12ex}\left|\mathcal{M}\right|^2_{t=0}}_{\hspace{4ex}s=m_\chi^2+2m_\chi\omega+m_\mathrm{\tilde\gamma}^2}\,,
+\ee
+where the sum runs over all DM scattering partners (counting, e.g., electrons and positrons separately), 
+$k\equiv\left| \mathbf{k}\right|$ is their momentum and $\omega$ their energy. The $g_i$ denote the SM
+distribution functions, which are assumed to be thermal (note, however, that no 
+assumption has been made about the form of the WIMP distribution function $f$).
+The scattering amplitude
+squared in this expression, $|\mathcal{M}|^2$, is understood to be {\it summed} over all internal (spin or 
+color) degrees of freedom, including initial ones. If it is not Taylor expandable around $t=0$, one has to 
+make the replacement \cite{KasaharaPHD,Gondolo:2012vh} 
+\be
+\label{maverage}
+ \mathop{\hspace{-12ex}\left|\mathcal{M}\right|^2_{t=0}}_{\hspace{4ex}s=m_\chi^2+2m_\chi\omega+m_\mathrm{\tilde\gamma}^2}
+\!\!\! \longrightarrow
+\left<\left|\mathcal{M}\right|^2\right>_t 
+\!\!\equiv \frac{1}{8k^4}\int_{-4k^2_{CM}}^0
+\!\!\!\! dt(-t)\left|\mathcal{M}\right|^2
+\ee
+in the above expression. We may easily check that the asymptotic behaviour 
+for $T_\chi$ described by Eq.~(\ref{dydx}) is consistent with the expectation outlined above: 
+At large $T$, we have $\gamma\gg H$, thus enforcing
+$T_\chi=T$; when $T$ becomes small, the WIMPs completely decouple from the thermal 
+bath and $y$ stays constant, i.e. $T_\chi\propto s^{2/3}\propto a^{-2}$. 
+A practical way to determine the 
+\emph{kinetic decoupling} temperature $T_{\rm kd}$ as defined in Eq.~(\ref{TchiT}) 
+is by solving the above differential equation until $y$ stays constant (indicated by the `$x\to\infty$'):
+\begin{equation}
+  \label{eq:tkddef}
+  x_{\rm kd}=\frac{m_\chi}{T_{\rm kd}}\equiv g_{\rm eff}(T_{\rm kd})\, \left.y\right|_{x\rightarrow\infty}\,.
+\end{equation}
+
+
+
+
+
+\subsection{The smallest protohalos}
+
+
+Before kinetic decoupling, WIMPs are tightly coupled to the heat bath, so
+any small-scale perturbations in the DM fluid would immediately be washed out.
+For temperatures $T\lesssim T_{\rm kd}$, however, this is no longer the case and perturbations
+ in the DM density start to devolop under the influence of gravity; however, the 
+remaining viscous coupling between the two fluids and, subsequently, the free-streaming 
+of the WIMPs generate an exponential cutoff in the power spectrum \cite{Green:2005fa}, 
+with a characteristic comoving damping scale $k_{\rm fs}$. The WIMP mass contained in a 
+sphere of the corresponding size is thus given by \cite{Bringmann:2009vf}
+\begin{equation}
+   M_{\rm fs}\approx\frac{4\pi}{3}\rho_\chi\left(\frac{\pi}{k_{\rm fs}}\right)^3
+=4.0\times 10^{-6}\left(\frac{1+{\rm ln}\left(g_{\rm eff}^{1/4}T_{\rm kd}/30\;{\rm MeV}\right)/18.6}{\left(m_\chi/100\; {\rm GeV}\right)^{1/2} g_{\rm eff}^{1/4}\left(T_{\rm kd}/30\;{\rm MeV}\right)^{1/2}}\right)^3M_\odot\,.
+\end{equation}
+Acoustic oscillations also have to be taken into account as a damping mechanism 
+and lead to a similar exponential cutoff in the power spectrum
+\cite{Loeb:2005pm,Bertschinger:2006nq}. In this case, the characteristic damping mass 
+ is given by the total amount of DM inside the horizon at the time of kinetic decoupling:
+\begin{equation}
+  M_{\rm ao}\approx\frac{4\pi}{3}\left.\frac{\rho_\chi}{H^3}\right|_{T=T_{\rm{kd}}}
+  =3.4\times10^{-6}\left(\frac{T_{\rm kd}g_{\rm eff}^{1/4}}{50\,{\rm MeV}}\right)^{-3}M_\odot\,.
+\end{equation}
+Note that $T_{\rm kd}$ in the above expressions only holds when using the definition given in Eq. (\ref{TchiT}); 
+for an alternative definition, the expected magnitude of the cutoff mass has to be correspondingly re-scaled.
+
+
+In general, the actual cutoff in the power spectrum is  given by
+$M_{\rm cut}=\max\left[M_{\rm fs},M_{\rm ao}\right]$; which of the two
+physically independent damping mechanisms is more efficient depends on the 
+particle nature of the WIMP. 
+The expected mass for the smallest gravitationally bound objects in the 
+universe is then also simply given by $M_{\rm cut}$. Numerically, the formation of 
+protohalos with masses down to the cutoff scale has been confirmed
+and their evolution could be 
+followed until a redshift of $z\sim26$ \cite{Diemand:2005vz}; the further survival 
+probabilities of these objects, however, as well as the resulting consequences for the indirect 
+detection of DM, are subject to a presently still ongoing discussion.
+
+

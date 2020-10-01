@@ -1,0 +1,617 @@
+#include "PILOT.inc"
+C-----------------------------------------------------------------
+      SUBROUTINE SUGEFF(G0,SIG1,SIG2,SIG3)
+C-----------------------------------------------------------------
+C
+C     Compute Higgs mass shift due to 1-loop effective potential
+C     remaining tadpoles added by Javier Ferrandis 5/20/03
+C     Added EW fine-tuning measure C5MAX in 5/11/2012
+C     Added high scale (HS) fine-tuning measure CHSMAX in 8/16/2012
+C     6/19/2012: SIG1=Sig^d^d and SIG2=Sig_u^u in Javier notation;
+C     Also output SIG3=Sig_u^d for correction to B*mu
+C     Improved by Azar/Howie 6/21/2012
+C     Added 1st/2nd gen. contributions 9/17/2012
+C     Neutralino contribution changed to correct expressions 11/29/12
+C     Added Dedes/Slavich dominant two loop correction to Sigma_u^u 12/08/2016
+C     Some corrections from Peter Ruud to Sigma(sbottom,stau)
+C
+#ifdef IMPNONE_X
+      IMPLICIT NONE
+#endif
+#include "sslun.inc"
+#include "sugpas.inc"
+#include "sugmg.inc"
+      REAL CHDHS,DMHDS,CDHDHS,CHUHS,DMHUS,CDHUHS
+      REAL CHD,CSIGD,CHU,CSIGU,CMU
+      REAL G0(31),SIG1,SIG2
+      REAL DELT,SIG1T1,FB,FT,MST2,MSB2,MSB1,SIG2B1,
+     $SIG1B1,SIG2B2,SIG1B2,SIG1T2,SIG2T1,DELB,SIG2T2,MST1,COS2W, 
+     $MT,PI,COTB,TANB,MB,SIG2B,SIG1B,G,GGP,SIG2T,E,FAC,SIG1T,QS,
+     $BETA,SINB,COSB,FAC4,FL,ML,SIG1L,SIG2L,MSL1,MSL2,
+     $DELL,SIG1L1,SIG2L1,SIG1L2,SIG2L2,VUQ,VDQ,GZ,EPS,DDEG
+      REAL SIG1HC,SIG2HC,SIG1W,SIG2W,SIG1Z,SIG2Z
+      REAL SIG3T1,SIG3T2,SIG3B1,SIG3B2,SIG3L1,SIG3L2,SIGNE3,
+     $SIG3C1,SIG3C2,SIG3
+      REAL VEVQ,MWQ,MZQ
+      REAL M1Q,M2Q,MPHO
+      REAL COS2B,QU,QD,QE
+      REAL SUGFN,QSC,D1NEFN,D2NEFN,D3NEFN,MZI
+      REAL ZESS1,ZESS2,ZESS3,ZESS4
+      REAL W1SS,W2SS
+      REAL MHL,MHH,MA,MHC,MGL
+      REAL SIG1C1,SIG1C2,SIG2C1,SIG2C2,SIG1C,SIG2C
+      REAL SIG1NE,SIG2NE,SIG3NE,SIG1NE1,SIG1NE2,SIG1NE3,SIG1NE4,SIG2NE1,
+     &     SIG2NE2,SIG2NE3,SIG2NE4,SIG3NE1,SIG3NE2,SIG3NE3,SIG3NE4
+      REAL SIG1HL,SIG1HH,SIG2HL,SIG2HH,SIG1HI,SIG2HI
+      REAL SIGNE1,SIGNE2
+      REAL SIG1UL,SIG1UR,SIG1DL,SIG1DR,SIG1EL,SIG1ER,SIG1N1
+      REAL SIG2UL,SIG2UR,SIG2DL,SIG2DR,SIG2EL,SIG2ER,SIG2N1
+      REAL SIG1CL,SIG1CR,SIG1SL,SIG1SR,SIG1ML,SIG1MR,SIG1N2
+      REAL SIG2CL,SIG2CR,SIG2SL,SIG2SR,SIG2ML,SIG2MR,SIG2N2
+      REAL AMUL,AMUR,AMDL,AMDR,AMEL,AMER,AMN1,SG1GN1,SG1GN2
+      REAL AMCL,AMCR,AMSL,AMSR,AMML,AMMR,AMN2,SG2GN1,SG2GN2
+      REAL THT,TANTHT,SG2LP,SGU2LP
+      LOGICAL DEGF
+      PARAMETER (EPS=1.e-5)
+
+C     Statement function
+      SUGFN(QSC)=QSC**2*(LOG(QSC**2/HIGFRZ**2)-1.)
+      D1NEFN(MZI)=-MZI**6*(G**2+GP**2)
+     &           +MZI**4*(G**2*(M1Q**2+MU**2)+GP**2*(M2Q**2+MU**2)
+     &                    +(G**2+GP**2)*MZQ**2)
+     &           -MZI**2*(MU**2*(G**2*M1Q**2+GP**2*M2Q**2)
+     &                   +(G**2+GP**2)*MZQ**2*(MPHO**2+2*MU**2*SINB**2))
+     &           +2.*(G**2+GP**2)*MZQ**2*SINB**2*MU**2*MPHO**2
+      D2NEFN(MZI)=-MZI**6*(G**2+GP**2)
+     &           +MZI**4*(G**2*(M1Q**2+MU**2)+GP**2*(M2Q**2+MU**2)
+     &                    +(G**2+GP**2)*MZQ**2)
+     &           -MZI**2*(MU**2*(G**2*M1Q**2+GP**2*M2Q**2)
+     &                   +(G**2+GP**2)*MZQ**2*(MPHO**2+2*MU**2*COSB**2))
+     &           +2.*(G**2+GP**2)*MZQ**2*COSB**2*MU**2*MPHO**2
+      D3NEFN(MZI)=MZI**2*(MZI**2-MU**2)*MU*(G**2*M2Q+GP**2*M1Q)
+     &           -MZI**2*M1Q*M2Q*MU*MPHO*(G**2+GP**2)
+     &           +(G**2+GP**2)*M1Q*M2Q*MPHO*MU**3
+C     reset degenerate sparticle flag      
+      DEGF=.FALSE.
+C
+      G=G2
+      GGP=(G**2+GP**2)/2.
+      GZ=SQRT(GGP/4.)
+      COS2W=1.-XW
+      VUQ=G0(31)
+      VDQ=G0(30)
+      VEVQ=SQRT(VUQ**2+VDQ**2)
+      TANB=VUQ/VDQ
+      COTB=1./TANB
+      BETA=ATAN(TANB)
+      SINB=SIN(BETA)
+      COSB=COS(BETA)
+      COS2B=COSB**2-SINB**2     
+      MWQ=G/SQRT(2.)*VEVQ
+      MZQ=SQRT(GGP)*VEVQ
+      PI=4.*ATAN(1.)
+      FAC=3./8./PI**2
+      FAC4=FAC/3.
+      E=EXP(1.)
+      QS=HIGFRZ**2
+      QU=2./3.
+      QD=-1./3.
+      QE=-1.
+C-----INITIALIZE EFF. POT. CONTRIBUTIONS
+      C5MAX=1.
+      SIG1=0.
+      SIG2=0.
+      SIG3=0.
+C-----CALCULATE TOP AND BOTTOM CONTRIBUTIONS; USE RUNNING MASSES--
+      FL=G0(4)
+      FB=G0(5)
+      FT=G0(6)
+      ML=FL*VDQ
+      MB=FB*VDQ
+      MT=FT*VUQ
+      SIG1T=0.
+      SIG2T=-FAC*FT**2*SUGFN(MT)
+      SIG1B=-FAC*FB**2*SUGFN(MB)
+      SIG2B=0.
+      SIG1L=-FAC4*FL**2*SUGFN(ML)
+      SIG2L=0.
+      MGL=MSS(1)
+      MST1=MSS(12)
+      MST2=MSS(13)
+      MSB1=MSS(10)
+      MSB2=MSS(11)
+      MSL1=MSS(21)
+      MSL2=MSS(22)
+      AMUL=MSS(2)
+      AMUR=MSS(3)
+      AMDL=MSS(4)
+      AMDR=MSS(5)
+      AMEL=MSS(17)
+      AMER=MSS(18)
+      AMN1=MSS(14)
+      AMCL=MSS(8)
+      AMCR=MSS(9)
+      AMSL=MSS(6)
+      AMSR=MSS(7)
+      AMML=MSS(19)
+      AMMR=MSS(20)
+      AMN2=MSS(15)
+      SIGDMX=MAX(ABS(SIG1B),ABS(SIG1L))
+      SIGUMX=ABS(SIG2T)
+C-----CALCULATE STOP_1 CONTRIBUTION -------------------------------
+      DDEG=abs(MST2/MST1-1.)
+      IF (DDEG.GT.EPS) THEN
+      DELT=(.5-4*XW/3.)*2.*((G0(24)-G0(23))/2.
+     &                      +MZQ**2*COS2B*(1./4.-2./3.*XW))
+      SIG1T1=FAC/2.*SUGFN(MST1)*
+     ,(GZ**2-(FT**2*MU**2+2*GZ**2*DELT)/(MST2**2-MST1**2))
+      SIG2T1=FAC/2.*SUGFN(MST1)*
+     ,(FT**2-GZ**2-(FT**2*G0(12)**2-2*GZ**2*DELT)/(MST2**2-MST1**2))
+      SIG3T1=FAC/2.*SUGFN(MST1)*FT**2*MU*G0(12)/(MST2**2-MST1**2)
+      SIGDMX=MAX(SIGDMX,ABS(SIG1T1))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2T1))
+C-----CALCULATE STOP_2 CONTRIBUTION -------------------------------
+      SIG1T2=FAC/2.*SUGFN(MST2)*
+     ,(GZ**2+(FT**2*MU**2+2*GZ**2*DELT)/(MST2**2-MST1**2))
+      SIG2T2=FAC/2.*SUGFN(MST2)*
+     ,(FT**2-GZ**2+(FT**2*G0(12)**2-2*GZ**2*DELT)/(MST2**2-MST1**2))
+      SIG3T2=-FAC/2.*SUGFN(MST2)*FT**2*MU*G0(12)/(MST2**2-MST1**2)
+      SIGDMX=MAX(SIGDMX,ABS(SIG1T2))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2T2))
+      ELSE
+        DEGF=.TRUE.
+        SIG1T2=0.
+        SIG2T2=0.    
+        SIG1T1=FAC*SUGFN(MST1)*GZ**2
+        SIG2T1=FAC*SUGFN(MST1)*(FT**2-GZ**2)
+        SIG3T1=0.
+        SIG3T2=0.
+      END IF
+c      print*,'SIG1T1,SIG2T1,SIG3T1=',SIG1T1,SIG2T1,SIG3T1
+c      print*,'SIG1T2,SIG2T2,SIG3T2=',SIG1T2,SIG2T2,SIG3T2
+C-----CALCULATE SBOT_1 CONTRIBUTION -------------------------------
+      DDEG=abs(MSB2/MSB1-1.)
+      IF (DDEG.GT.EPS) THEN
+      DELB=(.5-2*XW/3.)*2.*((G0(24)-G0(22))/2.
+     &                      -MZQ**2*COS2B*(1./4.-1./3.*XW))
+      SIG1B1=FAC/2.*SUGFN(MSB1)*
+     ,(GZ**2-(FB**2*MU**2+2*GZ**2*DELB)/(MSB2**2-MSB1**2))
+      SIG2B1=FAC/2.*SUGFN(MSB1)*
+     ,(FB**2-GZ**2-(FB**2*G0(11)**2-2*GZ**2*DELB)/(MSB2**2-MSB1**2))
+      SIG3B1=FAC/2.*SUGFN(MSB1)*FB**2*MU*G0(11)/(MSB2**2-MSB1**2)
+      SIGDMX=MAX(SIGDMX,ABS(SIG1B1))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2B1))
+C-----CALCULATE SBOT_2 CONTRIBUTION -------------------------------
+      SIG1B2=FAC/2.*SUGFN(MSB2)*
+     ,(GZ**2+(FB**2*MU**2+2*GZ**2*DELB)/(MSB2**2-MSB1**2))
+      SIG2B2=FAC/2.*SUGFN(MSB2)*
+     ,(FB**2-GZ**2+(FB**2*G0(11)**2-2*GZ**2*DELB)/(MSB2**2-MSB1**2))
+      SIG3B2=-FAC/2.*SUGFN(MSB2)*FB**2*MU*G0(11)/(MSB2**2-MSB1**2)
+      SIGDMX=MAX(SIGDMX,ABS(SIG1B2))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2B2))
+      ELSE
+        DEGF=.TRUE.
+        SIG1B2=0.
+        SIG2B2=0.
+        SIG1B1=FAC/2.*SUGFN(MSB1)*GZ**2
+        SIG2B1=FAC*SUGFN(MSB1)*(FB**2-GZ**2)
+        SIG3B1=0.
+        SIG3B2=0.
+      END IF
+C-----CALCULATE STAU_1 CONTRIBUTION -------------------------------
+      DDEG=abs(MSL2/MSL1-1.)
+      IF (DDEG.GT.EPS) THEN
+      DELL=(.5-2*XW)*2.*((G0(24)-G0(22))/2.-MZQ**2*COS2B*(1./4.-XW))
+      SIG1L1=FAC4/2.*SUGFN(MSL1)*
+     ,(GZ**2-(FL**2*MU**2+2*GZ**2*DELL)/(MSL2**2-MSL1**2))
+      SIG2L1=FAC4/2.*SUGFN(MSL1)*
+     ,(FL**2-GZ**2-(FL**2*G0(10)**2-2*GZ**2*DELL)/(MSL2**2-MSL1**2))
+      SIG3L1=FAC4/2.*SUGFN(MSL1)*FL**2*MU*G0(10)/(MSL2**2-MSL1**2)
+      SIGDMX=MAX(SIGDMX,ABS(SIG1L1))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2L1))
+C-----CALCULATE STAU_2 CONTRIBUTION -------------------------------
+      SIG1L2=FAC4/2.*SUGFN(MSL2)*
+     ,(GZ**2+(FL**2*MU**2+2*GZ**2*DELL)/(MSL2**2-MSL1**2))
+      SIG2L2=FAC4/2.*SUGFN(MSL2)*
+     ,(FL**2-GZ**2+(FL**2*G0(10)**2-2*GZ**2*DELL)/(MSL2**2-MSL1**2))
+      SIG3L2=-FAC4/2.*SUGFN(MSL2)*FL**2*MU*G0(10)/(MSL2**2-MSL1**2)
+      SIGDMX=MAX(SIGDMX,ABS(SIG1L2))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2L2))
+      ELSE
+        DEGF=.TRUE.
+        SIG1L2=0.
+        SIG2L2=0.
+        SIG1L1=FAC4*SUGFN(MSL1)*GZ**2
+        SIG2L1=FAC4*SUGFN(MSL1)*(FL**2-GZ**2)
+        SIG3L1=0.
+        SIG3L2=0.
+      END IF
+C-----First generation contributions
+      SIG1UL=FAC*2*GZ*(.5-QU*XW)*SUGFN(AMUL)
+      SIG1UR=FAC*2*GZ*(QU*XW)*SUGFN(AMUR)
+      SIG1DL=FAC*2*GZ*(-.5-QD*XW)*SUGFN(AMDL)
+      SIG1DR=FAC*2*GZ*(QD*XW)*SUGFN(AMDR)
+      SIG1EL=FAC4*2*GZ*(-.5-QE*XW)*SUGFN(AMEL)
+      SIG1ER=FAC4*2*GZ*(QE*XW)*SUGFN(AMER)
+      SIG1N1=FAC4*2*GZ*(.5)*SUGFN(AMN1)
+      SG1GN1=SIG1UL+SIG1UR+SIG1DL+SIG1DR+SIG1EL+SIG1ER+SIG1N1
+      SIGDMX=MAX(SIGDMX,ABS(SG1GN1))
+      SIG2UL=-FAC*2*GZ*(.5-QU*XW)*SUGFN(AMUL)
+      SIG2UR=-FAC*2*GZ*(QU*XW)*SUGFN(AMUR)
+      SIG2DL=-FAC*2*GZ*(-.5-QD*XW)*SUGFN(AMDL)
+      SIG2DR=-FAC*2*GZ*(QD*XW)*SUGFN(AMDR)
+      SIG2EL=-FAC4*2*GZ*(-.5-QE*XW)*SUGFN(AMEL)
+      SIG2ER=-FAC4*2*GZ*(QE*XW)*SUGFN(AMER)
+      SIG2N1=-FAC4*2*GZ*(.5)*SUGFN(AMN1)
+      SG2GN1=SIG2UL+SIG2UR+SIG2DL+SIG2DR+SIG2EL+SIG2ER+SIG2N1
+      SIGUMX=MAX(SIGUMX,ABS(SG2GN1))
+C-----Second generation contributions
+      SIG1CL=FAC*2*GZ*(.5-QU*XW)*SUGFN(AMCL)
+      SIG1CR=FAC*2*GZ*(QU*XW)*SUGFN(AMCR)
+      SIG1SL=FAC*2*GZ*(-.5-QD*XW)*SUGFN(AMSL)
+      SIG1SR=FAC*2*GZ*(QD*XW)*SUGFN(AMSR)
+      SIG1ML=FAC4*2*GZ*(-.5-QE*XW)*SUGFN(AMML)
+      SIG1MR=FAC4*2*GZ*(QE*XW)*SUGFN(AMMR)
+      SIG1N2=FAC4*2*GZ*(.5)*SUGFN(AMN2)
+      SG1GN2=SIG1CL+SIG1CR+SIG1SL+SIG1SR+SIG1ML+SIG1MR+SIG1N2
+      SIGDMX=MAX(SIGDMX,ABS(SG1GN2))
+      SIG2CL=-FAC*2*GZ*(.5-QU*XW)*SUGFN(AMCL)
+      SIG2CR=-FAC*2*GZ*(QU*XW)*SUGFN(AMCR)
+      SIG2SL=-FAC*2*GZ*(-.5-QD*XW)*SUGFN(AMSL)
+      SIG2SR=-FAC*2*GZ*(QD*XW)*SUGFN(AMSR)
+      SIG2ML=-FAC4*2*GZ*(-.5-QE*XW)*SUGFN(AMML)
+      SIG2MR=-FAC4*2*GZ*(QE*XW)*SUGFN(AMMR)
+      SIG2N2=-FAC4*2*GZ*(.5)*SUGFN(AMN2)
+      SG2GN2=SIG2CL+SIG2CR+SIG2SL+SIG2SR+SIG2ML+SIG2MR+SIG2N2
+      SIGUMX=MAX(SIGUMX,ABS(SG2GN2))
+C-----CALCULATE NEUTRALINO CONTRIBUTION -------------------------------
+      ZESS1=MSS(23)
+      ZESS2=MSS(24)
+      ZESS3=MSS(25)
+      ZESS4=MSS(26)
+      M1Q=G0(7)
+      M2Q=G0(8)
+      MPHO=COS2W*M1Q+XW*M2Q
+      DDEG=min(abs(1.-ZESS2/ZESS1),abs(1.-ZESS3/ZESS1),
+     &         abs(1.-ZESS4/ZESS1),abs(1.-ZESS3/ZESS2),
+     &         abs(1.-ZESS4/ZESS2),abs(1.-ZESS3/ZESS4))
+      IF (DDEG.GT.EPS) THEN
+c...old Javier eqs
+      SIGNE1=-GZ**2/2./PI**2*(
+     # ZESS1**2*(ZESS1-MPHO)/(ZESS1-ZESS2)/(ZESS1-ZESS3)
+     #     /(ZESS1-ZESS4)*SUGFN(ZESS1)+
+     # ZESS2**2*(ZESS2-MPHO)/(ZESS2-ZESS1)/(ZESS2-ZESS3)
+     #     /(ZESS2-ZESS4)*SUGFN(ZESS2)+
+     # ZESS3**2*(ZESS3-MPHO)/(ZESS3-ZESS1)/(ZESS3-ZESS2)
+     #    /(ZESS3-ZESS4)*SUGFN(ZESS3)+
+     # ZESS4**2*(ZESS4-MPHO)/(ZESS4-ZESS1)/(ZESS4-ZESS2)
+     #   /(ZESS4-ZESS3)*SUGFN(ZESS4))
+      SIGNE2=SIGNE1
+      SIGNE3=-GZ**2/2./PI**2*MU*(
+     # ZESS1*(ZESS1-MPHO)/(ZESS1-ZESS2)/(ZESS1-ZESS3)
+     #     /(ZESS1-ZESS4)*SUGFN(ZESS1)+
+     # ZESS2*(ZESS2-MPHO)/(ZESS2-ZESS1)/(ZESS2-ZESS3)
+     #     /(ZESS2-ZESS4)*SUGFN(ZESS2)+
+     # ZESS3*(ZESS3-MPHO)/(ZESS3-ZESS1)/(ZESS3-ZESS2)
+     #    /(ZESS3-ZESS4)*SUGFN(ZESS3)+
+     # ZESS4*(ZESS4-MPHO)/(ZESS4-ZESS1)/(ZESS4-ZESS2)
+     #   /(ZESS4-ZESS3)*SUGFN(ZESS4))
+c      SIGDMX=MAX(SIGDMX,ABS(SIGNE1))
+c      SIGUMX=MAX(SIGUMX,ABS(SIGNE2))
+c      PRINT*,'Javier SIGNE1,SIGNE2,SIGNE3=',SIGNE1,SIGNE2,SIGNE3
+c..new correct ones
+      SIG1NE1=FAC4/2.*SUGFN(ZESS1)*D1NEFN(ZESS1)
+     &        /(ZESS1**2-ZESS2**2)/(ZESS1**2-ZESS3**2)
+     &        /(ZESS1**2-ZESS4**2)
+      SIG1NE2=FAC4/2.*SUGFN(ZESS2)*D1NEFN(ZESS2)
+     &        /(ZESS2**2-ZESS1**2)/(ZESS2**2-ZESS3**2)
+     &        /(ZESS2**2-ZESS4**2)
+      SIG1NE3=FAC4/2.*SUGFN(ZESS3)*D1NEFN(ZESS3)
+     &        /(ZESS3**2-ZESS1**2)/(ZESS3**2-ZESS2**2)
+     &        /(ZESS3**2-ZESS4**2)
+      SIG1NE4=FAC4/2.*SUGFN(ZESS4)*D1NEFN(ZESS4)
+     &        /(ZESS4**2-ZESS1**2)/(ZESS4**2-ZESS2**2)
+     &        /(ZESS4**2-ZESS3**2)
+      SIG1NE=SIG1NE1+SIG1NE2+SIG1NE3+SIG1NE4
+      SIG2NE1=FAC4/2.*SUGFN(ZESS1)*D2NEFN(ZESS1)
+     &        /(ZESS1**2-ZESS2**2)/(ZESS1**2-ZESS3**2)
+     &        /(ZESS1**2-ZESS4**2)
+      SIG2NE2=FAC4/2.*SUGFN(ZESS2)*D2NEFN(ZESS2)
+     &        /(ZESS2**2-ZESS1**2)/(ZESS2**2-ZESS3**2)
+     &        /(ZESS2**2-ZESS4**2)
+      SIG2NE3=FAC4/2.*SUGFN(ZESS3)*D2NEFN(ZESS3)
+     &        /(ZESS3**2-ZESS1**2)/(ZESS3**2-ZESS2**2)
+     &        /(ZESS3**2-ZESS4**2)
+      SIG2NE4=FAC4/2.*SUGFN(ZESS4)*D2NEFN(ZESS4)
+     &        /(ZESS4**2-ZESS1**2)/(ZESS4**2-ZESS2**2)
+     &        /(ZESS4**2-ZESS3**2)
+      SIG2NE=SIG2NE1+SIG2NE2+SIG2NE3+SIG2NE4
+      SIG3NE1=FAC4/2.*SUGFN(ZESS1)*D3NEFN(ZESS1)
+     &        /(ZESS1**2-ZESS2**2)/(ZESS1**2-ZESS3**2)
+     &        /(ZESS1**2-ZESS4**2)
+      SIG3NE2=FAC4/2.*SUGFN(ZESS2)*D3NEFN(ZESS2)
+     &        /(ZESS2**2-ZESS1**2)/(ZESS2**2-ZESS3**2)
+     &        /(ZESS2**2-ZESS4**2)
+      SIG3NE3=FAC4/2.*SUGFN(ZESS3)*D3NEFN(ZESS3)
+     &        /(ZESS3**2-ZESS1**2)/(ZESS3**2-ZESS2**2)
+     &        /(ZESS3**2-ZESS4**2)
+      SIG3NE4=FAC4/2.*SUGFN(ZESS4)*D3NEFN(ZESS4)
+     &        /(ZESS4**2-ZESS1**2)/(ZESS4**2-ZESS2**2)
+     &        /(ZESS4**2-ZESS3**2)
+      SIG3NE=SIG3NE1+SIG3NE2+SIG3NE3+SIG3NE4
+      SIGDMX=MAX(SIGDMX,ABS(SIG1NE))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2NE))
+c      print*,'Correct SIG1NE,SIG2NE,SIG3NE=',SIG1NE,SIG2NE,SIG3NE
+c      print*,' SIG1NE:',SIG1NE1,SIG1NE2,SIG1NE3,SIG1NE4
+c      print*,' SIG2NE:',SIG2NE1,SIG2NE2,SIG2NE3,SIG2NE4
+c      print*,' SIG3NE:',SIG3NE1,SIG3NE2,SIG3NE3,SIG3NE4
+      ELSE
+        DEGF=.TRUE.
+c...old
+        SIGNE1=0.
+        SIGNE2=0.
+        SIGNE3=0.
+c...new
+        SIG1NE=0.
+        SIG2NE=0.
+        SIG3NE=0.
+      ENDIF
+C-----CALCULATE CHARGINO CONTRIBUTION -----------
+      W1SS=MSS(27)
+      W2SS=MSS(28)
+      DDEG=abs(abs(W2SS/W1SS)-1.)
+      IF (DDEG.GT.EPS) THEN
+      SIG1C1=-G**2/16./PI**2*(1.-(2.*MWQ**2*COS2B+M2Q**2+MU**2)/
+     #   (W2SS**2-W1SS**2))*SUGFN(W1SS)
+      SIG1C2=-G**2/16./PI**2*(1.+(2.*MWQ**2*COS2B+M2Q**2+MU**2)/
+     #   (W2SS**2-W1SS**2))*SUGFN(W2SS)
+      SIG2C1=-G**2/16./PI**2*(1.-(-2.*MWQ**2*COS2B+M2Q**2+MU**2)/
+     #   (W2SS**2-W1SS**2))*SUGFN(W1SS)
+      SIG2C2=-G**2/16./PI**2*(1.+(-2.*MWQ**2*COS2B+M2Q**2+MU**2)/
+     #   (W2SS**2-W1SS**2))*SUGFN(W2SS)
+      SIG3C1=G**2/16./PI**2*(2*M2Q*MU)/(W2SS**2-W1SS**2)*SUGFN(W1SS)
+      SIG3C2=-G**2/16./PI**2*(2*M2Q*MU)/(W2SS**2-W1SS**2)*SUGFN(W2SS)
+      SIG1C=SIG1C1+SIG1C2
+      SIG2C=SIG2C1+SIG2C2
+      SIGDMX=MAX(SIGDMX,ABS(SIG1C1))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2C1))
+      SIGDMX=MAX(SIGDMX,ABS(SIG1C2))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2C2))
+      ELSE
+        DEGF=.TRUE.
+        SIG1C=-G**2/16./PI**2*SUGFN(W1SS)*2.
+        SIG2C=-G**2/16./PI**2*SUGFN(W1SS)*2.
+        SIG3C1=0.
+        SIG3C2=0.
+      ENDIF
+C-----CALCULATE HIGGSES CONTRIBUTION -------------------------------
+      MHL=MSS(29)
+      MHH=MSS(30)
+      MA=MSS(31)
+      MHC=MSS(32)
+      IF(MHL.LT.1.) THEN
+	      SIG1HI=0.
+              SIG2HI=0.
+	      GOTO 111
+      ELSE
+	      CONTINUE
+      ENDIF
+      IF(MHH.LT.1.) THEN
+	      SIG1HI=0.
+              SIG2HI=0.
+	      GOTO 111
+      ELSE
+	      CONTINUE
+      ENDIF
+      SIG1HL=GZ**2/16./PI**2*(1.-(MZQ**2+
+     #    MA**2*(1.-4.*COS2B+2.*COS2B**2))/
+     #   (MHH**2-MHL**2))*SUGFN(MHL)
+      SIG1HH=GZ**2/16./PI**2*(1.+(MZQ**2+
+     #    MA**2*(1.-4.*COS2B+2.*COS2B**2))/
+     #   (MHH**2-MHL**2))*SUGFN(MHH)
+      SIG2HL=GZ**2/16./PI**2*(1.-(MZQ**2+
+     #   MA**2*(1.+4.*COS2B+2.*COS2B**2))/
+     #   (MHH**2-MHL**2))*SUGFN(MHL)
+      SIG2HH=GZ**2/16./PI**2*(1.+(MZQ**2+
+     #   MA**2*(1.+4.*COS2B+2.*COS2B**2))/
+     #   (MHH**2-MHL**2))*SUGFN(MHH)
+      SIG1HI=SIG1HL+SIG1HH
+      SIG2HI=SIG2HL+SIG2HH
+      SIGDMX=MAX(SIGDMX,ABS(SIG1HL))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2HL))
+      SIGDMX=MAX(SIGDMX,ABS(SIG1HH))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2HH))
+C-----CHARGED HIGGS ------------------------------------------------
+      SIG1HC=G**2/32./PI**2*SUGFN(MHC)
+      SIG2HC=SIG1HC
+      SIGDMX=MAX(SIGDMX,ABS(SIG1HC))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2HC))
+C-----W AND Z ------------------------------------------------------
+      SIG1W=3*G**2/32./PI**2*SUGFN(MWQ)
+      SIG2W=SIG1W
+      SIGDMX=MAX(SIGDMX,ABS(SIG1W))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2W))
+      SIG1Z=3*G**2/64./PI**2/(1.-XW)*SUGFN(MZQ)
+      SIG2Z=SIG1Z
+      SIGDMX=MAX(SIGDMX,ABS(SIG1Z))
+      SIGUMX=MAX(SIGUMX,ABS(SIG2Z))
+C-----ADD ALL TERMS ------------------------------------------------
+      SIG1=SIG1B+SIG1B1+SIG1B2+SIG1T+SIG1T1+SIG1T2+
+c     $SIG1L+SIG1L1+SIG1L2+SIGNE1+SIG1C+SIG1HI+
+     &     SIG1L+SIG1L1+SIG1L2+SIG1NE+SIG1C+SIG1HI+
+     $SIG1HC+SIG1W+SIG1Z+SG1GN1+SG1GN2
+      SIG2=SIG2B+SIG2B1+SIG2B2+SIG2T+SIG2T1+SIG2T2+
+c     $SIG2L+SIG2L1+SIG2L2+SIGNE2+SIG2C+SIG2HI+
+     &     SIG2L+SIG2L1+SIG2L2+SIG2NE+SIG2C+SIG2HI+
+     $SIG2HC+SIG2W+SIG2Z+SG2GN1+SG2GN2
+      SIG3=SIG3T1+SIG3T2+SIG3B1+SIG3B2+SIG3L1+SIG3L2+
+c     $SIGNE3+SIG3C1+SIG3C2
+     &     SIG3NE+SIG3C1+SIG3C2
+c      print*,'SIG1,SIG2,SIG3=',SIG1,SIG2,SIG3
+C-----COMPUTE weak scale FINE-TUNING MEASURE C5MAX
+      CHD=SQRT(ABS(G0(13))/(TANB**2-1.))
+      CSIGD=SQRT(ABS(SIGDMX)/(TANB**2-1.))
+      CHU=SQRT(ABS(G0(14))*TANB**2/(TANB**2-1.))
+      CSIGU=SQRT(ABS(SIGUMX)*TANB**2/(TANB**2-1.))
+      CMU=SQRT(ABS(MU**2))
+      C5MAX=MAX(CHD,CSIGD)
+      C5MAX=MAX(C5MAX,CHU)
+      C5MAX=MAX(C5MAX,CSIGU)
+      C5MAX=MAX(C5MAX,CMU)
+c      write(6,*) 'c5max=',c5max
+      TANTHT=(G0(24)+MT**2+MZQ**2*COS2B*(.5-2*.232/3.)-MST1**2)/
+     ,MT/(-G0(12)+MU*COTB)
+      THT=ATAN(TANTHT)
+      SG2LP=SGU2LP(MGL,MT,MST1,MST2,THT,HIGFRZ**2,G0(3),G0(12),VUQ)
+      SG2LP=SQRT(ABS(SG2LP))
+      C5MAX=MAX(C5MAX,SG2LP)
+c      WRITE(6,*) 'SG2LP=',SG2LP
+c     Xerxes/Azar prefer to dump out squared quantity...
+      C5MAX=C5MAX**2
+      IF(DEGF) C5MAX=-C5MAX 
+C-----COMPUTE high scale FINE-TUNING MEASURE CHSMAX
+      CHDHS=SQRT(ABS(MHDSMG)/(TANB**2-1.))
+      DMHDS=MHDSMG-G0(13)
+      CDHDHS=SQRT(ABS(DMHDS)/(TANB**2-1.))
+      CHUHS=SQRT(ABS(MHUSMG)*TANB**2/(TANB**2-1.))
+      DMHUS=MHUSMG-G0(14)
+      CDHUHS=SQRT(ABS(DMHUS)*TANB**2/(TANB**2-1.))
+      CHSMAX=MAX(CHDHS,CDHDHS)
+      CHSMAX=MAX(CHSMAX,CSIGD)
+      CHSMAX=MAX(CHSMAX,CHUHS)
+      CHSMAX=MAX(CHSMAX,CDHUHS)
+      CHSMAX=MAX(CHSMAX,CSIGU)
+      CHSMAX=MAX(CHSMAX,CMU)
+      CHSMAX=CHSMAX**2
+111   CONTINUE
+C-------------------------------------------------------------------
+      RETURN
+      END
+C-----------------------------------------------------------------
+      FUNCTION SGU2LP(MGL,MT,MT1,MT2,THT,QS,GS,AT,VUQ)
+C-----------------------------------------------------------------
+C     COMPUTE LEADING 2-LOOP CONTRIBUTION TO SIGU
+C     FROM DEDES/SLAVICH NPB657(2003)333 EQ'S B.1 AND B.2
+      DOUBLE PRECISION PHIXYZ,XX,YY,ZZ
+      REAL MGL,MT,MT1,MT2,THT,QS,PI,FAC,S2THT,C2THT,MGLS,MTS,MT1S,MT2S
+      REAL DEL1,DEL2,L1,L2,L31,L41,L51,L61,L71,L32,L42,L52,L62,L72 
+      REAL G1,G2,G31,G41,G51,G61,G71,G32,G42,G52,G62,G72
+      REAL GS,AT,VUQ,SR2,VU2,ALS,PHI1,PHI2
+      REAL F2L,G2L,SGU2LP
+      REAL X,Y,Z
+      PI=4*ATAN(1.)
+      SR2=SQRT(2.)
+      S2THT=SIN(2*THT)
+      C2THT=COS(2*THT)
+      MGLS=MGL**2
+      MT1S=MT1**2
+      MT2S=MT2**2
+      MTS=MT**2 
+      ALS=GS**2/4./PI
+      FAC=ALS/PI/(16*PI*PI)
+      VU2=(VUQ/SR2)**2
+      DEL1=SSXLAM(MGLS,MTS,MT1S)
+      DEL2=SSXLAM(MGLS,MTS,MT2S)
+      X=MGLS
+      Y=MTS
+      Z=MT1S
+      XX=DBLE(X)
+      YY=DBLE(Y)
+      ZZ=DBLE(Z)
+      IF ((X.LT.Z).AND.(Y.LT.Z)) THEN
+        PHI1=SNGL(PHIXYZ(XX,YY,ZZ))
+      ELSE IF ((Z.LT.X).AND.(Y.LT.X)) THEN
+        PHI1=Z*SNGL(PHIXYZ(ZZ,YY,XX))/X
+      END IF
+      Z=MT2S
+      ZZ=DBLE(Z)
+      IF ((X.LT.Z).AND.(Y.LT.Z)) THEN
+        PHI2=SNGL(PHIXYZ(XX,YY,ZZ))
+      ELSE IF ((Z.LT.X).AND.(Y.LT.X)) THEN
+        PHI2=Z*SNGL(PHIXYZ(ZZ,YY,XX))/X
+      END IF
+c      write(6,*) 'del=',del1,del2,phi1,phi2
+c      write(6,*) 'mgl,mt,mt1,mt2=',mgl,mt,mt1,mt2
+      L1=4*MGL*MT*(1.+4*C2THT**2)/S2THT-(2*(MT1S-MT2S)+4*MGL*MT/S2THT)*
+     ,LOG(MGLS/QS)*LOG(MTS/QS)
+      L2=-2*(4.-S2THT**2)*(MT1S-MT2S)+((4*MT1S*MT2S-S2THT**2*
+     ,(MT1S+MT2S)**2)/(MT1S-MT2S))*LOG(MT1S/QS)*LOG(MT2S/QS)
+      L31=(4*(MGLS+MTS+2*MT1S)-S2THT**2*(3*MT1S-MT2S)-16*C2THT**2*
+     ,MGL*MT*MT1S/S2THT/(MT1S-MT2S)-4*S2THT*MGL*MT)*LOG(MT1S/QS)
+      L41=MT1S/(MT1S-MT2S)*(S2THT**2*(MT1S+MT2S)-2*(MT1S-MT2S))*
+     ,(LOG(MT1S/QS)**2)
+      L51=2*(MT1S-MGLS-MTS+MGL*MT*S2THT+(2*C2THT**2*MGL*MT*MT1S)/
+     ,S2THT/(MT1S-MT2S))*LOG(MGLS*MTS/QS/QS)*LOG(MT1S/QS)
+      L61=4*MGL*MT*C2THT**2*(MTS-MGLS)/S2THT/(MT1S-MT2S)*
+     ,LOG(MTS/MGLS)*LOG(MT1S/QS)
+      L71=((4*MGLS*MTS+2*DEL1)/MT1S-2*MGL*MT*S2THT*(MGLS+MTS-MT1S)/
+     ,MT1S+4*C2THT**2*MGL*MT*DEL1/S2THT/MT1S/(MT1S-MT2S))*
+     ,PHI1
+      L32=(4*(MGLS+MTS+2*MT2S)-S2THT**2*(3*MT2S-MT1S)+16*C2THT**2*
+     ,MGL*MT*MT2S/S2THT/(MT2S-MT1S)+4*S2THT*MGL*MT)*LOG(MT2S/QS)
+      L42=MT2S/(MT2S-MT1S)*(S2THT**2*(MT2S+MT1S)-2*(MT2S-MT1S))*
+     ,(LOG(MT2S/QS)**2)
+      L52=2*(MT2S-MGLS-MTS-MGL*MT*S2THT-(2*C2THT**2*MGL*MT*MT2S)/
+     ,S2THT/(MT2S-MT1S))*LOG(MGLS*MTS/QS/QS)*LOG(MT2S/QS)
+      L62=-4*MGL*MT*C2THT**2*(MTS-MGLS)/S2THT/(MT2S-MT1S)*
+     ,LOG(MTS/MGLS)*LOG(MT2S/QS)
+      L72=((4*MGLS*MTS+2*DEL2)/MT2S+2*MGL*MT*S2THT*(MGLS+MTS-MT2S)/
+     ,MT2S-4*C2THT**2*MGL*MT*DEL2/S2THT/MT2S/(MT2S-MT1S))*
+     ,PHI2
+      F2L=L1+L2+(L31+L41+L51+L61+L71)-(L32+L42+L52+L62+L72)
+      F2L=F2L*FAC
+c      write(6,*) 'l_i=',l1,l2,l31,l41,l51,l61,l71,l32,l42,l52,
+c     ,l62,l72,f2l
+      G1=5*MGL*S2THT*(MT1S-MT2S)/MT-10*(MT1S+MT2S-2*MTS)-4*MGLS+
+     ,12*MTS*((LOG(MTS/QS))**2-2*LOG(MTS/QS))
+      G2=(4*MGLS-MGL*S2THT*(MT1S-MT2S)/MT)*LOG(MGLS/QS)*LOG(MTS/QS)+
+     ,S2THT**2*(MT1S+MT2S)*LOG(MT1S/QS)*LOG(MT2S/QS)
+      G31=(4*(MGLS+MTS+2*MT1S)+S2THT**2*(MT1S-MT2S)-4*MGL*S2THT*
+     ,(MTS+MT1S)/MT)*LOG(MT1S/QS)
+      G41=(MGL*S2THT*(5*MTS-MGLS+MT1S)/MT-2*(MGLS+2*MTS))*
+     ,LOG(MTS/QS)*LOG(MT1S/QS)
+      G51=(MGL*S2THT*(MGLS-MTS+MT1S)/MT-2*MGLS)*
+     ,LOG(MGLS/QS)*LOG(MT1S/QS)
+      G61=-(2.+S2THT)*MT1S*(LOG(MT1S/QS))**2
+      G71=(2*MGLS*(MGLS+MTS-MT1S-2*MGL*MT*S2THT)/MT1S+
+     ,MGL*S2THT*DEL1/MT/MT1S)*PHI1
+      G32=(4*(MGLS+MTS+2*MT2S)+S2THT**2*(MT2S-MT1S)+4*MGL*S2THT*
+     ,(MTS+MT2S)/MT)*LOG(MT2S/QS)
+      G42=(-MGL*S2THT*(5*MTS-MGLS+MT2S)/MT-2*(MGLS+2*MTS))*
+     ,LOG(MTS/QS)*LOG(MT2S/QS)
+      G52=(-MGL*S2THT*(MGLS-MTS+MT2S)/MT-2*MGLS)*
+     ,LOG(MGLS/QS)*LOG(MT2S/QS)
+      G62=-(2.-S2THT)*MT2S*(LOG(MT2S/QS))**2
+      G72=(2*MGLS*(MGLS+MTS-MT2S+2*MGL*MT*S2THT)/MT2S-
+     ,MGL*S2THT*DEL2/MT/MT2S)*PHI2
+      G2L=G1+G2+(G31+G41+G51+G61+G71)+(G32+G42+G52+G62+G72)
+      G2L=G2L*FAC  
+c      write(6,*) 'g1-g72=',g1,g2,g31,g41,g51,g61,g71,g32,g42,g52,
+c     ,g62,g72,g2l
+c       write(6,*) ' '
+c      write(6,*) 'mt2s,phi2=',mt2s,phi2
+
+      SGU2LP=(MT*AT*S2THT*F2L+2*MTS*G2L)/VU2
+c      write(6,*) 'f2l,g2l=',f2l,g2l,sgu2lp,del1,phi1,vu2
+      RETURN
+      END
+      DOUBLE PRECISION FUNCTION PHIXYZ(X,Y,Z)
+C     FUNCTION PHI FROM DEDES/SLAVICH NPB657(2003)333 EQ. A.6
+      DOUBLE PRECISION X,Y,Z,PI,PI2,U,V,XL,XLS,XP,XM,DDILOG
+      PI=4*ATAN(1.D0)
+      PI2=PI*PI
+      U=X/Z
+      V=Y/Z
+      XLS=(1.D0-U-V)**2-4*U*V
+      IF (XLS.LT.0.D0) THEN
+      PHIXYZ=0.D0
+      ELSE
+      XL=DSQRT(XLS)
+      XM=(1.D0-(U-V)-XL)/2.D0
+      XP=(1.D0+(U-V)-XL)/2.D0
+c      write(6,*) 'xls,xl,xp,xm=',xls,xl,xp,xm
+      PHIXYZ=(2*LOG(XP)*LOG(XM)-LOG(U)*LOG(V)-2*
+     ,(DDILOG(XP)+DDILOG(XM))+PI2/3.D0)/XL
+      END IF
+      RETURN
+      END

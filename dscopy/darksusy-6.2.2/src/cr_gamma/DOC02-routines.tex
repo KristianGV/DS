@@ -1,0 +1,20 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Gamma rays from the halo -- routines}
+
+\ds\  provides the functions \code{dscrgaflux\_dec} and \code{dscrgaflux\_v0ann} that take $J^{\rm dec}$ 
+(or $J^{\rm ann}$)  as input and return the fluxes given in  Eqs.~(\ref{eq:phidec}) and (\ref{eq:phiann}). Here, the subscript \code{\_v0ann} refers to the fact that, for the
+purpose of those routines, $S_2$ is evaluated
+in the limit of vanishing relative velocity of the annihilating DM pair. While this is the only situation of practical 
+interest in many DM models, future \ds\ versions will offer support for a full velocity dependence of this quantity.
+In analogy with \code{dscrsource\_line}, the \code{core} library furthermore provides
+routines \code{dscrgaflux\_line\_dec} and \code{dscrgaflux\_line\_v0ann} (and correspondingly for neutrinos) 
+that return strength, width and location of {\it monochromatic} (`line') signals. The latter is a convenient
+change with respect to previous versions of the code,  as one cannot generally know how many lines there
+are (this depends on the particle physics module).
+
+If a halo label is available, one can also 
+more conveniently call \code{dsgafluxsph} instead. This function  directly returns the gamma-ray flux,
+for that halo, 
+automatically calculating the required line-of-sight integrals and adding decaying and annihilating DM
+components depending on which particle model is initialized. 

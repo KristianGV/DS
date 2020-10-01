@@ -1,0 +1,3 @@
+      COMMON/TIMES/TIME1,TIME2
+      SAVE /TIMES/
+      REAL      TIME1,TIME2

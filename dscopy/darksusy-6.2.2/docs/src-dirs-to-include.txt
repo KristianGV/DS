@@ -1,0 +1,54 @@
+# This file includes the directories in src/, which should be searched
+# by the script headers2tex.pl. The script will look in these directories
+# for documentation tex-files and for headers in the Fortran routines.
+#
+# The format below is that each directory resides on one row with the first
+# element being the directory name and the rest being the title
+# of that chapter as it will appear in the manual. The order in which 
+# the directories appear below is the order in which the chapters/sections will
+# appear in the manual. Note that for particle physics modules, the first entry
+# should be to the subdirectory docs where general text and documentation 
+# about the model should be given. 
+#
+src/an_yield Annihilation yields in the halo -- yields from simulations
+src/se_mod Sun and Earth models
+src/cr_axi Cosmic rays -- diffusion routines for axisymmetric distributions
+src/cr_dmd Cosmic rays -- dark matter distributions
+src/cr_gamma Cosmic rays -- Gamma fluxes
+src/cr_nu Cosmic rays -- Neutrino fluxes
+src/cr_ge Cosmic rays -- general 
+src/cr_ps Cosmic rays -- point sources
+src/dd Direct detetion
+src/ge General routines
+src/hm Halo models
+src/ini Initialization routines
+src/kd Kinetic decoupling
+src/rd Relic density
+src/se_nu WIMP capture and annihilation in the Sun/Earth
+src/se_yield WIMP yield from annihilation in the Sun/Earth
+src/se_mod Earth and Sun models
+src/se_ic IceCube likelihoods
+src/se_aux Auxilirary routines for WIMP annihilation in the Sun/Earth
+src/xcern CERN routines needed by DarkSUSY
+src/xcmlib CMLIB routines needed by DarkSUSY
+src/xdiag Diagonalization routines
+src_models/docs General description of particle physics modules
+src_models/mssm/docs The Minimal Supersymmetric Standard Model (MSSM)
+src_models/mssm/ac Accelerator constraints
+src_models/mssm/ac_bsg Accelerator constrains for $b \rightarrow s \gamma$
+src_models/mssm/an Annihilation cross sections (general, $\chi^0$ and $\chi^\pm$) 
+src_models/mssm/an_1l Annihilation cross sections (1-loop)
+src_models/mssm/an_ib Internal bremsstrahlung
+src_models/mssm/an_sf Annihilation cross sections (with sfermions)
+src_models/mssm/an_stu $t$, $u$ and $s$ diagrams for $ff$-annihilation
+src_models/mssm/dd Direct detection
+src_models/mssm/ini Initialization routines
+src_models/mssm/kd Kinetic decoupling and microhalos
+src_models/mssm/rd Relic density
+src_models/mssm/rge cMSSM interface (Isasugra) to DarkSUSY
+src_models/mssm/slha SUSY Les Houches Accord interface
+src_models/mssm/su General SUSY model setup: masses, vertices etc
+src_models/mssm/xfeynhiggs FeynHiggs interface to DarkSUSY
+src_models/mssm/xhiggsbounds HiggsBounds interface
+src_models/mssm/xsuperiso SuperIso interface
+src_models/generic_wimp/docs Generic WIMPs

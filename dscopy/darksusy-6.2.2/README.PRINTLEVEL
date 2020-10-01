@@ -1,0 +1,20 @@
+The amount of output onto standard output can be controlled by the variable prtlevel. 
+
+The meaning of this print level setting is as follows:
+
+prtlevel=0
+----------
+All messages except fatal errors [and the welcome message] are suppressed.
+
+prtlevel=1
+----------
+Only warnings and fatal errors are shown.
+
+prtlevel=2
+----------
+As 1, but with additional information on which settings are used
+internally (e.g. which tables are loaded). 
+
+prtlevel=3
+----------
+Any additional (e.g. debug) information.

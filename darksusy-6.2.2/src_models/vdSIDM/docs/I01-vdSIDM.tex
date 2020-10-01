@@ -1,0 +1,16 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Self-Interacting Dark Matter}
+\label{ch:vdSIDM}
+
+The \code{vdSIDM} module implements a simplified model setup where DM is confined to a dark sector
+without (direct) interactions with the standard model. Besides the DM particle, which is assumed to be non-relativistic,
+there is also a dark radiation (DR) particle which in general will contribute to the relativistic degrees of freedom
+in the universe -- a quantity which is conventionally stated in terms of the contribution from a single neutrino
+species, $\Delta N_{\rm eff}$, and which is tightly constrained by both BBN and CMB. 
+Finally, the module implements a mediator particle. In principle, the code structure is set up such that arbitrary 
+spin combinations of these three particles can be implemented, but presently only scalar and vector mediators
+(for Dirac DM and DR) are available.  If the mass of the mediator particle is much lighter than the DM mass,
+the resulting Yukawa potential between DM particles results in a self-scattering rate that is strongly velocity-dependent
+-- as indicated in the name of the module.
+
+ 

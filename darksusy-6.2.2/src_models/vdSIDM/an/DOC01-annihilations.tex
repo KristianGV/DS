@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{ch:vdSIDM_an}
+
+For the spin combinations that are currently implemented in the \code{vdSIDM} module,  DM annihilates via the $t$- and $u$-channel 
+to a pair of mediators. In the limit of small CMS energies $\sqrt{s}\to2m_\chi$, this gives  the following contributions to the invariant rate:
+\bea
+ W_{\chi\chi\to VV} & \xlongrightarrow[p_\mathrm{CM}\ll m_\chi]{} & 4\pi \alpha_\chi^2\left(1-\frac{m_V^2}{m_\chi^2} \right)^{3/2} \left(1-\frac{m_V^2}{2m_\chi^2} \right)^{-2}\\
+ W_{\chi\chi\to \phi\phi} & \xlongrightarrow[p_\mathrm{CM}\ll m_\chi]{} & 6\pi \alpha_\chi^2p_\mathrm{CM}^2\left(1-\frac{m_\phi^2}{m_\chi^2} \right)^{1/2} \left(1-\frac{m_\phi^2}{2m_\chi^2} \right)^{-4}\left(1-\frac89\frac{m_\phi^2}{m_\chi^2}+\frac29\frac{m_\phi^4}{m_\chi^4}   \right),
+\eea
+where $\alpha_\chi\equiv g_\chi/(4\pi)$ and $p_\mathrm{CM}$ is the initial CMS momentum of (each of) the DM particles.
+%We note that the resulting expressions, in the above limit, differ from the corresponding 
+%lowest-order results stated in Eq.~(28) of Ref.~\cite{Tulin:2013teo}.
+%mediator mass dependence is very different
+% for m_med->0, the s-wave agrees, but our sv for the p-wave is a factor of 1/2 smaller.
+Furthermore, DM can annihilate to a pair of DR particles, by a mediator exchange in the $s$-channel. This gives 
+\bea
+ W_{\chi\chi\to V^*\to\tilde\gamma\tilde\gamma} & = & 8\pi \alpha_\chi s^2\left(1+\frac{2m_\chi^2}{s} \right)
+   \frac{\Gamma_{V\to\tilde\gamma\tilde\gamma}}{m_V}\left|D_{V}\right|^2\\
+  W_{\chi\chi\to \phi^* \to\tilde\gamma\tilde\gamma} & = & 8\pi \alpha_\chi s^2\left(1-\frac{4m_\chi^2}{s} \right)
+   \frac{\Gamma_{\phi\to\tilde\gamma\tilde\gamma}}{m_\phi}\left|D_{\phi}\right|^2\,,
+\eea 
+where $D_{V,\phi}$ is defined as 
+\begin{align}
+|D_H(s)|^2 = \frac{1}{(s-m_H^2)^2+m_H^2 \Gamma_H^2 }\,,
+\end{align}
+i.e.~as the inverse of the denominator of the respective propagator.
+
+The interface function \code{dsanwx} adds the full tree-level expressions for these processes, and then multiplies
+the  leading-order expressions in the $v\to0$ limit by an enhancement factor $S(v)$ due to the Sommerfeld effect.
+The factor $S(v)$ itself is provided by the auxiliary function \code{dsansommerfeld} residing in \code{src\_models/common/aux},
+which implements the analytic expressions from Ref.~\cite{Cassel:2009wt,Tulin:2013teo}
+(resulting from approximating the Yukawa potential by a Hulth\'en potential).  The Sommerfeld factor depends on whether the 
+process is $s$-wave dominated (as in the vector mediator case) or $p$-wave dominated
+(as in the scalar mediator case), which hence is one of the input parameters for \code{dsansommerfeld}.

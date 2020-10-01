@@ -1,0 +1,1209 @@
+
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{100}
+
+\bibitem{ds4}
+P.~Gondolo, J.~Edsj{\"o}, P.~Ullio, L.~Bergstr{\"o}m, M.~Schelke and E.~A.
+  Baltz, \emph{{DarkSUSY: Computing supersymmetric dark matter properties
+  numerically}},
+  \href{https://doi.org/10.1088/1475-7516/2004/07/008}{\emph{JCAP} {\bfseries
+  0407} (2004) 008}, [\href{https://arxiv.org/abs/astro-ph/0406204}{{\ttfamily
+  astro-ph/0406204}}].
+
+\bibitem{ds6}
+T.~Bringmann, J.~Edsj{\"o}, P.~Gondolo, P.~Ullio and L.~Bergstr{\"o}m,
+  \emph{{DarkSUSY 6: An Advanced Tool to Compute Dark Matter Properties
+  Numerically}}, .
+
+\bibitem{Zhao:1995cp}
+H.~Zhao, \emph{{Analytical models for galactic nuclei}},
+  \href{https://doi.org/10.1093/mnras/278.2.488}{\emph{Mon. Not. Roy. Astron.
+  Soc.} {\bfseries 278} (1996) 488--496},
+  [\href{https://arxiv.org/abs/astro-ph/9509122}{{\ttfamily
+  astro-ph/9509122}}].
+
+\bibitem{Silveira:1985rk}
+V.~Silveira and A.~Zee, \emph{{SCALAR PHANTOMS}},
+  \href{https://doi.org/10.1016/0370-2693(85)90624-0}{\emph{Phys. Lett.}
+  {\bfseries B161} (1985) 136--140}.
+
+\bibitem{McDonald:1993ex}
+J.~McDonald, \emph{{Gauge singlet scalars as cold dark matter}},
+  \href{https://doi.org/10.1103/PhysRevD.50.3637}{\emph{Phys. Rev.} {\bfseries
+  D50} (1994) 3637--3649},
+  [\href{https://arxiv.org/abs/hep-ph/0702143}{{\ttfamily hep-ph/0702143}}].
+
+\bibitem{Burgess:2000yq}
+C.~P. Burgess, M.~Pospelov and T.~ter Veldhuis, \emph{{The Minimal model of
+  nonbaryonic dark matter: A Singlet scalar}},
+  \href{https://doi.org/10.1016/S0550-3213(01)00513-2}{\emph{Nucl. Phys.}
+  {\bfseries B619} (2001) 709--728},
+  [\href{https://arxiv.org/abs/hep-ph/0011335}{{\ttfamily hep-ph/0011335}}].
+
+\bibitem{Cline:2013gha}
+J.~M. Cline, K.~Kainulainen, P.~Scott and C.~Weniger, \emph{{Update on scalar
+  singlet dark matter}}, \href{https://doi.org/10.1103/PhysRevD.92.039906,
+  10.1103/PhysRevD.88.055025}{\emph{Phys. Rev.} {\bfseries D88} (2013) 055025},
+  [\href{https://arxiv.org/abs/1306.4710}{{\ttfamily 1306.4710}}].
+
+\bibitem{1965TrAlm...5...87E}
+J.~{Einasto}, \emph{{On the Construction of a Composite Model for the Galaxy
+  and on the Determination of the System of Galactic Parameters}}, {\emph{Trudy
+  Astrofizicheskogo Instituta Alma-Ata} {\bfseries 5} (1965) 87--100}.
+
+\bibitem{Navarro:1995iw}
+J.~F. Navarro, C.~S. Frenk and S.~D.~M. White, \emph{{The Structure of cold
+  dark matter halos}}, \href{https://doi.org/10.1086/177173}{\emph{Astrophys.
+  J.} {\bfseries 462} (1996) 563--575},
+  [\href{https://arxiv.org/abs/astro-ph/9508025}{{\ttfamily
+  astro-ph/9508025}}].
+
+\bibitem{Sjostrand:2006za}
+T.~Sj{\"o}strand, S.~Mrenna and P.~Z. Skands, \emph{{PYTHIA 6.4 Physics and
+  Manual}}, \href{https://doi.org/10.1088/1126-6708/2006/05/026}{\emph{JHEP}
+  {\bfseries 05} (2006) 026},
+  [\href{https://arxiv.org/abs/hep-ph/0603175}{{\ttfamily hep-ph/0603175}}].
+
+\bibitem{Cirelli:2010xx}
+M.~Cirelli, G.~Corcella, A.~Hektor, G.~Hutsi, M.~Kadastik, P.~Panci et~al.,
+  \emph{{PPPC 4 DM ID: A Poor Particle Physicist Cookbook for Dark Matter
+  Indirect Detection}}, \href{https://doi.org/10.1088/1475-7516/2012/10/E01,
+  10.1088/1475-7516/2011/03/051}{\emph{JCAP} {\bfseries 1103} (2011) 051},
+  [\href{https://arxiv.org/abs/1012.4515}{{\ttfamily 1012.4515}}].
+
+\bibitem{Gondolo:1990dk}
+P.~Gondolo and G.~Gelmini, \emph{{Cosmic abundances of stable particles:
+  Improved analysis}},
+  \href{https://doi.org/10.1016/0550-3213(91)90438-4}{\emph{Nucl. Phys.}
+  {\bfseries B360} (1991) 145--179}.
+
+\bibitem{Edsjo:1997bg}
+J.~Edsj{\"o} and P.~Gondolo, \emph{{Neutralino relic density including
+  coannihilations}},
+  \href{https://doi.org/10.1103/PhysRevD.56.1879}{\emph{Phys. Rev.} {\bfseries
+  D56} (1997) 1879--1894},
+  [\href{https://arxiv.org/abs/hep-ph/9704361}{{\ttfamily hep-ph/9704361}}].
+
+\bibitem{Edsjo:2003us}
+J.~Edsj{\"o}, M.~Schelke, P.~Ullio and P.~Gondolo, \emph{{Accurate relic
+  densities with neutralino, chargino and sfermion coannihilations in mSUGRA}},
+  \href{https://doi.org/10.1088/1475-7516/2003/04/001}{\emph{JCAP} {\bfseries
+  0304} (2003) 001}, [\href{https://arxiv.org/abs/hep-ph/0301106}{{\ttfamily
+  hep-ph/0301106}}].
+
+\bibitem{Bringmann:2009vf}
+T.~Bringmann, \emph{{Particle Models and the Small-Scale Structure of Dark
+  Matter}}, \href{https://doi.org/10.1088/1367-2630/11/10/105027}{\emph{New J.
+  Phys.} {\bfseries 11} (2009) 105027},
+  [\href{https://arxiv.org/abs/0903.0189}{{\ttfamily 0903.0189}}].
+
+\bibitem{Bergstrom:1998zs}
+L.~Bergstr{\"o}m, J.~Edsj{\"o} and P.~Ullio, \emph{{Possible indications of a
+  clumpy dark matter halo}},
+  \href{https://doi.org/10.1103/PhysRevD.58.083507}{\emph{Phys. Rev.}
+  {\bfseries D58} (1998) 083507},
+  [\href{https://arxiv.org/abs/astro-ph/9804050}{{\ttfamily
+  astro-ph/9804050}}].
+
+\bibitem{Bergstrom:1998xh}
+L.~Bergstr{\"o}m, J.~Edsj{\"o} and P.~Gondolo, \emph{{Indirect detection of
+  dark matter in km size neutrino telescopes}},
+  \href{https://doi.org/10.1103/PhysRevD.58.103519}{\emph{Phys. Rev.}
+  {\bfseries D58} (1998) 103519},
+  [\href{https://arxiv.org/abs/hep-ph/9806293}{{\ttfamily hep-ph/9806293}}].
+
+\bibitem{Baltz:1998xv}
+E.~A. Baltz and J.~Edsjo, \emph{{Positron propagation and fluxes from
+  neutralino annihilation in the halo}},
+  \href{https://doi.org/10.1103/PhysRevD.59.023511}{\emph{Phys. Rev.}
+  {\bfseries D59} (1998) 023511},
+  [\href{https://arxiv.org/abs/astro-ph/9808243}{{\ttfamily
+  astro-ph/9808243}}].
+
+\bibitem{Bergstrom:1999jc}
+L.~Bergstrom, J.~Edsjo and P.~Ullio, \emph{{Cosmic anti-protons as a probe for
+  supersymmetric dark matter?}},
+  \href{https://doi.org/10.1086/307975}{\emph{Astrophys. J.} {\bfseries 526}
+  (1999) 215--235}, [\href{https://arxiv.org/abs/astro-ph/9902012}{{\ttfamily
+  astro-ph/9902012}}].
+
+\bibitem{Bringmann:2015cpa}
+T.~Bringmann, A.~J. Galea and P.~Walia, \emph{{Leading QCD Corrections for
+  Indirect Dark Matter Searches: a Fresh Look}},
+  \href{https://doi.org/10.1103/PhysRevD.93.043529}{\emph{Phys. Rev.}
+  {\bfseries D93} (2016) 043529},
+  [\href{https://arxiv.org/abs/1510.02473}{{\ttfamily 1510.02473}}].
+
+\bibitem{Bergstrom:1995cz}
+L.~Bergstr{\"o}m and P.~Gondolo, \emph{{Limits on direct detection of
+  neutralino dark matter from b ---> s gamma decays}},
+  \href{https://doi.org/10.1016/0927-6505(96)00027-8}{\emph{Astropart. Phys.}
+  {\bfseries 5} (1996) 263--278},
+  [\href{https://arxiv.org/abs/hep-ph/9510252}{{\ttfamily hep-ph/9510252}}].
+
+\bibitem{Bergstrom:1997fh}
+L.~Bergstr{\"o}m and P.~Ullio, \emph{{Full one loop calculation of neutralino
+  annihilation into two photons}},
+  \href{https://doi.org/10.1016/S0550-3213(97)00530-0}{\emph{Nucl. Phys.}
+  {\bfseries B504} (1997) 27--44},
+  [\href{https://arxiv.org/abs/hep-ph/9706232}{{\ttfamily hep-ph/9706232}}].
+
+\bibitem{Ullio:1997ke}
+P.~Ullio and L.~Bergstr{\"o}m, \emph{{Neutralino annihilation into a photon and
+  a Z boson}}, \href{https://doi.org/10.1103/PhysRevD.57.1962}{\emph{Phys.
+  Rev.} {\bfseries D57} (1998) 1962--1971},
+  [\href{https://arxiv.org/abs/hep-ph/9707333}{{\ttfamily hep-ph/9707333}}].
+
+\bibitem{Bringmann:2007nk}
+T.~Bringmann, L.~Bergstr{\"o}m and J.~Edsj{\"o}, \emph{{New Gamma-Ray
+  Contributions to Supersymmetric Dark Matter Annihilation}},
+  \href{https://doi.org/10.1088/1126-6708/2008/01/049}{\emph{JHEP} {\bfseries
+  01} (2008) 049}, [\href{https://arxiv.org/abs/0710.3169}{{\ttfamily
+  0710.3169}}].
+
+\bibitem{Bergstrom:2008gr}
+L.~Bergstr{\"o}m, T.~Bringmann and J.~Edsj{\"o}, \emph{{New Positron Spectral
+  Features from Supersymmetric Dark Matter - a Way to Explain the PAMELA
+  Data?}}, \href{https://doi.org/10.1103/PhysRevD.78.103520}{\emph{Phys. Rev.}
+  {\bfseries D78} (2008) 103520},
+  [\href{https://arxiv.org/abs/0808.3725}{{\ttfamily 0808.3725}}].
+
+\bibitem{Bringmann:2013oja}
+T.~Bringmann and F.~Calore, \emph{{Significant Enhancement of Neutralino Dark
+  Matter Annihilation from Electroweak Bremsstrahlung}},
+  \href{https://doi.org/10.1103/PhysRevLett.112.071301}{\emph{Phys. Rev. Lett.}
+  {\bfseries 112} (2014) 071301},
+  [\href{https://arxiv.org/abs/1308.1089}{{\ttfamily 1308.1089}}].
+
+\bibitem{Bringmann:2017sko}
+T.~Bringmann, F.~Calore, A.~Galea and M.~Garny, \emph{{Electroweak and Higgs
+  Boson Internal Bremsstrahlung: General considerations for Majorana dark
+  matter annihilation and application to MSSM neutralinos}},
+  \href{https://doi.org/10.1007/JHEP09(2017)041}{\emph{JHEP} {\bfseries 09}
+  (2017) 041}, [\href{https://arxiv.org/abs/1705.03466}{{\ttfamily
+  1705.03466}}].
+
+\bibitem{Turner:1986vr}
+M.~S. Turner, \emph{{Probing the Structure of the Galactic Halo with gamma Rays
+  Produced by WIMP Annihilations}},
+  \href{https://doi.org/10.1103/PhysRevD.34.1921}{\emph{Phys. Rev.} {\bfseries
+  D34} (1986) 1921}.
+
+\bibitem{Ipser:1987ru}
+J.~R. Ipser and P.~Sikivie, \emph{{Estimates of the Density of Dark Matter Near
+  the Center of the Galaxy}},
+  \href{https://doi.org/10.1103/PhysRevD.35.3695}{\emph{Phys. Rev.} {\bfseries
+  D35} (1987) 3695}.
+
+\bibitem{Freese:1989tg}
+K.~Freese and J.~Silk, \emph{{Halo gamma-rays from cold dark matter
+  annihilation}}, \href{https://doi.org/10.1103/PhysRevD.40.3828}{\emph{Phys.
+  Rev.} {\bfseries D40} (1989) 3828--3833}.
+
+\bibitem{Berezinsky:1994wva}
+V.~Berezinsky, A.~Bottino and G.~Mignola, \emph{{High-energy gamma radiation
+  from the galactic center due to neutralino annihilation}},
+  \href{https://doi.org/10.1016/0370-2693(94)90083-3}{\emph{Phys. Lett.}
+  {\bfseries B325} (1994) 136--142},
+  [\href{https://arxiv.org/abs/hep-ph/9402215}{{\ttfamily hep-ph/9402215}}].
+
+\bibitem{Lake:1990du}
+G.~Lake, \emph{{Detectability of gamma-rays from clumps of dark matter}},
+  \href{https://doi.org/10.1038/346039a0}{\emph{Nature} {\bfseries 346} (1990)
+  39--40}.
+
+\bibitem{Silk:1992bh}
+J.~Silk and A.~Stebbins, \emph{{Clumpy cold dark matter}},
+  \href{https://doi.org/10.1086/172846}{\emph{Astrophys. J.} {\bfseries 411}
+  (1993) 439--449}.
+
+\bibitem{CalcaneoRoldan:2000yt}
+C.~Calcaneo-Roldan and B.~Moore, \emph{{The Surface brightness of dark matter:
+  Unique signatures of neutralino annihilation in the galactic halo}},
+  \href{https://doi.org/10.1103/PhysRevD.62.123005}{\emph{Phys. Rev.}
+  {\bfseries D62} (2000) 123005},
+  [\href{https://arxiv.org/abs/astro-ph/0010056}{{\ttfamily
+  astro-ph/0010056}}].
+
+\bibitem{Bergstrom:1998jj}
+L.~Bergstr{\"o}m, J.~Edsj{\"o}, P.~Gondolo and P.~Ullio, \emph{{Clumpy
+  neutralino dark matter}},
+  \href{https://doi.org/10.1103/PhysRevD.59.043506}{\emph{Phys. Rev.}
+  {\bfseries D59} (1999) 043506},
+  [\href{https://arxiv.org/abs/astro-ph/9806072}{{\ttfamily
+  astro-ph/9806072}}].
+
+\bibitem{Bergstrom:2000bk}
+L.~Bergstr{\"o}m, J.~Edsj{\"o} and C.~Gunnarsson, \emph{{Neutralino gamma-ray
+  signals from accreting halo dark matter}},
+  \href{https://doi.org/10.1103/PhysRevD.63.083515}{\emph{Phys. Rev.}
+  {\bfseries D63} (2001) 083515},
+  [\href{https://arxiv.org/abs/astro-ph/0012346}{{\ttfamily
+  astro-ph/0012346}}].
+
+\bibitem{Baltz:1999ra}
+E.~A. Baltz, C.~Briot, P.~Salati, R.~Taillet and J.~Silk, \emph{{Detection of
+  neutralino annihilation photons from external galaxies}},
+  \href{https://doi.org/10.1103/PhysRevD.61.023514}{\emph{Phys. Rev.}
+  {\bfseries D61} (2000) 023514},
+  [\href{https://arxiv.org/abs/astro-ph/9909112}{{\ttfamily
+  astro-ph/9909112}}].
+
+\bibitem{Cline:1990mr}
+D.~B. Cline and Y.-T. Gao, \emph{{Low-energy cosmic $\gamma$-rays from
+  cosmological photino annihilation}}, {\emph{Astron. Astrophys.} {\bfseries
+  231} (1990) L23--L26}.
+
+\bibitem{Gao:1991rz}
+Y.-T. Gao, F.~W. Stecker and D.~B. Cline, \emph{{The Lightest supersymmetric
+  particle and the extragalactic gamma-ray background}}, {\emph{Astron.
+  Astrophys.} {\bfseries 249} (1991) 1--4}.
+
+\bibitem{Bergstrom:2001jj}
+L.~Bergstr{\"o}m, J.~Edsj{\"o} and P.~Ullio, \emph{{Spectral gamma-ray
+  signatures of cosmological dark matter annihilation}},
+  \href{https://doi.org/10.1103/PhysRevLett.87.251301}{\emph{Phys. Rev. Lett.}
+  {\bfseries 87} (2001) 251301},
+  [\href{https://arxiv.org/abs/astro-ph/0105048}{{\ttfamily
+  astro-ph/0105048}}].
+
+\bibitem{Belanger:2012zr}
+G.~Belanger, K.~Kannike, A.~Pukhov and M.~Raidal, \emph{{$Z_3$ Scalar Singlet
+  Dark Matter}},
+  \href{https://doi.org/10.1088/1475-7516/2013/01/022}{\emph{JCAP} {\bfseries
+  1301} (2013) 022}, [\href{https://arxiv.org/abs/1211.1014}{{\ttfamily
+  1211.1014}}].
+
+\bibitem{Belanger:2014bga}
+G.~Bélanger, K.~Kannike, A.~Pukhov and M.~Raidal, \emph{{Minimal
+  semi-annihilating $\mathbb{Z}_N$ scalar dark matter}},
+  \href{https://doi.org/10.1088/1475-7516/2014/06/021}{\emph{JCAP} {\bfseries
+  1406} (2014) 021}, [\href{https://arxiv.org/abs/1403.4960}{{\ttfamily
+  1403.4960}}].
+
+\bibitem{Ko:2014nha}
+P.~Ko and Y.~Tang, \emph{{Self-interacting scalar dark matter with local $Z_3$
+  symmetry}}, \href{https://doi.org/10.1088/1475-7516/2014/05/047}{\emph{JCAP}
+  {\bfseries 1405} (2014) 047},
+  [\href{https://arxiv.org/abs/1402.6449}{{\ttfamily 1402.6449}}].
+
+\bibitem{Choi:2015bya}
+S.-M. Choi and H.~M. Lee, \emph{{SIMP dark matter with gauged Z$_{3}$
+  symmetry}}, \href{https://doi.org/10.1007/JHEP09(2015)063}{\emph{JHEP}
+  {\bfseries 09} (2015) 063},
+  [\href{https://arxiv.org/abs/1505.00960}{{\ttfamily 1505.00960}}].
+
+\bibitem{Arina:2014fna}
+C.~Arina, T.~Bringmann, J.~Silk and M.~Vollmann, \emph{{Enhanced Line Signals
+  from Annihilating Kaluza-Klein Dark Matter}},
+  \href{https://doi.org/10.1103/PhysRevD.90.083506}{\emph{Phys. Rev.}
+  {\bfseries D90} (2014) 083506},
+  [\href{https://arxiv.org/abs/1409.0007}{{\ttfamily 1409.0007}}].
+
+\bibitem{Fitzpatrick:2012ix}
+A.~L. Fitzpatrick, W.~Haxton, E.~Katz, N.~Lubbers and Y.~Xu, \emph{{The
+  Effective Field Theory of Dark Matter Direct Detection}},
+  \href{https://doi.org/10.1088/1475-7516/2013/02/004}{\emph{JCAP} {\bfseries
+  1302} (2013) 004}, [\href{https://arxiv.org/abs/1203.3542}{{\ttfamily
+  1203.3542}}].
+
+\bibitem{GondoloScopel}
+P.~Gondolo and S.~Scopel, \emph{{ }}, {\emph{{\it in prep.}} (2018) }.
+
+\bibitem{Maccio:2008pcd}
+A.~V. Maccio', A.~A. Dutton and F.~C. v.~d. Bosch, \emph{{Concentration, Spin
+  and Shape of Dark Matter Haloes as a Function of the Cosmological Model:
+  WMAP1, WMAP3 and WMAP5 results}},
+  \href{https://doi.org/10.1111/j.1365-2966.2008.14029.x}{\emph{Mon. Not. Roy.
+  Astron. Soc.} {\bfseries 391} (2008) 1940--1954},
+  [\href{https://arxiv.org/abs/0805.1926}{{\ttfamily 0805.1926}}].
+
+\bibitem{Schaye:2014tpa}
+J.~Schaye et~al., \emph{{The EAGLE project: Simulating the evolution and
+  assembly of galaxies and their environments}},
+  \href{https://doi.org/10.1093/mnras/stu2058}{\emph{Mon. Not. Roy. Astron.
+  Soc.} {\bfseries 446} (2015) 521--554},
+  [\href{https://arxiv.org/abs/1407.7040}{{\ttfamily 1407.7040}}].
+
+\bibitem{Schaller:2014uwa}
+M.~Schaller, C.~S. Frenk, R.~G. Bower, T.~Theuns, A.~Jenkins, J.~Schaye et~al.,
+  \emph{{Baryon effects on the internal structure of $\Lambda$CDM haloes in the
+  EAGLE simulations}}, \href{https://doi.org/10.1093/mnras/stv1067}{\emph{Mon.
+  Not. Roy. Astron. Soc.} {\bfseries 451} (2015) 1247--1267},
+  [\href{https://arxiv.org/abs/1409.8617}{{\ttfamily 1409.8617}}].
+
+\bibitem{Wang:2015jpa}
+L.~Wang, A.~A. Dutton, G.~S. Stinson, A.~V. Macciò, C.~Penzo, X.~Kang et~al.,
+  \emph{{NIHAO project – I. Reproducing the inefficiency of galaxy formation
+  across cosmic time with a large sample of cosmological hydrodynamical
+  simulations}}, \href{https://doi.org/10.1093/mnras/stv1937}{\emph{Mon. Not.
+  Roy. Astron. Soc.} {\bfseries 454} (2015) 83--94},
+  [\href{https://arxiv.org/abs/1503.04818}{{\ttfamily 1503.04818}}].
+
+\bibitem{Tollet:2015gqa}
+E.~Tollet et~al., \emph{{NIHAO – IV: core creation and destruction in dark
+  matter density profiles across cosmic time}},
+  \href{https://doi.org/10.1093/mnras/stv2856}{\emph{Mon. Not. Roy. Astron.
+  Soc.} {\bfseries 456} (2016) 3542--3552},
+  [\href{https://arxiv.org/abs/1507.03590}{{\ttfamily 1507.03590}}].
+
+\bibitem{Bringmann:2006mu}
+T.~Bringmann and S.~Hofmann, \emph{{Thermal decoupling of WIMPs from first
+  principles}}, \href{https://doi.org/10.1088/1475-7516/2007/04/016,
+  10.1088/1475-7516/2007/04/016; 10.1088/1475-7516/2016/03/E02,
+  10.1088/1475-7516/2016/03/E02}{\emph{JCAP} {\bfseries 0704} (2007) 016},
+  [\href{https://arxiv.org/abs/hep-ph/0612238}{{\ttfamily hep-ph/0612238}}].
+
+\bibitem{Binder:2017rgn}
+T.~Binder, T.~Bringmann, M.~Gustafsson and A.~Hryczuk, \emph{{Early kinetic
+  decoupling of dark matter: when the standard way of calculating the thermal
+  relic density fails}},
+  \href{https://doi.org/10.1103/PhysRevD.96.115010}{\emph{Phys. Rev.}
+  {\bfseries D96} (2017) 115010},
+  [\href{https://arxiv.org/abs/1706.07433}{{\ttfamily 1706.07433}}].
+
+\bibitem{Bringmann:2016ilk}
+T.~Bringmann, H.~T. Ihle, J.~Kersten and P.~Walia, \emph{{Suppressing structure
+  formation at dwarf galaxy scales and below: late kinetic decoupling as a
+  compelling alternative to warm dark matter}},
+  \href{https://doi.org/10.1103/PhysRevD.94.103529}{\emph{Phys. Rev.}
+  {\bfseries D94} (2016) 103529},
+  [\href{https://arxiv.org/abs/1603.04884}{{\ttfamily 1603.04884}}].
+
+\bibitem{KasaharaPHD}
+J.~Kasahara, \emph{Neutralino Dark Matter: The Mass of the smallest Halo and
+  the golden Region}, Ph.D. thesis, University of Utah, 2009.
+
+\bibitem{Gondolo:2012vh}
+P.~Gondolo, J.~Hisano and K.~Kadota, \emph{{The Effect of quark interactions on
+  dark matter kinetic decoupling and the mass of the smallest dark halos}},
+  \href{https://doi.org/10.1103/PhysRevD.86.083523}{\emph{Phys. Rev.}
+  {\bfseries D86} (2012) 083523},
+  [\href{https://arxiv.org/abs/1205.1914}{{\ttfamily 1205.1914}}].
+
+\bibitem{Green:2005fa}
+A.~M. Green, S.~Hofmann and D.~J. Schwarz, \emph{{The First wimpy halos}},
+  \href{https://doi.org/10.1088/1475-7516/2005/08/003}{\emph{JCAP} {\bfseries
+  0508} (2005) 003}, [\href{https://arxiv.org/abs/astro-ph/0503387}{{\ttfamily
+  astro-ph/0503387}}].
+
+\bibitem{Loeb:2005pm}
+A.~Loeb and M.~Zaldarriaga, \emph{{The Small-scale power spectrum of cold dark
+  matter}}, \href{https://doi.org/10.1103/PhysRevD.71.103520}{\emph{Phys. Rev.}
+  {\bfseries D71} (2005) 103520},
+  [\href{https://arxiv.org/abs/astro-ph/0504112}{{\ttfamily
+  astro-ph/0504112}}].
+
+\bibitem{Bertschinger:2006nq}
+E.~Bertschinger, \emph{{The Effects of Cold Dark Matter Decoupling and Pair
+  Annihilation on Cosmological Perturbations}},
+  \href{https://doi.org/10.1103/PhysRevD.74.063509}{\emph{Phys. Rev.}
+  {\bfseries D74} (2006) 063509},
+  [\href{https://arxiv.org/abs/astro-ph/0607319}{{\ttfamily
+  astro-ph/0607319}}].
+
+\bibitem{Diemand:2005vz}
+J.~Diemand, B.~Moore and J.~Stadel, \emph{{Earth-mass dark-matter haloes as the
+  first structures in the early Universe}},
+  \href{https://doi.org/10.1038/nature03270}{\emph{Nature} {\bfseries 433}
+  (2005) 389--391}, [\href{https://arxiv.org/abs/astro-ph/0501589}{{\ttfamily
+  astro-ph/0501589}}].
+
+\bibitem{Griest:1990kh}
+K.~Griest and D.~Seckel, \emph{{Three exceptions in the calculation of relic
+  abundances}}, \href{https://doi.org/10.1103/PhysRevD.43.3191}{\emph{Phys.
+  Rev.} {\bfseries D43} (1991) 3191--3203}.
+
+\bibitem{Srednicki:1988ce}
+M.~Srednicki, R.~Watkins and K.~A. Olive, \emph{{Calculations of Relic
+  Densities in the Early Universe}},
+  \href{https://doi.org/10.1016/0550-3213(88)90099-5}{\emph{Nucl. Phys.}
+  {\bfseries B310} (1988) 693}.
+
+\bibitem{Drees:2015exa}
+M.~Drees, F.~Hajkarim and E.~R. Schmitz, \emph{{The Effects of QCD Equation of
+  State on the Relic Density of WIMP Dark Matter}},
+  \href{https://doi.org/10.1088/1475-7516/2015/06/025}{\emph{JCAP} {\bfseries
+  1506} (2015) 025}, [\href{https://arxiv.org/abs/1503.03513}{{\ttfamily
+  1503.03513}}].
+
+\bibitem{Krauss:1985unpub}
+L.~M. Krauss.
+
+\bibitem{Press:1985ug}
+W.~H. Press and D.~N. Spergel, \emph{{Capture by the sun of a galactic
+  population of weakly interacting massive particles}},
+  \href{https://doi.org/10.1086/163485}{\emph{Astrophys. J.} {\bfseries 296}
+  (1985) 679--684}.
+
+\bibitem{Silk:1985ax}
+J.~Silk, K.~A. Olive and M.~Srednicki, \emph{{The Photino, the Sun and
+  High-Energy Neutrinos}},
+  \href{https://doi.org/10.1103/PhysRevLett.55.257}{\emph{Phys. Rev. Lett.}
+  {\bfseries 55} (1985) 257--259}.
+
+\bibitem{Krauss:1985ks}
+L.~M. Krauss, K.~Freese, W.~Press and D.~Spergel, \emph{{Cold dark matter
+  candidates and the solar neutrino problem}},
+  \href{https://doi.org/10.1086/163767}{\emph{Astrophys. J.} {\bfseries 299}
+  (1985) 1001}.
+
+\bibitem{Krauss:1985aaa}
+L.~M. Krauss, M.~Srednicki and F.~Wilczek, \emph{{Solar System Constraints and
+  Signatures for Dark Matter Candidates}},
+  \href{https://doi.org/10.1103/PhysRevD.33.2079}{\emph{Phys. Rev.} {\bfseries
+  D33} (1986) 2079--2083}.
+
+\bibitem{Gaisser:1986ha}
+T.~K. Gaisser, G.~Steigman and S.~Tilav, \emph{{Limits on Cold Dark Matter
+  Candidates from Deep Underground Detectors}},
+  \href{https://doi.org/10.1103/PhysRevD.34.2206}{\emph{Phys. Rev.} {\bfseries
+  D34} (1986) 2206}.
+
+\bibitem{Griest:1986yu}
+K.~Griest and D.~Seckel, \emph{{Cosmic Asymmetry, Neutrinos and the Sun}},
+  \href{https://doi.org/10.1016/0550-3213(87)90293-8,
+  10.1016/0550-3213(88)90409-9}{\emph{Nucl. Phys.} {\bfseries B283} (1987)
+  681--705}.
+
+\bibitem{Hagelin:1986gv}
+J.~S. Hagelin, K.~W. Ng and K.~A. Olive, \emph{{A High-energy Neutrino
+  Signature From Supersymmetric Relics}},
+  \href{https://doi.org/10.1016/0370-2693(86)91205-0}{\emph{Phys. Lett.}
+  {\bfseries B180} (1986) 375--380}.
+
+\bibitem{Freese:1985qw}
+K.~Freese, \emph{{Can Scalar Neutrinos Or Massive Dirac Neutrinos Be the
+  Missing Mass?}},
+  \href{https://doi.org/10.1016/0370-2693(86)90349-7}{\emph{Phys. Lett.}
+  {\bfseries 167B} (1986) 295--300}.
+
+\bibitem{Kamionkowski:1991nj}
+M.~Kamionkowski, \emph{{Energetic neutrinos from heavy neutralino annihilation
+  in the sun}}, \href{https://doi.org/10.1103/PhysRevD.44.3021}{\emph{Phys.
+  Rev.} {\bfseries D44} (1991) 3021--3042}.
+
+\bibitem{Halzen:1991kh}
+F.~Halzen, T.~Stelzer and M.~Kamionkowski, \emph{{Signatures of dark matter in
+  underground detectors}},
+  \href{https://doi.org/10.1103/PhysRevD.45.4439}{\emph{Phys. Rev.} {\bfseries
+  D45} (1992) 4439--4442}.
+
+\bibitem{Bottino:1991dy}
+A.~Bottino, V.~de~Alfaro, N.~Fornengo, G.~Mignola and M.~Pignone,
+  \emph{{Indirect search for neutralinos at neutrino telescopes}},
+  \href{https://doi.org/10.1016/0370-2693(91)90013-G}{\emph{Phys. Lett.}
+  {\bfseries B265} (1991) 57--63}.
+
+\bibitem{Bottino:1994xp}
+A.~Bottino, N.~Fornengo, G.~Mignola and L.~Moscoso, \emph{{Signals of
+  neutralino dark matter from earth and sun}},
+  \href{https://doi.org/10.1016/0927-6505(94)00028-2}{\emph{Astropart. Phys.}
+  {\bfseries 3} (1995) 65--76},
+  [\href{https://arxiv.org/abs/hep-ph/9408391}{{\ttfamily hep-ph/9408391}}].
+
+\bibitem{Gandhi:1993ce}
+R.~Gandhi, J.~L. Lopez, D.~V. Nanopoulos, K.-j. Yuan and A.~Zichichi,
+  \emph{{Scrutinizing supergravity models through neutrino telescopes}},
+  \href{https://doi.org/10.1103/PhysRevD.49.3691}{\emph{Phys. Rev.} {\bfseries
+  D49} (1994) 3691--3703},
+  [\href{https://arxiv.org/abs/astro-ph/9309048}{{\ttfamily
+  astro-ph/9309048}}].
+
+\bibitem{Bergstrom:1996kp}
+L.~Bergstr{\"o}m, J.~Edsj{\"o} and P.~Gondolo, \emph{{Indirect neutralino
+  detection rates in neutrino telescopes}},
+  \href{https://doi.org/10.1103/PhysRevD.55.1765}{\emph{Phys. Rev.} {\bfseries
+  D55} (1997) 1765--1770},
+  [\href{https://arxiv.org/abs/hep-ph/9607237}{{\ttfamily hep-ph/9607237}}].
+
+\bibitem{Halzen:1996su}
+F.~Halzen, \emph{{Status of neutrino astronomy: The Quest for kilometer scale
+  instruments}}, {\emph{Comments Nucl. Part. Phys.} {\bfseries 22} (1997)
+  155--170}, [\href{https://arxiv.org/abs/astro-ph/9701029}{{\ttfamily
+  astro-ph/9701029}}].
+
+\bibitem{Ritz:1987mh}
+S.~Ritz and D.~Seckel, \emph{{Detailed Neutrino Spectra From Cold Dark Matter
+  Annihilations in the Sun}},
+  \href{https://doi.org/10.1016/0550-3213(88)90660-8}{\emph{Nucl. Phys.}
+  {\bfseries B304} (1988) 877--908}.
+
+\bibitem{Giudice:1988vs}
+G.~F. Giudice and E.~Roulet, \emph{{Energetic Neutrinos From Supersymmetric
+  Dark Matter}},
+  \href{https://doi.org/10.1016/0550-3213(89)90039-4}{\emph{Nucl. Phys.}
+  {\bfseries B316} (1989) 429--442}.
+
+\bibitem{Drees:1993bh}
+M.~Drees, G.~Jungman, M.~Kamionkowski and M.~M. Nojiri, \emph{{Neutralino
+  annihilation into gluons}},
+  \href{https://doi.org/10.1103/PhysRevD.49.636}{\emph{Phys. Rev.} {\bfseries
+  D49} (1994) 636--647},
+  [\href{https://arxiv.org/abs/hep-ph/9306325}{{\ttfamily hep-ph/9306325}}].
+
+\bibitem{Jungman:1994jr}
+G.~Jungman and M.~Kamionkowski, \emph{{Neutrinos from particle decay in the sun
+  and earth}}, \href{https://doi.org/10.1103/PhysRevD.51.328}{\emph{Phys. Rev.}
+  {\bfseries D51} (1995) 328--340},
+  [\href{https://arxiv.org/abs/hep-ph/9407351}{{\ttfamily hep-ph/9407351}}].
+
+\bibitem{Berezinsky:1996ga}
+V.~Berezinsky, A.~Bottino, J.~R. Ellis, N.~Fornengo, G.~Mignola and S.~Scopel,
+  \emph{{Searching for relic neutralinos using neutrino telescopes}},
+  \href{https://doi.org/10.1016/0927-6505(96)00035-7}{\emph{Astropart. Phys.}
+  {\bfseries 5} (1996) 333--352},
+  [\href{https://arxiv.org/abs/hep-ph/9603342}{{\ttfamily hep-ph/9603342}}].
+
+\bibitem{Kamionkowski:1994dp}
+M.~Kamionkowski, K.~Griest, G.~Jungman and B.~Sadoulet, \emph{{Model
+  independent comparison of direct versus indirect detection of supersymmetric
+  dark matter}}, \href{https://doi.org/10.1103/PhysRevLett.74.5174}{\emph{Phys.
+  Rev. Lett.} {\bfseries 74} (1995) 5174--5177},
+  [\href{https://arxiv.org/abs/hep-ph/9412213}{{\ttfamily hep-ph/9412213}}].
+
+\bibitem{Edsjo:1995zc}
+J.~Edsj{\"o} and P.~Gondolo, \emph{{WIMP mass determination with neutrino
+  telescopes}}, \href{https://doi.org/10.1016/0370-2693(95)00930-J}{\emph{Phys.
+  Lett.} {\bfseries B357} (1995) 595--601},
+  [\href{https://arxiv.org/abs/hep-ph/9504283}{{\ttfamily hep-ph/9504283}}].
+
+\bibitem{Bergstrom:1997tp}
+L.~Bergstr{\"o}m, J.~Edsj{\"o} and M.~Kamionkowski, \emph{{Astrophysical
+  neutrino detection with angular and energy resolution}},
+  \href{https://doi.org/10.1016/S0927-6505(97)00013-3}{\emph{Astropart. Phys.}
+  {\bfseries 7} (1997) 147--160},
+  [\href{https://arxiv.org/abs/astro-ph/9702037}{{\ttfamily
+  astro-ph/9702037}}].
+
+\bibitem{Jungman:1995df}
+G.~Jungman, M.~Kamionkowski and K.~Griest, \emph{{Supersymmetric dark matter}},
+  \href{https://doi.org/10.1016/0370-1573(95)00058-5}{\emph{Phys. Rept.}
+  {\bfseries 267} (1996) 195--373},
+  [\href{https://arxiv.org/abs/hep-ph/9506380}{{\ttfamily hep-ph/9506380}}].
+
+\bibitem{Gould:1987ir}
+A.~Gould, \emph{{Resonant Enhancements in WIMP Capture by the Earth}},
+  \href{https://doi.org/10.1086/165653}{\emph{Astrophys. J.} {\bfseries 321}
+  (1987) 571}.
+
+\bibitem{Bahcall:2000nu}
+J.~N. Bahcall, M.~H. Pinsonneault and S.~Basu, \emph{{Solar models: Current
+  epoch and time dependences, neutrinos, and helioseismological properties}},
+  \href{https://doi.org/10.1086/321493}{\emph{Astrophys. J.} {\bfseries 555}
+  (2001) 990--1012}, [\href{https://arxiv.org/abs/astro-ph/0010346}{{\ttfamily
+  astro-ph/0010346}}].
+
+\bibitem{2003TrGeo...2..547M}
+W.~F. {McDonough}, \emph{{Compositional Model for the Earth's Core}},
+  \href{https://doi.org/10.1016/B0-08-043751-6/02015-6}{\emph{Treatise on
+  Geochemistry} {\bfseries 2} (Dec., 2003) 568}.
+
+\bibitem{EncBrit}
+\emph{The Earth: its properties, composition, and structure}.
+\newblock Encyclop{\ae}dia Britannica, Inc., 1999.
+
+\bibitem{Gould:1991aa}
+A.~{Gould}, \emph{{Gravitational diffusion of solar system WIMPs}},
+  \href{https://doi.org/10.1086/169726}{\emph{\apj} {\bfseries 368} (Feb.,
+  1991) 610--615}.
+
+\bibitem{Farinella:1994aa}
+P.~{Farinella}, C.~{Froeschl{\'e}}, C.~{Froeschl{\'e}}, R.~{Gonczi}, G.~{Hahn},
+  A.~{Morbidelli} et~al., \emph{{Asteroids falling into the Sun}},
+  \href{https://doi.org/10.1038/371314a0}{\emph{\nat} {\bfseries 371} (Sept.,
+  1994) 314--317}.
+
+\bibitem{Gould:1999je}
+A.~Gould and S.~M. Khairul~Alam, \emph{{Can heavy WIMPs be captured by the
+  earth?}}, \href{https://doi.org/10.1086/319040}{\emph{Astrophys. J.}
+  {\bfseries 549} (2001) 72--75},
+  [\href{https://arxiv.org/abs/astro-ph/9911288}{{\ttfamily
+  astro-ph/9911288}}].
+
+\bibitem{Lundberg:2004dn}
+J.~Lundberg and J.~Edsj{\"o}, \emph{{WIMP diffusion in the solar system
+  including solar depletion and its effect on earth capture rates}},
+  \href{https://doi.org/10.1103/PhysRevD.69.123505}{\emph{Phys. Rev.}
+  {\bfseries D69} (2004) 123505},
+  [\href{https://arxiv.org/abs/astro-ph/0401113}{{\ttfamily
+  astro-ph/0401113}}].
+
+\bibitem{Edsjo:2007ws}
+J.~Edsj{\"o}, ``{WimpSim Neutrino Monte Carlo}.''
+  \url{http://www.fysik.su.se/~edsjo/wimpsim/}, 2007.
+
+\bibitem{Edsjo:1997hp}
+J.~Edsj{\"o}, \emph{{Aspects of neutrino detection of neutralino dark matter}},
+  Ph.D. thesis, Uppsala U., 1997.
+\newblock \href{https://arxiv.org/abs/hep-ph/9704384}{{\ttfamily
+  hep-ph/9704384}}.
+
+\bibitem{Edsjo:2007ns}
+J.~Edsj{\"o}, ``{NuSigma Neutrino Interaction Monte Carlo}.''
+  \url{http://www.fysik.su.se/~edsjo/wimpsim/}, 2007.
+
+\bibitem{Groom:2000in}
+{\scshape Particle Data Group} collaboration, D.~E. Groom et~al., \emph{{Review
+  of particle physics. Particle Data Group}}, {\emph{Eur. Phys. J.} {\bfseries
+  C15} (2000) 1--878}.
+
+\bibitem{Blennow:2007tw}
+M.~Blennow, J.~Edsj{\"o} and T.~Ohlsson, \emph{{Neutrinos from WIMP
+  annihilations using a full three-flavor Monte Carlo}},
+  \href{https://doi.org/10.1088/1475-7516/2008/01/021}{\emph{JCAP} {\bfseries
+  0801} (2008) 021}, [\href{https://arxiv.org/abs/0709.3898}{{\ttfamily
+  0709.3898}}].
+
+\bibitem{Spergel:1999mh}
+D.~N. Spergel and P.~J. Steinhardt, \emph{{Observational evidence for
+  selfinteracting cold dark matter}},
+  \href{https://doi.org/10.1103/PhysRevLett.84.3760}{\emph{Phys. Rev. Lett.}
+  {\bfseries 84} (2000) 3760--3763},
+  [\href{https://arxiv.org/abs/astro-ph/9909386}{{\ttfamily
+  astro-ph/9909386}}].
+
+\bibitem{Loeb:2010gj}
+A.~Loeb and N.~Weiner, \emph{{Cores in Dwarf Galaxies from Dark Matter with a
+  Yukawa Potential}},
+  \href{https://doi.org/10.1103/PhysRevLett.106.171302}{\emph{Phys. Rev. Lett.}
+  {\bfseries 106} (2011) 171302},
+  [\href{https://arxiv.org/abs/1011.6374}{{\ttfamily 1011.6374}}].
+
+\bibitem{Vogelsberger:2012ku}
+M.~Vogelsberger, J.~Zavala and A.~Loeb, \emph{{Subhaloes in Self-Interacting
+  Galactic Dark Matter Haloes}},
+  \href{https://doi.org/10.1111/j.1365-2966.2012.21182.x}{\emph{Mon. Not. Roy.
+  Astron. Soc.} {\bfseries 423} (2012) 3740},
+  [\href{https://arxiv.org/abs/1201.5892}{{\ttfamily 1201.5892}}].
+
+\bibitem{Peter:2012jh}
+A.~H.~G. Peter, M.~Rocha, J.~S. Bullock and M.~Kaplinghat, \emph{{Cosmological
+  Simulations with Self-Interacting Dark Matter II: Halo Shapes vs.
+  Observations}}, \href{https://doi.org/10.1093/mnras/sts535}{\emph{Mon. Not.
+  Roy. Astron. Soc.} {\bfseries 430} (2013) 105},
+  [\href{https://arxiv.org/abs/1208.3026}{{\ttfamily 1208.3026}}].
+
+\bibitem{Zavala:2012us}
+J.~Zavala, M.~Vogelsberger and M.~G. Walker, \emph{{Constraining
+  Self-Interacting Dark Matter with the Milky Way's dwarf spheroidals}},
+  \href{https://doi.org/10.1093/mnrasl/sls053}{\emph{Mon. Not. Roy. Astron.
+  Soc.} {\bfseries 431} (2013) L20--L24},
+  [\href{https://arxiv.org/abs/1211.6426}{{\ttfamily 1211.6426}}].
+
+\bibitem{Aarssen:2012fx}
+L.~G. van~den Aarssen, T.~Bringmann and C.~Pfrommer, \emph{{Is dark matter with
+  long-range interactions a solution to all small-scale problems of
+  $\Lambda$CDM cosmology?}},
+  \href{https://doi.org/10.1103/PhysRevLett.109.231301}{\emph{Phys. Rev. Lett.}
+  {\bfseries 109} (2012) 231301},
+  [\href{https://arxiv.org/abs/1205.5809}{{\ttfamily 1205.5809}}].
+
+\bibitem{Elbert:2014bma}
+O.~D. Elbert, J.~S. Bullock, S.~Garrison-Kimmel, M.~Rocha, J.~Onorbe and
+  A.~H.~G. Peter, \emph{{Core formation in dwarf haloes with self-interacting
+  dark matter: no fine-tuning necessary}},
+  \href{https://doi.org/10.1093/mnras/stv1470}{\emph{Mon. Not. Roy. Astron.
+  Soc.} {\bfseries 453} (2015) 29--37},
+  [\href{https://arxiv.org/abs/1412.1477}{{\ttfamily 1412.1477}}].
+
+\bibitem{Kamada:2016euw}
+A.~Kamada, M.~Kaplinghat, A.~B. Pace and H.-B. Yu, \emph{{How the
+  Self-Interacting Dark Matter Model Explains the Diverse Galactic Rotation
+  Curves}}, \href{https://doi.org/10.1103/PhysRevLett.119.111102}{\emph{Phys.
+  Rev. Lett.} {\bfseries 119} (2017) 111102},
+  [\href{https://arxiv.org/abs/1611.02716}{{\ttfamily 1611.02716}}].
+
+\bibitem{Robertson:2017mgj}
+A.~Robertson et~al., \emph{{The diverse density profiles of galaxy clusters
+  with self-interacting dark matter plus baryons}},
+  \href{https://doi.org/10.1093/mnrasl/sly024}{\emph{Mon. Not. Roy. Astron.
+  Soc.} {\bfseries 476} (2018) L20--L24},
+  [\href{https://arxiv.org/abs/1711.09096}{{\ttfamily 1711.09096}}].
+
+\bibitem{Bullock:2017xww}
+J.~S. Bullock and M.~Boylan-Kolchin, \emph{{Small-Scale Challenges to the
+  $\Lambda$CDM Paradigm}},
+  \href{https://doi.org/10.1146/annurev-astro-091916-055313}{\emph{Ann. Rev.
+  Astron. Astrophys.} {\bfseries 55} (2017) 343--387},
+  [\href{https://arxiv.org/abs/1707.04256}{{\ttfamily 1707.04256}}].
+
+\bibitem{Flores:1994gz}
+R.~A. Flores and J.~R. Primack, \emph{{Observational and theoretical
+  constraints on singular dark matter halos}},
+  \href{https://doi.org/10.1086/187350}{\emph{Astrophys. J.} {\bfseries 427}
+  (1994) L1--4}, [\href{https://arxiv.org/abs/astro-ph/9402004}{{\ttfamily
+  astro-ph/9402004}}].
+
+\bibitem{Moore:1994yx}
+B.~Moore, \emph{{Evidence against dissipationless dark matter from observations
+  of galaxy haloes}}, \href{https://doi.org/10.1038/370629a0}{\emph{Nature}
+  {\bfseries 370} (1994) 629}.
+
+\bibitem{BoylanKolchin:2011de}
+M.~Boylan-Kolchin, J.~S. Bullock and M.~Kaplinghat, \emph{{Too big to fail? The
+  puzzling darkness of massive Milky Way subhaloes}},
+  \href{https://doi.org/10.1111/j.1745-3933.2011.01074.x}{\emph{Mon. Not. Roy.
+  Astron. Soc.} {\bfseries 415} (2011) L40},
+  [\href{https://arxiv.org/abs/1103.0007}{{\ttfamily 1103.0007}}].
+
+\bibitem{BoylanKolchin:2011dk}
+M.~Boylan-Kolchin, J.~S. Bullock and M.~Kaplinghat, \emph{{The Milky Way's
+  bright satellites as an apparent failure of LCDM}},
+  \href{https://doi.org/10.1111/j.1365-2966.2012.20695.x}{\emph{Mon. Not. Roy.
+  Astron. Soc.} {\bfseries 422} (2012) 1203--1218},
+  [\href{https://arxiv.org/abs/1111.2048}{{\ttfamily 1111.2048}}].
+
+\bibitem{Oman:2015xda}
+K.~A. Oman et~al., \emph{{The unexpected diversity of dwarf galaxy rotation
+  curves}}, \href{https://doi.org/10.1093/mnras/stv1504}{\emph{Mon. Not. Roy.
+  Astron. Soc.} {\bfseries 452} (2015) 3650--3665},
+  [\href{https://arxiv.org/abs/1504.01437}{{\ttfamily 1504.01437}}].
+
+\bibitem{Oman:2016zjn}
+K.~A. Oman, J.~F. Navarro, L.~V. Sales, A.~Fattahi, C.~S. Frenk, T.~Sawala
+  et~al., \emph{{Missing dark matter in dwarf galaxies?}},
+  \href{https://doi.org/10.1093/mnras/stw1251}{\emph{Mon. Not. Roy. Astron.
+  Soc.} {\bfseries 460} (2016) 3610--3623},
+  [\href{https://arxiv.org/abs/1601.01026}{{\ttfamily 1601.01026}}].
+
+\bibitem{Moore:1999nt}
+B.~Moore, S.~Ghigna, F.~Governato, G.~Lake, T.~R. Quinn, J.~Stadel et~al.,
+  \emph{{Dark matter substructure within galactic halos}},
+  \href{https://doi.org/10.1086/312287}{\emph{Astrophys. J.} {\bfseries 524}
+  (1999) L19--L22}, [\href{https://arxiv.org/abs/astro-ph/9907411}{{\ttfamily
+  astro-ph/9907411}}].
+
+\bibitem{Klypin:1999uc}
+A.~A. Klypin, A.~V. Kravtsov, O.~Valenzuela and F.~Prada, \emph{{Where are the
+  missing Galactic satellites?}},
+  \href{https://doi.org/10.1086/307643}{\emph{Astrophys. J.} {\bfseries 522}
+  (1999) 82--92}, [\href{https://arxiv.org/abs/astro-ph/9901240}{{\ttfamily
+  astro-ph/9901240}}].
+
+\bibitem{Tulin:2013teo}
+S.~Tulin, H.-B. Yu and K.~M. Zurek, \emph{{Beyond Collisionless Dark Matter:
+  Particle Physics Dynamics for Dark Matter Halo Structure}},
+  \href{https://doi.org/10.1103/PhysRevD.87.115007}{\emph{Phys. Rev.}
+  {\bfseries D87} (2013) 115007},
+  [\href{https://arxiv.org/abs/1302.3898}{{\ttfamily 1302.3898}}].
+
+\bibitem{Kahlhoefer:2017umn}
+F.~Kahlhoefer, K.~Schmidt-Hoberg and S.~Wild, \emph{{Dark matter
+  self-interactions from a general spin-0 mediator}},
+  \href{https://doi.org/10.1088/1475-7516/2017/08/003}{\emph{JCAP} {\bfseries
+  1708} (2017) 003}, [\href{https://arxiv.org/abs/1704.02149}{{\ttfamily
+  1704.02149}}].
+
+\bibitem{Tulin:2017ara}
+S.~Tulin and H.-B. Yu, \emph{{Dark Matter Self-interactions and Small Scale
+  Structure}}, \href{https://doi.org/10.1016/j.physrep.2017.11.004}{\emph{Phys.
+  Rept.} {\bfseries 730} (2018) 1--57},
+  [\href{https://arxiv.org/abs/1705.02358}{{\ttfamily 1705.02358}}].
+
+\bibitem{Feng:2009hw}
+J.~L. Feng, M.~Kaplinghat and H.-B. Yu, \emph{{Halo Shape and Relic Density
+  Exclusions of Sommerfeld-Enhanced Dark Matter Explanations of Cosmic Ray
+  Excesses}}, \href{https://doi.org/10.1103/PhysRevLett.104.151301}{\emph{Phys.
+  Rev. Lett.} {\bfseries 104} (2010) 151301},
+  [\href{https://arxiv.org/abs/0911.0422}{{\ttfamily 0911.0422}}].
+
+\bibitem{Cyr-Racine:2015ihg}
+F.-Y. Cyr-Racine, K.~Sigurdson, J.~Zavala, T.~Bringmann, M.~Vogelsberger and
+  C.~Pfrommer, \emph{{ETHOS‚Äîan effective theory of structure formation:
+  From dark particle physics to the matter distribution of the Universe}},
+  \href{https://doi.org/10.1103/PhysRevD.93.123527}{\emph{Phys. Rev.}
+  {\bfseries D93} (2016) 123527},
+  [\href{https://arxiv.org/abs/1512.05344}{{\ttfamily 1512.05344}}].
+
+\bibitem{Khrapak:2003kjw}
+S.~A. Khrapak, A.~V. Ivlev, G.~E. Morfill and S.~K. Zhdanov, \emph{{Scattering
+  in the Attractive Yukawa Potential in the Limit of Strong Interaction}},
+  \href{https://doi.org/10.1103/PhysRevLett.90.225002}{\emph{Phys. Rev. Lett.}
+  {\bfseries 90} (2003) 225002}.
+
+\bibitem{PhysRevE.70.056405}
+S.~A. Khrapak, A.~V. Ivlev and G.~E. Morfill, \emph{Momentum transfer in
+  complex plasmas},
+  \href{https://doi.org/10.1103/PhysRevE.70.056405}{\emph{Phys. Rev. E}
+  {\bfseries 70} (Nov, 2004) 056405}.
+
+\bibitem{Luke:1969:SFTb}
+Y.~L. Luke, \emph{The Special Functions and Their Approximations}, vol.~II of
+  \emph{Mathematics in Science and Engineering, Volume 53-II, Editor: Richard
+  Bellman}.
+\newblock 1969.
+
+\bibitem{Chetyrkin:2000yt}
+K.~G. Chetyrkin, J.~H. Kuhn and M.~Steinhauser, \emph{{RunDec: A Mathematica
+  package for running and decoupling of the strong coupling and quark masses}},
+  \href{https://doi.org/10.1016/S0010-4655(00)00155-7}{\emph{Comput. Phys.
+  Commun.} {\bfseries 133} (2000) 43--65},
+  [\href{https://arxiv.org/abs/hep-ph/0004189}{{\ttfamily hep-ph/0004189}}].
+
+\bibitem{Haber:1984rc}
+H.~E. Haber and G.~L. Kane, \emph{{The Search for Supersymmetry: Probing
+  Physics Beyond the Standard Model}},
+  \href{https://doi.org/10.1016/0370-1573(85)90051-1}{\emph{Phys. Rept.}
+  {\bfseries 117} (1985) 75--263}.
+
+\bibitem{Gunion:1984yn}
+J.~F. Gunion and H.~E. Haber, \emph{{Higgs Bosons in Supersymmetric Models.
+  1.}}, \href{https://doi.org/10.1016/0550-3213(86)90340-8,
+  10.1016/0550-3213(93)90653-7}{\emph{Nucl. Phys.} {\bfseries B272} (1986) 1}.
+
+\bibitem{Paige:2003mg}
+F.~E. Paige, S.~D. Protopopescu, H.~Baer and X.~Tata, \emph{{ISAJET 7.69: A
+  Monte Carlo event generator for pp, anti-p p, and e+e- reactions}},
+  \href{https://arxiv.org/abs/hep-ph/0312045}{{\ttfamily hep-ph/0312045}}.
+
+\bibitem{isajet_www}
+\url{http://www.phy.bnl.gov/\~isajet}.
+
+\bibitem{Skands:2003cj}
+P.~Z. Skands et~al., \emph{{SUSY Les Houches accord: Interfacing SUSY spectrum
+  calculators, decay packages, and event generators}},
+  \href{https://doi.org/10.1088/1126-6708/2004/07/036}{\emph{JHEP} {\bfseries
+  07} (2004) 036}, [\href{https://arxiv.org/abs/hep-ph/0311123}{{\ttfamily
+  hep-ph/0311123}}].
+
+\bibitem{Allanach:2008qq}
+B.~C. Allanach et~al., \emph{{SUSY Les Houches Accord 2}},
+  \href{https://doi.org/10.1016/j.cpc.2008.08.004}{\emph{Comput. Phys. Commun.}
+  {\bfseries 180} (2009) 8--25},
+  [\href{https://arxiv.org/abs/0801.0045}{{\ttfamily 0801.0045}}].
+
+\bibitem{Drees:1996pk}
+M.~Drees, M.~M. Nojiri, D.~P. Roy and Y.~Yamada, \emph{{Light Higgsino dark
+  matter}}, \href{https://doi.org/10.1103/PhysRevD.64.039901,
+  10.1103/PhysRevD.56.276}{\emph{Phys. Rev.} {\bfseries D56} (1997) 276--290},
+  [\href{https://arxiv.org/abs/hep-ph/9701219}{{\ttfamily hep-ph/9701219}}].
+
+\bibitem{Pierce:1993gj}
+D.~Pierce and A.~Papadopoulos, \emph{{Radiative corrections to neutralino and
+  chargino masses in the minimal supersymmetric model}},
+  \href{https://doi.org/10.1103/PhysRevD.50.565}{\emph{Phys. Rev.} {\bfseries
+  D50} (1994) 565--570},
+  [\href{https://arxiv.org/abs/hep-ph/9312248}{{\ttfamily hep-ph/9312248}}].
+
+\bibitem{Lahanas:1993ib}
+A.~B. Lahanas, K.~Tamvakis and N.~D. Tracas, \emph{{One loop corrections to the
+  neutralino sector and radiative electroweak breaking in the MSSM}},
+  \href{https://doi.org/10.1016/0370-2693(94)90211-9}{\emph{Phys. Lett.}
+  {\bfseries B324} (1994) 387--396},
+  [\href{https://arxiv.org/abs/hep-ph/9312251}{{\ttfamily hep-ph/9312251}}].
+
+\bibitem{Heinemeyer:1998yj}
+S.~Heinemeyer, W.~Hollik and G.~Weiglein, \emph{{FeynHiggs: A Program for the
+  calculation of the masses of the neutral CP even Higgs bosons in the MSSM}},
+  \href{https://doi.org/10.1016/S0010-4655(99)00364-1}{\emph{Comput. Phys.
+  Commun.} {\bfseries 124} (2000) 76--89},
+  [\href{https://arxiv.org/abs/hep-ph/9812320}{{\ttfamily hep-ph/9812320}}].
+
+\bibitem{feynhiggs_www}
+\url{http://www.feynhiggs.de}.
+
+\bibitem{Heinemeyer:1998jw}
+S.~Heinemeyer, W.~Hollik and G.~Weiglein, \emph{{QCD corrections to the masses
+  of the neutral CP - even Higgs bosons in the MSSM}},
+  \href{https://doi.org/10.1103/PhysRevD.58.091701}{\emph{Phys. Rev.}
+  {\bfseries D58} (1998) 091701},
+  [\href{https://arxiv.org/abs/hep-ph/9803277}{{\ttfamily hep-ph/9803277}}].
+
+\bibitem{Heinemeyer:1998np}
+S.~Heinemeyer, W.~Hollik and G.~Weiglein, \emph{{The Masses of the neutral CP -
+  even Higgs bosons in the MSSM: Accurate analysis at the two loop level}},
+  \href{https://doi.org/10.1007/s100529900006,
+  10.1007/s100520050537}{\emph{Eur. Phys. J.} {\bfseries C9} (1999) 343--366},
+  [\href{https://arxiv.org/abs/hep-ph/9812472}{{\ttfamily hep-ph/9812472}}].
+
+\bibitem{Heinemeyer:1999be}
+S.~Heinemeyer, W.~Hollik and G.~Weiglein, \emph{{The Mass of the lightest MSSM
+  Higgs boson: A Compact analytical expression at the two loop level}},
+  \href{https://doi.org/10.1016/S0370-2693(99)00417-7}{\emph{Phys. Lett.}
+  {\bfseries B455} (1999) 179--191},
+  [\href{https://arxiv.org/abs/hep-ph/9903404}{{\ttfamily hep-ph/9903404}}].
+
+\bibitem{Workgroup:2017lvb}
+T.~Bringmann et~al., \emph{{DarkBit: A GAMBIT module for computing dark matter
+  observables and likelihoods}},
+  \href{https://doi.org/10.1140/epjc/s10052-017-5155-4}{\emph{Eur. Phys. J.}
+  {\bfseries C77} (2017) 831},
+  [\href{https://arxiv.org/abs/1705.07920}{{\ttfamily 1705.07920}}].
+
+\bibitem{Balazs:2017moi}
+{\scshape GAMBIT} collaboration, C.~Balázs et~al., \emph{{ColliderBit: a
+  GAMBIT module for the calculation of high-energy collider observables and
+  likelihoods}},
+  \href{https://doi.org/10.1140/epjc/s10052-017-5285-8}{\emph{Eur. Phys. J.}
+  {\bfseries C77} (2017) 795},
+  [\href{https://arxiv.org/abs/1705.07919}{{\ttfamily 1705.07919}}].
+
+\bibitem{Bechtle:2008jh}
+P.~Bechtle, O.~Brein, S.~Heinemeyer, G.~Weiglein and K.~E. Williams,
+  \emph{{HiggsBounds: Confronting Arbitrary Higgs Sectors with Exclusion Bounds
+  from LEP and the Tevatron}},
+  \href{https://doi.org/10.1016/j.cpc.2009.09.003}{\emph{Comput. Phys. Commun.}
+  {\bfseries 181} (2010) 138--167},
+  [\href{https://arxiv.org/abs/0811.4169}{{\ttfamily 0811.4169}}].
+
+\bibitem{Aad:2014wea}
+{\scshape ATLAS} collaboration, G.~Aad et~al., \emph{{Search for squarks and
+  gluinos with the ATLAS detector in final states with jets and missing
+  transverse momentum using $\sqrt{s}=8$ TeV proton--proton collision data}},
+  \href{https://doi.org/10.1007/JHEP09(2014)176}{\emph{JHEP} {\bfseries 09}
+  (2014) 176}, [\href{https://arxiv.org/abs/1405.7875}{{\ttfamily 1405.7875}}].
+
+\bibitem{Mahmoudi:2007vz}
+F.~Mahmoudi, \emph{{SuperIso: A Program for calculating the isospin asymmetry
+  of B ---> K* gamma in the MSSM}},
+  \href{https://doi.org/10.1016/j.cpc.2007.12.006}{\emph{Comput. Phys. Commun.}
+  {\bfseries 178} (2008) 745--754},
+  [\href{https://arxiv.org/abs/0710.2067}{{\ttfamily 0710.2067}}].
+
+\bibitem{Workgroup:2017myk}
+{\scshape The GAMBIT Flavour Workgroup} collaboration, F.~U. Bernlochner
+  et~al., \emph{{FlavBit: A GAMBIT module for computing flavour observables and
+  likelihoods}},
+  \href{https://doi.org/10.1140/epjc/s10052-017-5157-2}{\emph{Eur. Phys. J.}
+  {\bfseries C77} (2017) 786},
+  [\href{https://arxiv.org/abs/1705.07933}{{\ttfamily 1705.07933}}].
+
+\bibitem{Lees:2012wg}
+{\scshape BaBar} collaboration, J.~P. Lees et~al., \emph{{Exclusive
+  Measurements of $b \to s\gamma$ Transition Rate and Photon Energy Spectrum}},
+  \href{https://doi.org/10.1103/PhysRevD.86.052012}{\emph{Phys. Rev.}
+  {\bfseries D86} (2012) 052012},
+  [\href{https://arxiv.org/abs/1207.2520}{{\ttfamily 1207.2520}}].
+
+\bibitem{Lees:2012ym}
+{\scshape BaBar} collaboration, J.~P. Lees et~al., \emph{{Precision Measurement
+  of the $B \to X_s \gamma$ Photon Energy Spectrum, Branching Fraction, and
+  Direct CP Asymmetry $A_{CP}(B \to X_{s+d}\gamma)$}},
+  \href{https://doi.org/10.1103/PhysRevLett.109.191801}{\emph{Phys. Rev. Lett.}
+  {\bfseries 109} (2012) 191801},
+  [\href{https://arxiv.org/abs/1207.2690}{{\ttfamily 1207.2690}}].
+
+\bibitem{Belle:2016ufb}
+{\scshape Belle} collaboration, A.~Abdesselam et~al., \emph{{Measurement of the
+  inclusive $B\to X_{s+d} \gamma$ branching fraction, photon energy spectrum
+  and HQE parameters}},  in \emph{{Proceedings, 38th International Conference
+  on High Energy Physics (ICHEP 2016): Chicago, IL, USA, August 3-10, 2016}},
+  2016, \href{https://arxiv.org/abs/1608.02344}{{\ttfamily 1608.02344}},
+  \href{https://inspirehep.net/record/1479946/files/arXiv:1608.02344.pdf}{https://inspirehep.net/record/1479946/files/arXiv:1608.02344.pdf}.
+
+\bibitem{Aaij:2017vad}
+{\scshape LHCb} collaboration, R.~Aaij et~al., \emph{{Measurement of the
+  $B^0_s\to\mu^+\mu^-$ branching fraction and effective lifetime and search for
+  $B^0\to\mu^+\mu^-$ decays}},
+  \href{https://doi.org/10.1103/PhysRevLett.118.191801}{\emph{Phys. Rev. Lett.}
+  {\bfseries 118} (2017) 191801},
+  [\href{https://arxiv.org/abs/1703.05747}{{\ttfamily 1703.05747}}].
+
+\bibitem{Moroi:1995yh}
+T.~Moroi, \emph{{The Muon anomalous magnetic dipole moment in the minimal
+  supersymmetric standard model}},
+  \href{https://doi.org/10.1103/PhysRevD.53.6565,
+  10.1103/PhysRevD.56.4424}{\emph{Phys. Rev.} {\bfseries D53} (1996)
+  6565--6575}, [\href{https://arxiv.org/abs/hep-ph/9512396}{{\ttfamily
+  hep-ph/9512396}}].
+
+\bibitem{Bennett:2006fi}
+{\scshape Muon g-2} collaboration, G.~W. Bennett et~al., \emph{{Final Report of
+  the Muon E821 Anomalous Magnetic Moment Measurement at BNL}},
+  \href{https://doi.org/10.1103/PhysRevD.73.072003}{\emph{Phys. Rev.}
+  {\bfseries D73} (2006) 072003},
+  [\href{https://arxiv.org/abs/hep-ex/0602035}{{\ttfamily hep-ex/0602035}}].
+
+\bibitem{Workgroup:2017bkh}
+{\scshape GAMBIT} collaboration, P.~Athron et~al., \emph{{SpecBit, DecayBit and
+  PrecisionBit: GAMBIT modules for computing mass spectra, particle decay rates
+  and precision observables}},
+  \href{https://arxiv.org/abs/1705.07936}{{\ttfamily 1705.07936}}.
+
+\bibitem{reduce}
+A.~C. Hearn, \emph{Reduce 3.5},  1993.
+
+\bibitem{form2f}
+J.~Edsj{\"o}, ``form2f, perl script to convert form output to fortran.''
+
+\bibitem{Birkedal:2005ep}
+A.~Birkedal, K.~T. Matchev, M.~Perelstein and A.~Spray, \emph{{Robust gamma ray
+  signature of WIMP dark matter}},
+  \href{https://arxiv.org/abs/hep-ph/0507194}{{\ttfamily hep-ph/0507194}}.
+
+\bibitem{Bergstrom:2004cy}
+L.~Bergstr{\"o}m, T.~Bringmann, M.~Eriksson and M.~Gustafsson, \emph{{Gamma
+  rays from Kaluza-Klein dark matter}},
+  \href{https://doi.org/10.1103/PhysRevLett.94.131301}{\emph{Phys. Rev. Lett.}
+  {\bfseries 94} (2005) 131301},
+  [\href{https://arxiv.org/abs/astro-ph/0410359}{{\ttfamily
+  astro-ph/0410359}}].
+
+\bibitem{Bergstrom:1989jr}
+L.~Bergstr{\"o}m, \emph{{Radiative Processes in Dark Matter Photino
+  Annihilation}},
+  \href{https://doi.org/10.1016/0370-2693(89)90585-6}{\emph{Phys. Lett.}
+  {\bfseries B225} (1989) 372--380}.
+
+\bibitem{Bergstrom:2005ss}
+L.~Bergstr{\"o}m, T.~Bringmann, M.~Eriksson and M.~Gustafsson, \emph{{Gamma
+  rays from heavy neutralino dark matter}},
+  \href{https://doi.org/10.1103/PhysRevLett.95.241301}{\emph{Phys. Rev. Lett.}
+  {\bfseries 95} (2005) 241301},
+  [\href{https://arxiv.org/abs/hep-ph/0507229}{{\ttfamily hep-ph/0507229}}].
+
+\bibitem{Goodman:1984dc}
+M.~W. Goodman and E.~Witten, \emph{{Detectability of Certain Dark Matter
+  Candidates}}, \href{https://doi.org/10.1103/PhysRevD.31.3059}{\emph{Phys.
+  Rev.} {\bfseries D31} (1985) 3059}.
+
+\bibitem{Bottino:1996eu}
+A.~Bottino, F.~Donato, G.~Mignola, S.~Scopel, P.~Belli and A.~Incicchitti,
+  \emph{{Exploring the supersymmetric parameter space by direct search for
+  WIMPs}}, \href{https://doi.org/10.1016/S0370-2693(97)00390-0}{\emph{Phys.
+  Lett.} {\bfseries B402} (1997) 113--121},
+  [\href{https://arxiv.org/abs/hep-ph/9612451}{{\ttfamily hep-ph/9612451}}].
+
+\bibitem{Ellis:1987sh}
+J.~R. Ellis and R.~A. Flores, \emph{{Realistic Predictions for the Detection of
+  Supersymmetric Dark Matter}},
+  \href{https://doi.org/10.1016/0550-3213(88)90111-3}{\emph{Nucl. Phys.}
+  {\bfseries B307} (1988) 883--908}.
+
+\bibitem{Ellis:1991ef}
+J.~R. Ellis and R.~A. Flores, \emph{{Elastic supersymmetric relic - nucleus
+  scattering revisited}},
+  \href{https://doi.org/10.1016/0370-2693(91)90597-J}{\emph{Phys. Lett.}
+  {\bfseries B263} (1991) 259--266}.
+
+\bibitem{Engel:1991wq}
+J.~Engel, \emph{{Nuclear form-factors for the scattering of weakly interacting
+  massive particles}},
+  \href{https://doi.org/10.1016/0370-2693(91)90712-Y}{\emph{Phys. Lett.}
+  {\bfseries B264} (1991) 114--119}.
+
+\bibitem{Griest:1988ma}
+K.~Griest, \emph{{Cross-Sections, Relic Abundance and Detection Rates for
+  Neutralino Dark Matter}}, \href{https://doi.org/10.1103/PhysRevD.38.2357,
+  10.1103/PhysRevD.39.3802}{\emph{Phys. Rev.} {\bfseries D38} (1988) 2357}.
+
+\bibitem{Barbieri:1988zs}
+R.~Barbieri, M.~Frigeni and G.~F. Giudice, \emph{{Dark Matter Neutralinos in
+  Supergravity Theories}},
+  \href{https://doi.org/10.1016/0550-3213(89)90404-5}{\emph{Nucl. Phys.}
+  {\bfseries B313} (1989) 725--735}.
+
+\bibitem{Gelmini:1990je}
+G.~B. Gelmini, P.~Gondolo and E.~Roulet, \emph{{Neutralino dark matter
+  searches}}, \href{https://doi.org/10.1016/S0550-3213(05)80036-7}{\emph{Nucl.
+  Phys.} {\bfseries B351} (1991) 623--644}.
+
+\bibitem{Bottino:1993aa}
+A.~Bottino, V.~de~Alfaro, N.~Fornengo, S.~Mignola and S.~Scopel, \emph{{On the
+  neutralino as dark matter candidate. 2. Direct detection.}},
+  \href{https://doi.org/10.1016/0927-6505(94)90019-1}{\emph{Astropart. Phys.}
+  {\bfseries 2} (1994) 77--90},
+  [\href{https://arxiv.org/abs/hep-ph/9309219}{{\ttfamily hep-ph/9309219}}].
+
+\bibitem{Gasser:1990ce}
+J.~Gasser, H.~Leutwyler and M.~E. Sainio, \emph{{Sigma term update}},
+  \href{https://doi.org/10.1016/0370-2693(91)91393-A}{\emph{Phys. Lett.}
+  {\bfseries B253} (1991) 252--259}.
+
+\bibitem{Adams:1995ufa}
+{\scshape Spin Muon} collaboration, D.~Adams et~al., \emph{{A New measurement
+  of the spin dependent structure function g1(x) of the deuteron}},
+  \href{https://doi.org/10.1016/0370-2693(95)00898-U}{\emph{Phys. Lett.}
+  {\bfseries B357} (1995) 248--254}.
+
+\bibitem{Jaffe:1989jz}
+R.~L. Jaffe and A.~Manohar, \emph{{The G(1) Problem: Fact and Fantasy on the
+  Spin of the Proton}},
+  \href{https://doi.org/10.1016/0550-3213(90)90506-9}{\emph{Nucl. Phys.}
+  {\bfseries B337} (1990) 509--546}.
+
+\bibitem{Engel:1989ix}
+J.~Engel and P.~Vogel, \emph{{Spin dependent cross-sections of weakly
+  interacting massive particles on nuclei}},
+  \href{https://doi.org/10.1103/PhysRevD.40.3132}{\emph{Phys. Rev.} {\bfseries
+  D40} (1989) 3132--3135}.
+
+\bibitem{Haber:1988px}
+H.~E. Haber and D.~Wyler, \emph{{RADIATIVE NEUTRALINO DECAY}},
+  \href{https://doi.org/10.1016/0550-3213(89)90143-0}{\emph{Nucl. Phys.}
+  {\bfseries B323} (1989) 267--310}.
+
+\bibitem{Dimopoulos:1995kn}
+S.~Dimopoulos and S.~D. Thomas, \emph{{Dynamical relaxation of the
+  supersymmetric CP violating phases}},
+  \href{https://doi.org/10.1016/0550-3213(96)00065-X}{\emph{Nucl. Phys.}
+  {\bfseries B465} (1996) 23--33},
+  [\href{https://arxiv.org/abs/hep-ph/9510220}{{\ttfamily hep-ph/9510220}}].
+
+\bibitem{Ellis:1990nz}
+J.~R. Ellis, G.~Ridolfi and F.~Zwirner, \emph{{Radiative corrections to the
+  masses of supersymmetric Higgs bosons}},
+  \href{https://doi.org/10.1016/0370-2693(91)90863-L}{\emph{Phys. Lett.}
+  {\bfseries B257} (1991) 83--91}.
+
+\bibitem{Ellis:1991zd}
+J.~R. Ellis, G.~Ridolfi and F.~Zwirner, \emph{{On radiative corrections to
+  supersymmetric Higgs boson masses and their implications for LEP searches}},
+  \href{https://doi.org/10.1016/0370-2693(91)90626-2}{\emph{Phys. Lett.}
+  {\bfseries B262} (1991) 477--484}.
+
+\bibitem{Brignole:1991pq}
+A.~Brignole, J.~R. Ellis, G.~Ridolfi and F.~Zwirner, \emph{{The Supersymmetric
+  charged Higgs boson mass and LEP phenomenology}},
+  \href{https://doi.org/10.1016/0370-2693(91)91287-6}{\emph{Phys. Lett.}
+  {\bfseries B271} (1991) 123--132}.
+
+\bibitem{Drees:1991mx}
+M.~Drees and M.~M. Nojiri, \emph{{One loop corrections to the Higgs sector in
+  minimal supergravity models}},
+  \href{https://doi.org/10.1103/PhysRevD.45.2482}{\emph{Phys. Rev.} {\bfseries
+  D45} (1992) 2482--2492}.
+
+\bibitem{Carena:1995bx}
+M.~Carena, J.~R. Espinosa, M.~Quiros and C.~E.~M. Wagner, \emph{{Analytical
+  expressions for radiatively corrected Higgs masses and couplings in the
+  MSSM}}, \href{https://doi.org/10.1016/0370-2693(95)00694-G}{\emph{Phys.
+  Lett.} {\bfseries B355} (1995) 209--221},
+  [\href{https://arxiv.org/abs/hep-ph/9504316}{{\ttfamily hep-ph/9504316}}].
+
+\bibitem{Carena:1995wu}
+M.~Carena, M.~Quiros and C.~E.~M. Wagner, \emph{{Effective potential methods
+  and the Higgs mass spectrum in the MSSM}},
+  \href{https://doi.org/10.1016/0550-3213(95)00665-6}{\emph{Nucl. Phys.}
+  {\bfseries B461} (1996) 407--436},
+  [\href{https://arxiv.org/abs/hep-ph/9508343}{{\ttfamily hep-ph/9508343}}].
+
+\bibitem{Hahn:2010te}
+T.~Hahn, S.~Heinemeyer, W.~Hollik, H.~Rzehak and G.~Weiglein, \emph{{FeynHiggs
+  2.7}}, \href{https://doi.org/10.1016/j.nuclphysbps.2010.08.035}{\emph{Nucl.
+  Phys. Proc. Suppl.} {\bfseries 205-206} (2010) 152--157},
+  [\href{https://arxiv.org/abs/1007.0956}{{\ttfamily 1007.0956}}].
+
+\bibitem{Olive:2016xmw}
+{\scshape Particle Data Group} collaboration, C.~Patrignani et~al.,
+  \emph{{Review of Particle Physics}},
+  \href{https://doi.org/10.1088/1674-1137/40/10/100001}{\emph{Chin. Phys.}
+  {\bfseries C40} (2016) 100001}.
+
+\bibitem{haber97}
+H.~E. Haber, \emph{Perspectives in Higgs Physics II}.
+\newblock World Scientific, 1997.
+
+\bibitem{Hahn:2006nq}
+T.~Hahn, \emph{{SUSY Les Houches Accord 2 I/O made easy}},
+  \href{https://doi.org/10.1016/j.cpc.2009.03.012}{\emph{Comput. Phys. Commun.}
+  {\bfseries 180} (2009) 1681--1693},
+  [\href{https://arxiv.org/abs/hep-ph/0605049}{{\ttfamily hep-ph/0605049}}].
+
+\bibitem{Cassel:2009wt}
+S.~Cassel, \emph{{Sommerfeld factor for arbitrary partial wave processes}},
+  \href{https://doi.org/10.1088/0954-3899/37/10/105009}{\emph{J. Phys.}
+  {\bfseries G37} (2010) 105009},
+  [\href{https://arxiv.org/abs/0903.5307}{{\ttfamily 0903.5307}}].
+
+\end{thebibliography}\endgroup

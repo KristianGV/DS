@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Direct detection -- theory}
+
+Specific choices of nuclear structure functions can be selected by calling \code{dsddset('sf',} \code{label)}, where the 
+character variable \code{label} indicates the set of structure functions. For the default option ('\code{best}'),
+e.g., the code automatically picks the best currently available structure function (depending on the nucleus). 
+This mean, in order Fourier-Bessel, Sum-of-Gaussians, Fermi, Lewin-Smith.
+The function returning the value of $\tilde\sigma_{\chi T}$ is to be provided by an interface function 
+\code{dsddsigma(v,Er,A,Z,sigij, ierr)} residing in the particle physics module, where on input \code{v=$v$}, 
+\code{Er=$E_R$}, 
+\code{A=$A$}, \code{Z=$Z$} and on output the 27$\times$27 array \code{sigij} contains the (partial) equivalent 
+cross sections  $\tilde\sigma_{ij}$ in cm$^2$ and the integer \code{ierr} contains a possible error code. 
+The order of the entries in \code{sigij} corresponds to that of the independent nonrelativistic operators 
+$\mathcal{O}_i$; for the first 11 entries, we use the same operators and convention as in 
+Ref.~\cite{Fitzpatrick:2012ix}, while for the last 16 entries  we add the additional operators discussed in 
+Ref.~\cite{GondoloScopel}. In particular, \code{sigij(1,1)} is the 
+usual spin-independent cross section and \code{sigij(4,4)} is the usual spin-dependent cross section.
+In addition, the direct detection module in \ds\ provides utility functions that can be used in the computation of the 
+cross section. For example, the subroutine \code{dsddgg2sigma(v,} \code{er,A,Z,gg,sigij,ierr)} computes the (partial) 
+equivalent  scattering cross sections $\tilde\sigma_{ij}$ for nucleus $(A,Z)$ at relative velocity $v$ and recoil energy 
+$E_R$ starting from values of the $G_i^N$ constants in \code{gg}, with nuclear structure functions set by the 
+previous call to \code{dsddset}. The actual nuclear recoil event rate as given in 
+\begin{equation}
+\frac{dR}{dE_R} = \sum_T c_T \frac{\rho_\chi^0}{m_T  m_\chi} \int_{v>v_{\rm min}} \frac{d\sigma_{\chi T}}{dE_R}  \frac{f({\bf v},t)}{v} d^3 v\,,
+\label{eq:dRdE} 
+\end{equation}
+finally, is computed by the function \code{dsdddrde}.
+The latter two functions are independent of the specific particle physics implementation and hence 
+are contained in the core library.
+In the above expression, the sum  runs over nuclear species in the detector, $c_T$ being the detector mass fraction in nuclear species 
+$i$. $m_T$ is the nuclear (target) mass, and $\mu_{\chi T} = m_\chi m_T /(m_\chi + m_T)$ is the reduced DM--nucleus 
+mass. 
+Furthermore, $\rho_\chi^0$ is the local DM density, ${\bf v}$ the DM velocity relative to the detector, $v=|{\bf v}|$, and 
+$f({\bf v},t)$ is the (3D) DM velocity distribution.  In order to impart a recoil energy $E_R$ to the nucleus, the DM
+particle needs a minimal speed of $v_{\rm min}=\sqrt{M_TE_R/2\mu^2_{\chi T}}$. 
+

@@ -1,0 +1,3 @@
+      COMMON/WSIG/SIGLLQ
+      SAVE /WSIG/
+      REAL      SIGLLQ

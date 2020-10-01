@@ -1,0 +1,126 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Relic density -- routines}
+
+In \ft{src/rd}, the general relic density routines are found. These
+routines can be used for any dark matter candidate and e.g.\ the interface
+to neutralino dark matter is in \ft{src\_models/mssm/rd}. 
+
+The main routine for relic density calculations is \ft{dsrdomega}. It calculates and returns the relic density as well as the approximate temperature of freeze-out. It taks a few arguments: i) one \code{option} argument that typically (depending on the particle physics module) determines how co-annihilations are included, ii) one \code{fast} argument that determines how careful the Boltzmann solver should be in calculating the relic density. See the header of \ft{dsrdomega} for more details.
+%\index{relic density}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Global parameters}
+
+All internal settings of the relic density routines are set in common
+blocks in \ft{dsrdcom.h}. The most important parameters that can be
+changed by the user are
+
+\begin{sub}{Important parameters in \ftb{dsrdcom.h}}
+  \itit{Purpose:} Provide a set of parameters, with which the internal
+  behaviour of the relic density routines can be changed.
+  \itit{Parameters}
+  \itv{tharsi}{i} Size of the coannihilation, resonance and threshold
+    arrays (default=50). Increase this size if you have more than 50
+    coannihilating particles, more than 50 resonances or more than 50
+    thresholds.
+  \itv{rdluerr}{i} Logical unit number where error messages are
+    printed.
+  \itv{rdtag}{c*12} Idtag that is printed in case of errors.
+  \itv{cosmin}{r8} \ldots
+  \itv{waccd}{r8} \ldots
+  \itv{dpminr}{r8} \ldots
+  \itv{dpthr}{r8} \ldots
+  \itv{wdiffr}{r8} \ldots
+  \itv{wdifft}{r8} \ldots
+  \itv{hstep}{r8} \ldots
+  \itv{rdt\_max}{r8} Maximum number of seconds to spend on relic density calculation. If the time limit is exceeded, \ft{dsrdomega} returns with an error flag and the result 0. The time is the total CPU time (i.e.\ summed up over all cores/threads) and the limit is approximate as it is only checked before a new point is added to the $W_{\rm eff}$ tabulation.
+\end{sub}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Brief description of the internal routines}
+
+Below, the remaining routines related to the relic density calculation
+are briefly mentioned. For more details, we refer to the routines
+themselves.
+
+\begin{brief-subs}
+\bsub{dsrdaddpt}
+  To add one point in the $W_{\rm eff}$-$p_{\rm eff}$ table.
+\bsub{dsrdcom}
+  To initialize parameters in the common blocks in \ft{dsrdcom.h}. If
+  you want to change these parameters yourself, include \ft{dsrdcom.h}
+  in your code and change the parameters you want.
+\bsub{dsrddof}
+  Returns the degrees of freedom as a
+  function of the temperature in the early Universe.
+\bsub{dsrddpmin}
+  To return the allowed minimal distance in $p_{\rm
+  eff}$ between two points in the $W_{\rm eff}$-$p_{\rm eff}$ plane.
+  The returned value depends on if there is a resonance present or not
+  at the given $p_{\rm eff}$.
+\bsub{dsrdens} Routine to solve the Boltzmann equation and return the relic density. Called by \ft{dsrdomega}.
+\bsub{dsrdeqn}
+  To solve the relic density equation by means of an
+  implicit trapezoidal method with adaptive stepsize and termination.
+\bsub{dsrdfunc}
+  To return the invariant annihilation rate times the
+  thermal distribution.
+\bsub{dsrdfuncs}
+  To provide \ft{dsrdfunc} in a form suitable for
+  numerical integration.
+\bsub{dsrdlny}
+  To return $\ln W_{\rm eff}$ for a given $p_{\rm
+  eff}$.
+\bsub{dsrdnormlz}
+  To return a unit vector in a given direction.
+\bsub{dsrdqad}
+  To calculate the relic density with a
+  quick-and-dirty method. It uses the approximative expressions in
+  Kolb \& Turner with the cross section expaned in $v$.
+\bsub{dsrdqrkck}
+  To numerically integrate a function with a
+  Runge-Kutta method
+\bsub{dsrdrhs}
+  To calculate terms on the right-hand side in the
+  Boltzmann equation.
+\bsub{dsrdset}
+  To set the control parameters for the relic density calculation. Currently, only the choice of effective degrees of freedom is implemented through \ft{dsrdset}; the other parameters are passed as arguments to \ft{dsrdomega}.
+\bsub{dsrdspline}
+  To set up the table $W_{\rm eff}$-$p_{\rm eff}$ for
+  spline interpolation.
+\bsub{dsrdstart}
+  To sort and store information about coannihilations,
+  resonances and thresholds in common blocks.
+\bsub{dsrdtab}
+  To set up the table $W_{\rm eff}$-$p_{\rm eff}$.
+\bsub{dsrdthav}
+  To calculate the thermally averaged annihilation
+  cross section at a given temperature.
+\bsub{dsrdthclose}
+  ...
+\bsub{dsrdthlim}
+  To determine the end-points for the thermal
+  average integration.
+\bsub{dsrdthtest}
+  To check if a given entry in the $W_{\rm
+  eff}$-$p_{\rm eff}$ table is at a threshold.
+%\bsub{dsrdwdwdcos}
+%  To write out a table of $dW_{\rm eff}/d\cos \theta$
+%  as a function of $\cos \theta$ for a given $p_{\rm eff}$.
+\bsub{dsrdwfunc}
+  To write out \ft{dsrdfunc} for a given $x=m_\chi/T$.
+\bsub{dsrdwintp}
+  To return the invariant rate $W_{\rm eff}$ for any
+  given $p_{\rm eff}$ by performing a spline interpolation in the
+  $W_{\rm eff}$-$p_{\rm eff}$ table.
+\bsub{dsrdwintpch}
+  To check the spline interpolation in the $W_{\rm
+  eff}$-$p_{\rm eff}$ table and compare with a linear interpolation.
+\bsub{dsrdwintrp}
+  To write out a table of the invariant rate $W_{\rm
+  eff}$ and some internal integration variables and expressions.
+\bsub{dsrdwres}
+  To write out the table $W_{\rm eff}$-$p_{\rm eff}$.
+\end{brief-subs}

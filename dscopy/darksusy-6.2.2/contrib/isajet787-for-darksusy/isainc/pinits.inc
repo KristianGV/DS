@@ -1,0 +1,4 @@
+      COMMON/PINITS/PINITS(5,2),IDINIT(2)
+      SAVE /PINITS/
+      INTEGER   IDINIT
+      REAL      PINITS

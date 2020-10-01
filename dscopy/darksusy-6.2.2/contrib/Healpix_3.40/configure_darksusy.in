@@ -1,0 +1,19 @@
+#! /bin/sh
+./configure<<EOF
+3
+@FC@
+
+-I@HEALPIXDIR@/include -DGFORTRAN -fno-second-underscore @FOPT@
+
+@CC@
+
+
+
+../../lib
+N
+0
+Y
+N
+N
+0
+EOF
