@@ -25,7 +25,7 @@ c       vmoeller = 2.0d0*p*sqrt(s)/(s-2.0d0*dsmwimp()**2)
             sigma=0
       else
 c           dssigmavpartial is given in cm^3 s^-1            
-            sigma=dssigmavpartial(ichannel_22,p)/v_ij(mdm,mdm,s)/gev2cm3s
+            sigma=dssigmavpartial(ichannel_22,p)/v_ij(mdm,mdm,s)/gev2cm3s*1.d15
             ! sigma=dssigmavpartial(ichannel_22,p)/v_ij(m1_22,m2_22,s)
       end if
       return

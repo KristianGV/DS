@@ -18,11 +18,12 @@ c_______________________________________________________________________
      &,inputlambda,dsgammahpartial,dsmwimp,lgmdm,dsfi2to2oh2,dsfi2to2rhs
      &,rddec,rd2to2,sigma,sig,rd2to2_tmp,sum,tmp,dsfi2to2ab,lgtmp,
      &Y,Y_dec,Y_22,dsfidecab,dsfidecint,lgs
-
+      
+      real*8 lb,ub,k1_ds,k1_my,dsbessek1
         character*80 filename,filename1,filename_debug,filename2,
      &filename3
 
-        integer i,length,ierr,iwarn,ichannel
+        integer i,length,ierr,iwarn,ichannel,j
 
           
         call dsinit
@@ -30,8 +31,8 @@ c_______________________________________________________________________
         write (*,*) 
 
         TR=1.D6; ; inputlambda=1.D-11;eta=1;stat=0;g=1;
-        ichannel=19;eta_dec=1; zero=0; Tmin=0
-      !   mdm=10;
+        eta_dec=1; zero=0; Tmin=0
+
         
         eta1_22=1;eta2_22=1;etaX_22=0;g1_22=1;g2_22=1;c12_22=1
 
@@ -48,7 +49,7 @@ c_______________________________________________________________________
         length=100
         
 c ... scale setup
-        mmin=1E-2;mmax=1E3
+        mmin=1.d-3;mmax=1E3
 
         open(unit=100,file=filename,status='unknown',form='formatted')
         write(100,'(A)') '   mdm                       oh2'
@@ -69,7 +70,14 @@ c ... scale setup
 
 
         do i=0,length
-          write(*,*) i,' out of ',length
+          if(i.ne.0) then
+            do j=1,10
+              if(real(i)/real(length).eq.real(j)/real(10)) then
+                write(*,*) j*10,'%'
+              end if
+            end do
+            
+          end if
           step=real(i)/real(length)
 
 c       RELIC ABUNDACE TOTAL        
@@ -113,6 +121,7 @@ c       RELIC ABUNDACE 2to2
           end do
 
           write(500,*) mdm, rd2to2
+
 
 
 c     RELIC ABUNDANCE DECAY
@@ -196,8 +205,7 @@ c     TESTING CROSS SECTION VALUES
         ! !  lgs=f(step,log((2*mdm)**2),log(1.D10))
         ! !  s=exp(lgs)  
 
-        !  s=f(step,4*mdm**2,4*mdm**2+1.d-1)
-
+        !  s=f(step,4*mdm**2,4*mdm**2+1.d5)
 
         !  sig=0.0
         !  do ichannel_22=1,18
@@ -205,11 +213,21 @@ c     TESTING CROSS SECTION VALUES
         !  end do
         !  write(300,*) s, sig
 
+c     Testing Bessel function
+
+      ! mdm=1.d-2; lb=2*mdm; ub=50.d0; stat=1
+      ! x=f(step,lb,ub)
+      ! k1_ds=dsbessek1(x)/exp(x)
+      ! call dsfik1(x,zero,zero,zero,zero,zero,k1)
+      ! k1_my=k1
+      ! write(300,*) x,k1_ds, k1_my, k1_ds-k1_my
 
       end do  
       close(100)
       close(200)
       close(300)
+      close(400)
+      close(500)
       write(*,*) 'Done!'
       end program
 

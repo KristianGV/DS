@@ -95,7 +95,7 @@ scalar_FIMP : INC_MODULE = -I$(DS_INSTALL)/src_models/silveira_zee/include
 scalar_FIMP : scalar_FIMP.f
 scalar_FIMP : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
 	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
-	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) $(SRC) $(DEBUG) -o scalar_FIMP.out scalar_FIMP scalar_FIMP.f \
+	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) $(SRC) $(DEBUG) -o scalar_FIMP.out scalar_FIMP.f \
 	libds_tmp.a
 	rm -f libds_tmp.a
 

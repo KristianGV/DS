@@ -50,7 +50,7 @@ c-----------------------------------------------------------------------
       else
         selfconj=2
       endif    
-      kdof(kdm)=1               ! for scalar DM
+      kdof(kdm)=2               ! for scalar DM
       spin(kdm)=0.0d0           ! for scalar DM
       
 c... write annihilatiom rate to common block
