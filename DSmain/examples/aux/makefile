@@ -31,7 +31,7 @@ FOPT = -O -ffixed-line-length-none -fopenmp
 ### Setups for the DarkSUSY install directory ###
 
 # Determine where to install stuff (prefix is set in configure)
-prefix=/home/kriss/darksusy-6.2.2
+prefix=/home/kriss/DS/darksusy-6.2.2
 # DS_INSTALL is where the library and data files will be installed
 DS_INSTALL=${prefix}
 

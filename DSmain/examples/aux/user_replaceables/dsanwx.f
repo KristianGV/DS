@@ -42,7 +42,7 @@ c... is loaded, and should (at least) be included for all interface functions
 
       vmoeller = 2.0d0*p*sqrt(s)/(s-2.0d0*dsmwimp()**2)
       
-      if (4*dsmass(svch)**2.gt.s) return ! CMS energy must be large enough to
+c      if (4*dsmass(svch)**2.gt.s) return ! CMS energy must be large enough to
                                          ! produce final states!
       
 c... the expression below assumes that sva gives the cross section
