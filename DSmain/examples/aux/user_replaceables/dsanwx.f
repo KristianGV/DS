@@ -38,7 +38,7 @@ c... is loaded, and should (at least) be included for all interface functions
 
       dsanwx=0.0d0
       
-      s = 4.0d0*(dsmwimp()**2+p**2)
+      s = 4.0d0|*(dsmwimp()**2+p**2)
 
       vmoeller = 2.0d0*p*sqrt(s)/(s-2.0d0*dsmwimp()**2)
       

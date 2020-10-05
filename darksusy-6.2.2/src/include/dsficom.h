@@ -11,9 +11,10 @@ c----------------------------------------------------------------------c
 c by Kristian Gjestad Vangsnes (kristgva@uio.no), 2020-09-16
 
 * Global parameters
-      integer stat
-      common /global_fi/ stat
+      integer stat,selfcon
+      common /global_fi/ stat,selfcon
       save /global_fi/
+
 
 * K1 parameters
       real*8 x1_k1,x2_k1,x3_k1,eta1_k1,eta2_k1,eta3_k1

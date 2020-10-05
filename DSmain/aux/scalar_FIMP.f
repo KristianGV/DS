@@ -35,6 +35,7 @@ c_______________________________________________________________________
 
         
         eta1_22=1;eta2_22=1;etaX_22=0;g1_22=1;g2_22=1;c12_22=1
+        selfcon=1
 
 
         filename='scalar_FIMP.dat'
@@ -82,38 +83,40 @@ c ... scale setup
 
 c       RELIC ABUNDACE TOTAL        
 
-!           lgmdm=f(step,log(mmin),log(mmax))
-!           mdm=exp(lgmdm)
-!           Tmin=mdm/100
-!           call dsgivemodel_silveira_zee(inputlambda,mdm)
-!           w=dsgammahpartial(ichannel,zero) 
+    !       lgmdm=f(step,log(mmin),log(mmax))
+    !       mdm=exp(lgmdm)
+    !       Tmin=8.d1
+    !       call dsgivemodel_silveira_zee(inputlambda,mdm)
+    !       ichannel=18
+    !       w=dsgammahpartial(ichannel,zero) 
                  
 
-!           rddec=dsfidecoh2(TR,Tmin,w,M_dec,
-!      &g,eta_dec)
+    !       rddec=dsfidecoh2(TR,Tmin,w,M_dec,
+    !  &g,eta_dec)
 
 
-!           rd2to2=0.d0
-!           do ichannel_22=1,18
-!             rd2to2_tmp=dsfi2to2oh2(TR,Tmin,m1_22,m2_22
-!      &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
-!             rd2to2=rd2to2+rd2to2_tmp
-!           end do
+    !       rd2to2=0.d0
+    !       do ichannel_22=1,18
+    !         rd2to2_tmp=dsfi2to2oh2(TR,Tmin,m1_22,m2_22
+    !  &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
+    !         rd2to2=rd2to2+rd2to2_tmp
+    !       end do
 
 
-!           ! write(100,*) mdm, rddec+rd2to2
+    !       write(100,*) mdm, rddec+rd2to2
 
-!           write(100,*) mdm, rd2to2
 
 c       RELIC ABUNDACE 2to2        
 
           lgmdm=f(step,log(mmin),log(mmax))
           mdm=exp(lgmdm)
-          Tmin=mdm/100
+          Tmin=1.d2
           call dsgivemodel_silveira_zee(inputlambda,mdm)
                  
 
-          rd2to2=0.d0
+          rd2to2=0
+    !       dsfi2to2oh2(TR,Tmin,m1_22,m2_22
+    !  &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
           do ichannel_22=1,18
             rd2to2_tmp=dsfi2to2oh2(TR,Tmin,m1_22,m2_22
      &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
@@ -159,33 +162,35 @@ c     CALC Y
 
 c       TESTING dsfi2to2rhs
 
-!           mdm=20
-!           Tmin=mdm/100
+          ! mdm=25
+          ! Tmin=20000.d0
 
-!           tmp=f(step,Tmin,TR)
-!           x1_22=mdm/tmp
-!           x2_22=x1_22
-!           sum=0
+          ! tmp=f(step,Tmin,TR)
+          ! x1_22=m1_22/tmp
+          ! x2_22=x1_22
+          ! sum=0
 
-!           ichannel_22=18
-!           sum=sum+dsfi2to2rhs(tmp)
+          ! do ichannel_22=1,18
+          !   sum=sum+dsfi2to2rhs(tmp)
+          ! end do
 
-! c          write(*,*) tmp, sum
-!           write(*,*) dsfi2to2ab(TR,Tmin)
-!           write(300,*) tmp, sum
+          ! write(300,*) tmp, sum
 
 c       TESTING dsfi2to2int_simp
 
           ! T_22=1.d4
-          ! x1_22=mdm/T_22
+          ! x1_22=m1_22/T_22
           ! x2_22=x1_22
 
           ! mdm=1.d2
           ! sum=0.d0
+          ! call dsgivemodel_silveira_zee(inputlambda,mdm)
+
+          ! x=f(step,4*mdm**2+1.d-30,4*mdm**2+1.d10)
           ! do ichannel_22=1,18
           !   sum=sum+dsfi2to2int_simp(x)   
           ! end do  
-          ! x=f(step,1.d-50,1/(4*mdm**2))
+
           ! write(300,*) x, sum
 
 c       TESTING dsfidecint

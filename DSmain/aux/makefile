@@ -68,7 +68,8 @@ $(DS_INSTALL)/src/fi/dsfik1.f $(DS_INSTALL)/src/fi/dsfipcm.f \
 $(DS_INSTALL)/src/fi/dsfidecab.f $(DS_INSTALL)/src/fi/dsfidecoh2.f\
 $(DS_INSTALL)/src/fi/dsfi2to2int.f $(DS_INSTALL)/src/fi/dsfi2to2rhs.f\
 $(DS_INSTALL)/src/fi/dsfisigma.f $(DS_INSTALL)/src/fi/dsfi2to2ab.f\
-$(DS_INSTALL)/src/aux_xcernlib/dgadap.f $(DS_INSTALL)/src/fi/dsfi2to2oh2.f
+$(DS_INSTALL)/src/aux_xcernlib/dgadap.f $(DS_INSTALL)/src/fi/dsfi2to2oh2.f\
+$(DS_INSTALL)/src/rd/dsrdthav.f $(DS_INSTALL)/src_models/silveira_zee/an/dsanwx.f
 
 
 all: scalar_FIMP

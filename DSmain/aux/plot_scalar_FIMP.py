@@ -3,13 +3,14 @@ import numpy as np
 
 #dataset= np.genfromtxt('examples/aux/generic_wimp_oh2-planck-sigmav.dat')
 
+# mdm,oh2 =np.loadtxt('scalar_FIMP.dat',unpack=True,skiprows=1, usecols=range(0,2))
+
+
 # mdm_dec,oh2_dec =np.loadtxt('scalar_FIMP_decay.dat',unpack=True,skiprows=1, usecols=range(0,2))
 
-mdm_2to2, oh2_2to2 = np.loadtxt(
-    'scalar_FIMP_2to2.dat', unpack=True, skiprows=1, usecols=range(0, 2))
+mdm_2to2, oh2_2to2 = np.loadtxt('scalar_FIMP_2to2.dat', unpack=True, skiprows=1, usecols=range(0, 2))
 
-mdm_mo, oh2_mo = np.loadtxt(
-    'micrOMEGA_data.dat', unpack=True, skiprows=1, usecols=range(0, 2), delimiter=';')
+mdm_mo, oh2_mo = np.loadtxt('micrOMEGA_data.dat', unpack=True, skiprows=1, usecols=range(0, 2), delimiter=';')
 
 # x, y = np.loadtxt('debug.dat', unpack=True, skiprows=1, usecols=range(0, 2))
 
@@ -24,6 +25,10 @@ mass = np.exp(lgmass)
 
 plt.figure(1)
 
+#TOTAL
+
+# plt.loglog(mdm,oh2,color='blue',linestyle='--', label='my data:  total', marker='.')
+
 # DECAY
 
 # plt.loglog(mdm_dec,oh2_dec, color='black',linestyle='--',label='my data:  decay')
@@ -31,12 +36,11 @@ plt.figure(1)
 
 # 2->2
 
-plt.loglog(mdm_2to2, oh2_2to2, color='black',
-           linestyle='--', label='my data:  2->2', marker='.')
+plt.loglog(mdm_2to2, oh2_2to2, color='black',linestyle='--', label='my data:  2->2', marker='.')
 
 # MICROMEGAS DATA
-plt.loglog(mdm_mo, oh2_mo, color='red',
-           linestyle='--', label='micrOMEGAs data')
+plt.loglog(mdm_mo, oh2_mo, color='red',linestyle='--', label='micrOMEGAs data')
+
 # plt.loglog(mass, to2to, color='blue', label='2->2 data')
 
 
