@@ -49,7 +49,7 @@ plt.ylabel('$\Omega h^2$')
 plt.title('Freeze-in abundance')
 plt.legend()
 
-# plt.savefig('fig/scalar_fimp.pdf',format='pdf')
+plt.savefig('fig/scalar_fimp.pdf',format='pdf')
 
 plt.show()
 

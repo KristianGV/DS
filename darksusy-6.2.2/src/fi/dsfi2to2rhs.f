@@ -60,15 +60,14 @@ c     TRIED TO USE <sv>
             b=(4*mdm**2)+1.d80;eps=1.d-4
             sum=0
             if(nthr.eq.0) then
-                  call dgadap(a,a+1.d10,dsfi2to2int_simp,
+                  do i=0,100
+                        tmp_upper=a+1.d4
+                        tmp_upper1=tmp_upper
+                        call dgadap(a,tmp_upper,dsfi2to2int_simp,
      &eps,sum_tmp)
-                  sum=sum+sum_tmp
-                  call dgadap(a+1.d10,a+1.d20,dsfi2to2int_simp,
-     &eps,sum_tmp)
-                  sum=sum+sum_tmp
-                  call dgadap(a+1.d20,b,dsfi2to2int_simp,
-     &eps,sum_tmp)
-                  sum=sum+sum_tmp
+                        sum=sum+sum_tmp
+                        a=tmp_upper1
+                  end do
             else
             do i =0,nthr
                   if(i.eq.nthr) then
@@ -100,14 +99,14 @@ c     TRIED TO USE <sv>
                   do j =1,nrs
                     if((i.eq.0).and.(rm(j).ne.real(0))) then
                       if((rm(j).lt.tm(i+1))) then
-                        tmp_upper=rm(j)**2-1000
+                        tmp_upper=rm(j)**2-10
                         tmp_upper1=tmp_upper
                         call dgadap(a,tmp_upper,
      &dsfi2to2int_simp,eps,sum_tmp)
                         sum=sum+sum_tmp
                         a=tmp_upper1
 
-                        tmp_upper=rm(j)**2+1000
+                        tmp_upper=rm(j)**2+10
                         tmp_upper1=tmp_upper
                         call dgadap(a,tmp_upper,
      &dsfi2to2int_simp,eps,sum_tmp)
@@ -177,9 +176,9 @@ c     TRIED TO USE <sv>
                   end do
                   end if
             end do
-            end if
+      end if
+      c -------------------------------------------------------
             dsfi2to2rhs=sum/HPrime/s_ent*T
-
       else 
             a=(4*mdm**2)
             b=(4*mdm**2)+1.d40;eps=1.d-4
