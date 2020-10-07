@@ -14,35 +14,35 @@ c=======================================================================
       include 'dsmpconst.h'
       include 'dsficom.h'
 
-      real*8 tmp,lnT,M,eta,H,s,sqrtgstar,heff, geff,HPrime,zero,
+      real*8 T,lnT,M,eta,H,s,sqrtgstar,heff, geff,HPrime,zero,
      &k1
-      tmp=exp(lnT); 
+      T=exp(lnT); 
       zero=0
 
 
       call dsrdset('dof','default')
-      call dskdgeff(tmp,geff)
-      call dsrddof(tmp,sqrtgstar,heff)
-      call dsfik1(M/tmp,zero,zero,eta,zero,zero,k1)
+      call dskdgeff(T,geff)
+      call dsrddof(T,sqrtgstar,heff)
+      call dsfik1(M/T,zero,zero,eta,zero,zero,k1)
 
-      s=heff*2*pi*pi/45*tmp*tmp*tmp
-      H=sqrt(4*pi**3*geff/45)*tmp*tmp/mpl
+      s=heff*2*pi*pi/45*T*T*T
+      H=sqrt(4*pi**3*geff/45)*T*T/mpl
       HPrime=H*heff/sqrt(geff)/sqrtgstar 
 
-      dsfidecint= k1/HPrime/s*tmp
+      dsfidecint= k1/HPrime/s*T
       return
       end
 
 c     Made integrant into function of one variable to use in inegration routine
-      real*8 function dsfidecint_simp(tmp)
+      real*8 function dsfidecint_simp(T)
       implicit none
 
       include 'dsficom.h'
 
-      real*8 tmp,M,eta,dsfidecint,x1,x2,x3,eta1,eta2,eta3
+      real*8 T,M,eta,dsfidecint,x1,x2,x3,eta1,eta2,eta3
       if(stat.eq.0) then
-            eta_dec=0
+        eta_dec=0
       end if
-      dsfidecint_simp=dsfidecint(tmp,M_dec,eta_dec)
+      dsfidecint_simp=dsfidecint(T,M_dec,eta_dec)
       return
       end

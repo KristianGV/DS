@@ -34,7 +34,7 @@ c_______________________________________________________________________
         eta_dec=1; zero=0; Tmin=0
 
         
-        eta1_22=1;eta2_22=1;etaX_22=0;g1_22=1;g2_22=1;c12_22=1
+        eta1_22=1;eta2_22=1;etaX_22=0;g1_22=1;g2_22=1;c12_22=1.d0
         selfcon=1
 
 
@@ -50,7 +50,7 @@ c_______________________________________________________________________
         length=100
         
 c ... scale setup
-        mmin=1.d-3;mmax=1E3
+        mmin=1.d-3;mmax=1.d3
 
         open(unit=100,file=filename,status='unknown',form='formatted')
         write(100,'(A)') '   mdm                       oh2'
@@ -85,9 +85,9 @@ c       RELIC ABUNDACE TOTAL
 
     !       lgmdm=f(step,log(mmin),log(mmax))
     !       mdm=exp(lgmdm)
-    !       Tmin=8.d1
+    !       Tmin=1.d-3
     !       call dsgivemodel_silveira_zee(inputlambda,mdm)
-    !       ichannel=18
+    !       ichannel=19
     !       w=dsgammahpartial(ichannel,zero) 
                  
 
@@ -103,16 +103,15 @@ c       RELIC ABUNDACE TOTAL
     !       end do
 
 
-    !       write(100,*) mdm, rddec+rd2to2
+    !       write(100,*) mdm, (rddec+rd2to2)
 
 
 c       RELIC ABUNDACE 2to2        
 
           lgmdm=f(step,log(mmin),log(mmax))
           mdm=exp(lgmdm)
-          Tmin=1.d2
+          Tmin=1.d-3
           call dsgivemodel_silveira_zee(inputlambda,mdm)
-                 
 
           rd2to2=0
     !       dsfi2to2oh2(TR,Tmin,m1_22,m2_22
@@ -125,13 +124,12 @@ c       RELIC ABUNDACE 2to2
 
           write(500,*) mdm, rd2to2
 
-
-
 c     RELIC ABUNDANCE DECAY
 
     !       lgmdm=f(step,log(mmin),log(mmax))
     !       mdm=exp(lgmdm)
-    !       Tmin=mdm/100
+    !       Tmin=1.d-3
+    !       ichannel=19
     !       call dsgivemodel_silveira_zee(inputlambda,mdm)
     !       w=dsgammahpartial(ichannel,zero) 
                  
@@ -205,18 +203,18 @@ c       TESTING dsfidecint
 
 c     TESTING CROSS SECTION VALUES          
 
-        !  mdm=1.d1
-        !  call dsgivemodel_silveira_zee(inputlambda,mdm)
+        ! mdm=1.d-3
+        ! call dsgivemodel_silveira_zee(inputlambda,mdm)
         ! !  lgs=f(step,log((2*mdm)**2),log(1.D10))
         ! !  s=exp(lgs)  
 
-        !  s=f(step,4*mdm**2,4*mdm**2+1.d5)
+        ! s=f(step,m1_22**2-2,m1_22**2+2)
 
-        !  sig=0.0
-        !  do ichannel_22=1,18
-        !     sig=sig+sigma(s)
-        !  end do
-        !  write(300,*) s, sig
+        ! sig=0.0
+        ! do ichannel_22=1,18
+        !   sig=sig+sigma(s)
+        ! end do
+        ! write(300,*) s, sig
 
 c     Testing Bessel function
 

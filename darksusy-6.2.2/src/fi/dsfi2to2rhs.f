@@ -19,16 +19,22 @@ c=======================================================================
 
 
       real*8 lnT,T,a,b,eps,geff,sqrtgstar,heff,s_ent,H,HPrime,
-     &dsf_int2,abserr,resabs,resasc,c,d,sum1,sum2,sum3,dsrdthav,
+     &c,d,sum1,sum2,sum3,dsrdthav,
      &dsbessek2,x,debug1,debug2,debug3,sum,sum_tmp,tmp_upper,
      &tmp_upper1
       real*8, external :: dsfi2to2int_simp,dsanwx
       integer narray,ncoann,nrs,nthr,i,j
       parameter (narray=1000)
+
       real*8 mcoann(narray),dof(narray),tm(narray),
      &rm(narray),rw(narray)
 
+      integer npts2,npts_tmp
+      real*8 points(narray),points_sorted(narray),tmp_lowest,
+     &points_int(narray),abserr,resabs,resasc
+
       T=exp(lnT)
+      ! T=lnT
       call dsrdset('dof','default')
       call dskdgeff(T,geff)
       call dsrddof(T,sqrtgstar,heff)
@@ -53,138 +59,79 @@ c     TRIED TO USE <sv>
 !             end if
 
 
-
-            call dsrdparticles(0,narray,
+c------------ MY OWN ROUTINE
+        call dsrdparticles(0,narray,
      &  selfcon,ncoann,mcoann,dof,nrs,rm,rw,nthr,tm)
-            a=(4*mdm**2)+1.d-30
-            b=(4*mdm**2)+1.d80;eps=1.d-4
-            sum=0
-            if(nthr.eq.0) then
-                  do i=0,100
-                        tmp_upper=a+1.d4
-                        tmp_upper1=tmp_upper
-                        call dgadap(a,tmp_upper,dsfi2to2int_simp,
-     &eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1
-                  end do
+        a=(4*mdm**2)+1.d-30
+        b=1.d50;eps=1.d-4
+        sum=0
+c------------ Makes integration limits break points
+        npts2=2+nthr+(2*nrs)
+        npts_tmp=1
+        if(npts2.eq.2) then
+          points(1)=a
+          points(2)=b
+        else
+          points(1)=a
+        do i=1,nthr
+          do j=1,nrs
+            if((points(npts_tmp).lt.rm(j)**2).and.(rm(j).lt.tm(i))) then
+              npts_tmp=npts_tmp+1
+              points(npts_tmp)=(rm(j)-rw(j))**2
+              npts_tmp=npts_tmp+1
+              points(npts_tmp)=(rm(j)+rw(j))**2
+            end if
+          end do
+          npts_tmp=npts_tmp+1
+          points(npts_tmp)=tm(i)**2
+        end do
+        points(npts2)=b
+        end if
+c------------ sorting points from lowest to largest
+           
+        do i=1,npts2
+          ! finding lowest number in points
+          tmp_lowest=1.d100 
+          do j=1,npts2
+            if(i.eq.1) then
+              if(tmp_lowest.gt.points(j)) then
+                tmp_lowest=points(j)
+              end if
             else
-            do i =0,nthr
-                  if(i.eq.nthr) then
-                        tmp_upper=tm(nthr)**2
-                  else
-                        tmp_upper=tm(i+1)**2
-                  end if
-                  tmp_upper1=tmp_upper
-                  if(nrs.eq.0) then
-                        if(i.eq.0) then
-                              tmp_upper=tm(1)**2
-                              tmp_upper1=tmp_upper
-                              
-                        else if(i.ne.0.and.i.ne.nthr) then
-                              tmp_upper=tm(i+1)**2
-                              tmp_upper1=tmp_upper
-                        else
-                              tmp_upper=b
-                              tmp_upper1=tmp_upper
-                        end if
-                        call dgadap(a,a+1.d2,
-     &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        call dgadap(a+1.d2,tmp_upper,
-     &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1                                           
-                  else   
-                  do j =1,nrs
-                    if((i.eq.0).and.(rm(j).ne.real(0))) then
-                      if((rm(j).lt.tm(i+1))) then
-                        tmp_upper=rm(j)**2-10
-                        tmp_upper1=tmp_upper
-                        call dgadap(a,tmp_upper,
-     &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1
+              if((tmp_lowest.gt.points(j)).and.
+     &            (points(j).gt.points_sorted(i-1))) then
+                tmp_lowest=points(j)
+              end if
+            end if
+          end do
+          points_sorted(i)=tmp_lowest
+        end do
+c ------- Want to integrate over x=1/s insted, need new integration limits
+        do i=1,npts2
+          points_int(i)=1/points_sorted(npts2-(i-1))
+        end do
 
-                        tmp_upper=rm(j)**2+10
-                        tmp_upper1=tmp_upper
-                        call dgadap(a,tmp_upper,
+c-------- Integrate from xmin to xmax with breakpoints in points_sorted
+c         This means to sum over integral from points_int(i) to points_int(i+1)
+        sum=0
+        do i=1,(npts2-1)
+          call dgadap(points_int(i),points_int(i+1),
      &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1
-                      else if(j.eq.nrs) then
-                        tmp_upper=tm(1)**2
-                        tmp_upper1=tmp_upper
-                        call dgadap(a,tmp_upper,
-     &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1
-                      end if
+    !       call dqk21(dsfi2to2int_simp,points_int(i),
+    !  &points_int(i+1),sum,abserr,resabs,resasc)  
 
-                    else if((i.gt.0).and.(i.lt.nthr+1)) then
-                      if((rm(j).lt.tm(i+1)).and.
-     &(tm(i).lt.rm(j))) then
-                        tmp_upper=rm(j)**2-1000
-                        tmp_upper1=tmp_upper
-                        call dgadap(a,tmp_upper,
-     &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1
+          sum=sum+sum_tmp
+        end do
 
-                        tmp_upper=rm(j)**2+1000
-                        tmp_upper1=tmp_upper
-                        call dgadap(a,tmp_upper,
-     &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1
-                      else if(j.eq.nrs) then
-                        if(i.eq.nthr) then
-                              tmp_upper=tm(nthr)**2
-                        else
-                              tmp_upper=tm(i+1)**2
-                        end if
-                        tmp_upper1=tmp_upper
-                        call dgadap(a,tmp_upper,
-     &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1
-                      end if
-                    else if(i.eq.nthr+1) then
-                      if((rm(j).lt.b).and.
-     &(tm(nthr).lt.rm(j))) then
-                        tmp_upper=rm(j)**2-1000
-                        tmp_upper1=tmp_upper
-                        call dgadap(a,tmp_upper,
-     &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1
+        dsfi2to2rhs=sum/HPrime/s_ent*T
 
-                        tmp_upper=rm(j)**2+1000
-                        tmp_upper1=tmp_upper
-                        call dgadap(a,tmp_upper,
-     &dsfi2to2int_simp,eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        
-                        a=tmp_upper1
-                      else if(j.eq.nrs) then
-                        call dgadap(a,b,dsfi2to2int_simp,
-     &eps,sum_tmp)
-                        sum=sum+sum_tmp
-                        a=tmp_upper1
-                      end if
-                    end if
-                  end do
-                  end if
-            end do
-      end if
-c -------------------------------------------------------
-            dsfi2to2rhs=sum/HPrime/s_ent*T
+c----------------------------------------------------------------------
       else 
-            a=(4*mdm**2)
-            b=(4*mdm**2)+1.d40;eps=1.d-4
+        a=1/(4*mdm**2)
+        b=1/((4*mdm**2)+1.d40);eps=1.d-4
 
-            call dgadap(a,b,dsfi2to2int_simp,eps,sum1)
-            dsfi2to2rhs=(sum1)/HPrime/s_ent*T
+        call dgadap(b,a,dsfi2to2int_simp,eps,sum1)
+        dsfi2to2rhs=(sum1)/HPrime/s_ent*T
       end if
 
       return

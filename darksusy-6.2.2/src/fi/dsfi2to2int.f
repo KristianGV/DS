@@ -21,7 +21,7 @@ c=======================================================================
      &dsbessek1,mdm,m1,m2,sstar
       integer stat
       zero=0
-      s=x
+      s=1/x
       ! sstar=1/x
       ! s=sstar*4*mdm**2
 
@@ -33,7 +33,7 @@ c=======================================================================
 
       if(stat.eq.0) then
         dsfi2to2int=sigma(s)*p_ij(mdm,mdm,s)**2*sqrt(s)*
-     &dsbessek1(sqrt(s)/T)/exp(sqrt(s)/T)!*s**2
+     &dsbessek1(sqrt(s)/T)/exp(sqrt(s)/T)*s**2
 
       else
         if(s.lt.4*mdm**2) then
