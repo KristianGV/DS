@@ -16,8 +16,8 @@ plt.figure(1)
 
 ############# TOTAL #############
 
-# mdm,oh2 =np.loadtxt('scalar_FIMP.dat',unpack=True,skiprows=1, usecols=range(0,2))
-# plt.loglog(mdm,oh2,color='blue',linestyle='--', label='my data:  total', marker='.')
+mdm,oh2 =np.loadtxt('scalar_FIMP.dat',unpack=True,skiprows=1, usecols=range(0,2))
+plt.loglog(mdm,oh2,color='blue',linestyle='--', label='my data:  total', marker='.')
 
 
 ############# DECAY #############
@@ -28,8 +28,8 @@ plt.figure(1)
 
 ############# 2->2 #############
 
-mdm_2to2, oh2_2to2 = np.loadtxt('scalar_FIMP_2to2.dat', unpack=True, skiprows=1, usecols=range(0, 2))
-plt.loglog(mdm_2to2, oh2_2to2, color='black',linestyle='--', label='my data:  2->2', marker='.')
+# mdm_2to2, oh2_2to2 = np.loadtxt('scalar_FIMP_2to2.dat', unpack=True, skiprows=1, usecols=range(0, 2))
+# plt.loglog(mdm_2to2, oh2_2to2, color='black',linestyle='--', label='my data:  2->2', marker='.')
 
 # MICROMEGAS DATA
 

@@ -83,46 +83,46 @@ c ... scale setup
 
 c       RELIC ABUNDACE TOTAL        
 
-    !       lgmdm=f(step,log(mmin),log(mmax))
-    !       mdm=exp(lgmdm)
-    !       Tmin=1.d-3
-    !       call dsgivemodel_silveira_zee(inputlambda,mdm)
-    !       ichannel=19
-    !       w=dsgammahpartial(ichannel,zero) 
-                 
-
-    !       rddec=dsfidecoh2(TR,Tmin,w,M_dec,
-    !  &g,eta_dec)
-
-
-    !       rd2to2=0.d0
-    !       do ichannel_22=1,18
-    !         rd2to2_tmp=dsfi2to2oh2(TR,Tmin,m1_22,m2_22
-    !  &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
-    !         rd2to2=rd2to2+rd2to2_tmp
-    !       end do
-
-
-    !       write(100,*) mdm, (rddec+rd2to2)
-
-
-c       RELIC ABUNDACE 2to2        
-
           lgmdm=f(step,log(mmin),log(mmax))
           mdm=exp(lgmdm)
           Tmin=1.d-3
           call dsgivemodel_silveira_zee(inputlambda,mdm)
+          ichannel=19
+          w=dsgammahpartial(ichannel,zero) 
+                 
 
-          rd2to2=0
-    !       dsfi2to2oh2(TR,Tmin,m1_22,m2_22
-    !  &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
+          rddec=dsfidecoh2(TR,Tmin,w,M_dec,
+     &g,eta_dec)
+
+
+          rd2to2=0.d0
           do ichannel_22=1,18
             rd2to2_tmp=dsfi2to2oh2(TR,Tmin,m1_22,m2_22
      &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
             rd2to2=rd2to2+rd2to2_tmp
           end do
 
-          write(500,*) mdm, rd2to2
+
+          write(100,*) mdm, rddec+2*rd2to2
+
+
+c       RELIC ABUNDACE 2to2        
+
+    !       lgmdm=f(step,log(mmin),log(mmax))
+    !       mdm=exp(lgmdm)
+    !       Tmin=1.d-3
+    !       call dsgivemodel_silveira_zee(inputlambda,mdm)
+
+    !       rd2to2=0
+    ! !       dsfi2to2oh2(TR,Tmin,m1_22,m2_22
+    ! !  &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
+    !       do ichannel_22=1,18
+    !         rd2to2_tmp=dsfi2to2oh2(TR,Tmin,m1_22,m2_22
+    !  &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
+    !         rd2to2=rd2to2+rd2to2_tmp
+    !       end do
+
+    !       write(500,*) mdm, 2*rd2to2
 
 c     RELIC ABUNDANCE DECAY
 
