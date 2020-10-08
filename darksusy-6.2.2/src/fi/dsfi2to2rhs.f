@@ -10,7 +10,7 @@ c
 c
 c  author: Kristian Gjestad Vangsnes (kristgva@uio.no)   2020-09-07
 c=======================================================================
-      real*8 function dsfi2to2rhs(lnT)
+      real*8 function dsfi2to2rhs(T)
       implicit none
       include 'dsmpconst.h'
       include 'dsficom.h'
@@ -21,7 +21,7 @@ c=======================================================================
       real*8 lnT,T,a,b,eps,geff,sqrtgstar,heff,s_ent,H,HPrime,
      &c,d,sum1,sum2,sum3,dsrdthav,
      &dsbessek2,x,debug1,debug2,debug3,sum,sum_tmp,tmp_upper,
-     &tmp_upper1
+     &tmp_upper1,xf
       real*8, external :: dsfi2to2int_simp,dsanwx
       integer narray,ncoann,nrs,nthr,i,j
       parameter (narray=1000)
@@ -29,11 +29,11 @@ c=======================================================================
       real*8 mcoann(narray),dof(narray),tm(narray),
      &rm(narray),rw(narray)
 
-      integer npts2,npts_tmp
+      integer npts2,npts_tmp,iwar,nfc
       real*8 points(narray),points_sorted(narray),tmp_lowest,
      &points_int(narray),abserr,resabs,resasc
 
-      T=exp(lnT)
+      ! T=exp(lnT)
       ! T=lnT
       call dsrdset('dof','default')
       call dskdgeff(T,geff)
@@ -50,13 +50,14 @@ c     Integration limits
       ! b=1/(4*mdm**2)
       ! b=1
       if(stat.eq.0) then
-c     TRIED TO USE <sv>            
-!             if(x.eq.0) then
-!                   dsfi2to2rhs=0
-!             else
-!                   dsfi2to2rhs=T**2*dsrdthav(x,dsanwx)*
-!      &(dsbessek2(x)/exp(x))**2/HPrime/s_ent
-!             end if
+c     TRIED TO USE <sv>     
+      
+    !         if(x.eq.0) then
+    !               dsfi2to2rhs=0
+    !         else
+    !               dsfi2to2rhs=T**2*dsrdthav(x,dsanwx)*
+    !  &(dsbessek2(x)/exp(x))**2/HPrime/s_ent
+    !         end if
 
 
 c------------ MY OWN ROUTINE
@@ -123,7 +124,7 @@ c         This means to sum over integral from points_int(i) to points_int(i+1)
           sum=sum+sum_tmp
         end do
 
-        dsfi2to2rhs=sum/HPrime/s_ent*T
+        dsfi2to2rhs=sum/HPrime/s_ent!*T
 
 c----------------------------------------------------------------------
       else 
@@ -131,7 +132,7 @@ c----------------------------------------------------------------------
         b=1/((4*mdm**2)+1.d40);eps=1.d-4
 
         call dgadap(b,a,dsfi2to2int_simp,eps,sum1)
-        dsfi2to2rhs=(sum1)/HPrime/s_ent*T
+        dsfi2to2rhs=(sum1)/HPrime/s_ent!*T
       end if
 
       return

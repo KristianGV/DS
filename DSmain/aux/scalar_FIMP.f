@@ -17,14 +17,15 @@ c_______________________________________________________________________
      &step,mmin,mmax,f,dsfi2to2int_simp,dsfidecoh2,TR,Tmin,M,w,g
      &,inputlambda,dsgammahpartial,dsmwimp,lgmdm,dsfi2to2oh2,dsfi2to2rhs
      &,rddec,rd2to2,sigma,sig,rd2to2_tmp,sum,tmp,dsfi2to2ab,lgtmp,
-     &Y,Y_dec,Y_22,dsfidecab,dsfidecint,lgs
+     &Y,Y_dec,Y_22,dsfidecab,dsfidecint,lgs,dsrdthav,vmoeller,p
       
-      real*8 lb,ub,k1_ds,k1_my,dsbessek1
+      real*8 lb,ub,k1_ds,k1_my,dsbessek1,xf,dsrdomega
         character*80 filename,filename1,filename_debug,filename2,
      &filename3
+        
 
-        integer i,length,ierr,iwarn,ichannel,j
-
+        integer i,length,iwarn,ichannel,j,ierr,iwar,nfc
+        real*8,external :: dsanwx
           
         call dsinit
         write (*,*) '-------------------------------------------------------'
@@ -50,7 +51,7 @@ c_______________________________________________________________________
         length=100
         
 c ... scale setup
-        mmin=1.d-3;mmax=1.d3
+        mmin=1.d-2;mmax=1.d3
 
         open(unit=100,file=filename,status='unknown',form='formatted')
         write(100,'(A)') '   mdm                       oh2'
@@ -85,8 +86,12 @@ c       RELIC ABUNDACE TOTAL
 
           lgmdm=f(step,log(mmin),log(mmax))
           mdm=exp(lgmdm)
-          Tmin=1.d-3
+          Tmin=1.d-20
           call dsgivemodel_silveira_zee(inputlambda,mdm)
+          call dsmodelsetup()
+
+          ! x=dsrdomega(0,0,xf,ierr,iwar,nfc)
+          ! write(*,*) x
           ichannel=19
           w=dsgammahpartial(ichannel,zero) 
                  
@@ -103,7 +108,7 @@ c       RELIC ABUNDACE TOTAL
           end do
 
 
-          write(100,*) mdm, rddec+2*rd2to2
+          write(100,*) mdm, rddec+rd2to2
 
 
 c       RELIC ABUNDACE 2to2        
@@ -122,7 +127,7 @@ c       RELIC ABUNDACE 2to2
     !         rd2to2=rd2to2+rd2to2_tmp
     !       end do
 
-    !       write(500,*) mdm, 2*rd2to2
+    !       write(500,*) mdm, rd2to2
 
 c     RELIC ABUNDANCE DECAY
 
@@ -203,18 +208,36 @@ c       TESTING dsfidecint
 
 c     TESTING CROSS SECTION VALUES          
 
-        ! mdm=1.d-3
+        ! mdm=1.d2
         ! call dsgivemodel_silveira_zee(inputlambda,mdm)
         ! !  lgs=f(step,log((2*mdm)**2),log(1.D10))
         ! !  s=exp(lgs)  
 
-        ! s=f(step,m1_22**2-2,m1_22**2+2)
-
+        ! ! s=f(step,m1_22**2-1.d2,m1_22**2+1.d2)
+        ! lgs=f(step,log(4*mdm**2+1.d-3),log(1.d10))
+        ! s=exp(lgs)
+        ! p=5.d-1*sqrt(s-4*mdm**2)
+        ! vmoeller = 2.0d0*p*sqrt(s)/(s-2.0d0*mdm**2)
         ! sig=0.0
         ! do ichannel_22=1,18
         !   sig=sig+sigma(s)
         ! end do
-        ! write(300,*) s, sig
+        ! write(300,*) s, sig*vmoeller
+
+c     TESTING <sv>
+
+        ! mdm=1.d2
+        ! call dsgivemodel_silveira_zee(inputlambda,mdm)
+        ! Tmin=1.d-20
+        ! call dsgivemodel_silveira_zee(inputlambda,mdm)
+        ! call dsmodelsetup()
+        ! x=dsrdomega(0,0,xf,ierr,iwar,nfc)
+        
+        ! T=f(step,1.d0,1.d4)
+
+        ! sig=dsrdthav(mdm/T,dsanwx)
+        ! write(300,*) mdm/T, sig
+
 
 c     Testing Bessel function
 

@@ -26,8 +26,8 @@ c=======================================================================
       c12_22=c12;m1_22=m1;m2_22=m2
 c     Integration limits      
 
-      ! a=Tmin;b=TR;eps=1.d-5
-      a=log(Tmin);b=log(TR);eps=1.d-5
+      a=Tmin;b=TR;eps=1.d-5
+      ! a=log(Tmin);b=log(TR);eps=1.d-5
 
 c     Integrate using adaptive Gaussian integration routine    
       call dqk21(dsfi2to2rhs,a,b,sum,abserr,resabs,resasc)  
@@ -37,10 +37,10 @@ c     Integrate using adaptive Gaussian integration routine
       ! prec=1.d-2
       ! call dsfun_int(dsfi2to2rhs,a,b,eps,prec,res)
       if(stat.eq.0) then
-        dsfi2to2ab=sum*g1_22*g2_22*c12_22/(8*pi**4)
-        ! dsfi2to2ab=sum*4*g1_22*g2_22*c12_22*mdm**4
+        dsfi2to2ab=2*sum*g1_22*g2_22*c12_22/(8*pi**4)
+      !   dsfi2to2ab=sum*4*g1_22*g2_22*c12_22*mdm**4
       else
-        dsfi2to2ab=sum*g1_22*g2_22*abs(eta1_22*eta2_22)
+        dsfi2to2ab=2*sum*g1_22*g2_22*abs(eta1_22*eta2_22)
      &*c12_22/(8*pi**4)
       end if
       return
