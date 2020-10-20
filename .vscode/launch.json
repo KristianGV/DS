@@ -8,7 +8,7 @@
           "name": "(gdb) Fortran",
           "type": "cppdbg",
           "request": "launch",
-          "program": "${workspaceFolder}/DSmain/aux/scalar_FIMP.out",
+          "program": "${workspaceFolder}/DSmain/aux/abundance_mO.out",
           "args": [], // Possible input args for a.out
           "stopAtEntry": false,
           "cwd": "${workspaceFolder}",

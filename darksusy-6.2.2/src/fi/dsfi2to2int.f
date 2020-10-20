@@ -13,13 +13,13 @@ c
 c
 c  author: Kristian Gjestad Vangsnes (kristgva@uio.no)   2020-09-07
 c=======================================================================
-      real*8 function dsfi2to2int(x,T,x1,x2,xX,eta1,eta2,etaX,stat,mdm)
+      real*8 function dsfi2to2int(x,T,x1,x2,xX,eta1,eta2,etaX)
       implicit none
       include 'dsmpconst.h'
+      include 'dsficom.h'
 
       real*8 T,x1,x2,xX,eta1,eta2,etaX,zero,k1,k1X,k1bess,s,x,p_ij,sigma,
-     &dsbessek1,mdm,m1,m2,sstar
-      integer stat
+     &dsbessek1,m1,m2,sstar,p,dssigmavpartial
       zero=0
       s=1/x
       ! sstar=1/x
@@ -32,8 +32,19 @@ c=======================================================================
       m1=x1*T;m2=x2*T
 
       if(stat.eq.0) then
-        dsfi2to2int=sigma(s)*p_ij(mdm,mdm,s)**2*sqrt(s)*
-     &dsbessek1(sqrt(s)/T)/exp(sqrt(s)/T)*s**2
+    !     dsfi2to2int=sigma(s)*p_ij(mdm,mdm,s)**2*sqrt(s)*
+    !  &dsbessek1(sqrt(s)/T)/exp(sqrt(s)/T)*s**2
+
+        p=sqrt(s/4-mdm**2)
+        if(isnan(dssigmavpartial(ichannel_22,p))) then
+          dsfi2to2int=dssigmavpartial(ichannel_22,p)
+          dsfi2to2int=0
+    !       write(*,*) "dssigmavpartial is NaN at sqrts=", sqrt(s),
+    !  &"for channel=",ichannel_22 
+        else
+        dsfi2to2int=dssigmavpartial(ichannel_22,p)*p_ij(mdm,mdm,s)*
+     &(s-2*mdm**2)*dsbessek1(sqrt(s)/T)/exp(sqrt(s)/T)*s**2/gev2cm3s/2
+        end if
 
       else
         if(s.lt.4*mdm**2) then
@@ -58,15 +69,16 @@ c     Function that calculated p_ij that is used in the annihilation rate
       end
 
 c     dsfi2to2int made into a function of one dimension used to integrate over    
-      real*8 function dsfi2to2int_simp(x)
+      real*8 function dsfi2to2int_simp(lgx)
       implicit none
 
       include 'dsficom.h'
 
-      real*8 k1,s,x,dsfi2to2int
+      real*8 k1,s,x,dsfi2to2int,lgx
+      x=exp(lgx)
 
       dsfi2to2int_simp=dsfi2to2int(x,T_22,x1_22,x2_22,xX_22,eta1_22
-     &,eta2_22,etaX_22,stat,mdm)
+     &,eta2_22,etaX_22)*x
       return
       end
 

@@ -23,6 +23,8 @@ c       vmoeller = 2.0d0*p*sqrt(s)/(s-2.0d0*dsmwimp()**2)
       
       if(isnan(dssigmavpartial(ichannel_22,p)/v_ij(mdm,mdm,s))) then
             sigma=0
+            write(*,*) "dssigmavpartial returned NaN for channel:",ichannel_22  
+            write(*,*) "at sqrs=",sqrt(s)
       else
 c           dssigmavpartial is given in cm^3 s^-1            
             sigma=dssigmavpartial(ichannel_22,p)/v_ij(mdm,mdm,s)/gev2cm3s

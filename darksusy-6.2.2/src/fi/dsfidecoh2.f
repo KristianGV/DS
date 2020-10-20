@@ -17,7 +17,7 @@ c
 c  author: Kristian Gjestad Vangsnes (kristgva@uio.no)   2020-08-17
 c=======================================================================
 
-      real*8 function dsfidecoh2(TR,Tmin,w,M,g,eta)
+      real*8 function dsfidecoh2(Tmin,TR,w,M,g,eta)
       implicit none
 
       include 'dsmpconst.h'
@@ -30,7 +30,7 @@ c     Using that 1 GeV = 1.78266192E-24 g
 c     Since rho_conh2 is given in units g cm^-3, we have s0/rho_conh2 is in units g^-1
       Gevg=1.78266192E-24
 
-      dsfidecoh2= mdm*dsfidecab(TR,Tmin,w,M,g,eta)*s0/rho_conh2*Gevg
+      dsfidecoh2= mdm*dsfidecab(Tmin,TR,w,M,g,eta)*s0/rho_conh2*Gevg
 
       return 
       end

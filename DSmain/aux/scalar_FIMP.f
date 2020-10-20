@@ -1,8 +1,4 @@
-c_______________________________________________________________________
-c                   SCALAR FIMP DECAY
-c
-c
-c_______________________________________________________________________
+
       program scalar_FIMP
 
         implicit none
@@ -17,7 +13,8 @@ c_______________________________________________________________________
      &step,mmin,mmax,f,dsfi2to2int_simp,dsfidecoh2,TR,Tmin,M,w,g
      &,inputlambda,dsgammahpartial,dsmwimp,lgmdm,dsfi2to2oh2,dsfi2to2rhs
      &,rddec,rd2to2,sigma,sig,rd2to2_tmp,sum,tmp,dsfi2to2ab,lgtmp,
-     &Y,Y_dec,Y_22,dsfidecab,dsfidecint,lgs,dsrdthav,vmoeller,p
+     &Y,Y_dec,Y_22,dsfidecab,dsfidecint,lgs,dsrdthav,vmoeller,p,
+     &omega,lgx,dssigmavpartial
       
       real*8 lb,ub,k1_ds,k1_my,dsbessek1,xf,dsrdomega
         character*80 filename,filename1,filename_debug,filename2,
@@ -31,7 +28,7 @@ c_______________________________________________________________________
         write (*,*) '-------------------------------------------------------'
         write (*,*) 
 
-        TR=1.D6; ; inputlambda=1.D-11;eta=1;stat=0;g=1;
+        TR=1.d6; ; inputlambda=1.d-11;eta=1;stat=0;g=1;
         eta_dec=1; zero=0; Tmin=0
 
         
@@ -47,8 +44,7 @@ c_______________________________________________________________________
 
         M_dec=mass(khsm)
         m1_22=M_dec;m2_22=M_dec
-
-        length=100
+        length=10000
         
 c ... scale setup
         mmin=1.d-2;mmax=1.d3
@@ -84,38 +80,42 @@ c ... scale setup
 
 c       RELIC ABUNDACE TOTAL        
 
-          lgmdm=f(step,log(mmin),log(mmax))
-          mdm=exp(lgmdm)
-          Tmin=1.d-20
-          call dsgivemodel_silveira_zee(inputlambda,mdm)
-          call dsmodelsetup()
+    !       lgmdm=f(step,log(mmin),log(mmax))
+    !       mdm=exp(lgmdm)
+    !       ! Tmin=1.d-20
+    !       Tmin=1.d-20
 
-          ! x=dsrdomega(0,0,xf,ierr,iwar,nfc)
-          ! write(*,*) x
-          ichannel=19
-          w=dsgammahpartial(ichannel,zero) 
+    !       call dsgivemodel_silveira_zee(inputlambda,mdm)
+    !       call dsmodelsetup()
+
+    !       x=dsrdomega(0,0,xf,ierr,iwar,nfc)
+    !       ! write(*,*) x
+    !       ichannel=19
+    !       w=dsgammahpartial(ichannel,zero) 
                  
 
-          rddec=dsfidecoh2(TR,Tmin,w,M_dec,
-     &g,eta_dec)
+    !       rddec=dsfidecoh2(Tmin,TR,w,M_dec,
+    !  &g,eta_dec)
 
 
-          rd2to2=0.d0
-          do ichannel_22=1,18
-            rd2to2_tmp=dsfi2to2oh2(TR,Tmin,m1_22,m2_22
-     &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
-            rd2to2=rd2to2+rd2to2_tmp
-          end do
+    !       rd2to2=dsfi2to2oh2(Tmin,TR,m1_22,m2_22
+    !  &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
+
+    ! !       do ichannel_22=1,18
+    ! !         rd2to2_tmp=dsfi2to2oh2(TR,Tmin,m1_22,m2_22
+    ! !  &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)
+    ! !         rd2to2=rd2to2+rd2to2_tmp
+    !       ! end do
 
 
-          write(100,*) mdm, rddec+rd2to2
+    !       write(100,*) mdm, rd2to2!+rddec
 
 
 c       RELIC ABUNDACE 2to2        
 
     !       lgmdm=f(step,log(mmin),log(mmax))
     !       mdm=exp(lgmdm)
-    !       Tmin=1.d-3
+    !       Tmin=1.d-20
     !       call dsgivemodel_silveira_zee(inputlambda,mdm)
 
     !       rd2to2=0
@@ -137,7 +137,6 @@ c     RELIC ABUNDANCE DECAY
     !       ichannel=19
     !       call dsgivemodel_silveira_zee(inputlambda,mdm)
     !       w=dsgammahpartial(ichannel,zero) 
-                 
 
     !       rddec=dsfidecoh2(TR,Tmin,w,M_dec,
     !  &g,eta_dec)
@@ -165,19 +164,21 @@ c     CALC Y
 
 c       TESTING dsfi2to2rhs
 
-          ! mdm=25
-          ! Tmin=20000.d0
+          ! mdm=150.d0
+          ! Tmin=1.d-4
+          ! call dsgivemodel_silveira_zee(inputlambda,mdm)
+          ! call dsmodelsetup()
+          ! lgtmp=f(step,log(Tmin),log(TR))
 
-          ! tmp=f(step,Tmin,TR)
-          ! x1_22=m1_22/tmp
-          ! x2_22=x1_22
           ! sum=0
+          ! x=dsrdomega(0,0,xf,ierr,iwar,nfc)
+          ! sum=dsfi2to2rhs(lgtmp)
 
-          ! do ichannel_22=1,18
-          !   sum=sum+dsfi2to2rhs(tmp)
-          ! end do
+          ! ! do ichannel_22=1,18
+          ! !   sum=sum+dsfi2to2rhs(lgtmp)
+          ! ! end do
 
-          ! write(300,*) tmp, sum
+          ! write(300,*) exp(lgtmp), sum
 
 c       TESTING dsfi2to2int_simp
 
@@ -208,7 +209,7 @@ c       TESTING dsfidecint
 
 c     TESTING CROSS SECTION VALUES          
 
-        ! mdm=1.d2
+        ! mdm=128.d0
         ! call dsgivemodel_silveira_zee(inputlambda,mdm)
         ! !  lgs=f(step,log((2*mdm)**2),log(1.D10))
         ! !  s=exp(lgs)  
@@ -219,24 +220,25 @@ c     TESTING CROSS SECTION VALUES
         ! p=5.d-1*sqrt(s-4*mdm**2)
         ! vmoeller = 2.0d0*p*sqrt(s)/(s-2.0d0*mdm**2)
         ! sig=0.0
-        ! do ichannel_22=1,18
-        !   sig=sig+sigma(s)
+        ! do ichannel_22=12,12
+        !   sig=sig+dssigmavpartial(ichannel_22,p)/gev2cm3s
         ! end do
-        ! write(300,*) s, sig*vmoeller
+        ! write(300,*) sqrt(s), sig
 
 c     TESTING <sv>
 
-        ! mdm=1.d2
-        ! call dsgivemodel_silveira_zee(inputlambda,mdm)
-        ! Tmin=1.d-20
-        ! call dsgivemodel_silveira_zee(inputlambda,mdm)
-        ! call dsmodelsetup()
-        ! x=dsrdomega(0,0,xf,ierr,iwar,nfc)
+        mdm=300.d0
+        Tmin=1.d-5
+        inputlambda=1.d-11
+        call dsgivemodel_silveira_zee(inputlambda,mdm)
+        call dsmodelsetup()
+        omega=dsrdomega(0,0,xf,ierr,iwar,nfc)
         
-        ! T=f(step,1.d0,1.d4)
+        lgx=f(step,log(mdm/TR),log(mdm/Tmin))
+        x=exp(lgx)  
+        sig=dsrdthav(x,dsanwx)
 
-        ! sig=dsrdthav(mdm/T,dsanwx)
-        ! write(300,*) mdm/T, sig
+        write(300,*) x, sig
 
 
 c     Testing Bessel function
@@ -249,6 +251,7 @@ c     Testing Bessel function
       ! write(300,*) x,k1_ds, k1_my, k1_ds-k1_my
 
       end do  
+
       close(100)
       close(200)
       close(300)

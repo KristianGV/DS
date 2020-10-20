@@ -20,7 +20,7 @@ INC=../include ../../contrib/include
 DINC=-I../include -I../../contrib/include
 DOBJ=../../tmp/build-src-user
 
-INC_DEP = 
+INC_DEP = dsrdcom.h
 
 vpath %.h $(INC)
 

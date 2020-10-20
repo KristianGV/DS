@@ -11,7 +11,7 @@ c----------------------------------------------------------------------c
 c  author: joakim edsjo (edsjo@cfpa.berkeley.edu) 96-03-22
 c  modified: 98-03-03
 c  modified: 07-12-29 pg switch for choosing dof in early universe
-c....rdmgev - relic and coannihilating masses in gev's
+c....rdmgev - relic and coannihilating masses in gevs
       integer tharsi
       parameter (tharsi=1000)  
       real*8 mco(tharsi),mdof(tharsi),rgev(tharsi),rwid(tharsi)

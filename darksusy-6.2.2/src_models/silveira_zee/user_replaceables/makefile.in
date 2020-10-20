@@ -20,7 +20,8 @@ INC=../include ../../include ../../../src/include ../../../contrib/include
 DINC=-I../include -I../../include -I../../../src/include -I../../../contrib/include
 DOBJ=../../../tmp/build-silveira_zee-user
 
-INC_DEP = dsidtag.h dsmpconst.h dsparticles.h dssm.h dssmparam.h
+INC_DEP = dsidtag.h dsmpconst.h dsparticles.h dssilveira_zee.h dssm.h \
+dssmparam.h
 
 vpath %.h $(INC)
 
