@@ -6,7 +6,7 @@
 # Define fortran compiler and options (set when ./configure is run
 # in the DarkSUSY root directory).
 FF=@F77@
-FOPT=@FOPT@
+FOPT=@FOPT@ @DSDEBUG@
 
 FC=$(FF)
 FFLAGS=$(FOPT) -c $(DINC)
@@ -27,9 +27,9 @@ vpath %.h $(INC)
 SRC = dsabsq.f dsbessei0.f dsbessei1.f dsbessek0.f dsbessek1.f \
 dsbessek2.f dsbessjw.f dscharadd.f dsdatafile.f dsdilog.f dsf_int.f \
 dsf_int2.f dsfac.f dsgamma.f dshealpixave.f dshealpixint.f \
-dshiprecint3.f dshunt.f dsi_trim.f dsidtag.f dsisnan.f dslowcase.f \
-dsmoderf.f dsrnd1.f dsrndlin.f dsrndlog.f dsrndsgn.f dsspline.f \
-dssplint.f dswrite.f dszarg.f erf.f erfc.f erfinv.f erfsub.f lngamma.f \
+dshiprecint3.f dshunt.f dsi_trim.f dsidtag.f dsinterpolatetable2D.f \
+dsisnan.f dslowcase.f dsmoderf.f dsrnd1.f dsrndlin.f dsrndlog.f \
+dsrndsgn.f dsspline.f dssplint.f dswrite.f dszarg.f lngamma.f \
 modcosint.f safelog1m.f sinc.f zeroin.f
 
 OBJ1 = $(patsubst %.f,$(DOBJ)/%.o,$(SRC))
@@ -61,6 +61,6 @@ $(DOBJ)/%.o : %.c $(INC_DEP)
 
 
 mods : 
-	if [ -f *.mod ]; then\
+	@if [ -f *.mod ]; then\
 		cp -p *.mod ../include/ ;\
 	fi

@@ -46,7 +46,7 @@ c=======================================================================
               dsf_int=tot
               return
            endif
-     	endif
+        endif
         os=tot
         ost=st
         if (dsisnan(tot)) then

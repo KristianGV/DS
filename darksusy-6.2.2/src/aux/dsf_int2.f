@@ -44,7 +44,7 @@ c=======================================================================
               dsf_int2=tot
               return
            endif
-     	endif
+        endif
         os=tot
         ost=st
       enddo

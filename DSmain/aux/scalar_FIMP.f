@@ -36,15 +36,15 @@
         selfcon=1
 
 
-        filename='scalar_FIMP.dat'
-        filename1='scalar_FIMP_Y.dat'
-        filename2='scalar_FIMP_decay.dat'
-        filename3='scalar_FIMP_2to2.dat'
-        filename_debug='debug.dat'
+        filename='data/scalar_FIMP.dat'
+        filename1='data/scalar_FIMP_Y.dat'
+        filename2='data/scalar_FIMP_decay.dat'
+        filename3='data/scalar_FIMP_2to2.dat'
+        filename_debug='data/debug.dat'
 
         M_dec=mass(khsm)
         m1_22=M_dec;m2_22=M_dec
-        length=10000
+        length=100
         
 c ... scale setup
         mmin=1.d-2;mmax=1.d3
@@ -227,7 +227,7 @@ c     TESTING CROSS SECTION VALUES
 
 c     TESTING <sv>
 
-        mdm=300.d0
+        mdm=1.d0
         Tmin=1.d-5
         inputlambda=1.d-11
         call dsgivemodel_silveira_zee(inputlambda,mdm)

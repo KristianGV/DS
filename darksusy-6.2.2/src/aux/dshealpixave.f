@@ -32,9 +32,9 @@
       ppmax=12*nside*nside
       sum=0.d0
 
-c      goto 10 ! uncomment to avoid any bookkeeping, which is faster if you
-               ! always want to use how=0. This is typically better for
-               ! very large regions with Omega >~ 4*pi / 10.
+c      goto 10 ! uncomment here (and at label 10) to avoid any bookkeeping,
+               ! which is faster if you always want to use how=0. This is
+               ! typically better for very large regions with Omega >~ 4*pi / 10.
 
 c... if this is the first time we call this routine, we need to look
 c... at all points   
@@ -63,7 +63,8 @@ c... contained in plist are considered (saved in nlist from previous call)
       enddo
       
       goto 20 ! skip the "always how=0" implementation
-10    sum=0.d0
+c 10    continue
+      sum=0.d0
       call pix2ang_nest(nside, 0, l0, b0)  ! to rotate the HP system to (0,0)
       do i=1,ppmax
          call pix2ang_nest(nside, i-1, l, b)

@@ -24,8 +24,9 @@ INC_DEP = dsmpconst.h
 
 vpath %.h $(INC)
 
-SRC = dsfidecab.f dsfidecint.f dsfidecoh2.f dsfik1.f dsfipcm.f \
-dsfistat.f
+SRC = dsfi2to2ab.f dsfi2to2int.f dsfi2to2oh2.f dsfi2to2rhs.f \
+dsfidecab.f dsfidecint.f dsfidecoh2.f dsfik1.f dsfipcm.f \
+dsfisigma.f dsfistat.f dsinterpolatetable.f
 
 OBJ1 = $(patsubst %.f,$(DOBJ)/%.o,$(SRC))
 

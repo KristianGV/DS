@@ -19,7 +19,7 @@ c----------------------------------------------------------------------
 
         call dsgivemodel_silveira_zee(inputlambda,mdm)
         call dsmodelsetup()
-        omega=dsrdomega(0,0,xf,ierr,iwar,nfc)
+        ! omega=dsrdomega(0,0,xf,ierr,iwar,nfc)
 
         oh2=dsfi2to2oh2(Tmin,TR,m1_22,m2_22
      &,eta1_22,eta2_22,etaX_22,g1_22,g2_22,c12_22)

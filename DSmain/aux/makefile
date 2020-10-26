@@ -69,9 +69,8 @@ $(DS_INSTALL)/src/fi/dsfidecab.f $(DS_INSTALL)/src/fi/dsfidecoh2.f\
 $(DS_INSTALL)/src/fi/dsfi2to2int.f $(DS_INSTALL)/src/fi/dsfi2to2rhs.f\
 $(DS_INSTALL)/src/fi/dsfisigma.f $(DS_INSTALL)/src/fi/dsfi2to2ab.f\
 $(DS_INSTALL)/src/aux_xcernlib/dgadap.f $(DS_INSTALL)/src/fi/dsfi2to2oh2.f\
-$(DS_INSTALL)/src_models/silveira_zee/an/dsanwx.f\
 $(DS_INSTALL)/src/rd/dsrdomega.f $(DS_INSTALL)/src_models/silveira_zee/an/dssigmavpartial.f \
-$(DS_INSTALL)/src/fi/dsinterpolatetable2D.f
+$(DS_INSTALL)/src/fi/dsinterpolatetable.f $(DS_INSTALL)/src/user_replaceables/dsrdthav.f 
 
 
 #$(DS_INSTALL)/src/rd/dsrdthav.f 
@@ -97,11 +96,11 @@ all: scalar_FIMP abundance_mO
 
 scalar_FIMP : DS_MODULE = silveira_zee
 scalar_FIMP : INC_MODULE = -I$(DS_INSTALL)/src_models/silveira_zee/include
-scalar_FIMP : scalar_FIMP.f $(DS_INSTALL)/src_models/silveira_zee/user_replaceables/dssmgammahpartial.f
+scalar_FIMP : scalar_FIMP.f $(DS_INSTALL)/src_models/silveira_zee/user_replaceables/dsanwx.f
 scalar_FIMP : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
 	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
 	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) $(SRC) $(DEBUG) -o scalar_FIMP.out scalar_FIMP.f \
-	$(DS_INSTALL)/src_models/silveira_zee/user_replaceables/dssmgammahpartial.f \
+	$(DS_INSTALL)/src_models/silveira_zee/user_replaceables/dsanwx.f \
 	libds_tmp.a
 	rm -f libds_tmp.a
 
@@ -112,7 +111,6 @@ abundance_mO : abundance_mO.f $(DS_INSTALL)/src/user_replaceables/dsrdthav.f
 abundance_mO : $(LIB)/libds_core.a $(LIB)/libds_core_user.a
 	$(ADD_SCR) libds_tmp.a $(LIB)/libds_$(DS_MODULE)_user.a $(LIB)/libds_core_user.a $(LIB)/libds_$(DS_MODULE).a $(LIB)/libds_core.a
 	$(FF) $(FOPT) $(INC) $(INC_MODULE) -L$(LIB) $(SRC) $(DEBUG) -o abundance_mO.out abundance_mO.f \
-	$(DS_INSTALL)/src/user_replaceables/dsrdthav.f \
 	libds_tmp.a
 	rm -f libds_tmp.a
 

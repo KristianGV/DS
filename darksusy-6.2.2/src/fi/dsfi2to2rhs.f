@@ -58,11 +58,7 @@ c     TRIED TO USE <sv>
               write(*,*) "Warning x=0 at T=", T
             else
               dsfi2to2rhs=dsrdthav(x,dsanwx)*
-     &(dsbessek2(x)/exp(x))**2/HST2
-
-    !           dsfi2to2rhs=mpl*sqrtgstar*sqrt(pi/45)*(45/4/pi**2)**2
-    !  &*(dsbessek2(x)/exp(x))**2*dsrdthav(x,dsanwx)/heff**2/T**3*4*pi**4
-    !  &/sqrt(8*pi)                    
+     &(dsbessek2(x)/exp(x))**2/HST2                  
             end if
 
 

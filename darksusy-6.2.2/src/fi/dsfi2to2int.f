@@ -7,8 +7,6 @@ c       T - bath temperature
 c       xi = mi/T 
 c       etai=\pm exp^(mu_i/T)  - parameter in phase-space distribution
 c          pluss (minus) for bosons (fermions)    
-c       stat - determines if quantum corrections is to be considered 
-c         (stat=0 for Maxwell-Boltzmann statistics) (stat\neq 0 for FD/BE)
 c
 c
 c  author: Kristian Gjestad Vangsnes (kristgva@uio.no)   2020-09-07

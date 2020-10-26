@@ -1,1 +1,1 @@
-SRC =  dssmgammahpartial.f
+SRC =  dssmgammahpartial.f dsanwx.f

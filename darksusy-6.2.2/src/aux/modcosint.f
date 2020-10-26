@@ -22,7 +22,7 @@
         return
       endif
       if(t.gt.TMIN)then
-        b=cmplx(1.,t)
+        b=cmplx(1.e0,real(t))
         c=1./FPMIN
         d=1./b
         h=d
@@ -35,9 +35,10 @@
           h=h*del
           if(absc(del-1.d0).lt.EPS)goto 1
 11      continue
-        pause 'cf failed in cisi'
+        write(*,*) 'cf failed in cisi'
+        read(*,*)
 1       continue
-        h=cmplx(cos(t),-sin(t))*h
+        h=cmplx(real(cos(t)),real(-sin(t)))*h
         ci=(-real(h)-log(t)-EULER)/(t*t)
         si=(PIBY2+aimag(h))/(t*t)
       else
@@ -67,7 +68,8 @@
             if(err.lt.EPS)goto 2
             odd=.not.odd
 12        continue
-          pause 'maxits exceeded in ModCosInt'
+          write(*,*) 'maxits exceeded in ModCosInt'
+          read(*,*)
         endif
 2       si=sums
         ci=sumc

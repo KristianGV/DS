@@ -8,12 +8,14 @@ c=======================================================================
       integer idum,ia,im,iq,ir,ntab,ndiv
       real*8 dsrnd1,am,eps,rnmx
       parameter (ia=16807,im=2147483647,am=1.d0/im,iq=127773,
-     &  ir=2836,ntab=32,ndiv=1+(im-1)/ntab,eps=1.2d-7,rnmx=1.d0-eps)
+     &  ir=2836,ntab=32,eps=1.2d-7,rnmx=1.d0-eps)
       integer j,k,iv(ntab),iy,iddum
 c      save iv,iy
       common /rnd1ccc/ iddum,iy,iv
       data iv /ntab*0/, iy /0/
       save /rnd1ccc/
+      ndiv=1+int(1.*(im-1.)/(1.*ntab)) ! TB: moved here from parameter statement;
+                                      ! else it triggers a -Winteger-division warning
       if (idum.le.0.and.iy.eq.0) then
         idum=max(-idum,1)
         do 10 j=ntab+8,1,-1

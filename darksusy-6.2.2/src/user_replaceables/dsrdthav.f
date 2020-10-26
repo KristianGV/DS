@@ -37,7 +37,7 @@ c=======================================================================
       real*8 wavs,dsrdfuncs
       real*8 x,wrate,dsrdfunc,dsai,dsbi,
      &  epsin,epsout,gpindp2,T
-      integer i,iop,k
+      integer i,iop,k,j
       external dsrdfunc,wrate,dsrdfuncs,gpindp2
       real*8 wav,xmin,wtmp,utop,tmp,ptmp
       logical dsisnan
@@ -47,7 +47,7 @@ c required for dqagp2
       real*8 points(10000), epsabs,epsrel,result,abserr,work(10000)
 
 c
-      real*8 tabx(10000),tsvtab(10000),dsInterpolateTable2D
+      real*8 tabx(10000),tsvtab(2,10000),dsInterpolateTable
 c-----------------------------------------------------------------------
 c..added by je 97-01-17 for gadap integration
       real*8 rdx
@@ -256,12 +256,12 @@ c     integrate as far as umax in dsrdtab allows  ! je 97-01-07
      &status='old')
       read(15,*) 
       do i=1,10000 
-        ! print *, i
-        read(15,*) tabx(i), tsvtab(i)
+          read(15,*) tsvtab(1,i),tsvtab(2,i)
+          tsvtab(2,i)=tsvtab(2,i)*2.568e-9
       end do
+
       close(15)
-      dsrdthav=dsInterpolateTable2D(1,x,tsvtab,1,10000,1,1,tabx,
-     &                                     1,2)*2.568e-9
+      dsrdthav=dsInterpolateTable(x,tsvtab,10000,1,2)
 
       return
       end

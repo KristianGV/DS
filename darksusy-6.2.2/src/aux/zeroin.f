@@ -37,7 +37,7 @@ c  minimization without derivatives, prentice-hall, inc. (1973).
 c
       double precision  a,b,c,d,e,eps,fa,fb,fc,tol1,xm,p,q,r,s
       double precision  dabs, d1mach
-   10 eps = d1mach(4)
+      eps = d1mach(4)
       tol1 = eps+1.0d0
 c
       a=ax
@@ -46,11 +46,15 @@ c
       fb=f(b)
 c     check that f(ax) and f(bx) have different signs
       if (fa .eq.0.0d0 .or. fb .eq. 0.0d0) go to 20
-      if (fa * (fb/dabs(fb)) .le. 0.0d0) go to 20
+      if (fa * (fb/dabs(fb)) .le. 0.0d0) then
+        go to 20
+      else
          write(6,2500)
 2500     format(1x,'f(ax) and f(bx) do not have different signs,',
      1             ' zeroin is aborting')
+         zeroin = 0.0d0
          return
+      endif
    20 c=a
       fc=fa
       d=b-a
